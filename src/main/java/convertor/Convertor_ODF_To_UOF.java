@@ -23,7 +23,7 @@ import styles.*;
 import presentation.*;
 
 /**
- * Ö÷³ÌĞò£¬¸ºÔğ³õÊ¼»¯¾²Ì¬±í£¬·ÖÅäSAX½âÎöÆ÷£¬²¢µ÷ÓÃÄÚÈİ´¦Àí³ÌĞò¶ÔÎÄµµ½øĞĞ½âÎö¡£
+ * ä¸»ç¨‹åºï¼Œè´Ÿè´£åˆå§‹åŒ–é™æ€è¡¨ï¼Œåˆ†é…SAXè§£æå™¨ï¼Œå¹¶è°ƒç”¨å†…å®¹å¤„ç†ç¨‹åºå¯¹æ–‡æ¡£è¿›è¡Œè§£æã€‚
  *
  * @author xie
  *
@@ -64,7 +64,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 		super(title);
 		getContentPane().setLayout(new GridBagLayout());
 
-	    JLabel pathLb = new JLabel("ÇëÊäÈëODFÔ´ÎÄ¼şÃû: ");
+	    JLabel pathLb = new JLabel("è¯·è¾“å…¥ODFæºæ–‡ä»¶å: ");
 	    pathLb.setBorder(BorderFactory.createEmptyBorder(0,0,0,10));
 	    pathLb.setFont(new Font(" ", Font.BOLD, 14));
 	    _src_path_field = new JTextField(System.getProperty("user.dir"));
@@ -72,7 +72,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 	    _src_path_field.setColumns(37);
 	    add_content(create_src_panel(pathLb, _src_path_field),new Insets(25,5,5,5), 0, 0, 2);
 
-	    convertButton = new JButton("×ª»»µ½");
+	    convertButton = new JButton("è½¬æ¢åˆ°");
 	    convertButton.setBorder(BorderFactory.createEmptyBorder(3,4,3,4));
 	    convertButton.setActionCommand("CONVERT");
 	    convertButton.addActionListener(this);
@@ -85,9 +85,9 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 	    _rst_path_field.setColumns(32);
 	    add_content(create_src_panel(butPn, _rst_path_field),new Insets(5,5,5,5), 0, 1, 2);
 
-	    add_content(new JLabel("½âÎöÔ´ÎÄ¼ş: "),new Insets(5,5,0,35), 0, 2, 1);
+	    add_content(new JLabel("è§£ææºæ–‡ä»¶: "),new Insets(5,5,0,35), 0, 2, 1);
 
-	    add_content(new JLabel("½á¹ûÊä³ö:   "),new Insets(5,0,0,55), 1, 2, 1);
+	    add_content(new JLabel("ç»“æœè¾“å‡º:   "),new Insets(5,0,0,55), 1, 2, 1);
 
 	    _source_area = new JTextArea("",20,25);
 	    _source_area.setEditable(false);
@@ -159,7 +159,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			String rstFile = _rst_path_field.getText().trim();
 
 			if(!srcFile.endsWith(".odt") && !srcFile.endsWith(".ods") && !srcFile.endsWith(".odp")){
-				_source_area.setText("´íÎó! Ô´ÎÄ¼ş±ØĞëÊÇodfÀàĞÍ£¬ÇëÖØĞÂÊäÈë£¡");
+				_source_area.setText("é”™è¯¯! æºæ–‡ä»¶å¿…é¡»æ˜¯odfç±»å‹ï¼Œè¯·é‡æ–°è¾“å…¥ï¼");
 			}
 			else {
 				try{
@@ -211,7 +211,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			Unzip.unzip(srcFileName);
 			XMLReader xmlReader = null;
 
-			//´ÓmimetypeÎÄ¼ş»ñÈ¡ÎÄµµÀàĞÍ.
+			//ä»mimetypeæ–‡ä»¶è·å–æ–‡æ¡£ç±»å‹.
 			BufferedReader typeReader = new BufferedReader(new FileReader(tmpPath + "mimetype"));
 			String fileType = "";
 
@@ -228,7 +228,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			}
 
 			SAXParserFactory spfactory = SAXParserFactory.newInstance();
-			spfactory.setValidating(false);    //·ÇÑéÖ¤½âÎöÆ÷£¬ÓÃÓÚ¸ñÊ½Á¼ºÃµÄÎÄµµ.
+			spfactory.setValidating(false);    //ééªŒè¯è§£æå™¨ï¼Œç”¨äºæ ¼å¼è‰¯å¥½çš„æ–‡æ¡£.
 			SAXParser saxParser = spfactory.newSAXParser();
 			xmlReader = saxParser.getXMLReader();
 
@@ -236,7 +236,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			InputSource styleSource = new InputSource(tmpPath + "styles.xml");
 			InputSource contentSource = new InputSource(tmpPath + "content.xml");
 
-			//µÚÒ»´ÎÉ¨ÃèÔ´ÎÄµµ£¬ÌáÈ¡³öĞèÒª´æ´¢µÄÊı¾İ.
+			//ç¬¬ä¸€æ¬¡æ‰«ææºæ–‡æ¡£ï¼Œæå–å‡ºéœ€è¦å­˜å‚¨çš„æ•°æ®.
 			//first parse of meta.xml
 			DefaultHandler firstMetaHandler = new First_Meta_Handler();
 			xmlReader.setContentHandler(firstMetaHandler);
@@ -255,7 +255,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			xmlReader.setErrorHandler(firstContentHandler);
 			xmlReader.parse(contentSource);
 
-			//µÚ¶ş´ÎÉ¨ÃèÔ´ÎÄµµ£¬°ÑÀ©Õ¹ÇøÖ®ÍâµÄÄÚÈİĞ´Èë½á¹ûÎÄµµresult.xml.
+			//ç¬¬äºŒæ¬¡æ‰«ææºæ–‡æ¡£ï¼ŒæŠŠæ‰©å±•åŒºä¹‹å¤–çš„å†…å®¹å†™å…¥ç»“æœæ–‡æ¡£result.xml.
 			IDGenerator.restart();
 			Text_P.set_parsenum(false);
 			//second parse of meta.xml
@@ -276,7 +276,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			xmlReader.setErrorHandler(secondContentHandler);
 			xmlReader.parse(contentSource);
 
-			//É¨Ãè½á¹ûÎÄµµ£¬ÏòÃ¿¸öÔªËØ×·¼Óuof:locIDºÍuof:AttListÊôĞÔ.
+			//æ‰«æç»“æœæ–‡æ¡£ï¼Œå‘æ¯ä¸ªå…ƒç´ è¿½åŠ uof:locIDå’Œuof:AttListå±æ€§.
 			InputSource result = new InputSource(tmpFileName);
 			DefaultHandler thirdHandler = new Third_Handler();
 			xmlReader.setContentHandler(thirdHandler);

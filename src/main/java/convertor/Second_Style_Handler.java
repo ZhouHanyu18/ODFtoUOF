@@ -19,8 +19,8 @@ import text.Bookmark;
 import text.Hyperlink;
 
 /**
- * ÄÚÈİ´¦Àí³ÌĞò£¬ÓÃÓÚµÚ¶şÂÖÉ¨Ãèstyles.xml£¬´¦ÀíÇ°Á½ÀàÔªËØ£¬½«×ª»»ºóµÄ½á¹ûĞ´µ½ÖĞ¼ä½á¹ûÎÄµµÖĞ¡£
- * 
+ * å†…å®¹å¤„ç†ç¨‹åºï¼Œç”¨äºç¬¬äºŒè½®æ‰«æstyles.xmlï¼Œå¤„ç†å‰ä¸¤ç±»å…ƒç´ ï¼Œå°†è½¬æ¢åçš„ç»“æœå†™åˆ°ä¸­é—´ç»“æœæ–‡æ¡£ä¸­ã€‚
+ *
  * @author xie
  *
  */
@@ -28,7 +28,7 @@ public class Second_Style_Handler extends DefaultHandler {
 	//
 	private String _filetype = Common_Data.get_file_type();
 	//tag for <style:page-layout> in <spreadsheet>
-	private boolean _page_layout_s_tag = false;	
+	private boolean _page_layout_s_tag = false;
 	//tag for <style:master-page> in spreadsheet
 	private boolean _master_page_s_tag = false;
 	//tag for <style:master-page> in presentation
@@ -38,48 +38,48 @@ public class Second_Style_Handler extends DefaultHandler {
 	//
 	private int _group_level = 0;
 
-	public Second_Style_Handler(){	
+	public Second_Style_Handler(){
 
 	}
-	
+
 	public void startDocument() throws SAXException {
 
 	}
-	
+
 	public void endDocument() throws SAXException {
 		String result = "";
-		
-		//<uof:ÊéÇ©¼¯>
+
+		//<uof:ä¹¦ç­¾é›†>
 		result += Bookmark.get_result();
-		//<uof:Á´½Ó¼¯>
-		result += Hyperlink.get_result();	
-		result += "<uof:¶ÔÏó¼¯>" + Content_Data.get_object_set() + "</uof:¶ÔÏó¼¯>";
-		
-		result += "<uof:Ê½Ñù¼¯>";
-		//<uof:×ÖÌå¼¯>
+		//<uof:é“¾æ¥é›†>
+		result += Hyperlink.get_result();
+		result += "<uof:å¯¹è±¡é›†>" + Content_Data.get_object_set() + "</uof:å¯¹è±¡é›†>";
+
+		result += "<uof:å¼æ ·é›†>";
+		//<uof:å­—ä½“é›†>
 		result += Font_Face.get_result();
-		//<uof:×Ô¶¯±àºÅ¼¯>
+		//<uof:è‡ªåŠ¨ç¼–å·é›†>
 		result += Auto_Num.get_result();
-		//¾äÊ½Ñù ¶ÎÂäÊ½Ñù µ¥Ôª¸ñÊ½Ñù	
-		result += Style_Data.get_styles();				
-		//<uof:ÎÄ×Ö±íÊ½Ñù>
+		//å¥å¼æ · æ®µè½å¼æ · å•å…ƒæ ¼å¼æ ·
+		result += Style_Data.get_styles();
+		//<uof:æ–‡å­—è¡¨å¼æ ·>
 		result += Table_Style.get_all_styles();
-		result += "</uof:Ê½Ñù¼¯>";
-		
+		result += "</uof:å¼æ ·é›†>";
+
 		Results_Processor.process_result(result);
 	}
-	
-	public void startElement(String namespaceURI, String localName, 
-			String qName, Attributes atts) throws SAXException{	
+
+	public void startElement(String namespaceURI, String localName,
+			String qName, Attributes atts) throws SAXException{
 		if(qName.equals("office:automatic-styles")){
 				Style_Data.set_renaming(true);
 		}
-		
-		if (qName.contains("draw:")) {		
+
+		if (qName.contains("draw:")) {
 			if (qName.equals("draw:g")){
 				_group_level++;
 			}
-			if ((Draw_Type_Table._in_list(qName)&&_group_level == 0) 
+			if ((Draw_Type_Table._in_list(qName)&&_group_level == 0)
 					|| qName.equals("draw:g") && _group_level == 1) {
 				if (_filetype.equals("text")) {
 					String textAnchorID = IDGenerator.get_text_anchor_id();
@@ -93,11 +93,11 @@ public class Second_Style_Handler extends DefaultHandler {
 				}
 			}
 		}
-		
+
 		if (qName.equals("style:font-face")) {
 			Font_Face.process_atts(atts);
 		}
-		
+
 		else if(_filetype.equals("spreadsheet")){
 			if(_page_layout_s_tag){
 				Page_Layout_S.process_start(qName,atts);
@@ -106,13 +106,13 @@ public class Second_Style_Handler extends DefaultHandler {
 				_page_layout_s_tag = true;
 				Page_Layout_S.process_start(qName,atts);
 			}
-			
+
 			else if(_master_page_s_tag){
 				Master_Page_S.process_start(qName,atts);
 			}
 			else if(qName.equals("style:master-page")){
 				String name = atts.getValue("style:name");
-				
+
 				if(name != null && name.equals("Default")){
 					_master_page_s_tag = true;
 				}
@@ -124,13 +124,13 @@ public class Second_Style_Handler extends DefaultHandler {
 			}
 			else if(qName.equals("style:style")){
 				String family = atts.getValue("style:family");
-				
+
 				if(family != null && family.equals("presentation")){
 					_presen_tag = true;
 					Presentation_Style.process_start(qName,atts);
 				}
 			}
-						
+
 			if(_master_pane_tag){
 				Master_Pane.process_start(qName,atts);
 			}
@@ -140,7 +140,7 @@ public class Second_Style_Handler extends DefaultHandler {
 			}
 		}
 	}
-	
+
 	public void endElement(String namespaceURI, String localName, String qName) throws SAXException{
 		if (qName.equals("draw:g")) {
 			_group_level --;
@@ -155,7 +155,7 @@ public class Second_Style_Handler extends DefaultHandler {
 			}
 			else if(_master_page_s_tag){
 				Master_Page_S.process_end(qName);
-				
+
 				if(qName.equals("style:master-page")){
 					_master_page_s_tag = false;
 				}
@@ -163,47 +163,47 @@ public class Second_Style_Handler extends DefaultHandler {
 		}
 		else if(_filetype.equals("presentation")){
 			Master_Pane.set_achor_id("");
-				
+
 			if(_presen_tag){
 				Presentation_Style.process_end(qName);
-				
+
 				if(qName.equals("style:style")){
 					_presen_tag = false;
 				}
 			}
 			else if(_master_pane_tag){
 				Master_Pane.process_end(qName);
-				
-				if(qName.equals("style:master-page")){	
+
+				if(qName.equals("style:master-page")){
 					_master_pane_tag = false;
 				}
 			}
 		}
 	}
-	
+
 	public void characters(char[] ch, int start, int length) throws SAXException{
 		String chs = new String(ch, start, length);
-		
+
 		chs = chs.replace("&", Common_Data.ANDTAG);
 		chs = chs.replaceAll("<", Common_Data.LTAG);
 		chs = chs.replaceAll("&", Common_Data.ANDTAG);
-		
+
 		if(_master_page_s_tag){
 			Master_Page_S.process_chars(chs);
 		}
 	}
-	
-	public void error(SAXParseException exception) 
+
+	public void error(SAXParseException exception)
 	{
 		System.err.println("Error parsing the file: "+exception.getMessage());
 	}
-	
-	public void warning(SAXParseException exception) 
+
+	public void warning(SAXParseException exception)
 	{
 		System.err.println("Warning parsing the file: "+exception.getMessage());
 	}
-	
-	public void fatalError(SAXParseException exception) 
+
+	public void fatalError(SAXParseException exception)
 	{
 		System.err.println("Fatal error parsing the file: "+exception.getMessage());
 		System.err.println("Cannot continue.");
