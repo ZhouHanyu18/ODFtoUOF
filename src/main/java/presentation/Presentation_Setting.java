@@ -5,32 +5,32 @@ import java.util.ArrayList;
 import org.xml.sax.Attributes;
 
 /**
- * ¥¶¿Ì<presentation:setting> µΩ <—›:∑≈”≥…Ë÷√>µƒ◊™ªª°£
- * 
+ * Â§ÑÁêÜ<presentation:setting> Âà∞ <Êºî:ÊîæÊò†ËÆæÁΩÆ>ÁöÑËΩ¨Êç¢„ÄÇ
+ *
  * @author xie
  *
  */
 public class Presentation_Setting {
 	//the result
-	private static String _settings = ""; 
+	private static String _settings = "";
 	//a sequence of page names
 	private static ArrayList<String> _page_seq = new ArrayList<String>();
-	
+
 
 	public static String get_result(){
 		String rst = "";
-		
-		rst = "<—›:∑≈”≥…Ë÷√>" + _settings + "</—›:∑≈”≥…Ë÷√>";
+
+		rst = "<Êºî:ÊîæÊò†ËÆæÁΩÆ>" + _settings + "</Êºî:ÊîæÊò†ËÆæÁΩÆ>";
 		_settings = "";
 		_page_seq.clear();
-		
+
 		return rst;
 	}
 
 	public static void add_page_name(String page){
 		_page_seq.add(page);
 	}
-	
+
 	public static void process(String qName,Attributes atts){
 		String setting = "";
 		String attVal = "";
@@ -38,66 +38,66 @@ public class Presentation_Setting {
 		String startPage = "";
 		String endPage = _page_seq.get(_page_seq.size()-1);
 		String seqID = "SEQID";
-		
-		attVal=atts.getValue("presentation:start-page");		
+
+		attVal=atts.getValue("presentation:start-page");
 		if(attVal != null){
 			startPage = attVal;
 		}else {
 			startPage = _page_seq.get(0);
 		}
-		setting += "<—›:ª√µ∆∆¨–Ú¡– —›:±Í ∂∑˚=\"" + seqID + "\" —›:◊‘∂®“Â=\"false\">";
+		setting += "<Êºî:ÂπªÁÅØÁâáÂ∫èÂàó Êºî:Ê†áËØÜÁ¨¶=\"" + seqID + "\" Êºî:Ëá™ÂÆö‰πâ=\"false\">";
 		setting += startPage + " " + endPage;
-		setting += "</—›:ª√µ∆∆¨–Ú¡–>";
-		
-		setting += "<—›:∑≈”≥À≥–Ú —›:–Ú¡–“˝”√=\"" + seqID + "\"/>";
-		
+		setting += "</Êºî:ÂπªÁÅØÁâáÂ∫èÂàó>";
+
+		setting += "<Êºî:ÊîæÊò†È°∫Â∫è Êºî:Â∫èÂàóÂºïÁî®=\"" + seqID + "\"/>";
+
 		if((attVal=atts.getValue("presentation:full-screen"))!= null){
-			setting += "<—›:»´∆¡∑≈”≥>" + attVal + "</—›:»´∆¡∑≈”≥>";
+			setting += "<Êºî:ÂÖ®Â±èÊîæÊò†>" + attVal + "</Êºî:ÂÖ®Â±èÊîæÊò†>";
 		}
-		
+
 		if((attVal=atts.getValue("presentation:endless"))!= null){
-			setting += "<—›:—≠ª∑∑≈”≥>" + attVal + "</—›:—≠ª∑∑≈”≥>";
+			setting += "<Êºî:Âæ™ÁéØÊîæÊò†>" + attVal + "</Êºî:Âæ™ÁéØÊîæÊò†>";
 		}
-		
+
 		if((attVal=atts.getValue("presentation:pause"))!= null){
-			setting += "<—›:∑≈”≥º‰∏Ù>" + Draw_Page_Style.conv_time(attVal) + "</—›:∑≈”≥º‰∏Ù>";
+			setting += "<Êºî:ÊîæÊò†Èó¥Èöî>" + Draw_Page_Style.conv_time(attVal) + "</Êºî:ÊîæÊò†Èó¥Èöî>";
 		}
-		
+
 		if((attVal=atts.getValue("presentation:force-manual"))!= null){
-			setting += "<—›: ÷∂Ø∑Ω Ω>" + attVal + "</—›: ÷∂Ø∑Ω Ω>";
+			setting += "<Êºî:ÊâãÂä®ÊñπÂºè>" + attVal + "</Êºî:ÊâãÂä®ÊñπÂºè>";
 		}
-		
+
 		if((attVal=atts.getValue("presentation:start-with-navigator"))!= null){
-			setting += "<—›:µº∫Ω∞Ô÷˙>" + attVal + "</—›:µº∫Ω∞Ô÷˙>";
+			setting += "<Êºî:ÂØºËà™Â∏ÆÂä©>" + attVal + "</Êºî:ÂØºËà™Â∏ÆÂä©>";
 		}
-		
+
 		if((attVal=atts.getValue("presentation:animations"))!= null){
-			setting += "<—›:∑≈”≥∂Øª≠>" + tran_val(attVal) + "</—›:∑≈”≥∂Øª≠>";
+			setting += "<Êºî:ÊîæÊò†Âä®Áîª>" + tran_val(attVal) + "</Êºî:ÊîæÊò†Âä®Áîª>";
 		}
-		
+
 		if((attVal=atts.getValue("presentation:stay-on-top"))!= null){
-			setting += "<—›:«∞∂Àœ‘ æ>" + attVal + "</—›:«∞∂Àœ‘ æ>";
+			setting += "<Êºî:ÂâçÁ´ØÊòæÁ§∫>" + attVal + "</Êºî:ÂâçÁ´ØÊòæÁ§∫>";
 		}
-		
+
 		if((attVal=atts.getValue("presentation:transition-on-click"))!= null){
-			setting += "<—›:µ•ª˜Ã¯◊™>" + tran_val(attVal) + "</—›:µ•ª˜Ã¯◊™>";
+			setting += "<Êºî:ÂçïÂáªË∑≥ËΩ¨>" + tran_val(attVal) + "</Êºî:ÂçïÂáªË∑≥ËΩ¨>";
 		}
-		
+
 		setting += "";
-		
+
 		_settings = setting;
 	}
-		
+
 	private static String tran_val(String val){
 		String str = "";
-		
+
 		if(val.equals("enabled")){
 			str = "true";
 		}
 		else{
 			str = "false";
 		}
-		
+
 		return str;
 	}
 }

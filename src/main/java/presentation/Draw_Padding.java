@@ -8,8 +8,8 @@ import convertor.Unit_Converter;
 import graphic_content.Media_Obj;
 
 /**
- * ´¦Àí<draw:fill-image>µ½<Í¼:Í¼Æ¬>¡¢<draw:gradient>µ½<Í¼:½¥±ä>µÄ×ª»»¡£
- * 
+ * å¤„ç†<draw:fill-image>åˆ°<å›¾:å›¾ç‰‡>ã€<draw:gradient>åˆ°<å›¾:æ¸å˜>çš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
@@ -18,83 +18,83 @@ public class Draw_Padding {
 	private static Map<String,String> _gradient_map = new TreeMap<String,String>();
 	//
 	private static Map<String,String> _fill_image_map = new TreeMap<String,String>();
-	
-	
+
+
 	//initialize
 	public static void init(){
 		_gradient_map.clear();
 		_fill_image_map.clear();
 	}
-	
+
 	public static String get_gradient(String name){
 		return _gradient_map.get(name);
 	}
-	
+
 	public static String get_fill_image(String name){
 		return _fill_image_map.get(name);
 	}
-	
+
 	public static void process(String qName, Attributes atts){
 		String attVal = "";
-		
+
 		if(qName.equals("draw:fill-image")){
-			String href = "";		
+			String href = "";
 			String image = "";
-			
+
 			href = atts.getValue("xlink:href");
 			if(href != null){
 				String objID = Media_Obj.process_href(href);
-				image += " Í¼:Í¼ĞÎÒıÓÃ=\"" + objID + "\"";
+				image += " å›¾:å›¾å½¢å¼•ç”¨=\"" + objID + "\"";
 			}
-			image += " Í¼:Î»ÖÃ=\"tile\"";
-			
+			image += " å›¾:ä½ç½®=\"tile\"";
+
 			String name = atts.getValue("draw:name");
-			image = "<Í¼:Í¼Æ¬" + image + "/>";
+			image = "<å›¾:å›¾ç‰‡" + image + "/>";
 			_fill_image_map.put(name,image);
 		}
-		
+
 		else if (qName.equals("draw:gradient")){
 			String gradient = "";
 			String name = "";
-			
-			gradient = "<Í¼:½¥±ä";
+
+			gradient = "<å›¾:æ¸å˜";
 			if ((attVal = atts.getValue("draw:start-color")) != null){
-				gradient += " Í¼:ÆğÊ¼É«=\"" + attVal + "\"";
+				gradient += " å›¾:èµ·å§‹è‰²=\"" + attVal + "\"";
 			}
 			if ((attVal = atts.getValue("draw:end-color")) != null){
-				gradient += " Í¼:ÖÕÖ¹É«=\"" + attVal + "\"";
+				gradient += " å›¾:ç»ˆæ­¢è‰²=\"" + attVal + "\"";
 			}
 			if ((attVal = atts.getValue("draw:style")) != null){
-				gradient += " Í¼:ÖÖ×ÓÀàĞÍ=\"" + conv_style(attVal) + "\"";
+				gradient += " å›¾:ç§å­ç±»å‹=\"" + conv_style(attVal) + "\"";
 			}
-			if ((attVal = atts.getValue("draw:start-intensity")) != null){				
-				gradient += " Í¼:ÆğÊ¼Å¨¶È=\"" + Unit_Converter.from_percent(attVal) + "\"";
+			if ((attVal = atts.getValue("draw:start-intensity")) != null){
+				gradient += " å›¾:èµ·å§‹æµ“åº¦=\"" + Unit_Converter.from_percent(attVal) + "\"";
 			}
 			if ((attVal = atts.getValue("draw:end-intensity")) != null){
-				gradient += " Í¼:ÖÕÖ¹Å¨¶È=\"" + Unit_Converter.from_percent(attVal) + "\"";
+				gradient += " å›¾:ç»ˆæ­¢æµ“åº¦=\"" + Unit_Converter.from_percent(attVal) + "\"";
 			}
-			if ((attVal = atts.getValue("draw:angle")) != null){		
-				gradient += " Í¼:½¥±ä·½Ïò=\"" + (Integer.parseInt(attVal) / 10) + "\"";
+			if ((attVal = atts.getValue("draw:angle")) != null){
+				gradient += " å›¾:æ¸å˜æ–¹å‘=\"" + (Integer.parseInt(attVal) / 10) + "\"";
 			}
 			if ((attVal = atts.getValue("draw:border")) != null){
-				gradient += " Í¼:±ß½ç=\"" + attVal.substring(0,attVal.length()-1) + "\"";
+				gradient += " å›¾:è¾¹ç•Œ=\"" + attVal.substring(0,attVal.length()-1) + "\"";
 			}
 			if ((attVal = atts.getValue("draw:cx")) != null){
-				gradient += " Í¼:ÖÖ×ÓXÎ»ÖÃ=\"" + attVal.substring(0,attVal.length()-1) + "\"";
+				gradient += " å›¾:ç§å­Xä½ç½®=\"" + attVal.substring(0,attVal.length()-1) + "\"";
 			}
 			if ((attVal = atts.getValue("draw:cy")) != null){
-				gradient += " Í¼:ÖÖ×ÓYÎ»ÖÃ=\"" + attVal.substring(0,attVal.length()-1) + "\"";
-			}				
+				gradient += " å›¾:ç§å­Yä½ç½®=\"" + attVal.substring(0,attVal.length()-1) + "\"";
+			}
 			gradient += "/>";
-			
+
 			name = atts.getValue("draw:name");
 			_gradient_map.put(name,gradient);
 		}
 	}
-	
+
 	private static String conv_style(String val){
 		String convVal = "linear";
-		
+
 		if(val.equals("linear")){
 			convVal = "linear";
 		}
@@ -113,8 +113,8 @@ public class Draw_Padding {
 		else if(val.equals("rectangular")){
 			convVal = "rectangle";
 		}
-		
+
 		return convVal;
 	}
-	
+
 }

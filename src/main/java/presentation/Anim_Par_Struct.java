@@ -15,154 +15,154 @@ public class Anim_Par_Struct {
 	private String _sub_type = "";
 	//id of the target obj
 	private String _target_id = "";
-	//attributes of <Ñİ:¶¨Ê±>
+	//attributes of <æ¼”:å®šæ—¶>
 	private Map<String,String> _timing_map = new TreeMap<String,String>();
-	//attributes of <Ñİ:¶¯»­²¥·Åºó>
+	//attributes of <æ¼”:åŠ¨ç”»æ’­æ”¾å>
 	private Map<String,String>_after_map = new TreeMap<String,String>();
-	//attributes of <Ñİ:¶¯»­ÎÄ±¾>
+	//attributes of <æ¼”:åŠ¨ç”»æ–‡æœ¬>
 	private Map<String,String>_text_map = new TreeMap<String,String>();
-	//<Ñİ:ÉùÒô>
+	//<æ¼”:å£°éŸ³>
 	private String _sound = "";
-	//@Ñİ:ËÙ¶È
+	//@æ¼”:é€Ÿåº¦
 	private String _speed = "";
 	//
 	private String _motion_path = "";
-	
-	
+
+
 	//set the default values
 	public void init(){
-		
-		_timing_map.put("Ñİ:ÊÂ¼ş","on click");
-		_timing_map.put("Ñİ:ÑÓÊ±","0.0");
-		_timing_map.put("Ñİ:ËÙ¶È","fast");
-		_timing_map.put("Ñİ:ÖØ¸´","none");
-		_timing_map.put("Ñİ:»Ø¾í","false");
-		
-		_after_map.put("Ñİ:ÑÕÉ«","#ffffff");
-		_after_map.put("Ñİ:±ä°µ","true");
-		_after_map.put("Ñİ:²¥·ÅºóÒş²Ø","false");
-		_after_map.put("Ñİ:µ¥»÷ºóÒş²Ø","false");
-		
-		_text_map.put("Ñİ:·¢ËÍ","all at once");
-		_text_map.put("Ñİ:¼ä¸ô","0.0");
-		_text_map.put("Ñİ:¶¯»­ĞÎ×´","true");
-		_text_map.put("Ñİ:Ïà·´Ë³Ğò","false");
-		
+
+		_timing_map.put("æ¼”:äº‹ä»¶","on click");
+		_timing_map.put("æ¼”:å»¶æ—¶","0.0");
+		_timing_map.put("æ¼”:é€Ÿåº¦","fast");
+		_timing_map.put("æ¼”:é‡å¤","none");
+		_timing_map.put("æ¼”:å›å·","false");
+
+		_after_map.put("æ¼”:é¢œè‰²","#ffffff");
+		_after_map.put("æ¼”:å˜æš—","true");
+		_after_map.put("æ¼”:æ’­æ”¾åéšè—","false");
+		_after_map.put("æ¼”:å•å‡»åéšè—","false");
+
+		_text_map.put("æ¼”:å‘é€","all at once");
+		_text_map.put("æ¼”:é—´éš”","0.0");
+		_text_map.put("æ¼”:åŠ¨ç”»å½¢çŠ¶","true");
+		_text_map.put("æ¼”:ç›¸åé¡ºåº","false");
+
 		_speed = "fast";
 	}
-	
+
 	private String get_atts(Map<String,String> map){
 		String atts = "";
 		String name = "";
-		
+
 		for(Iterator<String> it=map.keySet().iterator(); it.hasNext();){
 			name = it.next();
 			atts += " " + name + "=\"" + map.get(name) + "\"";
 		}
-		
+
 		return atts;
 	}
-	
+
 	public String get_result(){
 		String rst = "";
-		
-		rst += "<Ñİ:¶¨Ê±" + get_atts(_timing_map) + "/>";
-		rst += "<Ñİ:ÔöÇ¿>";
-		rst += "<Ñİ:¶¯»­²¥·Åºó" + get_atts(_after_map) + "/>";
-		rst += "<Ñİ:¶¯»­ÎÄ±¾" + get_atts(_text_map) + "/>";
+
+		rst += "<æ¼”:å®šæ—¶" + get_atts(_timing_map) + "/>";
+		rst += "<æ¼”:å¢å¼º>";
+		rst += "<æ¼”:åŠ¨ç”»æ’­æ”¾å" + get_atts(_after_map) + "/>";
+		rst += "<æ¼”:åŠ¨ç”»æ–‡æœ¬" + get_atts(_text_map) + "/>";
 		rst += _sound;
-		rst += "</Ñİ:ÔöÇ¿>";
-		rst += "<Ñİ:Ğ§¹û>";
+		rst += "</æ¼”:å¢å¼º>";
+		rst += "<æ¼”:æ•ˆæœ>";
 		rst += anim_effect();
-		rst += "</Ñİ:Ğ§¹û>";
-		
-		rst = "<Ñİ:ĞòÁĞ Ñİ:¶¯»­¶ÔÏó=\"" +
-			_target_id + "\">" + rst + "</Ñİ:ĞòÁĞ>"; 
+		rst += "</æ¼”:æ•ˆæœ>";
+
+		rst = "<æ¼”:åºåˆ— æ¼”:åŠ¨ç”»å¯¹è±¡=\"" +
+			_target_id + "\">" + rst + "</æ¼”:åºåˆ—>";
 		return rst;
 	}
-	
+
 	private String anim_effect(){
 		String eff = "";
 		String act = "";
-		
+
 		act = Anim_Par.get_effect(_present_id,_sub_type);
 		act = (act==null) ? "" : act;
-		
+
 		if(_present_class.equals("entrance")){
-			eff += "<Ñİ:½øÈë>";
+			eff += "<æ¼”:è¿›å…¥>";
 			if(!act.equals("")){
 				eff += "<" + act +
-					" Ñİ:ËÙ¶È=\"" + _speed + "\"/>";
+					" æ¼”:é€Ÿåº¦=\"" + _speed + "\"/>";
 			}
-			eff += "</Ñİ:½øÈë>";
+			eff += "</æ¼”:è¿›å…¥>";
 		}
 		else if(_present_class.equals("emphasis")){
-			eff += "<Ñİ:Ç¿µ÷>";
+			eff += "<æ¼”:å¼ºè°ƒ>";
 			if(!act.equals("")){
-				eff += "<" + act + 
-					" Ñİ:ËÙ¶È=\"" + _speed + "\"/>";
+				eff += "<" + act +
+					" æ¼”:é€Ÿåº¦=\"" + _speed + "\"/>";
 			}
-			eff += "</Ñİ:Ç¿µ÷>";
+			eff += "</æ¼”:å¼ºè°ƒ>";
 		}
 		else if(_present_class.equals("exit")){
-			eff += "<Ñİ:ÍË³ö>";
+			eff += "<æ¼”:é€€å‡º>";
 			if(!act.equals("")){
 				eff += "<" + act;
-				eff += " Ñİ:ËÙ¶È=\"" + _speed + "\"";
+				eff += " æ¼”:é€Ÿåº¦=\"" + _speed + "\"";
 				eff += UOF_LocID_Table.get_exit_eff_atts(act);
 				eff += "/>";
 			}
-			eff += "</Ñİ:ÍË³ö>";
+			eff += "</æ¼”:é€€å‡º>";
 		}
 		else if(_present_class.equals("motion-path")){
-			eff += "<Ñİ:¶¯×÷Â·¾¶" + " Ñİ:Â·¾¶=\"" + _motion_path + "\"/>";
+			eff += "<æ¼”:åŠ¨ä½œè·¯å¾„" + " æ¼”:è·¯å¾„=\"" + _motion_path + "\"/>";
 		}
-		
+
 		return eff;
 	}
-	
+
 	public void set_present_class(String cls){
 		_present_class = cls;
 	}
-	
+
 	public void set_present_id(String id){
 		_present_id = id;
 	}
-	
+
 	public void set_sub_type(String type){
 		_sub_type = type;
 	}
-	
+
 	public void set_target(String id){
 		_target_id = id;
 	}
-	
+
 	public void add_timing_att(String attName,String val){
 		if(!val.equals("")){
 			_timing_map.put(attName,val);
 		}
 	}
-	
+
 	public void add_after_att(String attName,String val){
 		if(!val.equals("")){
 			_after_map.put(attName,val);
 		}
 	}
-	
+
 	public void add_text_att(String attName,String val){
 		if(!val.equals("")){
 			_text_map.put(attName,val);
 		}
 	}
-	
+
 	public void set_sound(String sound){
 		_sound = sound;
 	}
-	
+
 	public void set_speed(String sp){
 		_speed = sp;
 	}
-	
+
 	public void set_motion_path(String path){
 		_motion_path = path;
 	}

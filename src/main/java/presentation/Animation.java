@@ -2,32 +2,32 @@ package presentation;
 
 import org.xml.sax.Attributes;
 
-//´¦Àí¶¯»­ÀàĞÍ
-public class Animation {	
-	private static String _shape_id = "";		//¶¯»­¶ÔÏó
-	private static String _direction = "";		//½øÈë¡¢ÍË³öµÄ·½Ïò
-	private static String _speed = "";			//½øÈë»òÍË³öËÙ¶È
-	private static String _delay = "";			//³ÖĞøÊ±¼ä
-	private static String _action_type = "";	//ÓÃÀ´ÅĞ¶Ï½øÈë»òÍË³ö
-	
-	
-	private static void clear(){	
+//å¤„ç†åŠ¨ç”»ç±»å‹
+public class Animation {
+	private static String _shape_id = "";		//åŠ¨ç”»å¯¹è±¡
+	private static String _direction = "";		//è¿›å…¥ã€é€€å‡ºçš„æ–¹å‘
+	private static String _speed = "";			//è¿›å…¥æˆ–é€€å‡ºé€Ÿåº¦
+	private static String _delay = "";			//æŒç»­æ—¶é—´
+	private static String _action_type = "";	//ç”¨æ¥åˆ¤æ–­è¿›å…¥æˆ–é€€å‡º
+
+
+	private static void clear(){
 		_shape_id = "";
 		_direction = "";
 		_speed = "";
 		_delay = "";
 		_action_type = "";
 	}
-	
+
 	public static String get_result(){
-		String str = "<Ñİ:·ÅÓ³¶¯»­>";
-		
-		str += "<Ñİ:¶¯»­ĞòÁĞ" + " Ñİ:¶¯»­¶ÔÏó=\"" + _shape_id + "\">";
+		String str = "<æ¼”:æ”¾æ˜ åŠ¨ç”»>";
+
+		str += "<æ¼”:åŠ¨ç”»åºåˆ—" + " æ¼”:åŠ¨ç”»å¯¹è±¡=\"" + _shape_id + "\">";
 		str += p_duration() + p_direction();
-		str += "</Ñİ:¶¯»­ĞòÁĞ>";
-		str += "</Ñİ:·ÅÓ³¶¯»­>";
+		str += "</æ¼”:åŠ¨ç”»åºåˆ—>";
+		str += "</æ¼”:æ”¾æ˜ åŠ¨ç”»>";
 		clear();
-		
+
 		return str;
 	}
 
@@ -40,13 +40,13 @@ public class Animation {
 		else if(qName.equals("presentation:hide-shape")){
 			_action_type = "hide";
 			processAtts(atts);
-		}								
+		}
 	}
 
-	//´¦Àí<presentation:show-shape>µÄÊôĞÔ
+	//å¤„ç†<presentation:show-shape>çš„å±æ€§
 	private static void processAtts(Attributes atts){
 		String value = "";
-		
+
 		if((value=atts.getValue("draw:shape-id")) != null){
 			_shape_id = value;
 		}
@@ -60,11 +60,11 @@ public class Animation {
 			_delay = value;
 		}
 	}
-	
-	//uofÓëodf¶Ô·½ÏòµÄ¶¨Òå²»Í¬£¬ĞèÒª½øĞĞ×ª»»
+
+	//uofä¸odfå¯¹æ–¹å‘çš„å®šä¹‰ä¸åŒï¼Œéœ€è¦è¿›è¡Œè½¬æ¢
 	private static String convertDirection(String string){
 		String direction = "top";
-		
+
 		if(string.equals("to-top")||string.equals("from-top")){
 			direction = "top";
 		}
@@ -89,31 +89,31 @@ public class Animation {
 		else if(string.equals("to-lower-right")||string.equals("from-lower-right")){
 			direction = "lower right";
 		}
-		
+
 		return direction;
 	}
-	
-	//´¦Àí<Ñİ:¶¯»­·½Ïò>µÄ×ª»»
+
+	//å¤„ç†<æ¼”:åŠ¨ç”»æ–¹å‘>çš„è½¬æ¢
 	private static String p_direction(){
-		String str = "<Ñİ:¶¯»­·½Ïò>";
+		String str = "<æ¼”:åŠ¨ç”»æ–¹å‘>";
 		if(_action_type.equals("show"))
-			str += "<Ñİ:½øÈë>" + _direction + "</Ñİ:½øÈë>";
+			str += "<æ¼”:è¿›å…¥>" + _direction + "</æ¼”:è¿›å…¥>";
 		else
-			str += "<Ñİ:ÍË³ö>" + _direction + "</Ñİ:ÍË³ö>";
-		str += "</Ñİ:¶¯»­·½Ïò>";
-		
+			str += "<æ¼”:é€€å‡º>" + _direction + "</æ¼”:é€€å‡º>";
+		str += "</æ¼”:åŠ¨ç”»æ–¹å‘>";
+
 		return str;
 	}
 
-	//´¦Àí<Ñİ:³ÖĞøÊ±¼ä>µÄ×ª»»
+	//å¤„ç†<æ¼”:æŒç»­æ—¶é—´>çš„è½¬æ¢
 	private static String p_duration(){
-		String str = "<Ñİ:³ÖĞøÊ±¼ä>";
-		
-		str += "<Ñİ:½øÈë>" + _speed + "</Ñİ:½øÈë>";
-		str += "<Ñİ:Í£Áô>" + _delay + "</Ñİ:Í£Áô>";
-		str += "<Ñİ:ÍË³ö>" + _speed + "</Ñİ:ÍË³ö>";
-		str = "</Ñİ:³ÖĞøÊ±¼ä>";
-		
+		String str = "<æ¼”:æŒç»­æ—¶é—´>";
+
+		str += "<æ¼”:è¿›å…¥>" + _speed + "</æ¼”:è¿›å…¥>";
+		str += "<æ¼”:åœç•™>" + _delay + "</æ¼”:åœç•™>";
+		str += "<æ¼”:é€€å‡º>" + _speed + "</æ¼”:é€€å‡º>";
+		str = "</æ¼”:æŒç»­æ—¶é—´>";
+
 		return str;
 	}
 

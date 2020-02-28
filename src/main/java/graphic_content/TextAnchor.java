@@ -4,49 +4,49 @@ import org.xml.sax.Attributes;
 
 public class TextAnchor {
 
-	private String _id = "";   					//±êÊ¶·û
-	
-	private String _begin_element = "<×Ö:Ãªµã";
-	private String _drawing = "";   			//Í¼ÐÎ
-	private String _anchor_atts = "";   		//ÃªµãÊôÐÔ
-	private String _end_element = "</×Ö:Ãªµã>";
+	private String _id = "";   					//æ ‡è¯†ç¬¦
+
+	private String _begin_element = "<å­—:é”šç‚¹";
+	private String _drawing = "";   			//å›¾å½¢
+	private String _anchor_atts = "";   		//é”šç‚¹å±žæ€§
+	private String _end_element = "</å­—:é”šç‚¹>";
 	private String _type = "";
-	
+
 	public TextAnchor() {
 	}
-	
+
 	public void set_id(String id) {
 		_id = id;
 	}
-	
+
 	public String get_id() {
 		return _id;
 	}
-	
+
 	public void set_type(String type) {
 		_type = type;
 	}
-	
+
 	public void add_begin_element(String string) {
 		_begin_element += string;
 	}
-	
+
 	public void set_anchor_atts(String string) {
 		_anchor_atts = string;
 	}
-	
+
 	public String get_anchor_atts()
 	{
 		return 	_anchor_atts;
 	}
-	
+
 	public void add_drawing(String drawString) {
 		_drawing += drawString;
 	}
-	
+
 	public void process_atts(Attributes atts) {
 		String value = "";
-		
+
 		if ((value = atts.getValue("text:anchor-type")) != null) {
 			if (value.equals("as-char"))
 				_type = "inline";
@@ -54,9 +54,9 @@ public class TextAnchor {
 				_type = "normal";
 		}
 	}
-	
+
 	public String get_text_anchor_string() {
-		return (_begin_element + " ×Ö:ÀàÐÍ=\"" + _type + "\">" + "<×Ö:ÃªµãÊôÐÔ>" + _anchor_atts
-				+ "</×Ö:ÃªµãÊôÐÔ>" + _drawing + _end_element);
+		return (_begin_element + " å­—:ç±»åž‹=\"" + _type + "\">" + "<å­—:é”šç‚¹å±žæ€§>" + _anchor_atts
+				+ "</å­—:é”šç‚¹å±žæ€§>" + _drawing + _end_element);
 	}
 }

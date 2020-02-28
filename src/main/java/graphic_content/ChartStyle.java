@@ -9,126 +9,126 @@ import convertor.Unit_Converter;
 public class ChartStyle {
 
 	private String _id = "";
-	private String _font = "";   				//<±í:×ÖÌå>£¬¶ÔÓ¦text-properties
-	private String _border = "";   		//<±í:±ß¿ò>£¬ÔÚparagraph-propertiesÖĞÌáÈ¡£¿
-	private String _padding = "";   		//<±í:Ìî³ä>£¬ÎŞ¶ÔÓ¦£¬UOF¶¨ÒåÊÇ·ñÓĞÎó£¿
-	
-	//<±í:¶ÔÆë>£¬ÓÃÓÚ±êÌâ¼¯
+	private String _font = "";   				//<è¡¨:å­—ä½“>ï¼Œå¯¹åº”text-properties
+	private String _border = "";   		//<è¡¨:è¾¹æ¡†>ï¼Œåœ¨paragraph-propertiesä¸­æå–ï¼Ÿ
+	private String _padding = "";   		//<è¡¨:å¡«å……>ï¼Œæ— å¯¹åº”ï¼ŒUOFå®šä¹‰æ˜¯å¦æœ‰è¯¯ï¼Ÿ
+
+	//<è¡¨:å¯¹é½>ï¼Œç”¨äºæ ‡é¢˜é›†
 	private String _hori_align = "";
 	private String _vert_align = "";
 	private String _indent = "";
 	private String _direction = "";
 	private String _rotation_angle = "";
 	private String _auto_newline = "";
-	private String _shrink_to_fit = "";   		//ÎŞ¶ÔÓ¦
-	
-	//<¶ÔÆë>£¬ÓÃÓÚ×ø±êÖá
+	private String _shrink_to_fit = "";   		//æ— å¯¹åº”
+
+	//<å¯¹é½>ï¼Œç”¨äºåæ ‡è½´
 	private String _axis_word_direction = "";
 	private String _axis_word_rot_angle = "";
-	private String _offset = "";   				//ÎŞ¶ÔÓ¦
-	
-	private String _axis_line_type = "";   		//<±í:ÏßĞÍ>£¬ÓÃÓÚ×ø±êÖá£¬ÔÚgraphic-propertiesÖĞÌáÈ¡¡£Íø¸ñÏßÒ²¿ÉÀûÓÃÏßĞÍµÄÄÚÈİ
-	private String _axis_data_style = "";   //<±í:ÊıÖµ>£¬ÓÃÓÚ×ø±êÖá
-	
-	//×ø±êÖáÊôĞÔ,¡°¿Ì¶ÈÏß±êÖ¾¡±ÊôĞÔÎ´ÕÒµ½¶ÔÓ¦
+	private String _offset = "";   				//æ— å¯¹åº”
+
+	private String _axis_line_type = "";   		//<è¡¨:çº¿å‹>ï¼Œç”¨äºåæ ‡è½´ï¼Œåœ¨graphic-propertiesä¸­æå–ã€‚ç½‘æ ¼çº¿ä¹Ÿå¯åˆ©ç”¨çº¿å‹çš„å†…å®¹
+	private String _axis_data_style = "";   //<è¡¨:æ•°å€¼>ï¼Œç”¨äºåæ ‡è½´
+
+	//åæ ‡è½´å±æ€§,â€œåˆ»åº¦çº¿æ ‡å¿—â€å±æ€§æœªæ‰¾åˆ°å¯¹åº”
 	private String _major_tick_type = "";
 	private String _minor_tick_type = "";
-	
-	//<¿Ì¶È>
-	//ÊıÖµÖá²¿·Ö
-	private String _y_min_value = "";   		//ÊıÖµÖá×îĞ¡Öµ
-	private String _y_max_value = "";   		//ÊıÖµÖá×î´óÖµ
-	private String _y_major_internal = "";   	//ÊıÖµÖáÖ÷µ¥Î»
-	private String _y_minor_internal = "";   	//ÊıÖµÖá´Îµ¥Î»
-	private String _x_cross_point = "";   		//ÊıÖµÖáµÄ·ÖÀà½»²æµã
-	private String _y_unit = "";   				//ÊıÖµÖáµ¥Î»
-	private String _display_unit = "";   		//ÏÔÊ¾µ¥Î»
-	private String _y_logarithm = "";   		//ÊıÖµÖá£¬¶ÔÊı
-	private String _y_sequence_rev = "";   		//ÊıÖµ´ÎĞò·´×ª
-	//·ÖÀàÖá²¿·Ö
-	private String _y_cross_point = "";   		//·ÖÀàÖáµÄÊıÖµ½»²æµã
-	private String _x_lable_num = "";   		//·ÖÀà±êÇ©Êı
-	private String _x_mark_num = "";   			//·ÖÀà¿Ì¶ÈÊı
-	private String _x_sequence_rev = "";   		//·ÖÀà´ÎĞò·´×ª
-	
-	private String _display_symbol = ""; //<ÏÔÊ¾±êÖ¾>£¬ÓÃÓÚÊı¾İÏµÁĞºÍÊı¾İµã
-	private String _serie_name = "";   			//<ÏµÁĞÃû>£¬ÓÃÓÚÊı¾İÏµÁĞºÍÊı¾İµã£¬Î´ÕÒµ½¶ÔÓ¦
-	
-	public ChartStyle() {		
+
+	//<åˆ»åº¦>
+	//æ•°å€¼è½´éƒ¨åˆ†
+	private String _y_min_value = "";   		//æ•°å€¼è½´æœ€å°å€¼
+	private String _y_max_value = "";   		//æ•°å€¼è½´æœ€å¤§å€¼
+	private String _y_major_internal = "";   	//æ•°å€¼è½´ä¸»å•ä½
+	private String _y_minor_internal = "";   	//æ•°å€¼è½´æ¬¡å•ä½
+	private String _x_cross_point = "";   		//æ•°å€¼è½´çš„åˆ†ç±»äº¤å‰ç‚¹
+	private String _y_unit = "";   				//æ•°å€¼è½´å•ä½
+	private String _display_unit = "";   		//æ˜¾ç¤ºå•ä½
+	private String _y_logarithm = "";   		//æ•°å€¼è½´ï¼Œå¯¹æ•°
+	private String _y_sequence_rev = "";   		//æ•°å€¼æ¬¡åºåè½¬
+	//åˆ†ç±»è½´éƒ¨åˆ†
+	private String _y_cross_point = "";   		//åˆ†ç±»è½´çš„æ•°å€¼äº¤å‰ç‚¹
+	private String _x_lable_num = "";   		//åˆ†ç±»æ ‡ç­¾æ•°
+	private String _x_mark_num = "";   			//åˆ†ç±»åˆ»åº¦æ•°
+	private String _x_sequence_rev = "";   		//åˆ†ç±»æ¬¡åºåè½¬
+
+	private String _display_symbol = ""; //<æ˜¾ç¤ºæ ‡å¿—>ï¼Œç”¨äºæ•°æ®ç³»åˆ—å’Œæ•°æ®ç‚¹
+	private String _serie_name = "";   			//<ç³»åˆ—å>ï¼Œç”¨äºæ•°æ®ç³»åˆ—å’Œæ•°æ®ç‚¹ï¼Œæœªæ‰¾åˆ°å¯¹åº”
+
+	public ChartStyle() {
 	}
-	
-	public void set_id(String string) 
+
+	public void set_id(String string)
 	{
 		_id = string;
 	}
-	
+
 	public String get_id()
 	{
 		return _id;
 	}
-	
-	public void process_chart_pro(Attributes atts) 
+
+	public void process_chart_pro(Attributes atts)
 	{
 		String value = "";
-		
+
 		if((value = atts.getValue("chart:lines")) != null && value.equals("true")) {
 			Chart.set_lines(true);
 		}
-		
+
 		if((value = atts.getValue("chart:symbol-type")) != null && !value.equals("none")) {
 			Chart.set_symbol(true);
 		}
-		
+
 		if((value = atts.getValue("chart:pie-offset")) != null) {
 			Chart.set_pieOffset(true);
 		}
-		
+
 		if((value = atts.getValue("chart:three-dimensional")) != null && value.equals("true")) {
 			Chart.set_3D(true);
 		}
-		
+
 		if((value = atts.getValue("chart:vertical")) != null && value.equals("true")) {
 			Chart.set_vertical(true);
 		}
-		
+
 		if((value = atts.getValue("chart:stacked")) != null && value.equals("true")) {
 			Chart.set_stacked(true);
 		}
 		if((value = atts.getValue("chart:percentage")) != null && value.equals("true")) {
 			Chart.set_percentage(true);
 		}
-		
+
 		if((value = atts.getValue("chart:display-label")) != null) {
-			_display_unit = "<±í:ÏÔÊ¾µ¥Î» ±í:Öµ=\"" + value + "\"/>";
+			_display_unit = "<è¡¨:æ˜¾ç¤ºå•ä½ è¡¨:å€¼=\"" + value + "\"/>";
 			System.out.print("...\n\n");
 		}
-		
+
 		if((value = atts.getValue("chart:series-source")) != null) {
 			if (value.equals("columns")) {
-				Chart.add_data_source(" ±í:ÏµÁĞ²úÉú=\"col\"");
+				Chart.add_data_source(" è¡¨:ç³»åˆ—äº§ç”Ÿ=\"col\"");
 				Chart_Local_Table.set_series_type("col");
 			}
 			else if (value.equals("rows")) {
-				Chart.add_data_source(" ±í:ÏµÁĞ²úÉú=\"row\"");
+				Chart.add_data_source(" è¡¨:ç³»åˆ—äº§ç”Ÿ=\"row\"");
 				Chart_Local_Table.set_series_type("row");
 			}
 		}
-		
+
 		if ((value = atts.getValue("style:direction")) != null) {
 			if (value.equals("ltr")) {
-				_direction += "<±í:ÎÄ×Ö·½Ïò>horizontal</±í:ÎÄ×Ö·½Ïò>";
-				_axis_word_direction += "<±í:ÎÄ×Ö·½Ïò>horizontal</±í:ÎÄ×Ö·½Ïò>";
+				_direction += "<è¡¨:æ–‡å­—æ–¹å‘>horizontal</è¡¨:æ–‡å­—æ–¹å‘>";
+				_axis_word_direction += "<è¡¨:æ–‡å­—æ–¹å‘>horizontal</è¡¨:æ–‡å­—æ–¹å‘>";
 			}
 			else if (value.equals("ttb")) {
-				_direction += "<±í:ÎÄ×Ö·½Ïò>vertical</±í:ÎÄ×Ö·½Ïò>";
-				_axis_word_direction += "<±í:ÎÄ×Ö·½Ïò>vertical</±í:ÎÄ×Ö·½Ïò>";
+				_direction += "<è¡¨:æ–‡å­—æ–¹å‘>vertical</è¡¨:æ–‡å­—æ–¹å‘>";
+				_axis_word_direction += "<è¡¨:æ–‡å­—æ–¹å‘>vertical</è¡¨:æ–‡å­—æ–¹å‘>";
 			}
 		}
-		
+
 		if ((value = atts.getValue("chart:link-data-style-to-source")) != null) {
-			_axis_data_style += " ±í:Á´½Óµ½Ô´=\"" + value + "\"";
+			_axis_data_style += " è¡¨:é“¾æ¥åˆ°æº=\"" + value + "\"";
 		}
-		
+
 		if ((value = atts.getValue("chart:tick-marks-major-inner")) != null && value.equals("true")) {
 			_major_tick_type = "inside";
 		}
@@ -141,91 +141,91 @@ public class ChartStyle {
 		if ((value = atts.getValue("chart:tick-marks-minor-outer")) != null && value.equals("true")) {
 			_minor_tick_type = "outside";
 		}
-		
+
 		if ((value = atts.getValue("chart:axis-logarithmic")) != null) {
 			if (value.equals("true"))
-				_y_logarithm = "<±í:¶ÔÊı ±í:Öµ=\"true\">";
+				_y_logarithm = "<è¡¨:å¯¹æ•° è¡¨:å€¼=\"true\">";
 			else
-				_y_logarithm = "<±í:¶ÔÊı ±í:Öµ=\"false\">";
+				_y_logarithm = "<è¡¨:å¯¹æ•° è¡¨:å€¼=\"false\">";
 		}
-		
+
 		if ((value = atts.getValue("chart:minimum")) != null)
-			_y_min_value = "<±í:×îĞ¡Öµ>" + value + "</±í:×îĞ¡Öµ>";
+			_y_min_value = "<è¡¨:æœ€å°å€¼>" + value + "</è¡¨:æœ€å°å€¼>";
 		if ((value = atts.getValue("chart:maximum")) != null)
-			_y_max_value = "<±í:×î´óÖµ>" + value + "</±í:×î´óÖµ>";
-		
+			_y_max_value = "<è¡¨:æœ€å¤§å€¼>" + value + "</è¡¨:æœ€å¤§å€¼>";
+
 		if ((value = atts.getValue("chart:origin")) != null)
-			_y_cross_point = "<±í:ÊıÖµ½»²æµã>" + value + "</±í:ÊıÖµ½»²æµã>";
-		
+			_y_cross_point = "<è¡¨:æ•°å€¼äº¤å‰ç‚¹>" + value + "</è¡¨:æ•°å€¼äº¤å‰ç‚¹>";
+
 		if ((value = atts.getValue("chart:interval-major")) != null) {
 			double major = Double.valueOf(value);
-			_y_major_internal = "<±í:Ö÷µ¥Î»>" + major + "</±í:Ö÷µ¥Î»>";
+			_y_major_internal = "<è¡¨:ä¸»å•ä½>" + major + "</è¡¨:ä¸»å•ä½>";
 			if ((value = atts.getValue("chart:interval-minor-divisor")) != null) {
 				int divisor = Integer.valueOf(value);
 				double minor = major/divisor;
-				_y_minor_internal = "<±í:´Îµ¥Î»>" + minor + "</±í:´Îµ¥Î»>";
+				_y_minor_internal = "<è¡¨:æ¬¡å•ä½>" + minor + "</è¡¨:æ¬¡å•ä½>";
 			}
 		}
-		
+
 		if ((value = atts.getValue("chart:data-label-number")) != null) {
 			if (value.equals("value"))
-				_display_symbol += " ±í:ÊıÖµ=\"true\"";
+				_display_symbol += " è¡¨:æ•°å€¼=\"true\"";
 			else if (value.equals("percentage"))
-				_display_symbol += " ±í:°Ù·ÖÊı=\"true\"";
+				_display_symbol += " è¡¨:ç™¾åˆ†æ•°=\"true\"";
 			else if (value.equals("none"))
-				_display_symbol += " ±í:ÊıÖµ=\"false\"";
+				_display_symbol += " è¡¨:æ•°å€¼=\"false\"";
 		}
-		
+
 		if ((value = atts.getValue("chart:data-label-text")) != null && value.equals("true"))
-			_display_symbol += " ±í:ÏµÁĞÃû=\"true\"";
-	
+			_display_symbol += " è¡¨:ç³»åˆ—å=\"true\"";
+
 		if ((value = atts.getValue("chart:data-label-symbol")) != null && value.equals("true"))
-			_display_symbol += " ±í:Í¼Àı±êÖ¾=\"true\"";
+			_display_symbol += " è¡¨:å›¾ä¾‹æ ‡å¿—=\"true\"";
 	}
-	
-	public void process_graphic_pro(Attributes atts) 
+
+	public void process_graphic_pro(Attributes atts)
 	{
 		String value = "";
-		
+
 		if ((value = atts.getValue("fo:wrap-option")) != null) {
 			if (value.equals("wrap"))
-				_auto_newline += "<±í:×Ô¶¯»»ĞĞ Öµ=\"true\"/>";
+				_auto_newline += "<è¡¨:è‡ªåŠ¨æ¢è¡Œ å€¼=\"true\"/>";
 			else
-				_auto_newline += "<±í:×Ô¶¯»»ĞĞ Öµ=\"true\"/>";
+				_auto_newline += "<è¡¨:è‡ªåŠ¨æ¢è¡Œ å€¼=\"true\"/>";
 		}
-		
-		//<±í:ÏßĞÍ>,±ß¾àºÍÒõÓ°ÊôĞÔÎ´ÕÒµ½¶ÔÓ¦
+
+		//<è¡¨:çº¿å‹>,è¾¹è·å’Œé˜´å½±å±æ€§æœªæ‰¾åˆ°å¯¹åº”
 		if ((value = atts.getValue("draw:stroke")) != null) {
 			if (value.equals("solid"))
-				_axis_line_type += " ±í:ÀàĞÍ=\"single\"";
+				_axis_line_type += " è¡¨:ç±»å‹=\"single\"";
 			else if (value.equals("dash"))
-				_axis_line_type += " ±í:ÀàĞÍ=\"dash\"";
+				_axis_line_type += " è¡¨:ç±»å‹=\"dash\"";
 			else
-				_axis_line_type += " ±í:ÀàĞÍ=\"none\"";
+				_axis_line_type += " è¡¨:ç±»å‹=\"none\"";
 		}
-		else _axis_line_type += " ±í:ÀàĞÍ=\"none\"";   //ÀàĞÍÊôĞÔÊÇrequiredµÄ
+		else _axis_line_type += " è¡¨:ç±»å‹=\"none\"";   //ç±»å‹å±æ€§æ˜¯requiredçš„
 		if ((value = atts.getValue("svg:stroke-width")) != null)
-			_axis_line_type += " ±í:¿í¶È=\"" + Unit_Converter.convert_gra(value) + "\"";
+			_axis_line_type += " è¡¨:å®½åº¦=\"" + Unit_Converter.convert_gra(value) + "\"";
 		if ((value = atts.getValue("svg:stroke-color")) != null)
-			_axis_line_type += " ±í:ÑÕÉ«=\"" + value + "\"";	
-		
+			_axis_line_type += " è¡¨:é¢œè‰²=\"" + value + "\"";
+
 		if ((value = atts.getValue("draw:fill-color")) != null)
-//			_padding = "<Í¼:ÑÕÉ«>" + value + "</Í¼:ÑÕÉ«>";
-			_padding = "<Í¼:ÑÕÉ«>auto</Í¼:ÑÕÉ«>";
+//			_padding = "<å›¾:é¢œè‰²>" + value + "</å›¾:é¢œè‰²>";
+			_padding = "<å›¾:é¢œè‰²>auto</å›¾:é¢œè‰²>";
 	}
-	
+
 	public void process_para_pro(Attributes atts)
 	{
 		String value = "";
-		
-		//±ß¿ò
+
+		//è¾¹æ¡†
 		if ((value = atts.getValue("fo:border")) != null) {
 			_border += Common_Pro.tranBorderValue(value);
 		}
-		
-		//¶ÔÆë
+
+		//å¯¹é½
 		if ((value = atts.getValue("fo:text-align")) != null) {
-			_hori_align += "<±í:Ë®Æ½¶ÔÆë·½Ê½>";
+			_hori_align += "<è¡¨:æ°´å¹³å¯¹é½æ–¹å¼>";
 			if (value.equals("left"))
 				_hori_align += "left";
 			else if (value.equals("right"))
@@ -234,173 +234,173 @@ public class ChartStyle {
 				_hori_align += "center";
 			else if (value.equals("justify"))
 				_hori_align += "justified";
-			/*startºÍendÃ»ÓĞ¶ÔÓ¦
+			/*startå’Œendæ²¡æœ‰å¯¹åº”
 			 else if (value.equals("start"))
 			 align += "left";
 			 else if (value.equals("end"))
 			 align += "right";
 			 */
-			_hori_align += "</±í:Ë®Æ½¶ÔÆë·½Ê½>";
+			_hori_align += "</è¡¨:æ°´å¹³å¯¹é½æ–¹å¼>";
 		}
 		if ((value = atts.getValue("style:vertical-align")) != null) {
-			_vert_align += "<±í:´¹Ö±¶ÔÆë·½Ê½>";
+			_vert_align += "<è¡¨:å‚ç›´å¯¹é½æ–¹å¼>";
 			if (value.equals("top"))
 				_vert_align += "top";
 			else if (value.equals("middle"))
 				_vert_align += "center";
 			else if (value.equals("bottom"))
 				_vert_align += "bottom";
-			/*autoÃ»ÓĞ¶ÔÓ¦
+			/*autoæ²¡æœ‰å¯¹åº”
 			 else if (value.equals("auto"))
 			 align += "";
 			 */
-			_vert_align += "</±í:´¹Ö±¶ÔÆë·½Ê½>";
+			_vert_align += "</è¡¨:å‚ç›´å¯¹é½æ–¹å¼>";
 		}
-		//To do.´Ë´¦ĞèÒªÅĞ¶ÏËõ½øÊÇÈ¡length¶ø²»ÊÇpercent
+		//To do.æ­¤å¤„éœ€è¦åˆ¤æ–­ç¼©è¿›æ˜¯å–lengthè€Œä¸æ˜¯percent
 		if ((value = atts.getValue("fo:text-indent")) != null) {
-			_indent += "<±í:Ëõ½ø>" + value + "</±í:Ëõ½ø>";
+			_indent += "<è¡¨:ç¼©è¿›>" + value + "</è¡¨:ç¼©è¿›>";
 		}
 	}
-	
+
 	public void process_text_pro(Attributes atts)
 	{
 		String value = "";
-		
-		_font = "<±í:×ÖÌå>" + Sent_Style.process_text_atts(atts) + "</±í:×ÖÌå>";
-				
-		//ĞèÒª¸Ä½ø¡£ODFµÄÎÄ×ÖĞı×ª½Ç¶ÈÊÇ¸ö·Ç¸ºÕûÊı£¬UOFµÄÔòÊÇ-90µ½90Ö®¼ä¡£
+
+		_font = "<è¡¨:å­—ä½“>" + Sent_Style.process_text_atts(atts) + "</è¡¨:å­—ä½“>";
+
+		//éœ€è¦æ”¹è¿›ã€‚ODFçš„æ–‡å­—æ—‹è½¬è§’åº¦æ˜¯ä¸ªéè´Ÿæ•´æ•°ï¼ŒUOFçš„åˆ™æ˜¯-90åˆ°90ä¹‹é—´ã€‚
 		if ((value = atts.getValue("style:rotation-angle")) != null) {
-			_rotation_angle += "<±í:ÎÄ×ÖĞı×ª½Ç¶È>" + value + "</±í:ÎÄ×ÖĞı×ª½Ç¶È>";
-			_axis_word_rot_angle += "<±í:Ğı×ª½Ç¶È>" + value + "</±í:Ğı×ª½Ç¶È>";
+			_rotation_angle += "<è¡¨:æ–‡å­—æ—‹è½¬è§’åº¦>" + value + "</è¡¨:æ–‡å­—æ—‹è½¬è§’åº¦>";
+			_axis_word_rot_angle += "<è¡¨:æ—‹è½¬è§’åº¦>" + value + "</è¡¨:æ—‹è½¬è§’åº¦>";
 		}
-		
+
 	}
-	
-	private String get_border() 
+
+	private String get_border()
 	{
 		String border = "";
 		if (_border.length() != 0)
-			border = "<±í:±ß¿ò" + _border + "/>";
+			border = "<è¡¨:è¾¹æ¡†" + _border + "/>";
 		return border;
 	}
-	
-	private String get_padding() 
+
+	private String get_padding()
 	{
 		String padding = "";
 		if (_padding.length() != 0)
-			padding = "<±í:Ìî³ä>" + _padding + "</±í:Ìî³ä>";
+			padding = "<è¡¨:å¡«å……>" + _padding + "</è¡¨:å¡«å……>";
 		else if (Chart.get_type().equals("chart:line"))
-			padding = "<±í:Ìî³ä><Í¼:ÑÕÉ«>auto</Í¼:ÑÕÉ«></±í:Ìî³ä>";
+			padding = "<è¡¨:å¡«å……><å›¾:é¢œè‰²>auto</å›¾:é¢œè‰²></è¡¨:å¡«å……>";
 		return padding;
 	}
 
-	private String get_title_align() 
+	private String get_title_align()
 	{
 		String titleAlign = _hori_align + _vert_align + _indent + _direction + _rotation_angle
 		+ _auto_newline + _shrink_to_fit;
 		if (titleAlign.length() != 0)
-			titleAlign = "<±í:¶ÔÆë uof:locID=\"s0020\">" + titleAlign + "</±í:¶ÔÆë>";
+			titleAlign = "<è¡¨:å¯¹é½ uof:locID=\"s0020\">" + titleAlign + "</è¡¨:å¯¹é½>";
 		return titleAlign;
 	}
-	
-	public String get_major_tick_type() 
+
+	public String get_major_tick_type()
 	{
 		if (_major_tick_type.length() == 0)
 			_major_tick_type = "inside";
 		return 	_major_tick_type;
 	}
-	
-	public String get_minor_tick_type() 
+
+	public String get_minor_tick_type()
 	{
 		if (_minor_tick_type.length() == 0)
 			_minor_tick_type = "none";
 		return 	_minor_tick_type;
 	}
-	
-	public void add_axis_datastyle(String string) 
+
+	public void add_axis_datastyle(String string)
 	{
 		_axis_data_style += string;
 	}
-	
+
 	public String get_chart_area()
 	{
 		String border = get_border();
 		if (border.length() == 0) {
-			border = "<±í:±ß¿ò uof:locID=\"s0057\" uof:attrList=\"ÀàĞÍ ¿í¶È ±ß¾à ÑÕÉ« ÒõÓ°\"" +
-					" uof:ÀàĞÍ=\"none\"/>";
+			border = "<è¡¨:è¾¹æ¡† uof:locID=\"s0057\" uof:attrList=\"ç±»å‹ å®½åº¦ è¾¹è· é¢œè‰² é˜´å½±\"" +
+					" uof:ç±»å‹=\"none\"/>";
 		}
 		String padding = get_padding();
-		return "<±í:Í¼±íÇø>" + border + padding + _font + "</±í:Í¼±íÇø>";
+		return "<è¡¨:å›¾è¡¨åŒº>" + border + padding + _font + "</è¡¨:å›¾è¡¨åŒº>";
 	}
-	
-	public String get_plot_area() 
+
+	public String get_plot_area()
 	{
 		String border = get_border();
 		if (border.length() == 0) {
-			border = "<±í:±ß¿ò uof:locID=\"s0057\" uof:attrList=\"ÀàĞÍ ¿í¶È ±ß¾à ÑÕÉ« ÒõÓ°\"" +
-					" uof:ÀàĞÍ=\"none\"/>";
+			border = "<è¡¨:è¾¹æ¡† uof:locID=\"s0057\" uof:attrList=\"ç±»å‹ å®½åº¦ è¾¹è· é¢œè‰² é˜´å½±\"" +
+					" uof:ç±»å‹=\"none\"/>";
 		}
 		String padding = get_padding();
-		return "<±í:»æÍ¼Çø>" + border + padding + "</±í:»æÍ¼Çø>";
+		return "<è¡¨:ç»˜å›¾åŒº>" + border + padding + "</è¡¨:ç»˜å›¾åŒº>";
 	}
-	
+
 	public String get_legend()
 	{
 		String border = get_border();
 		String padding = get_padding();
 		return border + padding + _font;
 	}
-	
-	public String get_title() 
+
+	public String get_title()
 	{
 		String border = get_border();
 		String padding = get_padding();
 		String titleAlign = get_title_align();
 		return border + padding + _font + titleAlign;
 	}
-	
-	public String get_x_axis() 
+
+	public String get_x_axis()
 	{
-		if (!_axis_data_style.contains("±í:Á´½Óµ½Ô´"))
-			_axis_data_style += " ±í:Á´½Óµ½Ô´=\"true\"";
-		
-		return "<±í:ÏßĞÍ" + _axis_line_type + "/><±í:ÊıÖµ" + _axis_data_style + "/>" + _font + 
-		"<±í:¿Ì¶È>" + _display_unit + _x_lable_num + _x_mark_num + _x_sequence_rev + "</±í:¿Ì¶È>"
-		+ "<±í:¶ÔÆë uof:locID=\"s0078\">" + _axis_word_direction + _axis_word_rot_angle + _offset + "</±í:¶ÔÆë>";
+		if (!_axis_data_style.contains("è¡¨:é“¾æ¥åˆ°æº"))
+			_axis_data_style += " è¡¨:é“¾æ¥åˆ°æº=\"true\"";
+
+		return "<è¡¨:çº¿å‹" + _axis_line_type + "/><è¡¨:æ•°å€¼" + _axis_data_style + "/>" + _font +
+		"<è¡¨:åˆ»åº¦>" + _display_unit + _x_lable_num + _x_mark_num + _x_sequence_rev + "</è¡¨:åˆ»åº¦>"
+		+ "<è¡¨:å¯¹é½ uof:locID=\"s0078\">" + _axis_word_direction + _axis_word_rot_angle + _offset + "</è¡¨:å¯¹é½>";
 	}
-	
-	public String get_y_axis() 
+
+	public String get_y_axis()
 	{
-		if (!_axis_data_style.contains("±í:Á´½Óµ½Ô´"))
-			_axis_data_style += " ±í:Á´½Óµ½Ô´=\"true\"";
-		
-		return "<±í:ÏßĞÍ" + _axis_line_type  + "/><±í:ÊıÖµ" + _axis_data_style + "/>" + _font + 
-		"<±í:¿Ì¶È>" + _y_min_value + _y_max_value + _y_major_internal + _y_minor_internal + _x_cross_point
-		+ _y_unit + _display_unit + _y_logarithm + _y_sequence_rev + _y_cross_point + "</±í:¿Ì¶È>"
-		+ "<±í:¶ÔÆë uof:locID=\"s0078\">" + _axis_word_direction + _axis_word_rot_angle + _offset + "</±í:¶ÔÆë>";
+		if (!_axis_data_style.contains("è¡¨:é“¾æ¥åˆ°æº"))
+			_axis_data_style += " è¡¨:é“¾æ¥åˆ°æº=\"true\"";
+
+		return "<è¡¨:çº¿å‹" + _axis_line_type  + "/><è¡¨:æ•°å€¼" + _axis_data_style + "/>" + _font +
+		"<è¡¨:åˆ»åº¦>" + _y_min_value + _y_max_value + _y_major_internal + _y_minor_internal + _x_cross_point
+		+ _y_unit + _display_unit + _y_logarithm + _y_sequence_rev + _y_cross_point + "</è¡¨:åˆ»åº¦>"
+		+ "<è¡¨:å¯¹é½ uof:locID=\"s0078\">" + _axis_word_direction + _axis_word_rot_angle + _offset + "</è¡¨:å¯¹é½>";
 	}
-	
-	public String get_gridline() 
+
+	public String get_gridline()
 	{
-		return "<±í:Íø¸ñÏß" + _axis_line_type;   //Íø¸ñÏßÖ»±È×ø±êÖáÏßĞÍ¶à³öÒ»¸öÎ»ÖÃÊôĞÔ¡£¿ÉÔÚ<chart:grid>ÖĞÌí¼Ó
+		return "<è¡¨:ç½‘æ ¼çº¿" + _axis_line_type;   //ç½‘æ ¼çº¿åªæ¯”åæ ‡è½´çº¿å‹å¤šå‡ºä¸€ä¸ªä½ç½®å±æ€§ã€‚å¯åœ¨<chart:grid>ä¸­æ·»åŠ 
 	}
-	
+
 	public String get_data_point()
 	{
 		String border = get_border();
 		String padding = get_padding();
 		String displaySymbol = _display_symbol;
-		
-		//ÓÀÖĞÄ¬ÈÏÎªfalse
-		if (!_display_symbol.contains("±í:ÊıÖµ"))
-			displaySymbol += " ±í:ÊıÖµ=\"false\"";
-		if (!_display_symbol.contains("±í:ÏµÁĞÃû"))
-			displaySymbol += " ±í:ÏµÁĞÃû=\"false\"";
-		if (!_display_symbol.contains("±í:Í¼Àı±êÖ¾"))
-			displaySymbol += " ±í:Í¼Àı±êÖ¾=\"false\"";
-		
-		displaySymbol += " ±í:Àà±ğÃû=\"false\"";
-		
-		return border + padding + "<±í:ÏÔÊ¾±êÖ¾" + displaySymbol  + "/>" + _serie_name;
+
+		//æ°¸ä¸­é»˜è®¤ä¸ºfalse
+		if (!_display_symbol.contains("è¡¨:æ•°å€¼"))
+			displaySymbol += " è¡¨:æ•°å€¼=\"false\"";
+		if (!_display_symbol.contains("è¡¨:ç³»åˆ—å"))
+			displaySymbol += " è¡¨:ç³»åˆ—å=\"false\"";
+		if (!_display_symbol.contains("è¡¨:å›¾ä¾‹æ ‡å¿—"))
+			displaySymbol += " è¡¨:å›¾ä¾‹æ ‡å¿—=\"false\"";
+
+		displaySymbol += " è¡¨:ç±»åˆ«å=\"false\"";
+
+		return border + padding + "<è¡¨:æ˜¾ç¤ºæ ‡å¿—" + displaySymbol  + "/>" + _serie_name;
 	}
 }

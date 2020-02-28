@@ -5,35 +5,35 @@ import org.xml.sax.Attributes;
 import spreadsheet.Cell_Address;
 
 public class Chart_Local_Table {
-	
+
 	private static String _sheet_name = "";
 	private static int _begin_col = 0;
 	private static int _end_col = 0;
 	private static int _begin_row = 0;
 	private static int _end_row = 0;
-	
+
 	private static boolean _is_header_row = false;
 	private static String _text = "";
-	private static int _rows = 0;  //local tableµÄĞĞÊı£¬Í¨¹ıÓëÆğÊ¼ĞĞÖ®²îµÄ±È½Ï¿ÉÒÔÅĞ¶ÏÊÇ·ñÒ»Ê×ĞĞ¡¢Ê×ÁĞÎªÊı¾İ±êÖ¾
+	private static int _rows = 0;  //local tableçš„è¡Œæ•°ï¼Œé€šè¿‡ä¸èµ·å§‹è¡Œä¹‹å·®çš„æ¯”è¾ƒå¯ä»¥åˆ¤æ–­æ˜¯å¦ä¸€é¦–è¡Œã€é¦–åˆ—ä¸ºæ•°æ®æ ‡å¿—
 	private static String[] _header_row = null;
 	private static String[] _header_col = null;
-	
+
 	private static int _col_index = -1;
 	private static int _row_index = -1;
-	
+
 	private static String _series_type = "";
-	
+
 	public static void set_area(String sheetName, int beginCol, int endCol, int beginRow, int endRow) {
 		_sheet_name = sheetName;
 		_begin_col = beginCol;
 		_end_col = endCol;
 		_begin_row = beginRow;
 		_end_row = endRow;
-		
+
 		_header_row = new String[_end_col - _begin_col + 2];
 		_header_col = new String[_end_row - _begin_row + 2];
 	}
-	
+
 	public static void process_start(String qName,Attributes atts)
 	{
 		if (qName.equals("table:table-header-rows")) {
@@ -47,19 +47,19 @@ public class Chart_Local_Table {
 			_col_index++;
 		}
 	}
-	
+
 	public static void process_end(String qName)
 	{
 		if (qName.equals("table:table")) {
 			int offset = 0;
-			if (Chart.get_type().equals("chart:scatter"))  //xyÍ¼½ÏÌØÊâ,ÉÙµÚÒ»¸öÏµÁĞ
+			if (Chart.get_type().equals("chart:scatter"))  //xyå›¾è¾ƒç‰¹æ®Š,å°‘ç¬¬ä¸€ä¸ªç³»åˆ—
 				offset = 1;
 			int rowNum = _end_row - _begin_row + 1;
 			int colNum = _end_col - _begin_col + 1;
-			if (_rows > rowNum) {  //Ê×ĞĞ¡¢Ê×ÁĞ²»×÷ÎªÊı¾İ±êÖ¾
+			if (_rows > rowNum) {  //é¦–è¡Œã€é¦–åˆ—ä¸ä½œä¸ºæ•°æ®æ ‡å¿—
 				if (_series_type.equals("col")) {
 					for(int i = offset; i < colNum; i++) {
-						String serie = "<±í:ÏµÁĞ ±í:ÏµÁĞÃû=\"" + _header_row[i + 1] + "\" ±í:ÏµÁĞÖµ=\"='"
+						String serie = "<è¡¨:ç³»åˆ— è¡¨:ç³»åˆ—å=\"" + _header_row[i + 1] + "\" è¡¨:ç³»åˆ—å€¼=\"='"
 						+ _sheet_name + "'!" + Cell_Address.to_col_addr(_begin_col + i + 1) + _begin_row
 						+ ":" + Cell_Address.to_col_addr(_begin_col + i + 1) + _end_row +"\"/>";
 						Chart.add_data_source(serie);
@@ -67,7 +67,7 @@ public class Chart_Local_Table {
 				}
 				else {  //row
 					for(int i = offset; i < rowNum; i++) {
-						String serie = "<±í:ÏµÁĞ ±í:ÏµÁĞÃû=\"" + _header_col[i + 1] + "\" ±í:ÏµÁĞÖµ=\"='"
+						String serie = "<è¡¨:ç³»åˆ— è¡¨:ç³»åˆ—å=\"" + _header_col[i + 1] + "\" è¡¨:ç³»åˆ—å€¼=\"='"
 						+ _sheet_name + "'!" + Cell_Address.to_col_addr(_begin_col + 1) + (_begin_row + i)
 						+ ":" + Cell_Address.to_col_addr(_end_col + 1) + (_begin_row + i) +"\"/>";
 						Chart.add_data_source(serie);
@@ -77,11 +77,11 @@ public class Chart_Local_Table {
 			else {
 				if (_series_type.equals("col")) {
 					for(int i = offset; i < colNum - 1; i++) {
-						String serie = "<±í:ÏµÁĞ ±í:ÏµÁĞÃû=\"='" + _sheet_name + "'!"
+						String serie = "<è¡¨:ç³»åˆ— è¡¨:ç³»åˆ—å=\"='" + _sheet_name + "'!"
 						+ Cell_Address.to_col_addr(_begin_col + i + 2) + _begin_row + ":"
-						+ Cell_Address.to_col_addr(_begin_col + i + 2) + _begin_row + "\" ±í:ÏµÁĞÖµ=\"='"
+						+ Cell_Address.to_col_addr(_begin_col + i + 2) + _begin_row + "\" è¡¨:ç³»åˆ—å€¼=\"='"
 						+ _sheet_name + "'!" + Cell_Address.to_col_addr(_begin_col + i + 2) + (_begin_row + 1)
-						+ ":" + Cell_Address.to_col_addr(_begin_col + i + 2) + _end_row + "\" ±í:·ÖÀàÃû=\"='" 
+						+ ":" + Cell_Address.to_col_addr(_begin_col + i + 2) + _end_row + "\" è¡¨:åˆ†ç±»å=\"='"
 						+ _sheet_name + "'!" + Cell_Address.to_col_addr(_begin_col + 1) + (_begin_row + 1)
 						+ ":" + Cell_Address.to_col_addr(_begin_col + 1) + _end_row + "\"/>";
 						Chart.add_data_source(serie);
@@ -89,18 +89,18 @@ public class Chart_Local_Table {
 				}
 				else {  //row
 					for(int i = offset; i < colNum - 1; i++) {
-						String serie = "<±í:ÏµÁĞ ±í:ÏµÁĞÃû=\"='" + _sheet_name + "'!"
+						String serie = "<è¡¨:ç³»åˆ— è¡¨:ç³»åˆ—å=\"='" + _sheet_name + "'!"
 						+ Cell_Address.to_col_addr(_begin_col + 1)  + (_begin_row + i + 1) + ":"
-						+ Cell_Address.to_col_addr(_begin_col + 1)  + (_begin_row + i + 1) + "\" ±í:ÏµÁĞÖµ=\"='"
+						+ Cell_Address.to_col_addr(_begin_col + 1)  + (_begin_row + i + 1) + "\" è¡¨:ç³»åˆ—å€¼=\"='"
 						+ _sheet_name + "'!" + Cell_Address.to_col_addr(_begin_col + 2) + (_begin_row + i + 1)
 						+ ":" + Cell_Address.to_col_addr(_end_col + 1) + (_begin_row + i + 1)
-						+"\" ±í:·ÖÀàÃû=\"='" + _sheet_name + "'!" + Cell_Address.to_col_addr(_begin_col + 2) + _begin_row
+						+"\" è¡¨:åˆ†ç±»å=\"='" + _sheet_name + "'!" + Cell_Address.to_col_addr(_begin_col + 2) + _begin_row
 						+ ":" + Cell_Address.to_col_addr(_end_col + 1) + _begin_row + "\"/>";
 						Chart.add_data_source(serie);
 					}
 				}
 			}
-			
+
 			clear();
 		}
 		else if (qName.equals("table:table-header-rows")) {
@@ -113,18 +113,18 @@ public class Chart_Local_Table {
 			if (_is_header_row) {
 				_header_row[_col_index] = _text;
 			}
-			
+
 			if (_col_index == 0) {
 				_header_col[_row_index] = _text;
 			}
 		}
 	}
-	
-	public static void process_chars(char[] ch, int start, int length) 
+
+	public static void process_chars(char[] ch, int start, int length)
 	{
 		_text = new String(ch,start,length);
 	}
-	
+
 	private static void clear() {
 		_sheet_name = "";
 		_begin_col = 0;
@@ -140,7 +140,7 @@ public class Chart_Local_Table {
 		_row_index = -1;
 		_series_type = "";
 	}
-	
+
 	public static void set_series_type(String type) {
 		_series_type = type;
 	}

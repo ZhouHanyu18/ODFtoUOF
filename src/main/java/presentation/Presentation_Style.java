@@ -7,19 +7,19 @@ import styles.Para_Style;
 import styles.Sent_Style;
 
 /**
- * ´¦Àístyle:family="presentation"µÄ<style:style> µ½ <Ñİ:ÎÄ±¾Ê½Ñù>µÄ×ª»»¡£
- * 
+ * å¤„ç†style:family="presentation"çš„<style:style> åˆ° <æ¼”:æ–‡æœ¬å¼æ ·>çš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
-public class Presentation_Style {	
+public class Presentation_Style {
 	//the result
 	private static String _result = "";
 	//tag for filtration
 	private static boolean _filter_tag = false;
 	//@style:name
 	private static String _style_name = "";
-	//attributes of Ñİ:¶ÎÂäÊ½Ñù
+	//attributes of æ¼”:æ®µè½å¼æ ·
 	private static String _ele_atts = "";
 	//attributes of style:text-properties
 	private static String _text_pro = "";
@@ -27,121 +27,121 @@ public class Presentation_Style {
 	private static String _para_pro = "";
 	//name of the master-page
 	private static String _master_name = "";
-	
-	
+
+
 	public static void set_master_name(String name){
 		if(_master_name.equals("")){
 			_master_name = name;
 		}
 	}
-	
+
 	public static String title_name(){
 		return _master_name + "-title";
 	}
-	
+
 	public static String subtitle_name(){
 		return _master_name + "-subtitle";
 	}
-	
+
 	public static String outline_name(){
 		return _master_name + "-outline";
 	}
-	
+
 	public static String notes_name(){
 		return _master_name + "-notes";
 	}
-	
+
 	public static String background_name(){
 		return _master_name + "-background";
 	}
-	
+
 	//return style name of text:p according to its presentation class
 	public static String style_name(String presenCls, int listLev){
 		String styleName = "";
-		
+
 		if(presenCls.equals("title")){
 			styleName = title_name();
-		}	
+		}
 		else if(presenCls.equals("subtitle")){
 			styleName = outline_name() + "1";
-		}	
+		}
 		else if(presenCls.equals("outline")){
 			styleName = outline_name() + (listLev+1);
 		}
 		else if(presenCls.equals("notes")){
 			styleName = notes_name();
 		}
-		
+
 		return styleName;
 	}
-	
+
 	private static void clear(){
 		_style_name = "";
 		_ele_atts = "";
 		_text_pro = "";
 		_para_pro = "";
 	}
-	
+
 	private static String get_one_style(){
-		String style = "";		
+		String style = "";
 		String level = "";
 		String outline = "";
 		String listInfo = "";
-		
+
 		if(_style_name.equals(title_name())){
 			level = "0";
 		}else{
 			level = _style_name.substring(outline_name().length());
 		}
 
-		outline = "<×Ö:´ó¸Ù¼¶±ğ>" + level + "</×Ö:´ó¸Ù¼¶±ğ>";
-		
+		outline = "<å­—:å¤§çº²çº§åˆ«>" + level + "</å­—:å¤§çº²çº§åˆ«>";
+
 		int lev = Integer.parseInt(level);
-		String listName = (lev % 2 == 0) ? "bn0" : "bn1"; 
-		listInfo = "<×Ö:×Ô¶¯±àºÅĞÅÏ¢" + " ×Ö:±àºÅÒıÓÃ=\"" + listName + "\"" + " ×Ö:±àºÅ¼¶±ğ=\"0\"/>";
+		String listName = (lev % 2 == 0) ? "bn0" : "bn1";
+		listInfo = "<å­—:è‡ªåŠ¨ç¼–å·ä¿¡æ¯" + " å­—:ç¼–å·å¼•ç”¨=\"" + listName + "\"" + " å­—:ç¼–å·çº§åˆ«=\"0\"/>";
 		if(_style_name.equals(title_name())){
-			listInfo += "<uof:Í£Ö¹ÒıÓÃ><uof:Â·¾¶ uof:locID=\"u0067\">×Ô¶¯±àºÅĞÅÏ¢</uof:Â·¾¶></uof:Í£Ö¹ÒıÓÃ>";
+			listInfo += "<uof:åœæ­¢å¼•ç”¨><uof:è·¯å¾„ uof:locID=\"u0067\">è‡ªåŠ¨ç¼–å·ä¿¡æ¯</uof:è·¯å¾„></uof:åœæ­¢å¼•ç”¨>";
 		}
-		
-		//ĞÂ°æscheamaÊÇ<Ñİ:¶ÎÂäÊ½Ñù>
-		style = "<uof:¶ÎÂäÊ½Ñù" + _ele_atts + ">";
+
+		//æ–°ç‰ˆscheamaæ˜¯<æ¼”:æ®µè½å¼æ ·>
+		style = "<uof:æ®µè½å¼æ ·" + _ele_atts + ">";
 		style += outline + _para_pro + listInfo;
-		style += "<×Ö:¾äÊôĞÔ>" + _text_pro + "</×Ö:¾äÊôĞÔ>";
-		style += "</uof:¶ÎÂäÊ½Ñù>";
-		
+		style += "<å­—:å¥å±æ€§>" + _text_pro + "</å­—:å¥å±æ€§>";
+		style += "</uof:æ®µè½å¼æ ·>";
+
 		if(level.equals("9")){
 			style = "";
 		}
 		return style;
 	}
-	
+
 	private static String get_notes_style(){
 		String style = "";
-		
-		style = "<uof:¶ÎÂäÊ½Ñù" + _ele_atts + ">";
+
+		style = "<uof:æ®µè½å¼æ ·" + _ele_atts + ">";
 		style += _para_pro;
-		style += "<×Ö:¾äÊôĞÔ>" + _text_pro + "</×Ö:¾äÊôĞÔ>";
-		style += "</uof:¶ÎÂäÊ½Ñù>";
-		
+		style += "<å­—:å¥å±æ€§>" + _text_pro + "</å­—:å¥å±æ€§>";
+		style += "</uof:æ®µè½å¼æ ·>";
+
 		return style;
 	}
-	
+
 	public static String get_result(){
 		String rst = "";
-		
-		rst = "<Ñİ:ÎÄ±¾Ê½Ñù¼¯>";
-		rst += "<Ñİ:ÎÄ±¾Ê½Ñù Ñİ:±êÊ¶·û=\"ps001\">";
+
+		rst = "<æ¼”:æ–‡æœ¬å¼æ ·é›†>";
+		rst += "<æ¼”:æ–‡æœ¬å¼æ · æ¼”:æ ‡è¯†ç¬¦=\"ps001\">";
 		rst += _result;
-		rst += "</Ñİ:ÎÄ±¾Ê½Ñù>";
-		rst += "</Ñİ:ÎÄ±¾Ê½Ñù¼¯>";
-		
+		rst += "</æ¼”:æ–‡æœ¬å¼æ ·>";
+		rst += "</æ¼”:æ–‡æœ¬å¼æ ·é›†>";
+
 		_result = "";
 		return rst;
 	}
-	
+
 	public static void process_start(String qName, Attributes atts){
 		String attVal = "";
-		
+
 		if(_filter_tag){
 			if(_style_name.equals(background_name()) && qName.equals("style:graphic-properties")){
 				attVal = atts.getValue("draw:fill-color");
@@ -150,41 +150,41 @@ public class Presentation_Style {
 			}
 			return;
 		}
-		
+
 		else if(qName.equals("style:style")){
 			attVal = atts.getValue("style:name");
 			_style_name = (attVal==null) ? "" : attVal;
-			
-			if(!_style_name.contains(outline_name()) 
+
+			if(!_style_name.contains(outline_name())
 			    && !_style_name.equals(title_name())
 			    && !_style_name.equals(notes_name())){
 				_filter_tag = true;
 			}
-			
+
 			if(!_style_name.equals("")){
-				_ele_atts += " ×Ö:±êÊ¶·û=\"" + _style_name + "\"";
+				_ele_atts += " å­—:æ ‡è¯†ç¬¦=\"" + _style_name + "\"";
 			}
 			if((attVal=atts.getValue("style:parent-style-name")) != null){
-				_ele_atts += " ×Ö:»ùÊ½ÑùÒıÓÃ=\"" + attVal + "\"";
+				_ele_atts += " å­—:åŸºå¼æ ·å¼•ç”¨=\"" + attVal + "\"";
 			}
-			
+
 			if(_style_name.equals(notes_name())){
-				_ele_atts += " ×Ö:Ãû³Æ=\"notes\"";
+				_ele_atts += " å­—:åç§°=\"notes\"";
 			}else{
-				_ele_atts += " ×Ö:Ãû³Æ=\"slide\"";
+				_ele_atts += " å­—:åç§°=\"slide\"";
 			}
-			_ele_atts += " ×Ö:ÀàĞÍ=\"default\"";
+			_ele_atts += " å­—:ç±»å‹=\"default\"";
 		}
-		
+
 		else if(qName.equals("style:paragraph-properties")){
 			_para_pro = Para_Style.process_para_atts(atts);
 		}
-		
+
 		else if(qName.equals("style:text-properties")){
 			_text_pro = Sent_Style.process_text_atts(atts);
 		}
 	}
-	
+
 	public static void process_end(String qName){
 		if(qName.equals("style:style")){
 			if(!_filter_tag){
@@ -194,11 +194,11 @@ public class Presentation_Style {
 					Style_Data.add_styles(get_notes_style());
 				}
 			}
-		
+
 			clear();
 			_filter_tag = false;
 		}
-		
+
 		else if(_filter_tag){
 			return;
 		}

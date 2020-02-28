@@ -10,96 +10,96 @@ import convertor.Unit_Converter;
 import spreadsheet.Anchor_Pos;
 
 public class Chart_Handler extends DefaultHandler {
-	
+
 	private String _current_chart_style_id = "";
-	private String _title_begin = "";   		//±êÌâÆğÊ¼ÔªËØ
-	private String _title_content = "";   			//±êÌâÄÚÈİ
-	private boolean _title_mark = false;   			//ÓÃÓÚ<text:p>ÖĞÎÄ±¾½ÚµãµÄÅĞ¶Ï£¬¾ö¶¨ÊÇ·ñÏò±êÌâÖĞÌí¼ÓÃû³ÆÊôĞÔ
-	private ChartStyle _plot_area_style = null;   	//Èç¹ûplot-areaµÄ×ÓÔªËØÎ´µ¥¶ÀÒıÓÃstyle£¬Ôò»áÊ¹ÓÃÕâ¸östyle
-	private String _axis_type = "";   				//ÓÃÓÚÍø¸ñÏßºÍ±êÌâµÄÅĞ¶Ï
-	private boolean _in_plot_area = false;   		//ÓÃÓÚ±êÊ¶½øÈëplot-area£¬×ÓÔªËØÈôÃ»ÓĞÊ½ÑùÒıÓÃÔòÊ¹ÓÃplotAreaStyle
-	
-	private int _data_serie_num = 0;   				//ÏµÁĞºÅ£¬ĞèÒªÉú³É
-	private int _data_point_num = 0;   				//µãºÅ£¬ĞèÒªÉú³É
+	private String _title_begin = "";   		//æ ‡é¢˜èµ·å§‹å…ƒç´ 
+	private String _title_content = "";   			//æ ‡é¢˜å†…å®¹
+	private boolean _title_mark = false;   			//ç”¨äº<text:p>ä¸­æ–‡æœ¬èŠ‚ç‚¹çš„åˆ¤æ–­ï¼Œå†³å®šæ˜¯å¦å‘æ ‡é¢˜ä¸­æ·»åŠ åç§°å±æ€§
+	private ChartStyle _plot_area_style = null;   	//å¦‚æœplot-areaçš„å­å…ƒç´ æœªå•ç‹¬å¼•ç”¨styleï¼Œåˆ™ä¼šä½¿ç”¨è¿™ä¸ªstyle
+	private String _axis_type = "";   				//ç”¨äºç½‘æ ¼çº¿å’Œæ ‡é¢˜çš„åˆ¤æ–­
+	private boolean _in_plot_area = false;   		//ç”¨äºæ ‡è¯†è¿›å…¥plot-areaï¼Œå­å…ƒç´ è‹¥æ²¡æœ‰å¼æ ·å¼•ç”¨åˆ™ä½¿ç”¨plotAreaStyle
+
+	private int _data_serie_num = 0;   				//ç³»åˆ—å·ï¼Œéœ€è¦ç”Ÿæˆ
+	private int _data_point_num = 0;   				//ç‚¹å·ï¼Œéœ€è¦ç”Ÿæˆ
 	private String _data_source = "";
-	
-	//Ä¿Ç°Ö»´¦ÀíÀ´×ÔÒ»¸ö¾ØĞÎÇøÓòµÄÇé¿ö
-	private boolean _data_src_tag = false;   //±êÊ¶data_sourceµÄµÚÒ»¸ö²¿·ÖÊÇ·ñÒÑ´¦Àí£¬´ı¸Ä½ø
-	
+
+	//ç›®å‰åªå¤„ç†æ¥è‡ªä¸€ä¸ªçŸ©å½¢åŒºåŸŸçš„æƒ…å†µ
+	private boolean _data_src_tag = false;   //æ ‡è¯†data_sourceçš„ç¬¬ä¸€ä¸ªéƒ¨åˆ†æ˜¯å¦å·²å¤„ç†ï¼Œå¾…æ”¹è¿›
+
 	private boolean _local_table_tag = false;
-	
-	public Chart_Handler() { 
+
+	public Chart_Handler() {
 	}
-	
-	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException 
+
+	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException
 	{
 		String value = "";
-		//ÊıÖµÊ½Ñù
+		//æ•°å€¼å¼æ ·
 		if (qName.equals("number:number-style") && (value = atts.getValue("style:name")) != null) {
 			Chart.add_data_style(value,"number");
 		}
-		/*To do:Ìí¼ÓÆäËûµÄÊıÖµ·ÖÀà
+		/*To do:æ·»åŠ å…¶ä»–çš„æ•°å€¼åˆ†ç±»
 		else if (qName.equals("number:-style") && atts.getValue("style:name") != null) {
-			
+
 		}
 		*/
-		
-		//style:familyÊÇ·ñ¿Ï¶¨ÊÇchart?
+
+		//style:familyæ˜¯å¦è‚¯å®šæ˜¯chart?
 		else if (qName.equals("style:style") && atts.getValue("style:family").equals("chart")) {
 			_current_chart_style_id = atts.getValue("style:name");
 			ChartStyle chartstyle = new ChartStyle();
-			
-			//Ò»Ğ©ÊıÖµĞÅÏ¢.<±í:ÊıÖµ>µÄ¸ñÊ½ÂëÊôĞÔÌ«¸´ÔÓ£¬ÔİÊ±Î´´¦Àí¡£
+
+			//ä¸€äº›æ•°å€¼ä¿¡æ¯.<è¡¨:æ•°å€¼>çš„æ ¼å¼ç å±æ€§å¤ªå¤æ‚ï¼Œæš‚æ—¶æœªå¤„ç†ã€‚
 			if ((value = atts.getValue("style:data-style-name")) != null) {
-				chartstyle.add_axis_datastyle(" ±í:·ÖÀàÃû³Æ=\"" + Chart.get_data_style(value) + "\"");
+				chartstyle.add_axis_datastyle(" è¡¨:åˆ†ç±»åç§°=\"" + Chart.get_data_style(value) + "\"");
 			}
-			
-			Chart_Data.add_chart_style(_current_chart_style_id,chartstyle);	
+
+			Chart_Data.add_chart_style(_current_chart_style_id,chartstyle);
 		}
 		else if (qName.equals("style:chart-properties") && _current_chart_style_id.length() != 0) {
 			Chart_Data.get_chart_style(_current_chart_style_id).process_chart_pro(atts);
 		}
 		else if (qName.equals("style:graphic-properties") && _current_chart_style_id.length() != 0) {
 			Chart_Data.get_chart_style(_current_chart_style_id).process_graphic_pro(atts);
-		}	
+		}
 		else if (qName.equals("style:paragraph-properties") && _current_chart_style_id.length() != 0) {
 			Chart_Data.get_chart_style(_current_chart_style_id).process_para_pro(atts);
 		}
 		else if (qName.equals("style:text-properties") && _current_chart_style_id.length() != 0) {
 			Chart_Data.get_chart_style(_current_chart_style_id).process_text_pro(atts);
 		}
-		
+
 		else if (qName.equals("chart:chart")) {
-			//×ÓÀàĞÍÔİÊ±ºÍÀàĞÍÒ»Ñù
+			//å­ç±»å‹æš‚æ—¶å’Œç±»å‹ä¸€æ ·
 			Chart.set_type(atts.getValue("chart:class"));
-			
-			Chart.add_begin_element( " ±í:¿í¶È=\"" + Unit_Converter.convert_gra(atts.getValue("svg:width")) 
-					+ "\" ±í:¸ß¶È=\"" + Unit_Converter.convert_gra(atts.getValue("svg:height")) + "\"");
+
+			Chart.add_begin_element( " è¡¨:å®½åº¦=\"" + Unit_Converter.convert_gra(atts.getValue("svg:width"))
+					+ "\" è¡¨:é«˜åº¦=\"" + Unit_Converter.convert_gra(atts.getValue("svg:height")) + "\"");
 			if (atts.getValue("chart:style-name") != null)
 				Chart.add_chart_area(Chart_Data.get_chart_style(atts.getValue("chart:style-name")).get_chart_area());
-			//To do£¿
+			//To doï¼Ÿ
 		}
-		
-		//±êÌâµÄÃû³ÆÊôĞÔĞèÒªµ½×ÓÔªËØ<text:p>µÄÎÄ±¾½ÚµãÖĞÌáÈ¡
+
+		//æ ‡é¢˜çš„åç§°å±æ€§éœ€è¦åˆ°å­å…ƒç´ <text:p>çš„æ–‡æœ¬èŠ‚ç‚¹ä¸­æå–
 		else if (qName.equals("chart:title")) {
 			_title_mark = true;
-			
+
 			if(_axis_type.equals("x"))
-				_title_begin += " ±í:Î»ÖÃ=\"category axis\"";
+				_title_begin += " è¡¨:ä½ç½®=\"category axis\"";
 			else if(_axis_type.equals("y"))
-				_title_begin += " ±í:Î»ÖÃ=\"value axis\"";
+				_title_begin += " è¡¨:ä½ç½®=\"value axis\"";
 			else
-				_title_begin += " ±í:Î»ÖÃ=\"chart\"";
-			
+				_title_begin += " è¡¨:ä½ç½®=\"chart\"";
+
 			if ((value = atts.getValue("chart:style-name")) != null)
 				_title_content = Chart_Data.get_chart_style(value).get_title();
-			//Èç¹ûÃ»ÓĞÊ½ÑùÒıÓÃ£¬¶øÓÖÔÚplot-areaÖĞ£¬ÔòÒıÓÃplotAreaStyle
+			//å¦‚æœæ²¡æœ‰å¼æ ·å¼•ç”¨ï¼Œè€Œåˆåœ¨plot-areaä¸­ï¼Œåˆ™å¼•ç”¨plotAreaStyle
 			else if (_in_plot_area)
 				_title_content = _plot_area_style.get_title();
 			if(_axis_type.equals("y")) {
-				int index = _title_content.indexOf("</±í:¶ÔÆë>");
+				int index = _title_content.indexOf("</è¡¨:å¯¹é½>");
 				_title_content = _title_content.substring(0,index)
-				+ "<±í:ÎÄ×ÖĞı×ª½Ç¶È>90</±í:ÎÄ×ÖĞı×ª½Ç¶È>" + "</±í:¶ÔÆë>";  //´ı¸Ä½ø
+				+ "<è¡¨:æ–‡å­—æ—‹è½¬è§’åº¦>90</è¡¨:æ–‡å­—æ—‹è½¬è§’åº¦>" + "</è¡¨:å¯¹é½>";  //å¾…æ”¹è¿›
 			}
 		}
 /*		else if (qName.equals("chart:subtitle") || qName.equals("chart:footer")) {
@@ -107,11 +107,11 @@ public class Chart_Handler extends DefaultHandler {
 			if ((value =atts.getValue("chart:style-name")) != null)
 				_title_content = Chart_Data.get_chart_style(value).get_title();
 		}
-*/			
+*/
 		else if (qName.equals("chart:legend")) {
-			String legend = "<±í:Í¼Àı";
+			String legend = "<è¡¨:å›¾ä¾‹";
 			if ((value = atts.getValue("chart:legend-position")) != null) {
-				legend += " ±í:Î»ÖÃ=\"";
+				legend += " è¡¨:ä½ç½®=\"";
 				if (value.equals("start"))
 					legend += "left";
 				else if (value.equals("end"))
@@ -125,117 +125,117 @@ public class Chart_Handler extends DefaultHandler {
 				legend += "\"";
 			}
 			legend += ">";
-			
-			//UOFÖĞÍ¼ÀıµÄ×ÖÌå¶¨ÒåÓĞÒÉÎÊ£¬Ğë½øÒ»²½¿¼ÂÇ
+
+			//UOFä¸­å›¾ä¾‹çš„å­—ä½“å®šä¹‰æœ‰ç–‘é—®ï¼Œé¡»è¿›ä¸€æ­¥è€ƒè™‘
 			if ((value = atts.getValue("chart:style-name")) != null)
 				legend += Chart_Data.get_chart_style(value).get_legend();
-			
-			legend += "</±í:Í¼Àı>";
+
+			legend += "</è¡¨:å›¾ä¾‹>";
 			Chart.add_legend(legend);
 		}
-		
+
 		else if (qName.equals("chart:plot-area")) {
 			if ((value = atts.getValue("chart:style-name")) != null) {
 				_in_plot_area = true;
 				Chart.add_plot_area(Chart_Data.get_chart_style(value).get_plot_area());
 				_plot_area_style = Chart_Data.get_chart_style(value);
 			}
-			
+
 			if ((value = atts.getValue("table:cell-range-address")) != null) {
 				process_data_sources(value);
-				Chart.add_data_source(" ±í:Êı¾İÇøÓò=\"" + _data_source + "\"");
+				Chart.add_data_source(" è¡¨:æ•°æ®åŒºåŸŸ=\"" + _data_source + "\"");
 			}
 
 			Chart.add_data_source(">");
 			//To do
 		}
-		
+
 		else if (qName.equals("chart:axis") && (value = atts.getValue("chart:dimension")) != null) {
 			if (value.equals("x")) {
 				_axis_type = "x";
 				if (atts.getValue("chart:style-name") != null) {
-					String xAxis = "<±í:·ÖÀàÖá";
+					String xAxis = "<è¡¨:åˆ†ç±»è½´";
 					ChartStyle chartstyle = Chart_Data.get_chart_style(atts.getValue("chart:style-name"));
 					if (chartstyle.get_major_tick_type().length() != 0)
-						xAxis += " ±í:Ö÷¿Ì¶ÈÀàĞÍ=\"" + chartstyle.get_major_tick_type() + "\"";
+						xAxis += " è¡¨:ä¸»åˆ»åº¦ç±»å‹=\"" + chartstyle.get_major_tick_type() + "\"";
 					if (chartstyle.get_minor_tick_type().length() != 0)
-						xAxis += " ±í:´Î¿Ì¶ÈÀàĞÍ=\"" + chartstyle.get_minor_tick_type() + "\"";
-					xAxis += " ±í:¿Ì¶ÈÏß±êÖ¾=\"next to axis\">" + chartstyle.get_x_axis() + "</±í:·ÖÀàÖá>";
+						xAxis += " è¡¨:æ¬¡åˆ»åº¦ç±»å‹=\"" + chartstyle.get_minor_tick_type() + "\"";
+					xAxis += " è¡¨:åˆ»åº¦çº¿æ ‡å¿—=\"next to axis\">" + chartstyle.get_x_axis() + "</è¡¨:åˆ†ç±»è½´>";
 					Chart.add_x_axis(xAxis);
 				}
 			}
 			else if (value.equals("y")) {
 				_axis_type = "y";
 				if (atts.getValue("chart:style-name") != null) {
-					String yAxis = "<±í:ÊıÖµÖá";
+					String yAxis = "<è¡¨:æ•°å€¼è½´";
 					ChartStyle chartstyle = Chart_Data.get_chart_style(atts.getValue("chart:style-name"));
 					if (chartstyle.get_major_tick_type().length() != 0)
-						yAxis += " ±í:Ö÷¿Ì¶ÈÀàĞÍ=\"" + chartstyle.get_major_tick_type() + "\"";
+						yAxis += " è¡¨:ä¸»åˆ»åº¦ç±»å‹=\"" + chartstyle.get_major_tick_type() + "\"";
 					if (chartstyle.get_minor_tick_type().length() != 0)
-						yAxis += " ±í:´Î¿Ì¶ÈÀàĞÍ=\"" + chartstyle.get_minor_tick_type() + "\"";
-					yAxis += " ±í:¿Ì¶ÈÏß±êÖ¾=\"next to axis\">" + chartstyle.get_y_axis() + "</±í:ÊıÖµÖá>";
+						yAxis += " è¡¨:æ¬¡åˆ»åº¦ç±»å‹=\"" + chartstyle.get_minor_tick_type() + "\"";
+					yAxis += " è¡¨:åˆ»åº¦çº¿æ ‡å¿—=\"next to axis\">" + chartstyle.get_y_axis() + "</è¡¨:æ•°å€¼è½´>";
 					Chart.add_x_axis(yAxis);
 				}
 			}
 		}
-		
+
 		else if (qName.equals("chart:grid")) {
 			String gridLine = "";
 			if ((value = atts.getValue("chart:style-name")) != null)
 				gridLine = Chart_Data.get_chart_style(value).get_gridline();
-			//Ã»ÓĞÊ½ÑùÒıÓÃÔòÊ¹ÓÃplotAreaStyle¡£
+			//æ²¡æœ‰å¼æ ·å¼•ç”¨åˆ™ä½¿ç”¨plotAreaStyleã€‚
 			else
 				gridLine = _plot_area_style.get_gridline();
-			
-			if (_axis_type.equals("x") && atts.getValue("chart:class").equals("major")) //UOFÄ¿Ç°Ö»Ö§³ÖÖ÷Íø¸ñÏß
-				gridLine += " ±í:Î»ÖÃ=\"category axis\"";
-			else if (_axis_type.equals("y") && atts.getValue("chart:class").equals("major")) 
-				gridLine += " ±í:Î»ÖÃ=\"value axis\"";
+
+			if (_axis_type.equals("x") && atts.getValue("chart:class").equals("major")) //UOFç›®å‰åªæ”¯æŒä¸»ç½‘æ ¼çº¿
+				gridLine += " è¡¨:ä½ç½®=\"category axis\"";
+			else if (_axis_type.equals("y") && atts.getValue("chart:class").equals("major"))
+				gridLine += " è¡¨:ä½ç½®=\"value axis\"";
 			gridLine += "/>";
 			Chart.add_gridline(gridLine);
 		}
-		
+
 		else if (qName.equals("chart:series")) {
 			_data_serie_num++;
-			String serie = "<±í:Êı¾İÏµÁĞ ±í:ÏµÁĞ=\"" + _data_serie_num + "\">";
-			if ((value = atts.getValue("chart:style-name")) != null) 
+			String serie = "<è¡¨:æ•°æ®ç³»åˆ— è¡¨:ç³»åˆ—=\"" + _data_serie_num + "\">";
+			if ((value = atts.getValue("chart:style-name")) != null)
 				serie += Chart_Data.get_chart_style(value).get_data_point();
 			else
 				serie += _plot_area_style.get_data_point();
-			serie += "</±í:Êı¾İÏµÁĞ>";
+			serie += "</è¡¨:æ•°æ®ç³»åˆ—>";
 			Chart.add_data_serie(serie);
-			
-			//To do.<Êı¾İÔ´>ÖĞ¼ÓÈë<ÏµÁĞ>×ÓÔªËØ£¬µ«ÊÇÎ´ÕÒµ½¶ÔÓ¦ÊôĞÔ
+
+			//To do.<æ•°æ®æº>ä¸­åŠ å…¥<ç³»åˆ—>å­å…ƒç´ ï¼Œä½†æ˜¯æœªæ‰¾åˆ°å¯¹åº”å±æ€§
 		}
-		
-		//======ÒÉÎÊ:chart:seriesÒıÓÃµÄÊ½ÑùÊÇ·ñ¸²¸Çchart:plot-areaµÄÊ½Ñù??======
+
+		//======ç–‘é—®:chart:serieså¼•ç”¨çš„å¼æ ·æ˜¯å¦è¦†ç›–chart:plot-areaçš„å¼æ ·??======
 		else if (qName.equals("chart:data-point")) {
 /*			_data_point_num++;
-			String point = "<±í:Êı¾İµã ±í:ÏµÁĞ=\"" + _data_serie_num + "\" ±í:µã=\"" + _data_point_num + "\">";
-			if ((value = atts.getValue("chart:style-name")) != null) 
+			String point = "<è¡¨:æ•°æ®ç‚¹ è¡¨:ç³»åˆ—=\"" + _data_serie_num + "\" è¡¨:ç‚¹=\"" + _data_point_num + "\">";
+			if ((value = atts.getValue("chart:style-name")) != null)
 				point += Chart_Data.get_chart_style(value).get_data_point();
 			else
 				point += _plot_area_style.get_data_point();
-			point += "</±í:Êı¾İµã>";
+			point += "</è¡¨:æ•°æ®ç‚¹>";
 			Chart.add_data_point(point);*/
 		}
-		
+
 		else if (qName.equals("table:table")) {
 			_local_table_tag = true;
 		}
-		
+
 		if (_local_table_tag) {
 			Chart_Local_Table.process_start(qName,atts);
 		}
-			
+
 	}
-	
-	public void endElement(String namespaceURI, String localName, String qName) throws SAXException 
+
+	public void endElement(String namespaceURI, String localName, String qName) throws SAXException
 	{
 		if (_local_table_tag) {
 			Chart_Local_Table.process_end(qName);
 		}
-		
+
 		if (qName.equals("style:style"))
 			_current_chart_style_id = "";
 		else if (qName.equals("text:p")) {
@@ -243,7 +243,7 @@ public class Chart_Handler extends DefaultHandler {
 				_title_mark = false;
 		}
 		else if (qName.equals("chart:title")) {
-			Chart.add_title("<±í:±êÌâ" + _title_begin + ">" + _title_content + "</±í:±êÌâ>");
+			Chart.add_title("<è¡¨:æ ‡é¢˜" + _title_begin + ">" + _title_content + "</è¡¨:æ ‡é¢˜>");
 			_title_begin = "";
 			_title_content = "";
 		}
@@ -251,38 +251,38 @@ public class Chart_Handler extends DefaultHandler {
 			_in_plot_area = false;
 		else if (qName.equals("chart:axis"))
 			_axis_type = "";
-		
+
 		else if (qName.equals("table:table")) {
 			_local_table_tag = false;
 		}
 	}
-	
-	public void characters(char[] ch, int start, int length) throws SAXException  
+
+	public void characters(char[] ch, int start, int length) throws SAXException
 	{
 		if (_title_mark)
-			_title_begin += (" ±í:Ãû³Æ=\"" + new String(ch, start, length) + "\"");
-		
+			_title_begin += (" è¡¨:åç§°=\"" + new String(ch, start, length) + "\"");
+
 		if (_local_table_tag) {
 			Chart_Local_Table.process_chars(ch,start,length);
 		}
 	}
-	
-	public void error(SAXParseException exception) 
+
+	public void error(SAXParseException exception)
 	{
 		System.err.println("Error parsing the file: "+exception.getMessage());
 	}
-	
-	public void warning(SAXParseException exception) 
+
+	public void warning(SAXParseException exception)
 	{
 		System.err.println("Warning parsing the file: "+exception.getMessage());
 	}
-	
-	public void fatalError(SAXParseException exception) 
+
+	public void fatalError(SAXParseException exception)
 	{
 		System.err.println("Fatal error parsing the file: "+exception.getMessage());
 		System.err.println("Cannot continue.");
 	}
-	
+
 	private void process_data_sources(String dataSource) {
 		String tempDataSrc = dataSource;
 		String dataSrcPart = "";
@@ -296,15 +296,15 @@ public class Chart_Handler extends DefaultHandler {
 		dataSrcPart = tempDataSrc;
 		_data_source += process_dataSrcPart(dataSrcPart);
 	}
-	
+
 	private String process_dataSrcPart(String dataSrcPart) {
-//		¹¤×÷±í1.$A$1:.$B$3 --> '¹¤×÷±í1'!$A$1:$B$3
+//		å·¥ä½œè¡¨1.$A$1:.$B$3 --> 'å·¥ä½œè¡¨1'!$A$1:$B$3
 		int index1 = dataSrcPart.indexOf(".");
 		String sheetName = dataSrcPart.substring(0,index1);
 		int index2 = dataSrcPart.indexOf(".",index1 + 1);
 		String result = "'" + dataSrcPart.substring(0, index1) + "'!"
 		+ dataSrcPart.substring(index1 + 1, index2) + dataSrcPart.substring(index2 + 1);
-		
+
 		if (!_data_src_tag) {
 			_data_src_tag = true;
 			index1 = dataSrcPart.indexOf("$");
@@ -315,10 +315,10 @@ public class Chart_Handler extends DefaultHandler {
 			index2 = dataSrcPart.indexOf("$",index1 + 1);
 			int endCol = Anchor_Pos.colName_to_int(dataSrcPart.substring(index1 + 1, index2));
 			int endRow = Integer.valueOf(dataSrcPart.substring(index2 + 1));
-			
+
 			Chart_Local_Table.set_area(sheetName,beginCol,endCol,beginRow,endRow);
 		}
-		
+
 		return result;
 	}
 }

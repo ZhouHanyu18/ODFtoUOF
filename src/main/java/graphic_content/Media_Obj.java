@@ -46,12 +46,12 @@ public class Media_Obj {
 				path = Unzip.get_temp_path() + href;
 			}
 
-			obj = "<uof:ÆäËû¶ÔÏó";
-			obj += " uof:±êÊ¶·û=\"" + objID + "\"";
-			obj += " uof:¹«¹²ÀàĞÍ=\""+ type + "\"";
-			obj += " uof:ÄÚÇ¶=\"false\">";
-			obj += "<uof:Êı¾İ>" + base64Enc(path) + "</uof:Êı¾İ>";
-			obj += "</uof:ÆäËû¶ÔÏó>";
+			obj = "<uof:å…¶ä»–å¯¹è±¡";
+			obj += " uof:æ ‡è¯†ç¬¦=\"" + objID + "\"";
+			obj += " uof:å…¬å…±ç±»å‹=\""+ type + "\"";
+			obj += " uof:å†…åµŒ=\"false\">";
+			obj += "<uof:æ•°æ®>" + base64Enc(path) + "</uof:æ•°æ®>";
+			obj += "</uof:å…¶ä»–å¯¹è±¡>";
 
 			Content_Data.add_other_obj(objID,obj);
 		}
@@ -65,19 +65,19 @@ public class Media_Obj {
 			File f = new File(filename);
 			FileInputStream fin = new FileInputStream(filename);
 
-			//¶ÁÎÄ¼şµ½BYTEÊı×é
+			//è¯»æ–‡ä»¶åˆ°BYTEæ•°ç»„
 			byte bytes[] = new byte[(int)(f.length())];
 			int n = fin.read(bytes);
 
-			byte buf[] = new byte[4]; // base64 ×Ö·ûÊı×é
+			byte buf[] = new byte[4]; // base64 å­—ç¬¦æ•°ç»„
 
-			int n3byt = n / 3; // 3 bytes ×éÊı
+			int n3byt = n / 3; // 3 bytes ç»„æ•°
 			out = new byte[n3byt * 4 + 4];
-			int nrest = n % 3; // ·Ö×éºóÊ£Óà bytes
+			int nrest = n % 3; // åˆ†ç»„åå‰©ä½™ bytes
 			int k = n3byt * 3;
-			int i = 0, j = 0; // Ö¸Õë
+			int i = 0, j = 0; // æŒ‡é’ˆ
 
-			//´¦ÀíÃ¿¸ö3-bytes·Ö×é
+			//å¤„ç†æ¯ä¸ª3-bytesåˆ†ç»„
 			for (; i < k; i += 3) {
 				buf[0] = (byte)((bytes[i] & 0xFC) >> 2);
 				buf[1] = (byte)(((bytes[i] & 0x03) << 4) |
@@ -91,7 +91,7 @@ public class Media_Obj {
 				out[j++] = BaseTable[buf[3]];
 			}
 
-			//´¦ÀíÎ²²¿
+			//å¤„ç†å°¾éƒ¨
 			if (nrest==2) { //2 bytes left
 				buf[0] = (byte)(( bytes[k] & 0xFC) >> 2);
 				buf[1] = (byte)(((bytes[k] & 0x03) << 4) |
@@ -102,7 +102,7 @@ public class Media_Obj {
 				buf[0] = (byte)((bytes[k] & 0xFC) >> 2);
 				buf[1] = (byte)((bytes[k] & 0x03) << 4);
 			}
-			if (nrest > 0) { //·¢ËÍÎ²²¿
+			if (nrest > 0) { //å‘é€å°¾éƒ¨
 				out[j++] = BaseTable[buf[0]];
 				out[j++] = BaseTable[buf[1]];
 				if (nrest==2)
