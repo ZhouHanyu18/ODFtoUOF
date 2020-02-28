@@ -4,7 +4,7 @@ import org.xml.sax.Attributes;
 
 /**
  * ´¦Àí Ä¿Â¼ µÄ×ª»»¡£
- * 
+ *
  * @author xie
  *
  */
@@ -17,9 +17,9 @@ public class Text_TOC {
 		_result = "";
 		return rst;
 	}
-	
+
 	public static void process_start(String qName,Attributes atts){
-		
+
 		if(_para_tag){
 			Text_P.process_start(qName,atts);
 		}
@@ -28,13 +28,13 @@ public class Text_TOC {
 			Text_P.process_start(qName,atts);
 		}
 	}
-	
+
 	public static void process_chars(String chs){
 		if(_para_tag){
 			Text_P.process_chars(chs);
 		}
 	}
-	
+
 	public static void process_end(String qName){
 		if(qName.equals("text:p")){
 			_para_tag = false;
@@ -44,10 +44,10 @@ public class Text_TOC {
 		else if(_para_tag){
 			Text_P.process_end(qName);
 		}
-		
+
 		else if(qName.equals("text:index-title")){
 			String tocStart = "";
-			
+
 			tocStart += "<×Ö:¶ÎÂä><×Ö:¶ÎÂäÊôÐÔ/>";
 			tocStart += "<×Ö:Óò¿ªÊ¼ ×Ö:ÀàÐÍ=\"ref\" ×Ö:Ëø¶¨=\"false\"/>";
 			tocStart += "<×Ö:Óò´úÂë><×Ö:¶ÎÂä>";
@@ -56,17 +56,17 @@ public class Text_TOC {
 			tocStart += "</×Ö:¾ä>";
 			tocStart += "</×Ö:¶ÎÂä></×Ö:Óò´úÂë>";
 			tocStart += "</×Ö:¶ÎÂä>";
-			
+
 			_result += tocStart;
 		}
-		
+
 		else if(qName.equals("text:index-body")){
 			String tocEnd = "";
-			
+
 			tocEnd += "<×Ö:¶ÎÂä><×Ö:¶ÎÂäÊôÐÔ/>";
 			tocEnd += "<×Ö:Óò½áÊø/>";
 			tocEnd += "</×Ö:¶ÎÂä>";
-			
+
 			_result += tocEnd;
 		}
 	}
