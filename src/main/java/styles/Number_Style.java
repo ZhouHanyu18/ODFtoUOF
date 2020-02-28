@@ -4,28 +4,28 @@ import org.xml.sax.Attributes;
 import stored_data.Style_Data;
 
 /**
- * ´¦Àí<number:number-style>¡¢<number:percentage-style>¡¢
- * <number:date-style>µÈ µ½ <±í:Êı×Ö¸ñÊ½>µÄ×ª»»¡£
- * 
+ * å¤„ç†<number:number-style>ã€<number:percentage-style>ã€
+ * <number:date-style>ç­‰ åˆ° <è¡¨:æ•°å­—æ ¼å¼>çš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
 public class Number_Style {
 	private static String _chs = "";
-	private static String _last_qName = "";			//ÉÏÒ»¸ö±êÇ©Ãû
+	private static String _last_qName = "";			//ä¸Šä¸€ä¸ªæ ‡ç­¾å
 	private static String _style_name = "";
 	private static String _style_type = "";
-	
-	private static int _decimal_places = 0;			//Ğ¡ÊıÎ»Êı
-	private static boolean _grouping = false;		//Ê¹ÓÃÇ§Î»Êı
-	private static String _currency_symbol = "";	//»õ±Ò·ûºÅ
-	
+
+	private static int _decimal_places = 0;			//å°æ•°ä½æ•°
+	private static boolean _grouping = false;		//ä½¿ç”¨åƒä½æ•°
+	private static String _currency_symbol = "";	//è´§å¸ç¬¦å·
+
 	private static boolean _truncate = true;		//
 	private static boolean _date_tag = false;
 	private static String _date_string = "";
 	private static boolean _time_tag = false;
 	private static String _time_string = "";
-	
+
 	private static void clear(){
 		_chs = "";
 		_last_qName = "";
@@ -38,73 +38,73 @@ public class Number_Style {
 		_date_string = "";
 		_time_string = "";
 	}
-	
+
 	public static String get_result(){
 		String digits = "";
 		String style = "";
-		
+
 		while(_decimal_places > 0){
 			digits += "0";
 			_decimal_places --;
 		}
 		digits = "0." + digits;
-		
+
 		//0.00%
 		if(_style_type.equals("percentage")){
 			style = digits + "%";
-			style = "<±í:Êı×Ö¸ñÊ½ ±í:·ÖÀàÃû³Æ=\"percentage\" ±í:¸ñÊ½Âë=\"" + style + "\"/>";	
+			style = "<è¡¨:æ•°å­—æ ¼å¼ è¡¨:åˆ†ç±»åç§°=\"percentage\" è¡¨:æ ¼å¼ç =\"" + style + "\"/>";
 		}
-		
-		//0.0;[Red]-0.0--Ğ¡ÊıÎ»Êı1
-		//0.00;[Red]-0.00--Ğ¡ÊıÎ»Êı2
-		//#,##0.00;[Red]-#,##0.00--Ê¹ÓÃÇ§Î»Êı
+
+		//0.0;[Red]-0.0--å°æ•°ä½æ•°1
+		//0.00;[Red]-0.00--å°æ•°ä½æ•°2
+		//#,##0.00;[Red]-#,##0.00--ä½¿ç”¨åƒä½æ•°
 		else if(_style_type.equals("number")){
 			if(_grouping){
 				style = "#,##" + digits + ";[Red]-#,##" + digits;
 			}else{
 				style = digits + ";[Red]-" + digits;
 			}
-			
-			style = "<±í:Êı×Ö¸ñÊ½ ±í:·ÖÀàÃû³Æ=\"number\" ±í:¸ñÊ½Âë=\"" + style + "\"/>";
+
+			style = "<è¡¨:æ•°å­—æ ¼å¼ è¡¨:åˆ†ç±»åç§°=\"number\" è¡¨:æ ¼å¼ç =\"" + style + "\"/>";
 		}
-		
+
 		//#,##0.000;[Red]-#,##0.000
-		//£¤#,##0.00;[Red]-£¤#,##0.00
+		//ï¿¥#,##0.00;[Red]-ï¿¥#,##0.00
 		else if(_style_type.equals("currency")){
 			if(_currency_symbol.equals("")){
-				_currency_symbol = "£¤";
+				_currency_symbol = "ï¿¥";
 			}
 			style = _currency_symbol + "#,##" + digits;
 			style += ";[Red]-" + _currency_symbol + "#,##" + digits;
-			
-			style = "<±í:Êı×Ö¸ñÊ½ ±í:·ÖÀàÃû³Æ=\"currency\""	
-					+ " ±í:¸ñÊ½Âë=\"" + style + "\"/>";
+
+			style = "<è¡¨:æ•°å­—æ ¼å¼ è¡¨:åˆ†ç±»åç§°=\"currency\""
+					+ " è¡¨:æ ¼å¼ç =\"" + style + "\"/>";
 		}
-		
-		//yyyy&quot;Äê&quot;m&quot;ÔÂ&quot;
-		//m&quot;ÔÂ&quot;d&quot;ÈÕ&quot;
-		//yyyy&quot;Äê&quot;m&quot;ÔÂ&quot;d&quot;ÈÕ&quot;
+
+		//yyyy&quot;å¹´&quot;m&quot;æœˆ&quot;
+		//m&quot;æœˆ&quot;d&quot;æ—¥&quot;
+		//yyyy&quot;å¹´&quot;m&quot;æœˆ&quot;d&quot;æ—¥&quot;
 		else if(_style_type.equals("date")){
-			style = "<±í:Êı×Ö¸ñÊ½ ±í:·ÖÀàÃû³Æ=\"date\" ±í:¸ñÊ½Âë=\"" + _date_string + "\"/>";
+			style = "<è¡¨:æ•°å­—æ ¼å¼ è¡¨:åˆ†ç±»åç§°=\"date\" è¡¨:æ ¼å¼ç =\"" + _date_string + "\"/>";
 		}
-		
+
 		//h:mm
 		//h:mm:ss AM/PM
-		//h&quot;Ê±&quot;mm&quot;·Ö&quot;
-		//ÉÏÎç/ÏÂÎçh&quot;Ê±&quot;mm&quot;·Ö&quot;ss&quot;Ãë&quot;
+		//h&quot;æ—¶&quot;mm&quot;åˆ†&quot;
+		//ä¸Šåˆ/ä¸‹åˆh&quot;æ—¶&quot;mm&quot;åˆ†&quot;ss&quot;ç§’&quot;
 		else if(_style_type.equals("time")){
-			style += "<±í:Êı×Ö¸ñÊ½ ±í:·ÖÀàÃû³Æ=\"time\" ±í:¸ñÊ½Âë=\"" + _time_string + "\"/>";
+			style += "<è¡¨:æ•°å­—æ ¼å¼ è¡¨:åˆ†ç±»åç§°=\"time\" è¡¨:æ ¼å¼ç =\"" + _time_string + "\"/>";
 		}
-	
+
 		clear();
-		return style;	
+		return style;
 	}
-	
+
 	public static void process_start(String qName, Attributes atts){
 		String attVal = "";
-		
+
 		//According to the element name, set the value of
-		//_style_type and _style_name 
+		//_style_type and _style_name
 		if(qName.equals("number:number-style")){
 			_style_type = "number";
 			_style_name = atts.getValue("style:name");
@@ -126,23 +126,23 @@ public class Number_Style {
 			_time_tag = true;
 			_style_type = "time";
 			_style_name = atts.getValue("style:name");
-			
+
 			attVal = atts.getValue("number:truncate-on-overflow");
 			if(attVal != null){
 				_truncate = Boolean.parseBoolean(attVal);
 			}
 		}
-		
+
 		else if(qName.equals("number:number")){
 			if((attVal=atts.getValue("number:decimal-places"))!=null){
 				_decimal_places = Integer.parseInt(attVal);
 			}
-			
+
 			if((attVal=atts.getValue("number:grouping"))!=null){
 				_grouping = Boolean.parseBoolean(attVal);
 			}
 		}
-		
+
 		else if(_date_tag){
 			if(qName.equals("number:year")){
 				_date_string += "yyyy";
@@ -163,10 +163,10 @@ public class Number_Style {
 				_date_string += "ss";
 			}
 		}
-		
+
 		else if(_time_tag){
 			if(qName.equals("number:am-pm")){
-				_time_string += "ÉÏÎç/ÏÂÎç";
+				_time_string += "ä¸Šåˆ/ä¸‹åˆ";
 			}
 			else if(qName.equals("number:hours")){
 				if(_truncate){
@@ -183,33 +183,33 @@ public class Number_Style {
 			}
 		}
 	}
-	
+
 	public static void process_chars(String chs){
 		_chs = chs;
 	}
-	
+
 	public static void process_end(String qName){
 		if(qName.startsWith("number:")&&qName.endsWith("-style")){
 			_date_tag = false;
 			_time_tag = false;
-			
+
 			Style_Data.add_data_style(_style_name, get_result());
 		}
-		
+
 		else if(qName.equals("number:currency-symbol")){
 			_currency_symbol = _chs;
 		}
-		
+
 		else if(qName.equals("number:text")){
-			String quot = "&amp;quot;";	
+			String quot = "&amp;quot;";
 			String text = "";
-			
+
 			if(_chs.equals(":")){
 				text = ":";
 			}else{
 				text = quot + _chs + quot;
 			}
-			
+
 			if(_date_tag){
 				if(_last_qName.equals("number:year")){
 					_date_string += text;
@@ -230,8 +230,8 @@ public class Number_Style {
 					_date_string += text;
 				}
 			}
-			
-			else if(_time_tag){ 
+
+			else if(_time_tag){
 				if(_last_qName.equals("number:hours")){
 					_time_string += text;
 				}
@@ -243,9 +243,9 @@ public class Number_Style {
 				}
 			}
 		}
-		
+
 		else if(qName.equals("number:am-pm")){
-			
+
 		}
 		_chs = "";
 		_last_qName = qName;

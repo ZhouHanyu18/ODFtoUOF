@@ -10,14 +10,14 @@ import styles.Table_Style;
 import styles.Table_Row;
 
 /**
- * ´¦Àí<table:table> µ½ <×Ö:ÎÄ×Ö±í>µÄ×ª»»¡£
- * 
+ * å¤„ç†<table:table> åˆ° <å­—:æ–‡å­—è¡¨>çš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
-public class Text_Table {	
+public class Text_Table {
 	//the result
-	private static String _result = ""; 
+	private static String _result = "";
 	//stack for nesting
 	private static Stack<String> _stack = new Stack<String>();
 	//tag for <text:p>
@@ -32,8 +32,8 @@ public class Text_Table {
 	private static Stack<Integer> _cell_counter_stack = new Stack<Integer>();
 	//in case of <table:table>'s nesting
 	private static Stack<Table_Style_Struct> _struct_stack = new Stack<Table_Style_Struct>();
-	
-	
+
+
 	//initialize
 	public static void init(){
 		_result = "";
@@ -44,21 +44,21 @@ public class Text_Table {
 		_cell_counter_stack.clear();
 		_struct_stack.clear();
 	}
-	
+
 	private static void clear(){
 		_result = "";
 	}
-	
+
 	public static String get_result(){
 		String str = _result;
 		clear();
 		return str;
 	}
-	
-	//´¦ÀíÔªËØ¿ªÊ¼±êÇ©
+
+	//å¤„ç†å…ƒç´ å¼€å§‹æ ‡ç­¾
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		
+
 		if(_para_tag){
 			_stack.push(qName);
 			Text_P.process_start(qName,atts);
@@ -71,67 +71,67 @@ public class Text_Table {
 		else if(qName.equals("table:table")){
 			_cell_counter_stack.push(_cell_counter);
 			_struct_stack.push(_the_struct);
-			
+
 			String tableName = atts.getValue("table:style-name");
 			if(tableName == null){
 				tableName = IDGenerator.get_tb_id();
 			}
 			_the_struct = Table_Style.get_table_style(tableName);
-			
-			_result += "<×Ö:ÎÄ×Ö±í>";
-			_result += "<×Ö:ÎÄ×Ö±íÊôĞÔ>";
+
+			_result += "<å­—:æ–‡å­—è¡¨>";
+			_result += "<å­—:æ–‡å­—è¡¨å±æ€§>";
 			if(_the_struct != null){
 				_result += _the_struct.get_style_bc();
 			}
-			_result += "</×Ö:ÎÄ×Ö±íÊôĞÔ>";
+			_result += "</å­—:æ–‡å­—è¡¨å±æ€§>";
 		}
 		else if(qName.equals("table:table-header-rows")){
 			_is_header_row = true;
 		}
 		else if(qName.equals("table:table-row")){
 			_cell_counter = 0;		//be reset
-			_result += "<×Ö:ĞĞ>";
+			_result += "<å­—:è¡Œ>";
 			_result += get_row_pro(atts);
 		}
 		else if(qName.equals("table:table-cell")){
-			float width = 0.0f;		//×Ö:¿í¶È
+			float width = 0.0f;		//å­—:å®½åº¦
 			int numSpan = 1;		//number-columns-spanned
-			
+
 			attVal=atts.getValue("table:number-columns-spanned");
 			attVal = (attVal==null) ? "1" : attVal;
 			numSpan = Integer.parseInt(attVal);
 			String wid = _the_struct.get_col_width(_cell_counter);
 			wid = (wid==null) ? "0" : wid;
 			width = Float.parseFloat(wid) * numSpan;
-			
-			_result += "<×Ö:µ¥Ôª¸ñ>";
-			_result += "<×Ö:µ¥Ôª¸ñÊôĞÔ>";
-			_result += "<×Ö:¿í¶È uof:locID=\"t0150\"" +
-					" uof:attrList=\"¾ø¶ÔÖµ Ïà¶ÔÖµ\" ×Ö:¾ø¶ÔÖµ=\"" + width + "\"/>";
+
+			_result += "<å­—:å•å…ƒæ ¼>";
+			_result += "<å­—:å•å…ƒæ ¼å±æ€§>";
+			_result += "<å­—:å®½åº¦ uof:locID=\"t0150\"" +
+					" uof:attrList=\"ç»å¯¹å€¼ ç›¸å¯¹å€¼\" å­—:ç»å¯¹å€¼=\"" + width + "\"/>";
 			if ((attVal=atts.getValue("table:style-name"))!=null){
 				_result += Style_Data.get_cell_pro(attVal);
 			}
 			if ((attVal=atts.getValue("table:number-columns-spanned")) != null) {
-				_result += "<×Ö:¿çÁĞ ×Ö:Öµ=\"" + attVal + "\"/>";
+				_result += "<å­—:è·¨åˆ— å­—:å€¼=\"" + attVal + "\"/>";
 			}
 			if ((attVal=atts.getValue("table:number-rows-spanned")) != null) {
-				_result += "<×Ö:¿çĞĞ ×Ö:Öµ=\"" + attVal + "\"/>";
+				_result += "<å­—:è·¨è¡Œ å­—:å€¼=\"" + attVal + "\"/>";
 			}
-			_result += "</×Ö:µ¥Ôª¸ñÊôĞÔ>";
-			
+			_result += "</å­—:å•å…ƒæ ¼å±æ€§>";
+
 			_cell_counter += numSpan;
 		}
 	}
-	
+
 	public static void process_chars(String chs){
 		if(_para_tag){
 			Text_P.process_chars(chs);
 		}
 	}
-	
-	//´¦ÀíÔªËØ½áÊø±êÇ©
+
+	//å¤„ç†å…ƒç´ ç»“æŸæ ‡ç­¾
 	public static void process_end(String qName){
-		
+
 		if(_para_tag){
 			Text_P.process_end(qName);
 			_stack.pop();
@@ -144,26 +144,26 @@ public class Text_Table {
 			_cell_counter = _cell_counter_stack.pop();
 			_the_struct = _struct_stack.pop();
 
-			_result += "</×Ö:ÎÄ×Ö±í>";
+			_result += "</å­—:æ–‡å­—è¡¨>";
 		}
 		else if(qName.equals("table:table-header-rows")){
 			_is_header_row = false;
 		}
 		else if(qName.equals("table:table-row")){
-			_result += "</×Ö:ĞĞ>";
+			_result += "</å­—:è¡Œ>";
 		}
 		else if(qName.equals("table:table-cell")){
-			_result += "</×Ö:µ¥Ôª¸ñ>";
+			_result += "</å­—:å•å…ƒæ ¼>";
 		}
 	}
-	
-	//´¦Àí±íĞĞÊôĞÔ
+
+	//å¤„ç†è¡¨è¡Œå±æ€§
 	private static String get_row_pro(Attributes atts){
 		String str1 = "";
 		String str2 = "";
 		String rowID = atts.getValue("table:style-name");
 
-		
+
 		if(Table_Row.get_row_pro("default") != null){
 			str1 += Table_Row.get_row_pro("default");
 		}
@@ -171,18 +171,18 @@ public class Text_Table {
 			str1 += Table_Row.get_row_pro(rowID);
 		}
 		if(_is_header_row){
-			str1 += "<×Ö:±íÍ·ĞĞ ×Ö:Öµ=\"true\"/>";
+			str1 += "<å­—:è¡¨å¤´è¡Œ å­—:å€¼=\"true\"/>";
 		}
-		
+
 		if(str1.length()!= 0){
-			str2 += "<×Ö:±íĞĞÊôĞÔ>";
+			str2 += "<å­—:è¡¨è¡Œå±æ€§>";
 			str2 += str1;
-			str2 += "</×Ö:±íĞĞÊôĞÔ>";
+			str2 += "</å­—:è¡¨è¡Œå±æ€§>";
 		}
 		else{
-			str2 += "<×Ö:±íĞĞÊôĞÔ/>";
+			str2 += "<å­—:è¡¨è¡Œå±æ€§/>";
 		}
-		
+
 		return str2;
 	}
 }

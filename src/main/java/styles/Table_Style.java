@@ -9,9 +9,9 @@ import stored_data.Style_Data;
 import stored_data.Table_Style_Struct;
 
 /**
- * ´¦Àístyle:family="table"µÄ<style:style> µ½ <uof:ÎÄ×Ö±íÊ½Ñù>
- * ¼°spreadsheetÖĞ¹¤×÷±íÊôĞÔµÄµÄ×ª»»¡£
- * 
+ * å¤„ç†style:family="table"çš„<style:style> åˆ° <uof:æ–‡å­—è¡¨å¼æ ·>
+ * åŠspreadsheetä¸­å·¥ä½œè¡¨å±æ€§çš„çš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
@@ -19,15 +19,15 @@ public class Table_Style {
 	//current table id for <spreadsheet>
 	private static String _current_id = "";
 	//
-	private static Table_Style_Struct _struct = null;	
-	//ÎÄ×Ö±íÊ½ÑùÄ£¿é
-	private static Map<String,Table_Style_Struct> 	
-			_table_styles = new TreeMap<String,Table_Style_Struct>(); 			
-	//To keep two attributes:±í:Òş²Ø,±í:ÑÕÉ« used by spreadsheet table
-	private static Map<String,String> 
-			_sheet_table_atts = new TreeMap<String,String>(); 
+	private static Table_Style_Struct _struct = null;
+	//æ–‡å­—è¡¨å¼æ ·æ¨¡å—
+	private static Map<String,Table_Style_Struct>
+			_table_styles = new TreeMap<String,Table_Style_Struct>();
+	//To keep two attributes:è¡¨:éšè—,è¡¨:é¢œè‰² used by spreadsheet table
+	private static Map<String,String>
+			_sheet_table_atts = new TreeMap<String,String>();
 
-	
+
 	//initialize
 	public static void init(){
 		_current_id = "";
@@ -35,87 +35,87 @@ public class Table_Style {
 		_table_styles.clear();
 		_sheet_table_atts.clear();
 	}
-	
+
 	//Get the specifid spreadsheet table attributes.
-	//Invoke by 
+	//Invoke by
 	public static String get_sheet_att(String styleName){
 		return _sheet_table_atts.get(styleName);
 	}
-	
-	//Get table-style-struct specified by its id. 
+
+	//Get table-style-struct specified by its id.
 	//Invoked by Text_Table
 	public static Table_Style_Struct get_table_style(String id){
 		return _table_styles.get(id);
 	}
-	
+
 	//Get all table styles keeped in TreeMap and place
-	//them as children of <uof:Ê½Ñù¼¯>. Invoked by 
+	//them as children of <uof:å¼æ ·é›†>. Invoked by
 	//Second_Style_Handler
 	public static String get_all_styles() {
-		String content = "";		
-		Collection<Table_Style_Struct> 
+		String content = "";
+		Collection<Table_Style_Struct>
 				values = _table_styles.values();
-				
-		for (Iterator<Table_Style_Struct> 
-				iterator = values.iterator(); 
+
+		for (Iterator<Table_Style_Struct>
+				iterator = values.iterator();
 						iterator.hasNext(); ) {
 			content += iterator.next().get_style();
 		}
-		
+
 		return content;
 	}
-	
+
 	private static String get_start_atts(String id,String type,String parent){
 		String ele = "";
-		
-//		ele += "<uof:ÎÄ×Ö±íÊ½Ñù";
-		ele += " ×Ö:±êÊ¶·û=\"" + id + "\"";
-		ele += " ×Ö:Ãû³Æ=\"" + id + "\"";
-		ele += " ×Ö:ÀàĞÍ=\"" + type + "\"";
+
+//		ele += "<uof:æ–‡å­—è¡¨å¼æ ·";
+		ele += " å­—:æ ‡è¯†ç¬¦=\"" + id + "\"";
+		ele += " å­—:åç§°=\"" + id + "\"";
+		ele += " å­—:ç±»å‹=\"" + type + "\"";
 		if(!parent.equals("")){
-			ele += " ×Ö:»ùÊ½ÑùÒıÓÃ=\"" + parent + "\"";
+			ele += " å­—:åŸºå¼æ ·å¼•ç”¨=\"" + parent + "\"";
 		}
-		
+
 		return ele;
 	}
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		
+
 		if(Common_Data.get_file_type().equals("text")){
 			if(qName.equals("style:default-style")){
 				String id = "defaultt";
 				String ele = get_start_atts(id,"auto","");
-				
+
 				_struct = new Table_Style_Struct();
 				_struct.set_start_atts(ele);
 				//add to the TreeMap
 				_table_styles.put(id,_struct);
 			}
-			
+
 			else if(qName.equals("style:style")){
-				String id = atts.getValue("style:name");		
-				String styleType = 
+				String id = atts.getValue("style:name");
+				String styleType =
 					Style_Data.is_auto_style() ? "auto" : "custom";
 
 				attVal = atts.getValue("style:parent-style-name");
-				String parent = (attVal!=null) ? attVal : "defaultt";				
+				String parent = (attVal!=null) ? attVal : "defaultt";
 				String ele = get_start_atts(id,styleType,parent);
-				
+
 				_struct = new Table_Style_Struct();
 				_struct.set_start_atts(ele);
 				//add to the TreeMap
 				_table_styles.put(id,_struct);
 			}
-			
+
 			else if(qName.equals("style:table-properties")){
 				_struct.set_atts(process_table_atts(atts));
 			}
-			
+
 			else if(qName.equals("style:background-image")){
 				String pad = Sent_Style.deal_with_bg_image(atts);
-					
+
 				if (pad.length() != 0){
-					pad = "<×Ö:Ìî³ä uof:locID=\"t0138\">" + pad + "</×Ö:Ìî³ä>";
+					pad = "<å­—:å¡«å…… uof:locID=\"t0138\">" + pad + "</å­—:å¡«å……>";
 					_struct.set_padding(pad);
 				}
 			}
@@ -129,94 +129,94 @@ public class Table_Style {
 			}
 		}
 	}
-	
+
 	public static String process_table_atts(Attributes attrs){
 		String attVal = "";
 		String result = "";
-		
-		//¿í¶È
+
+		//å®½åº¦
 		String widthVal = "";
 		if ((attVal = attrs.getValue("style:width")) != null) {
-			widthVal += (" ×Ö:¾ø¶Ô¿í¶È=\"" + Unit_Converter.convert(attVal) + "\"");
+			widthVal += (" å­—:ç»å¯¹å®½åº¦=\"" + Unit_Converter.convert(attVal) + "\"");
 		}
 		if ((attVal = attrs.getValue("style:rel-width")) != null) {
 			int index = attVal.indexOf("%");
 			attVal = attVal.substring(0,index);
-			widthVal = (" ×Ö:Ïà¶Ô¿í¶È=\"" + attVal + "\"");
+			widthVal = (" å­—:ç›¸å¯¹å®½åº¦=\"" + attVal + "\"");
 		}
 		if(widthVal.length() != 0){
-			result += "<×Ö:¿í¶È uof:locID=\"t0130\"" +
-					" uof:attrList=\"¾ø¶Ô¿í¶È Ïà¶Ô¿í¶È\"" + widthVal + "/>";
+			result += "<å­—:å®½åº¦ uof:locID=\"t0130\"" +
+					" uof:attrList=\"ç»å¯¹å®½åº¦ ç›¸å¯¹å®½åº¦\"" + widthVal + "/>";
 		}
-		
-		//¶ÔÆë  UOFÖĞÃ»ÓĞÓëmargin¶ÔÓ¦µÄÊôĞÔÖµ
-		if ((attVal = attrs.getValue("table:align")) != null && !attVal.equals("margins")) {	
-			result += "<×Ö:¶ÔÆë uof:locID=\"t0133\">" + attVal + "</×Ö:¶ÔÆë>";
+
+		//å¯¹é½  UOFä¸­æ²¡æœ‰ä¸marginå¯¹åº”çš„å±æ€§å€¼
+		if ((attVal = attrs.getValue("table:align")) != null && !attVal.equals("margins")) {
+			result += "<å­—:å¯¹é½ uof:locID=\"t0133\">" + attVal + "</å­—:å¯¹é½>";
 		}
-		
+
 		if((attVal = attrs.getValue("fo:margin")) != null && !(attVal.contains("%"))) {
-			result += "<×Ö:×óËõ½ø>" + Unit_Converter.convert(attVal) + "</×Ö:×óËõ½ø>";
+			result += "<å­—:å·¦ç¼©è¿›>" + Unit_Converter.convert(attVal) + "</å­—:å·¦ç¼©è¿›>";
 		}
 		else if((attVal = attrs.getValue("fo:margin-left")) != null && !(attVal.contains("%"))) {
-			result += "<×Ö:×óËõ½ø>" + Unit_Converter.convert(attVal) + "</×Ö:×óËõ½ø>";
+			result += "<å­—:å·¦ç¼©è¿›>" + Unit_Converter.convert(attVal) + "</å­—:å·¦ç¼©è¿›>";
 		}
-		
+
 		if((attVal=attrs.getValue("fo:background-color")) != null) {
 			if (!attVal.equals("transparent")){
-				String pad = "<×Ö:Ìî³ä uof:locID=\"t0138\">";
-				pad += "<Í¼:Í¼°¸ Í¼:ÀàĞÍ=\"Çå³ı\"";
-				pad += " Í¼:Ç°¾°É«=\"auto\" Í¼:±³¾°É«=\"" + attVal + "\"/>";
-				pad += "</×Ö:Ìî³ä>";
-				
+				String pad = "<å­—:å¡«å…… uof:locID=\"t0138\">";
+				pad += "<å›¾:å›¾æ¡ˆ å›¾:ç±»å‹=\"æ¸…é™¤\"";
+				pad += " å›¾:å‰æ™¯è‰²=\"auto\" å›¾:èƒŒæ™¯è‰²=\"" + attVal + "\"/>";
+				pad += "</å­—:å¡«å……>";
+
 				_struct.set_padding(pad);
 			}
 		}
-		
-		return result;
-	}
-	
-	public static String process_sheet_atts(Attributes atts){
-		String attVal = "";
-		String result = "";
-		
-		if((attVal=atts.getValue("table:display")) != null){
-			if(attVal.equals("true")){
-				result += " ±í:Òş²Ø=\"false\"";
-			}else{
-				result += " ±í:Òş²Ø=\"true\"";
-			}
-		}	
-		if((attVal=atts.getValue("style:background-color")) != null) {
-			if (attVal.equals("transparent")){
-				result += " ±í:ÑÕÉ«=\"" + attVal + "\"";
-			}
-		}
-		
+
 		return result;
 	}
 
-	//Add <×Ö:ÁĞ¿í>-elements to the specified table-style-struct.
+	public static String process_sheet_atts(Attributes atts){
+		String attVal = "";
+		String result = "";
+
+		if((attVal=atts.getValue("table:display")) != null){
+			if(attVal.equals("true")){
+				result += " è¡¨:éšè—=\"false\"";
+			}else{
+				result += " è¡¨:éšè—=\"true\"";
+			}
+		}
+		if((attVal=atts.getValue("style:background-color")) != null) {
+			if (attVal.equals("transparent")){
+				result += " è¡¨:é¢œè‰²=\"" + attVal + "\"";
+			}
+		}
+
+		return result;
+	}
+
+	//Add <å­—:åˆ—å®½>-elements to the specified table-style-struct.
 	//Invoked by First_Content_Handler.
 	public static void add_column_width(String tableID,Attributes atts){
 		int repeat_num = 1;
 		String colWidth = "";
 		String attVal = "";
-		
-		Table_Style_Struct theStyle = _table_styles.get(tableID);		
+
+		Table_Style_Struct theStyle = _table_styles.get(tableID);
 		if(theStyle == null){
 			theStyle = new Table_Style_Struct();
 			_table_styles.put(tableID,theStyle);
 		}
-		
+
 		attVal = atts.getValue("table:number-columns-repeated");
 		if (attVal != null) {
 			repeat_num = Integer.parseInt(attVal);
 		}
-		
+
 		attVal = atts.getValue("table:style-name");
-		for(int i=0; i<repeat_num; i++){			
+		for(int i=0; i<repeat_num; i++){
 			colWidth = Table_Column.get_text_width(attVal);
 			theStyle.add_col_width(colWidth);
-		}		
+		}
 	}
 }

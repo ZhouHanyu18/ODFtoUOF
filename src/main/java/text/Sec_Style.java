@@ -1,109 +1,109 @@
 package text;
 
 /**
- * 
+ *
  * @author xie
  *
  */
 public class Sec_Style {
-//	½ÚÊôĞÔµÄ×ÓÔªËØ£º
-//	¸ñÊ½ĞŞ¶© ½ÚÀàĞÍ Ò³±ß¾à Ö½ÕÅ ÆæÅ¼Ò³Ò³Ã¼Ò³½Å²»Í¬ Ê×Ò³Ò³Ã¼Ò³½Å²»Í¬ Ò³Ã¼Î»ÖÃ Ò³½ÅÎ»ÖÃ Ò³Ã¼
-//	Ò³½Å ×°¶©Ïß ¶Ô³ÆÒ³±ß¾à Æ´Ò³ Ö½ÕÅ·½Ïò Ö½ÕÅÀ´Ô´ ½Å×¢ÉèÖÃ Î²×¢ÉèÖÃ Ò³ÂëÉèÖÃ ĞĞºÅÉèÖÃ Íø¸ñ
-//	ÉèÖÃ ´¹Ö±¶ÔÆë·½Ê½ ÎÄ×ÖÅÅÁĞ·½Ïò ±ß¿ò Ìî³ä ·ÖÀ¸
-//	ÏÂÃæÖ»ÁĞ³öÄÜ×ª»»µÄ£¬²»ÄÜ×ª»»µÄ²»´¦Àí
-	
-	private String _id = "";				//±êÊ¶·û
-	private String _secType = "<×Ö:½ÚÀàĞÍ>new-page</×Ö:½ÚÀàĞÍ>";	//½ÚÀàĞÍ
-	private String _margins = "";			//Ò³±ß¾à
-	private String _page = "";				//Ö½ÕÅ
-	private String _differ_even_odd = "";	//ÆæÅ¼Ò³Ò³Ã¼Ò³½Å²»Í¬
-	private String _header_position = "";	//Ò³Ã¼Î»ÖÃ
-	private String _footer_position = "";	//Ò³½ÅÎ»ÖÃ
-	private String _header = "";			//Ò³Ã¼
-	private String _footer = "";			//Ò³½Å
-	private String _orientation = "";		//Ö½ÕÅ·½Ïò
-	private String _configs = "";			//½Å×¢ÉèÖÃ Î²×¢ÉèÖÃ ĞĞºÅÉèÖÃ
-	private String _numFormat ="";			//Ò³ÂëÉèÖÃ
-	private String _grid = "";				//Íø¸ñÉèÖÃ
-	private String _writingMode = "";		//ÎÄ×ÖÅÅÁĞ·½Ïò
-	private String _borders = "";			//±ß¿ò
-	private String _padding = "";			//Ìî³ä
-	private String _columns = "";			//·ÖÀ¸
-	
+//	èŠ‚å±æ€§çš„å­å…ƒç´ ï¼š
+//	æ ¼å¼ä¿®è®¢ èŠ‚ç±»å‹ é¡µè¾¹è· çº¸å¼  å¥‡å¶é¡µé¡µçœ‰é¡µè„šä¸åŒ é¦–é¡µé¡µçœ‰é¡µè„šä¸åŒ é¡µçœ‰ä½ç½® é¡µè„šä½ç½® é¡µçœ‰
+//	é¡µè„š è£…è®¢çº¿ å¯¹ç§°é¡µè¾¹è· æ‹¼é¡µ çº¸å¼ æ–¹å‘ çº¸å¼ æ¥æº è„šæ³¨è®¾ç½® å°¾æ³¨è®¾ç½® é¡µç è®¾ç½® è¡Œå·è®¾ç½® ç½‘æ ¼
+//	è®¾ç½® å‚ç›´å¯¹é½æ–¹å¼ æ–‡å­—æ’åˆ—æ–¹å‘ è¾¹æ¡† å¡«å…… åˆ†æ 
+//	ä¸‹é¢åªåˆ—å‡ºèƒ½è½¬æ¢çš„ï¼Œä¸èƒ½è½¬æ¢çš„ä¸å¤„ç†
+
+	private String _id = "";				//æ ‡è¯†ç¬¦
+	private String _secType = "<å­—:èŠ‚ç±»å‹>new-page</å­—:èŠ‚ç±»å‹>";	//èŠ‚ç±»å‹
+	private String _margins = "";			//é¡µè¾¹è·
+	private String _page = "";				//çº¸å¼ 
+	private String _differ_even_odd = "";	//å¥‡å¶é¡µé¡µçœ‰é¡µè„šä¸åŒ
+	private String _header_position = "";	//é¡µçœ‰ä½ç½®
+	private String _footer_position = "";	//é¡µè„šä½ç½®
+	private String _header = "";			//é¡µçœ‰
+	private String _footer = "";			//é¡µè„š
+	private String _orientation = "";		//çº¸å¼ æ–¹å‘
+	private String _configs = "";			//è„šæ³¨è®¾ç½® å°¾æ³¨è®¾ç½® è¡Œå·è®¾ç½®
+	private String _numFormat ="";			//é¡µç è®¾ç½®
+	private String _grid = "";				//ç½‘æ ¼è®¾ç½®
+	private String _writingMode = "";		//æ–‡å­—æ’åˆ—æ–¹å‘
+	private String _borders = "";			//è¾¹æ¡†
+	private String _padding = "";			//å¡«å……
+	private String _columns = "";			//åˆ†æ 
+
 	public void set_id(String str){
 		_id = str;
 	}
-	
+
 	public String get_id(){
 		return _id;
 	}
-	
+
 	public void set_secType(String str){
 		_secType = str;
 	}
-	
+
 	public void set_margins(String str){
 		_margins = str;
 	}
-	
+
 	public void set_page(String str){
 		_page = str;
 	}
-	
+
 	public void set_differ_even_odd(String str){
 		_differ_even_odd = str;
 	}
-	
+
 	public void set_header_position(String str){
 		_header_position = str;
 	}
-	
+
 	public void set_footer_position(String str){
 		_footer_position = str;
 	}
-	
+
 	public void set_header(String str){
 		_header = str;
 	}
-	
+
 	public void set_footer(String str){
 		_footer = str;
 	}
-	
+
 	public void set_orientation(String str){
 		_orientation = str;
 	}
-	
+
 	public void set_numFormat(String str){
 		_numFormat = str;
 	}
-	
+
 	public void set_grid(String str){
 		_grid = str;
 	}
-	
+
 	public void set_writingMode(String str){
 		_writingMode = str;
 	}
-	
+
 	public void set_borders(String str){
 		_borders = str;
 	}
-	
+
 	public void set_padding(String str){
 		_padding = str;
 	}
-	
+
 	public void set_columns(String str){
 		_columns = str;
 	}
-	
+
 	public String get_result(){
 		String str = "";
-		
+
 		_configs = Text_Config.get_result();
-		
-		str += "<×Ö:½ÚÊôĞÔ>";
+
+		str += "<å­—:èŠ‚å±æ€§>";
 		str += _secType;
 		str += _margins;
 		str += _page;
@@ -120,8 +120,8 @@ public class Sec_Style {
 		str += _borders;
 		str += _padding;
 		str += _columns;
-		str += "</×Ö:½ÚÊôĞÔ>";
-		
+		str += "</å­—:èŠ‚å±æ€§>";
+
 		return str;
 	}
 }

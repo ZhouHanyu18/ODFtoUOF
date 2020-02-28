@@ -4,21 +4,21 @@ import org.xml.sax.Attributes;
 import stored_data.*;
 
 /**
- * ´¦Àístyle:family="graphic"µÄ<style:style>µÄ×ª»»¡£
- * 
+ * å¤„ç†style:family="graphic"çš„<style:style>çš„è½¬æ¢ã€‚
+ *
  * @author chenyuan
  *
  */
 public class Graphic_Style {
-	private static String _graphic_id = "";   		 //µ±Ç°Í¼ĞÎÊôĞÔID
-	private static boolean _is_default_style = false;//default style¿ÉÄÜÃ»ÓĞstyle:nameÊôĞÔ£¬ĞèÒªÉú³Éid	
-	//Ä¬ÈÏÍ¼ĞÎÊ½ÑùµÄÊôĞÔ×é
+	private static String _graphic_id = "";   		 //å½“å‰å›¾å½¢å±æ€§ID
+	private static boolean _is_default_style = false;//default styleå¯èƒ½æ²¡æœ‰style:nameå±æ€§ï¼Œéœ€è¦ç”Ÿæˆid
+	//é»˜è®¤å›¾å½¢å¼æ ·çš„å±æ€§ç»„
 	private static Attributes _def_gra_pro = null;
 	private static Attributes _def_para_pro = null;
 	private static Attributes _def_text_pro = null;
-	private static boolean _list_tag = false;   //ÓÃÓÚ´¦Àígraphic»òpresentation styleÀïµÄ×Ô¶¯±àºÅ
-	
-	
+	private static boolean _list_tag = false;   //ç”¨äºå¤„ç†graphicæˆ–presentation styleé‡Œçš„è‡ªåŠ¨ç¼–å·
+
+
 	//initialize
 	public static void init(){
 		_graphic_id = "";
@@ -27,7 +27,7 @@ public class Graphic_Style {
 		_def_para_pro = null;
 		_def_text_pro = null;
 	}
-	
+
 	public static Graphic_Pro get_def() {
 		Graphic_Pro graphicpro = new Graphic_Pro();
 		if(_def_gra_pro != null){
@@ -41,90 +41,90 @@ public class Graphic_Style {
 		}
 		return graphicpro;
 	}
-	
-	public static void process_start(String qName,Attributes atts){			
+
+	public static void process_start(String qName,Attributes atts){
 		String attVal="";
-		
+
 		if (_list_tag) {
 			Auto_Num.process_start(qName, atts);
 		}
-		
+
 		if(qName.equals("style:style")||qName.equals("style:default-style")){
 			if(qName.equals("style:default-style")){
 				_is_default_style = true;
 			}
 			if((attVal = atts.getValue("style:name")) != null) {
-				//Éú³ÉÒ»¸öGraphicProµÄÊµÀı£¬´æID,²¢ÉèÖÃcurrentGraphicProID
-				//ÒÔ±ã´¦Àístyle:graphic-propertiesÊ±Ê¹ÓÃ
-				
+				//ç”Ÿæˆä¸€ä¸ªGraphicProçš„å®ä¾‹ï¼Œå­˜ID,å¹¶è®¾ç½®currentGraphicProID
+				//ä»¥ä¾¿å¤„ç†style:graphic-propertiesæ—¶ä½¿ç”¨
+
 				attVal = Style_Data.rename(attVal);
-				
-				Graphic_Pro graphicpro = new Graphic_Pro();		
+
+				Graphic_Pro graphicpro = new Graphic_Pro();
 				if (atts.getValue("style:parent-style-name") != null) {
 					String parent = atts.getValue("style:parent-style-name");
 					graphicpro.set_parent_style(parent);
 				}
-				else {   //ÒıÓÃÄ¬ÈÏµÄgraphicÊ½Ñù
+				else {   //å¼•ç”¨é»˜è®¤çš„graphicå¼æ ·
 					graphicpro = get_def();
 				}
-				
+
 				graphicpro.set_id(attVal);
 				Style_Data.add_graphic_pro(attVal,graphicpro);
 				_graphic_id = attVal;
 			}
-		}	
-		
+		}
+
 		if (qName.equals("style:paragraph-properties")) {
 			if (_graphic_id.length() != 0){
 				(Style_Data.get_graphic_pro(_graphic_id)).process_para_atts(atts);
 			}
-			else if (_is_default_style) {   //´æ´¢Í¼ĞÎµÄÄ¬ÈÏÊ½Ñù£¬ÒòÎªÔÚUOFÖĞÎŞ·¨ÒıÓÃ
+			else if (_is_default_style) {   //å­˜å‚¨å›¾å½¢çš„é»˜è®¤å¼æ ·ï¼Œå› ä¸ºåœ¨UOFä¸­æ— æ³•å¼•ç”¨
 				_def_para_pro = atts;
 			}
 		}
-		
+
 		else if (qName.equals("style:text-properties")) {
 			if (_graphic_id.length() != 0)
 				(Style_Data.get_graphic_pro(_graphic_id)).process_sent_atts(atts);
-			else if (_is_default_style) {   //´æ´¢Í¼ĞÎµÄÄ¬ÈÏÊ½Ñù£¬ÒòÎªÔÚUOFÖĞÎŞ·¨ÒıÓÃ
+			else if (_is_default_style) {   //å­˜å‚¨å›¾å½¢çš„é»˜è®¤å¼æ ·ï¼Œå› ä¸ºåœ¨UOFä¸­æ— æ³•å¼•ç”¨
 				_def_text_pro = atts;
 			}
-		}		
-		//¸ù¾İcurrentGraphicProIDÏòÏàÓ¦GraphicProÊµÀıÖĞ´¢´æÔ¤¶¨ÒåÍ¼ĞÎµÄÊôĞÔÒÔ¼°<ÎÄ±¾ÄÚÈİ>ÔªËØµÄÄ³Ğ©ÊôĞÔ¡£
-		//²¢´æ´¢ÃªµãËùĞèµÄÒ»Ğ©ÊôĞÔ¡£×¢:draw:frameÒıÓÃµÄÒ²ÊÇgraphic style.
+		}
+		//æ ¹æ®currentGraphicProIDå‘ç›¸åº”GraphicProå®ä¾‹ä¸­å‚¨å­˜é¢„å®šä¹‰å›¾å½¢çš„å±æ€§ä»¥åŠ<æ–‡æœ¬å†…å®¹>å…ƒç´ çš„æŸäº›å±æ€§ã€‚
+		//å¹¶å­˜å‚¨é”šç‚¹æ‰€éœ€çš„ä¸€äº›å±æ€§ã€‚æ³¨:draw:frameå¼•ç”¨çš„ä¹Ÿæ˜¯graphic style.
 		else if (qName.equals("style:graphic-properties")) {
 			if (_graphic_id.length() != 0)
 				(Style_Data.get_graphic_pro(_graphic_id)).process_graphic_atts(atts);
-			else if (_is_default_style) {   //´æ´¢Í¼ĞÎµÄÄ¬ÈÏÊ½Ñù£¬ÒòÎªÔÚUOFÖĞÎŞ·¨ÒıÓÃ
+			else if (_is_default_style) {   //å­˜å‚¨å›¾å½¢çš„é»˜è®¤å¼æ ·ï¼Œå› ä¸ºåœ¨UOFä¸­æ— æ³•å¼•ç”¨
 				_def_gra_pro = atts;
 			}
 		}
-		
+
 		else if (qName.equals("text:list-style")) {
 			_list_tag = true;
 			Auto_Num.process_start(qName, atts);
 		}
-		
+
 		else if (qName.equals("style:background-image")) {
 			String padding = Sent_Style.deal_with_bg_image(atts);
 			if(padding.length() != 0) {
-				padding = "<Í¼:Ìî³ä>" + Sent_Style.deal_with_bg_image(atts) + "</Í¼:Ìî³ä>";
+				padding = "<å›¾:å¡«å……>" + Sent_Style.deal_with_bg_image(atts) + "</å›¾:å¡«å……>";
 				if (_graphic_id.length() != 0)
 					Style_Data.get_graphic_pro(_graphic_id).set_padding(padding);
 			}
 		}
 	}
-	
+
 	public static void process_end(String qName){
 		if (qName.equals("style:default-style")){
 			_is_default_style = false;
-		}	
-		
+		}
+
 		else if (qName.equals("text:list-style")) {
 			_list_tag = false;
 			Auto_Num.process_end(qName);
 		}
-		
+
 		if (_list_tag) {
 			Auto_Num.process_end(qName);
 		}

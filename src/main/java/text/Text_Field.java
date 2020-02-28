@@ -5,9 +5,9 @@ import java.util.TreeSet;
 import org.xml.sax.Attributes;
 
 /**
- * ´¦Àí<text:date>¡¢<text:time>¡¢<text:word-count>¡¢<text:file-name>¡¢<text:character-count>¡¢
- * <text:editing-duration>¡¢<text:page-number>¡¢<text:page-count>µÈ µ½ ×Ö:ÓòµÄ×ª»»¡£
- * 
+ * å¤„ç†<text:date>ã€<text:time>ã€<text:word-count>ã€<text:file-name>ã€<text:character-count>ã€
+ * <text:editing-duration>ã€<text:page-number>ã€<text:page-count>ç­‰ åˆ° å­—:åŸŸçš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
@@ -15,53 +15,53 @@ public class Text_Field {
 	//
 	private static String _chs = "";
 	//the result
-	private static String _result = ""; 
+	private static String _result = "";
 	//@text:*-value
 	//private static String _value = "";
 	//@text:fixed
 	private static String _fixed = "";
-	//×Ö:Óò´úÂë
+	//å­—:åŸŸä»£ç 
 	private static String _code = "";
 	//the collection of text-field's names
 	private static Set<String> _field_name_set = new TreeSet<String>();
-	
-	
+
+
 	public static void create_set(){
-		
-		_field_name_set.add("text:date");				//ÈÕÆÚ
-		
-		_field_name_set.add("text:time");				//Ê±¼ä
-		
-		_field_name_set.add("text:word-count");			//×ÖÊı
-		
-		_field_name_set.add("text:file-name");			//Â·¾¶Ãû³Æ
-		
-		_field_name_set.add("text:character-count");	//×Ö·ûÊı
-		
-		_field_name_set.add("text:editing-duration");	//±à¼­Ê±¼ä
-		
-		_field_name_set.add("text:page-number");		//Ò³Âë
-		
-		_field_name_set.add("text:page-count");			//Ò³Êı
-		
-		_field_name_set.add("text:initial-creator");	//×÷Õß
-		
-		_field_name_set.add("text:editing-cycles");		//ĞŞ¸Ä´ÎÊı
-		
-		_field_name_set.add("text:sequence");			//Ìâ×¢
+
+		_field_name_set.add("text:date");				//æ—¥æœŸ
+
+		_field_name_set.add("text:time");				//æ—¶é—´
+
+		_field_name_set.add("text:word-count");			//å­—æ•°
+
+		_field_name_set.add("text:file-name");			//è·¯å¾„åç§°
+
+		_field_name_set.add("text:character-count");	//å­—ç¬¦æ•°
+
+		_field_name_set.add("text:editing-duration");	//ç¼–è¾‘æ—¶é—´
+
+		_field_name_set.add("text:page-number");		//é¡µç 
+
+		_field_name_set.add("text:page-count");			//é¡µæ•°
+
+		_field_name_set.add("text:initial-creator");	//ä½œè€…
+
+		_field_name_set.add("text:editing-cycles");		//ä¿®æ”¹æ¬¡æ•°
+
+		_field_name_set.add("text:sequence");			//é¢˜æ³¨
 	}
-	
+
 	public static boolean is_field_name(String qName){
 		return _field_name_set.contains(qName);
 	}
-	
+
 	private static void clear(){
 		_chs = "";
-		_result = "";	
+		_result = "";
 		_fixed = "";
 		_code = "";
 	}
-	
+
 	public static String get_result(){
 		String str = _result;
 		clear();
@@ -70,49 +70,49 @@ public class Text_Field {
 
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		
+
 		_fixed = atts.getValue("text:fixed");
 		_fixed = (_fixed==null) ? "false" : _fixed;
-		
+
 		if(qName.equals("text:sequence")){
 			String format = atts.getValue("style:num-format");
-			
+
 			attVal = atts.getValue("text:name");
 			if(attVal != null){
 				_code = "Seq " + attVal + " \\* " + conv_num_format(format);
 			}
 		}
 	}
-	
-	public static void process_chars(String chs){	
+
+	public static void process_chars(String chs){
 		_chs += chs;
 	}
-	
-	public static void process_end(String qName){	
+
+	public static void process_end(String qName){
 		if(qName.equals("text:date")){
 			_result += gen_a_field("Date",_fixed,_chs);
 		}
-		
+
 		else if(qName.equals("text:time")){
 			_result += gen_a_field("Time",_fixed,_chs);
 		}
-		
+
 		else if(qName.equals("text:character-count")){
 			_result += gen_a_field("NumChars",_fixed,_chs);
 		}
-		
+
 		else if(qName.equals("text:word-count")){
 			_result += gen_a_field("NumWords",_fixed,_chs);
 		}
-		
+
 		else if(qName.equals("text:file-name")){
 			_result += gen_a_field("FileName",_fixed,_chs);
 		}
-		
+
 		else if(qName.equals("text:editing-duration")){
 			_result += gen_a_field("EditTime",_fixed,_chs);
 		}
-		
+
 		else if(qName.equals("text:page-number")){
 			_result += gen_a_field("Page",_fixed,_chs);
 		}
@@ -120,63 +120,63 @@ public class Text_Field {
 		else if(qName.equals("text:page-count")){
 			_result += gen_a_field("NumPages",_fixed,_chs);
 		}
-		
+
 		else if(qName.equals("text:initial-creator")){
 			_result += gen_a_field("Author",_fixed,_chs);
 		}
-		
+
 		else if(qName.equals("text:editing-cycles")){
 			_result += gen_a_field("RevNum",_fixed,_chs);
 		}
-		
+
 		else if(qName.equals("text:sequence")){
 			_result += gen_sequence_field(_code,_fixed,_chs);
 		}
-		
+
 		_chs = "";
 	}
-	
+
 	private static String gen_a_field(String type,String fixed,String chs){
 		String field = "";
-		
-		field = "<×Ö:Óò¿ªÊ¼ ×Ö:ÀàĞÍ=\"" + type + "\" ×Ö:Ëø¶¨=\"" + fixed + "\"/>";
-		field += "<×Ö:Óò´úÂë>";
-		field += "<×Ö:¶ÎÂä><×Ö:¾ä><×Ö:¾äÊôĞÔ/>";
-		field += "<×Ö:ÎÄ±¾´®>" + get_field_code(type) + "</×Ö:ÎÄ±¾´®>";
-		field += "</×Ö:¾ä></×Ö:¶ÎÂä>";
-		field += "</×Ö:Óò´úÂë>";
-		field += "<×Ö:¾ä><×Ö:¾äÊôĞÔ/>";
-		field += "<×Ö:ÎÄ±¾´®>" + chs + "</×Ö:ÎÄ±¾´®>";
-		field += "</×Ö:¾ä>";
-		field += "<×Ö:Óò½áÊø/>";
-		field += "<×Ö:¾ä><×Ö:¾äÊôĞÔ/></×Ö:¾ä>";
-		
+
+		field = "<å­—:åŸŸå¼€å§‹ å­—:ç±»å‹=\"" + type + "\" å­—:é”å®š=\"" + fixed + "\"/>";
+		field += "<å­—:åŸŸä»£ç >";
+		field += "<å­—:æ®µè½><å­—:å¥><å­—:å¥å±æ€§/>";
+		field += "<å­—:æ–‡æœ¬ä¸²>" + get_field_code(type) + "</å­—:æ–‡æœ¬ä¸²>";
+		field += "</å­—:å¥></å­—:æ®µè½>";
+		field += "</å­—:åŸŸä»£ç >";
+		field += "<å­—:å¥><å­—:å¥å±æ€§/>";
+		field += "<å­—:æ–‡æœ¬ä¸²>" + chs + "</å­—:æ–‡æœ¬ä¸²>";
+		field += "</å­—:å¥>";
+		field += "<å­—:åŸŸç»“æŸ/>";
+		field += "<å­—:å¥><å­—:å¥å±æ€§/></å­—:å¥>";
+
 		return field;
 	}
-	
+
 	private static String gen_sequence_field(String code,String fixed,String chs){
 		String field = "";
-		
-		field = "<×Ö:Óò¿ªÊ¼ ×Ö:ÀàĞÍ=\"Seq\" ×Ö:Ëø¶¨=\"" + fixed + "\"/>";
-		field += "<×Ö:Óò´úÂë>";
-		field += "<×Ö:¶ÎÂä><×Ö:¾ä><×Ö:¾äÊôĞÔ/>";
-		field += "<×Ö:ÎÄ±¾´®>" + _code + "</×Ö:ÎÄ±¾´®>";
-		field += "</×Ö:¾ä></×Ö:¶ÎÂä>";
-		field += "</×Ö:Óò´úÂë>";
-		field += "<×Ö:¾ä><×Ö:¾äÊôĞÔ/>";
-		field += "<×Ö:ÎÄ±¾´®>" + chs + "</×Ö:ÎÄ±¾´®>";
-		field += "</×Ö:¾ä>";
-		field += "<×Ö:Óò½áÊø/>";
-		field += "<×Ö:¾ä><×Ö:¾äÊôĞÔ/></×Ö:¾ä>";
-		
+
+		field = "<å­—:åŸŸå¼€å§‹ å­—:ç±»å‹=\"Seq\" å­—:é”å®š=\"" + fixed + "\"/>";
+		field += "<å­—:åŸŸä»£ç >";
+		field += "<å­—:æ®µè½><å­—:å¥><å­—:å¥å±æ€§/>";
+		field += "<å­—:æ–‡æœ¬ä¸²>" + _code + "</å­—:æ–‡æœ¬ä¸²>";
+		field += "</å­—:å¥></å­—:æ®µè½>";
+		field += "</å­—:åŸŸä»£ç >";
+		field += "<å­—:å¥><å­—:å¥å±æ€§/>";
+		field += "<å­—:æ–‡æœ¬ä¸²>" + chs + "</å­—:æ–‡æœ¬ä¸²>";
+		field += "</å­—:å¥>";
+		field += "<å­—:åŸŸç»“æŸ/>";
+		field += "<å­—:å¥><å­—:å¥å±æ€§/></å­—:å¥>";
+
 		return field;
 	}
-	
+
 	private static String get_field_code(String type){
 		String code = "";
-		
+
 		if(type.equals("Date")){
-			code = "DATE \\@ \"yyyyÄêMÔÂdÈÕ\"";
+			code = "DATE \\@ \"yyyyå¹´Mæœˆdæ—¥\"";
 		}
 		else if(type.equals("Time")){
 			code = "\\@ \"h:mm:ss AM/PM\"";
@@ -205,15 +205,15 @@ public class Text_Field {
 		else if(type.equals("RevNum")){
 			code = "REVNUM  \\* MERGEFORMAT";
 		}
-		
+
 		return code;
 	}
 
 	private static String conv_num_format(String odfVal){
 		String uofVal = "Arabic";
-		
+
 		if(odfVal == null){
-			
+
 		}
 		else if(odfVal.equals("1")){
 			uofVal = "Arabic";
@@ -230,22 +230,22 @@ public class Text_Field {
 		else if(odfVal.equals("I")){
 			uofVal = "ROMAN";
 		}
-		else if(odfVal.equals("Ò», ¶ş, Èı, ...")){
+		else if(odfVal.equals("ä¸€, äºŒ, ä¸‰, ...")){
 			uofVal = "CHINESENUM3";
 		}
-		else if(odfVal.equals("Ò¼, ·¡, Èş, ...")){
+		else if(odfVal.equals("å£¹, è´°, å, ...")){
 			uofVal = "CHINESENUM2";
 		}
-		else if(odfVal.equals("¼×, ÒÒ, ±û, ...")){
+		else if(odfVal.equals("ç”², ä¹™, ä¸™, ...")){
 			uofVal = "ZODIAC1";
 		}
-		else if(odfVal.equals("×Ó, ³ó, Òú, ...")){
+		else if(odfVal.equals("å­, ä¸‘, å¯…, ...")){
 			uofVal = "ZODIAC2";
 		}
-		else if(odfVal.equals("¢Ù, ¢Ú, ¢Û, ...")){
+		else if(odfVal.equals("â‘ , â‘¡, â‘¢, ...")){
 			uofVal = "GB3";
 		}
-		
+
 		return uofVal;
 	}
 }

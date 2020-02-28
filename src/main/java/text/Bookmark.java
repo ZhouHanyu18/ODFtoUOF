@@ -7,70 +7,70 @@ import spreadsheet.Cell_Address;
 import convertor.IDGenerator;
 
 /**
- * ¥¶¿Ì<text:bookmark> µΩ <uof: È«©>µƒ◊™ªª°£
- * 
+ * Â§ÑÁêÜ<text:bookmark> Âà∞ <uof:‰π¶Á≠æ>ÁöÑËΩ¨Êç¢„ÄÇ
+ *
  * @author xie
  *
  */
 public class Bookmark {
 	//the result
 	private static String _bookmarks = "";
-	
-	
+
+
 	public static String get_result(){
 		String rst = "";
-		
+
 		if(!_bookmarks.equals("")){
-			rst = "<uof: È«©ºØ>" + _bookmarks + "</uof: È«©ºØ>";
+			rst = "<uof:‰π¶Á≠æÈõÜ>" + _bookmarks + "</uof:‰π¶Á≠æÈõÜ>";
 			_bookmarks = "";
 		}
-		
+
 		return rst;
 	}
-	
+
 	//add a bookmark for <table:named-expressions>
 	public static void add_nex_bk(String bk){
 		_bookmarks += bk;
 	}
-	
+
 	//add a bookmark for toc
 	public static void add_toc_bk(){
 		String bk = "";
-		
-		bk = "<uof: È«© uof:√˚≥∆=\"" + IDGenerator.get_toc_bk_name() + "\">";
-		bk += "<uof:Œƒ±æŒª÷√ ◊÷:«¯”Ú“˝”√=\"" + IDGenerator.get_toc_bk_id() + "\"/>";
-		bk += "</uof: È«©>";
-		
+
+		bk = "<uof:‰π¶Á≠æ uof:ÂêçÁß∞=\"" + IDGenerator.get_toc_bk_name() + "\">";
+		bk += "<uof:ÊñáÊú¨‰ΩçÁΩÆ Â≠ó:Âå∫ÂüüÂºïÁî®=\"" + IDGenerator.get_toc_bk_id() + "\"/>";
+		bk += "</uof:‰π¶Á≠æ>";
+
 		_bookmarks += bk;
 	}
-	
+
 	//add a bookmark for Print_Area in spreadsheet
 	public static void add_print_area(Attributes atts){
 		String area = "";
 		String bk = "";
-		
+
 		String pr = atts.getValue("table:print-ranges");
 		if(pr != null){
 			String taName = atts.getValue("table:name");
 			area = "='" + taName + "'!" + Cell_Address.get_cell_range(pr);
-			
-			bk = "<uof: È«© uof:√˚≥∆=\"Print_Area\">";
-			bk += "<uof:√¸√˚±Ì¥Ô Ω uof:––¡–«¯”Ú=\"" + area + "\" uof:π§◊˜±Ì√˚=\"" + taName +"\"/>";
-			bk += "</uof: È«©>";
+
+			bk = "<uof:‰π¶Á≠æ uof:ÂêçÁß∞=\"Print_Area\">";
+			bk += "<uof:ÂëΩÂêçË°®ËææÂºè uof:Ë°åÂàóÂå∫Âüü=\"" + area + "\" uof:Â∑•‰ΩúË°®Âêç=\"" + taName +"\"/>";
+			bk += "</uof:‰π¶Á≠æ>";
 		}
-		
+
 		_bookmarks += bk;
 	}
-	
+
 	//add a new bookmark
 	public static void process(Attributes atts){
 		String onebk = "";
 		String name = atts.getValue("text:name");
-		
-		onebk += "<uof: È«© uof:√˚≥∆=\"" + name + "\">";
-		onebk += "<uof:Œƒ±æŒª÷√ ◊÷:«¯”Ú“˝”√=\"" + name + "\"/>";
-		onebk += "</uof: È«©>";
-			
+
+		onebk += "<uof:‰π¶Á≠æ uof:ÂêçÁß∞=\"" + name + "\">";
+		onebk += "<uof:ÊñáÊú¨‰ΩçÁΩÆ Â≠ó:Âå∫ÂüüÂºïÁî®=\"" + name + "\"/>";
+		onebk += "</uof:‰π¶Á≠æ>";
+
 		_bookmarks += onebk;
-	}	
+	}
 }

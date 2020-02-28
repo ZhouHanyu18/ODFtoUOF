@@ -7,32 +7,32 @@ import presentation.Draw_Padding;
 import convertor.Unit_Converter;
 
 public class Graphic_Pro {
-	
+
 	private String _id = "";
-	private final float _PI_ = (float)3.1415927; 
+	private final float _PI_ = (float)3.1415927;
 	private String _svgx = "";
 	private String _svgy = "";
-	
-	//<Ô¤¶¨ÒåÍ¼ĞÎ>ÖĞ<ÊôĞÔ>µÄ×ÓÔªËØ×é
-	private String _padding = "";   			//Ìî³ä  
-	private String _line_color = "";   			//ÏßÑÕÉ«
-	private String _line_type = "";   			//ÏßĞÍ 
-	private String _line_width = "";   			//Ïß´ÖÏ¸
-	private String _for_arrow = "";   			//Ç°¶Ë¼ıÍ· Î´´¦Àí¡£¶ÔÓ¦draw:marker-start
-	private String _back_arrow = "";   			//ºó¶Ë¼ıÍ· Î´´¦Àí¡£¶ÔÓ¦draw:marker-end
-	private String _width = "";   				//¿í¶È 
-	private String _height = "";   				//¸ß¶È 
-	private String _rotate_angle = "";   		//Ğı×ª½Ç¶È
-	private String _x_scale = "";   			//X-Ëõ·Å±ÈÀı £¿£¿
-	private String _y_scale = "";   			//Y-Ëõ·Å±ÈÀı £¿£¿
-	private String _lock_asp_ratio = "";   		//Ëø¶¨×İºá±È  ÎŞ
-	private String _rel_ratio = "";   			//Ïà¶ÔÔ­Ê¼±ÈÀı  ÎŞ
-	private String _print = "";   				//´òÓ¡¶ÔÏó
-	private String _web_ch = "";   				//WebÎÄ×Ö ÎŞ
-	private String _opacity = "";   			//Í¸Ã÷¶È
-	private String _border = "";                //ÎÄ±¾¿òÊ±ÏßÑÕÉ« ÏßĞÍ Ïß´ÖÏ¸µÄ´¦Àí
-	
-	//°ÑÎÄ±¾ÄÚÈİµÄ¿ªÊ¼ÔªËØÒ²´æÔÚÕâÀïÃæ
+
+	//<é¢„å®šä¹‰å›¾å½¢>ä¸­<å±æ€§>çš„å­å…ƒç´ ç»„
+	private String _padding = "";   			//å¡«å……
+	private String _line_color = "";   			//çº¿é¢œè‰²
+	private String _line_type = "";   			//çº¿å‹
+	private String _line_width = "";   			//çº¿ç²—ç»†
+	private String _for_arrow = "";   			//å‰ç«¯ç®­å¤´ æœªå¤„ç†ã€‚å¯¹åº”draw:marker-start
+	private String _back_arrow = "";   			//åç«¯ç®­å¤´ æœªå¤„ç†ã€‚å¯¹åº”draw:marker-end
+	private String _width = "";   				//å®½åº¦
+	private String _height = "";   				//é«˜åº¦
+	private String _rotate_angle = "";   		//æ—‹è½¬è§’åº¦
+	private String _x_scale = "";   			//X-ç¼©æ”¾æ¯”ä¾‹ ï¼Ÿï¼Ÿ
+	private String _y_scale = "";   			//Y-ç¼©æ”¾æ¯”ä¾‹ ï¼Ÿï¼Ÿ
+	private String _lock_asp_ratio = "";   		//é”å®šçºµæ¨ªæ¯”  æ— 
+	private String _rel_ratio = "";   			//ç›¸å¯¹åŸå§‹æ¯”ä¾‹  æ— 
+	private String _print = "";   				//æ‰“å°å¯¹è±¡
+	private String _web_ch = "";   				//Webæ–‡å­— æ— 
+	private String _opacity = "";   			//é€æ˜åº¦
+	private String _border = "";                //æ–‡æœ¬æ¡†æ—¶çº¿é¢œè‰² çº¿å‹ çº¿ç²—ç»†çš„å¤„ç†
+
+	//æŠŠæ–‡æœ¬å†…å®¹çš„å¼€å§‹å…ƒç´ ä¹Ÿå­˜åœ¨è¿™é‡Œé¢
 //	private String _text_begin = "";
 	private String _left_margin = "";
 	private String _right_margin = "";
@@ -45,441 +45,441 @@ public class Graphic_Pro {
 	private String _fit = "";
 
 	//
-	private String _margin_string = "";			//×ó±ß¾à ÓÒ±ß¾à ÉÏ±ß¾à ÏÂ±ß¾à
-	
-	//´æ´¢ÃªµãÊôĞÔ
-	private String _anchor_width = "";   			//Ãªµã¿í¶È
-	private String _anchor_height = "";   			//Ãªµã¸ß¶È
-//	private String _anchor_position = "";   		//ÃªµãÎ»ÖÃ
-	private String _anchor_horirel = "";   			//ÃªµãË®Æ½Ïà¶ÔÓÚ
-	private String _anchor_horipos = "";   			//ÃªµãË®Æ½Î»ÖÃ
-	private String _anchor_vertrel = "";   			//Ãªµã´¹Ö±Ïà¶ÔÓÚ
-	private String _anchor_vertpos = "";   			//Ãªµã´¹Ö±Î»ÖÃ
-	private String _anchor_wrap = "";   			//ÃªµãÈÆÅÅ
-	private String _anchor_margin = "";   			//Ãªµã±ß¾à
-	private String _anchor_lock = "";   			//ÃªµãËø¶¨  £¿£¿
-	private String _anchor_protection = "";   		//Ãªµã±£»¤
-	private String _anchor_allow_overlap = "";  	//ÔÊĞíÖØµş  ÎŞ	
-	private String _anchor_type = "";	
-	private String _parent_style = "";   			//ÓÃÓÚ´¦Àíframe
+	private String _margin_string = "";			//å·¦è¾¹è· å³è¾¹è· ä¸Šè¾¹è· ä¸‹è¾¹è·
+
+	//å­˜å‚¨é”šç‚¹å±æ€§
+	private String _anchor_width = "";   			//é”šç‚¹å®½åº¦
+	private String _anchor_height = "";   			//é”šç‚¹é«˜åº¦
+//	private String _anchor_position = "";   		//é”šç‚¹ä½ç½®
+	private String _anchor_horirel = "";   			//é”šç‚¹æ°´å¹³ç›¸å¯¹äº
+	private String _anchor_horipos = "";   			//é”šç‚¹æ°´å¹³ä½ç½®
+	private String _anchor_vertrel = "";   			//é”šç‚¹å‚ç›´ç›¸å¯¹äº
+	private String _anchor_vertpos = "";   			//é”šç‚¹å‚ç›´ä½ç½®
+	private String _anchor_wrap = "";   			//é”šç‚¹ç»•æ’
+	private String _anchor_margin = "";   			//é”šç‚¹è¾¹è·
+	private String _anchor_lock = "";   			//é”šç‚¹é”å®š  ï¼Ÿï¼Ÿ
+	private String _anchor_protection = "";   		//é”šç‚¹ä¿æŠ¤
+	private String _anchor_allow_overlap = "";  	//å…è®¸é‡å   æ— 
+	private String _anchor_type = "";
+	private String _parent_style = "";   			//ç”¨äºå¤„ç†frame
 	//private Para_Style _para_style = new Para_Style();
-	private String _parapro = ""; 
-	
+	private String _parapro = "";
+
 	private boolean _hasstroke = false;
 	private boolean _hasfill = false;
-	
-	public Graphic_Pro() {	
+
+	public Graphic_Pro() {
 	}
-	
+
 	//SPECIAL=====for OOo2 draw:polyline======
 	public void clear_padding() {
 		if (_padding.contains("#99ccff"))
 			_padding = "";
 	}
-	
+
 	public void set_padding(String padding) {
 		_padding = padding;
 	}
-	
+
 	public boolean get_hasstroke() {
 		return _hasstroke;
 	}
-	
+
 	public boolean get_hasfill() {
 		return _hasfill;
 	}
-	
+
 	public void set_id(String graphicProID)
 	{
 		_id = graphicProID;
 	}
-	
+
 	public String get_id()
 	{
 		return _id;
 	}
-	
+
 	public void set_linecolor(String color) {
 		_line_color = color;
 	}
-	
-	public void add_lock(String string) 
+
+	public void add_lock(String string)
 	{
 		_lock_asp_ratio += string;
 	}
-	
+
 	public void add_rel_ratio(String string)
 	{
 		_rel_ratio += string;
 	}
-	
-	public void add_web_ch(String string) 
+
+	public void add_web_ch(String string)
 	{
 		_web_ch += string;
 	}
-	
-	public String get_text_begin() 
+
+	public String get_text_begin()
 	{
 		return _hori_align + _vert_align + _wrap + _fit;
 	}
-	
-	public String getLeftMargin() 
+
+	public String getLeftMargin()
 	{
 		return _left_margin;
 	}
-	
-	public String getRightMargin() 
+
+	public String getRightMargin()
 	{
 		return _right_margin;
 	}
-	
-	public String getTopMargin() 
+
+	public String getTopMargin()
 	{
 		return _top_margin;
 	}
-	
-	public String getBottomMargin() 
+
+	public String getBottomMargin()
 	{
 		return _bottom_margin;
 	}
-	
+
 	public String get_margin_string(){
 		return _margin_string;
 	}
-	
-	public String getWritingMode() 
+
+	public String getWritingMode()
 	{
 		return _writing_mode;
 	}
-	
+
 	public void set_parent_style(String parent_style)
 	{
 		_parent_style = parent_style;
 	}
-	
-	public String get_parent_style() 
+
+	public String get_parent_style()
 	{
 		return _parent_style;
 	}
-	
+
 //	public Para_Style get_parastyle() {
 //		return _para_style;
 //	}
-	
+
 	public String get_parapro() {
 		return _parapro;
 	}
-	
+
 	public void process_graphic_atts(Attributes atts)
 	{
 		String value = "";
-			
-		//Í¼°¸(hatch)Ìî³ä²îÒìÌ«´ó£¬Î´¿¼ÂÇ
+
+		//å›¾æ¡ˆ(hatch)å¡«å……å·®å¼‚å¤ªå¤§ï¼Œæœªè€ƒè™‘
 		if ((value = atts.getValue("draw:fill")) != null) {
 			if (!value.equals("none"))
 				_hasfill = true;
-			
-			_padding = "<Í¼:Ìî³ä>";
+
+			_padding = "<å›¾:å¡«å……>";
 			if (value.equals("solid"))
-				_padding += ("<Í¼:ÑÕÉ«>" + atts.getValue("draw:fill-color") + "</Í¼:ÑÕÉ«>");
+				_padding += ("<å›¾:é¢œè‰²>" + atts.getValue("draw:fill-color") + "</å›¾:é¢œè‰²>");
 			else if (value.equals("bitmap")) {
 				_padding += Draw_Padding.get_fill_image(atts.getValue("draw:fill-image-name"));
 				if((value = atts.getValue("style:repeat")) != null){
 					if(value.equals("no-repeat"))
-						_padding += " Í¼:¶ÔÆë·½Ê½=\"center\"/>";
+						_padding += " å›¾:å¯¹é½æ–¹å¼=\"center\"/>";
 					else if(value.equals("repeat"))
-						_padding += " Í¼:¶ÔÆë·½Ê½=\"tile\"/>";
+						_padding += " å›¾:å¯¹é½æ–¹å¼=\"tile\"/>";
 					else if(value.equals("stretch"))
-						_padding += " Í¼:¶ÔÆë·½Ê½=\"stretch\"/>";
+						_padding += " å›¾:å¯¹é½æ–¹å¼=\"stretch\"/>";
 				}
 				_padding += "/>";
 			}
 			else if (value.equals("gradient")) {
 				_padding += Draw_Padding.get_gradient(atts.getValue("draw:fill-gradient-name"));
 			}
-			_padding += "</Í¼:Ìî³ä>";
+			_padding += "</å›¾:å¡«å……>";
 		}
 		else if ((value = atts.getValue("fo:background-color")) != null) {
-			_padding = "<Í¼:Ìî³ä><Í¼:ÑÕÉ«>" + value + "</Í¼:ÑÕÉ«></Í¼:Ìî³ä>";
+			_padding = "<å›¾:å¡«å……><å›¾:é¢œè‰²>" + value + "</å›¾:é¢œè‰²></å›¾:å¡«å……>";
 		}
-		//====OOo2Ä¬ÈÏÓĞÌî³äÑÕÉ«#99ccff.µ«ÊÇdraw:polyline³ıÍâ=====
+		//====OOo2é»˜è®¤æœ‰å¡«å……é¢œè‰²#99ccff.ä½†æ˜¯draw:polylineé™¤å¤–=====
 		else
-			_padding = "<Í¼:Ìî³ä><Í¼:ÑÕÉ«>#99ccff</Í¼:ÑÕÉ«></Í¼:Ìî³ä>";
+			_padding = "<å›¾:å¡«å……><å›¾:é¢œè‰²>#99ccff</å›¾:é¢œè‰²></å›¾:å¡«å……>";
 
-		
+
 		if ((value = atts.getValue("draw:stroke")) != null) {
 			if (!value.equals("none"))
 				_hasstroke = true;
-			
-			_line_type = "<Í¼:ÏßĞÍ>";
+
+			_line_type = "<å›¾:çº¿å‹>";
 			if (value.equals("none"))
 				_line_type += "none";
 			else if (value.equals("solid"))
 				_line_type += "single";
 			else if (value.equals("dash")) {
-				_line_type += "dash";   //´ËÊ±±¾À´Ó¦¶ÔÓ¦draw:stroke-dashÊôĞÔÒıÓÃµÄdashÊ½Ñù£¬µ«Á½¸ö±ê×¼²îÒìÌ«´ó	
+				_line_type += "dash";   //æ­¤æ—¶æœ¬æ¥åº”å¯¹åº”draw:stroke-dashå±æ€§å¼•ç”¨çš„dashå¼æ ·ï¼Œä½†ä¸¤ä¸ªæ ‡å‡†å·®å¼‚å¤ªå¤§
 			}
-			_line_type += "</Í¼:ÏßĞÍ>";
+			_line_type += "</å›¾:çº¿å‹>";
 		}
-	//¶ÔÎÄ±¾¿òµÄ´¦Àí
+	//å¯¹æ–‡æœ¬æ¡†çš„å¤„ç†
 		if ((atts.getValue("fo:border")) != null||(atts.getValue("fo:border-left")) != null||(atts.getValue("fo:border-right")) != null
 				||(atts.getValue("fo:border-top")) != null||(atts.getValue("fo:border-bottom")) != null){
 		      _border = get_borders(atts);
 		}
-		
+
 		if ((value = atts.getValue("svg:stroke-color")) != null)
-			_line_color = "<Í¼:ÏßÑÕÉ«>" + value + "</Í¼:ÏßÑÕÉ«>";
+			_line_color = "<å›¾:çº¿é¢œè‰²>" + value + "</å›¾:çº¿é¢œè‰²>";
 		//==============================================
-		//========ÓÀÖĞ±ØĞëÒªÓĞÏßÑÕÉ«£¬·ñÔòÄ¬ÈÏÎªÍ¸Ã÷=======
+		//========æ°¸ä¸­å¿…é¡»è¦æœ‰çº¿é¢œè‰²ï¼Œå¦åˆ™é»˜è®¤ä¸ºé€æ˜=======
 		else if(_border.equals(""))
-			_line_color = "<Í¼:ÏßÑÕÉ«>#000000</Í¼:ÏßÑÕÉ«>";
+			_line_color = "<å›¾:çº¿é¢œè‰²>#000000</å›¾:çº¿é¢œè‰²>";
 		//==============================================
 		//==============================================
-		
+
 		if ((value = atts.getValue("svg:stroke-width")) != null)
-			_line_width = "<Í¼:Ïß´ÖÏ¸>" + Unit_Converter.convert(value) + "</Í¼:Ïß´ÖÏ¸>";
-		
-		if ((value = atts.getValue("draw:opacity")) != null) {   //È¡10%µÄ10
+			_line_width = "<å›¾:çº¿ç²—ç»†>" + Unit_Converter.convert(value) + "</å›¾:çº¿ç²—ç»†>";
+
+		if ((value = atts.getValue("draw:opacity")) != null) {   //å–10%çš„10
 			value = value.substring(0,value.indexOf("%"));
-			_opacity = "<Í¼:Í¸Ã÷¶È>" + value + "</Í¼:Í¸Ã÷¶È>";
+			_opacity = "<å›¾:é€æ˜åº¦>" + value + "</å›¾:é€æ˜åº¦>";
 		}
 		if ((value = atts.getValue("style:background-transparency")) != null) {
 			value = value.substring(0,value.indexOf("%"));
-			_opacity = "<Í¼:Í¸Ã÷¶È>" + value + "</Í¼:Í¸Ã÷¶È>";
+			_opacity = "<å›¾:é€æ˜åº¦>" + value + "</å›¾:é€æ˜åº¦>";
 		}
-		
-		//Ïò<ÎÄ±¾ÄÚÈİ..ÖĞÌí¼ÓÄ³Ğ©ÊôĞÔ¡£
+
+		//å‘<æ–‡æœ¬å†…å®¹..ä¸­æ·»åŠ æŸäº›å±æ€§ã€‚
 		if ((value = atts.getValue("fo:wrap-option")) != null) {
 			if (value.equals("wrap"))
-				_wrap = " Í¼:×Ô¶¯»»ĞĞ=\"false\"";
+				_wrap = " å›¾:è‡ªåŠ¨æ¢è¡Œ=\"false\"";
 			else
-				_wrap = " Í¼:×Ô¶¯»»ĞĞ=\"true\"";
+				_wrap = " å›¾:è‡ªåŠ¨æ¢è¡Œ=\"true\"";
 		}
-		
+
 /*		if ((atts.getValue("draw:auto-grow-width")) != null && atts.getValue("draw:auto-grow-width").equals("true")
 				|| (atts.getValue("draw:auto-grow-height")) != null && atts.getValue("draw:auto-grow-height").equals("true"))
-			_fit = " Í¼:´óĞ¡ÊÊÓ¦ÎÄ×Ö=\"true\"";*/
-		
+			_fit = " å›¾:å¤§å°é€‚åº”æ–‡å­—=\"true\"";*/
+
 		if((value = atts.getValue("draw:textarea-horizontal-align")) != null){
-			_hori_align = " Í¼:Ë®Æ½¶ÔÆë=\"" + value + "\"";
+			_hori_align = " å›¾:æ°´å¹³å¯¹é½=\"" + value + "\"";
 		}
 		if((value = atts.getValue("draw:textarea-vertical-align")) != null){
-			_vert_align = " Í¼:´¹Ö±¶ÔÆë=\"" + value + "\"";
+			_vert_align = " å›¾:å‚ç›´å¯¹é½=\"" + value + "\"";
 		}
-		
-		
-//		==================ÒÔÏÂ´¦ÀíÃªµãÊôĞÔ===================
+
+
+//		==================ä»¥ä¸‹å¤„ç†é”šç‚¹å±æ€§===================
 		String margin_val = "";
 		if ((value = atts.getValue("fo:margin")) != null && !value.contains("%")) {
 			value = Unit_Converter.convert(value);
-			margin_val += (" ×Ö:×ó=\"" + value + "\" ×Ö:ÓÒ=\"" + value + "\" ×Ö:ÉÏ=\"" + value + "\" ×Ö:ÏÂ=\"" + value + "\"");
+			margin_val += (" å­—:å·¦=\"" + value + "\" å­—:å³=\"" + value + "\" å­—:ä¸Š=\"" + value + "\" å­—:ä¸‹=\"" + value + "\"");
 		}
 		else {
 			if ((value = atts.getValue("fo:margin-left")) != null && !value.contains("%"))
-				margin_val += (" ×Ö:×ó=\"" + Unit_Converter.convert(value) + "\"");
+				margin_val += (" å­—:å·¦=\"" + Unit_Converter.convert(value) + "\"");
 			if ((value = atts.getValue("fo:margin-right")) != null && !value.contains("%"))
-				margin_val += (" ×Ö:ÓÒ=\"" + Unit_Converter.convert(value) + "\"");
+				margin_val += (" å­—:å³=\"" + Unit_Converter.convert(value) + "\"");
 			if ((value = atts.getValue("fo:margin-top")) != null && !value.contains("%"))
-				margin_val += (" ×Ö:ÉÏ=\"" + Unit_Converter.convert(value) + "\"");
+				margin_val += (" å­—:ä¸Š=\"" + Unit_Converter.convert(value) + "\"");
 			if ((value = atts.getValue("fo:margin-bottom")) != null && !value.contains("%"))
-				margin_val += (" ×Ö:ÏÂ=\"" + Unit_Converter.convert(value) + "\"");
+				margin_val += (" å­—:ä¸‹=\"" + Unit_Converter.convert(value) + "\"");
 		}
 		if(margin_val.length() != 0){
-			_anchor_margin = "<×Ö:±ß¾à" + margin_val + "/>";
-		}
-		
-		//ODFÖĞstyle:protectµÄÖµÓĞ¿ÉÄÜÎªnone,content,size,position£¬¶ÔÓ¦µÃ²»´óºÃ
-		if ((value = atts.getValue("style:protect")) != null) {
-			if (value.equals("none"))
-				_anchor_protection = "<×Ö:±£»¤ ×Ö:Öµ=\"false\"/>";
-			else   
-				_anchor_protection = "<×Ö:±£»¤ ×Ö:Öµ=\"true\"/>";
-		}
-		
-		//Î»ÖÃ
-		if ((value = atts.getValue("style:horizontal-rel")) != null) {
-			if (value.equals("char"))
-				_anchor_horirel = " ×Ö:Ïà¶ÔÓÚ=\"char\"";
-			else if (value.contains("margin"))
-				_anchor_horirel = " ×Ö:Ïà¶ÔÓÚ=\"margin\"";
-			else if (value.contains("page"))
-				_anchor_horirel = " ×Ö:Ïà¶ÔÓÚ=\"page\"";		
-			//UOFÖĞµÄcolumnÃ»ÓĞ¶ÔÓ¦,ODFÖĞº¬ÓĞparagraph¶ø²»º¬marginµÄÃ»ÓĞ¶ÔÓ¦
-			
-			//default?
-			else
-				_anchor_horirel = " ×Ö:Ïà¶ÔÓÚ=\"column\"";	
+			_anchor_margin = "<å­—:è¾¹è·" + margin_val + "/>";
 		}
 
-		if ((value = atts.getValue("style:horizontal-pos")) != null && 
-				(value.equals("left") || value.equals("right") || value.equals("center"))) {
-					_anchor_horipos = "<×Ö:Ïà¶Ô uof:locID=\"t0178\" uof:attrList=\"Öµ\" ×Ö:Öµ=\"" + value + "\"/>"; 
-			//ODFÖĞÄ³Ğ©ÖµÎŞ¶ÔÓ¦
+		//ODFä¸­style:protectçš„å€¼æœ‰å¯èƒ½ä¸ºnone,content,size,positionï¼Œå¯¹åº”å¾—ä¸å¤§å¥½
+		if ((value = atts.getValue("style:protect")) != null) {
+			if (value.equals("none"))
+				_anchor_protection = "<å­—:ä¿æŠ¤ å­—:å€¼=\"false\"/>";
+			else
+				_anchor_protection = "<å­—:ä¿æŠ¤ å­—:å€¼=\"true\"/>";
 		}
-		
-		if ((value = atts.getValue("style:vertical-rel")) != null) {
-			if (value.equals("line"))
-				_anchor_vertrel = " ×Ö:Ïà¶ÔÓÚ=\"line\"";
-			else if (value.contains("paragraph"))
-				_anchor_vertrel = " ×Ö:Ïà¶ÔÓÚ=\"paragraph\"";
-			//======ÓÀÖĞÈ¡paragraph²ÅÄÜÏÔÊ¾Õı³£======
+
+		//ä½ç½®
+		if ((value = atts.getValue("style:horizontal-rel")) != null) {
+			if (value.equals("char"))
+				_anchor_horirel = " å­—:ç›¸å¯¹äº=\"char\"";
+			else if (value.contains("margin"))
+				_anchor_horirel = " å­—:ç›¸å¯¹äº=\"margin\"";
 			else if (value.contains("page"))
-				//_anchor_vertrel = " ×Ö:Ïà¶ÔÓÚ=\"page\"";
-				_anchor_vertrel = " ×Ö:Ïà¶ÔÓÚ=\"paragraph\"";
-			//======================================
-			
-			//UOFÖĞµÄmarginÃ»ÓĞ¶ÔÓ¦,ODFÖĞframe¡¢frame-content¡¢char¡¢baseline¡¢textÃ»ÓĞ¶ÔÓ¦
-			
-			
+				_anchor_horirel = " å­—:ç›¸å¯¹äº=\"page\"";
+			//UOFä¸­çš„columnæ²¡æœ‰å¯¹åº”,ODFä¸­å«æœ‰paragraphè€Œä¸å«marginçš„æ²¡æœ‰å¯¹åº”
+
 			//default?
 			else
-				_anchor_vertrel = " ×Ö:Ïà¶ÔÓÚ=\"paragraph\"";
+				_anchor_horirel = " å­—:ç›¸å¯¹äº=\"column\"";
+		}
+
+		if ((value = atts.getValue("style:horizontal-pos")) != null &&
+				(value.equals("left") || value.equals("right") || value.equals("center"))) {
+					_anchor_horipos = "<å­—:ç›¸å¯¹ uof:locID=\"t0178\" uof:attrList=\"å€¼\" å­—:å€¼=\"" + value + "\"/>";
+			//ODFä¸­æŸäº›å€¼æ— å¯¹åº”
+		}
+
+		if ((value = atts.getValue("style:vertical-rel")) != null) {
+			if (value.equals("line"))
+				_anchor_vertrel = " å­—:ç›¸å¯¹äº=\"line\"";
+			else if (value.contains("paragraph"))
+				_anchor_vertrel = " å­—:ç›¸å¯¹äº=\"paragraph\"";
+			//======æ°¸ä¸­å–paragraphæ‰èƒ½æ˜¾ç¤ºæ­£å¸¸======
+			else if (value.contains("page"))
+				//_anchor_vertrel = " å­—:ç›¸å¯¹äº=\"page\"";
+				_anchor_vertrel = " å­—:ç›¸å¯¹äº=\"paragraph\"";
+			//======================================
+
+			//UOFä¸­çš„marginæ²¡æœ‰å¯¹åº”,ODFä¸­frameã€frame-contentã€charã€baselineã€textæ²¡æœ‰å¯¹åº”
+
+
+			//default?
+			else
+				_anchor_vertrel = " å­—:ç›¸å¯¹äº=\"paragraph\"";
 		}
 
 		if ((value = atts.getValue("style:vertical-pos")) != null) {
 			if (value.equals("middle"))
-				_anchor_vertpos = "<×Ö:Ïà¶Ô uof:locID=\"t0181\" uof:attrList=\"Öµ\" ×Ö:Öµ=\"center\"/>";
+				_anchor_vertpos = "<å­—:ç›¸å¯¹ uof:locID=\"t0181\" uof:attrList=\"å€¼\" å­—:å€¼=\"center\"/>";
 			else if (value.equals("top") || value.equals("bottom"))
-				_anchor_vertpos = "<×Ö:Ïà¶Ô uof:locID=\"t0181\" uof:attrList=\"Öµ\" ×Ö:Öµ=\"" + value + "\"/>";
-			//ODFÖĞÄ³Ğ©ÖµÎŞ¶ÔÓ¦
+				_anchor_vertpos = "<å­—:ç›¸å¯¹ uof:locID=\"t0181\" uof:attrList=\"å€¼\" å­—:å€¼=\"" + value + "\"/>";
+			//ODFä¸­æŸäº›å€¼æ— å¯¹åº”
 		}
-		
-		//ÈÆÅÅ
+
+		//ç»•æ’
 		if ((value = atts.getValue("style:wrap")) != null) {
-			_anchor_wrap = "<×Ö:ÈÆÅÅ";
+			_anchor_wrap = "<å­—:ç»•æ’";
 			if (value.equals("run-through")) {
 				if(atts.getValue("style:run-through") != null && atts.getValue("style:run-through").equals("background"))
-					_anchor_wrap += " ×Ö:ÈÆÅÅ·½Ê½=\"behindtext\" ×Ö:»·ÈÆÎÄ×Ö=\"both\"";
+					_anchor_wrap += " å­—:ç»•æ’æ–¹å¼=\"behindtext\" å­—:ç¯ç»•æ–‡å­—=\"both\"";
 				else
-					_anchor_wrap += " ×Ö:ÈÆÅÅ·½Ê½=\"infrontoftext\" ×Ö:»·ÈÆÎÄ×Ö=\"both\"";
+					_anchor_wrap += " å­—:ç»•æ’æ–¹å¼=\"infrontoftext\" å­—:ç¯ç»•æ–‡å­—=\"both\"";
 			}
 			else if (value.equals("left"))
-				_anchor_wrap += " ×Ö:ÈÆÅÅ·½Ê½=\"square\" ×Ö:»·ÈÆÎÄ×Ö=\"left\"";
+				_anchor_wrap += " å­—:ç»•æ’æ–¹å¼=\"square\" å­—:ç¯ç»•æ–‡å­—=\"left\"";
 			else if (value.equals("right"))
-				_anchor_wrap += " ×Ö:ÈÆÅÅ·½Ê½=\"square\" ×Ö:»·ÈÆÎÄ×Ö=\"right\"";
+				_anchor_wrap += " å­—:ç»•æ’æ–¹å¼=\"square\" å­—:ç¯ç»•æ–‡å­—=\"right\"";
 			else if (value.equals("parallel"))
-				_anchor_wrap += " ×Ö:ÈÆÅÅ·½Ê½=\"square\" ×Ö:»·ÈÆÎÄ×Ö=\"both\"";
+				_anchor_wrap += " å­—:ç»•æ’æ–¹å¼=\"square\" å­—:ç¯ç»•æ–‡å­—=\"both\"";
 			else if (value.equals("biggest"))
-				_anchor_wrap += " ×Ö:»·ÈÆÎÄ×Ö=\"largest\"";
+				_anchor_wrap += " å­—:ç¯ç»•æ–‡å­—=\"largest\"";
 			else if (value.equals("none")) {
 				_anchor_type = "inline";
-				_anchor_wrap += " ×Ö:»·ÈÆÎÄ×Ö=\"both\"";
+				_anchor_wrap += " å­—:ç¯ç»•æ–‡å­—=\"both\"";
 			}
 			_anchor_wrap += "/>";
 		}
 		else {
-			_anchor_wrap = "<×Ö:ÈÆÅÅ ×Ö:ÈÆÅÅ·½Ê½=\"square\" ×Ö:»·ÈÆÎÄ×Ö=\"both\"/>";
+			_anchor_wrap = "<å­—:ç»•æ’ å­—:ç»•æ’æ–¹å¼=\"square\" å­—:ç¯ç»•æ–‡å­—=\"both\"/>";
 		}
-		
-		//Ëø¶¨¡£ÊÇ·ñÕıÈ·£¿£¿
+
+		//é”å®šã€‚æ˜¯å¦æ­£ç¡®ï¼Ÿï¼Ÿ
 		if ((value = atts.getValue("style:flow-with-text")) != null) {
-			_anchor_lock = "<×Ö:Ëø¶¨ ×Ö:Öµ=\"" + value + "\"/>";		
+			_anchor_lock = "<å­—:é”å®š å­—:å€¼=\"" + value + "\"/>";
 		}
-		
+
 		//used in Anno_In_Cell
 		if((value=atts.getValue("fo:padding-left")) != null){
-			_margin_string += " Í¼:×ó±ß¾à=\"" + Unit_Converter.convert(value) + "\"";
+			_margin_string += " å›¾:å·¦è¾¹è·=\"" + Unit_Converter.convert(value) + "\"";
 		}
 		if((value=atts.getValue("fo:padding-right")) != null){
-			_margin_string += " Í¼:ÓÒ±ß¾à=\"" + Unit_Converter.convert(value) + "\"";
+			_margin_string += " å›¾:å³è¾¹è·=\"" + Unit_Converter.convert(value) + "\"";
 		}
 		if((value=atts.getValue("fo:padding-top")) != null){
-			_margin_string += " Í¼:ÉÏ±ß¾à=\"" + Unit_Converter.convert(value) + "\"";
+			_margin_string += " å›¾:ä¸Šè¾¹è·=\"" + Unit_Converter.convert(value) + "\"";
 		}
 		if((value=atts.getValue("fo:padding-bottom")) != null){
-			_margin_string += " Í¼:ÏÂ±ß¾à=\"" + Unit_Converter.convert(value) + "\"";
+			_margin_string += " å›¾:ä¸‹è¾¹è·=\"" + Unit_Converter.convert(value) + "\"";
 		}
-		
+
 		if((value = atts.getValue("style:writing-mode")) != null) {
 			if(value.equals("lr-tb"))
-				_writing_mode = " Í¼:ÎÄ×ÖÅÅÁĞ·½Ïò=\"hori-l2r\"";
+				_writing_mode = " å›¾:æ–‡å­—æ’åˆ—æ–¹å‘=\"hori-l2r\"";
 			else if(value.equals("rl-tb"))
-				_writing_mode = " Í¼:ÎÄ×ÖÅÅÁĞ·½Ïò=\"hori-r2l\"";
+				_writing_mode = " å›¾:æ–‡å­—æ’åˆ—æ–¹å‘=\"hori-r2l\"";
 			else if(value.equals("tb-rl"))
-				_writing_mode = " Í¼:ÎÄ×ÖÅÅÁĞ·½Ïò=\"vert-l2r\"";
+				_writing_mode = " å›¾:æ–‡å­—æ’åˆ—æ–¹å‘=\"vert-l2r\"";
 			else if(value.equals("tb-lr"))
-				_writing_mode = " Í¼:ÎÄ×ÖÅÅÁĞ·½Ïò=\"vert-r2l\"";
+				_writing_mode = " å›¾:æ–‡å­—æ’åˆ—æ–¹å‘=\"vert-r2l\"";
 		}
 	}
-	
+
 	public void process_draw_atts(Attributes atts)
 	{
 		String value = "";
-		
+
 		if ((value = atts.getValue("svg:x")) != null) {
 			_svgx = value;
 		}
-		else if (atts.getValue("svg:x1") != null && atts.getValue("svg:x2") != null) {   //LineµÄÇé¿ö
+		else if (atts.getValue("svg:x1") != null && atts.getValue("svg:x2") != null) {   //Lineçš„æƒ…å†µ
 			float x1 = Unit_Converter.convert_gra(atts.getValue("svg:x1"));
 			float x2 = Unit_Converter.convert_gra(atts.getValue("svg:x2"));
 			if (x1 >= x2) {
 				_svgx = atts.getValue("svg:x2");
-				_width = "<Í¼:¿í¶È>" + (x1 - x2) + "</Í¼:¿í¶È>";
-				_anchor_width = "<×Ö:¿í¶È uof:locID=\"t0112\">" + (x1 - x2) + "</×Ö:¿í¶È>";
+				_width = "<å›¾:å®½åº¦>" + (x1 - x2) + "</å›¾:å®½åº¦>";
+				_anchor_width = "<å­—:å®½åº¦ uof:locID=\"t0112\">" + (x1 - x2) + "</å­—:å®½åº¦>";
 			}
 			else {
 				_svgx = atts.getValue("svg:x1");
-				_width = "<Í¼:¿í¶È>" + (x2 - x1) + "</Í¼:¿í¶È>";
-				_anchor_width = "<×Ö:¿í¶È uof:locID=\"t0112\">" + (x2 - x1) + "</×Ö:¿í¶È>";
+				_width = "<å›¾:å®½åº¦>" + (x2 - x1) + "</å›¾:å®½åº¦>";
+				_anchor_width = "<å­—:å®½åº¦ uof:locID=\"t0112\">" + (x2 - x1) + "</å­—:å®½åº¦>";
 			}
 		}
-		
+
 		if ((value = atts.getValue("svg:y")) != null) {
 			_svgy = value;
 		}
-		else if (atts.getValue("svg:y1") != null && atts.getValue("svg:y2") != null) {   //LineµÄÇé¿ö
+		else if (atts.getValue("svg:y1") != null && atts.getValue("svg:y2") != null) {   //Lineçš„æƒ…å†µ
 			float y1 = Unit_Converter.convert_gra(atts.getValue("svg:y1"));
 			float y2 = Unit_Converter.convert_gra(atts.getValue("svg:y2"));
 			if (y1 >= y2) {
 				_svgy = atts.getValue("svg:y2");
-				_height = "<Í¼:¸ß¶È>" + (y1 - y2) + "</Í¼:¸ß¶È>";
-				_anchor_height = "<×Ö:¸ß¶È uof:locID=\"t0113\">" + (y1 - y2) + "</×Ö:¸ß¶È>";
+				_height = "<å›¾:é«˜åº¦>" + (y1 - y2) + "</å›¾:é«˜åº¦>";
+				_anchor_height = "<å­—:é«˜åº¦ uof:locID=\"t0113\">" + (y1 - y2) + "</å­—:é«˜åº¦>";
 			}
 			else {
 				_svgy = atts.getValue("svg:y1");
-				_height = "<Í¼:¸ß¶È>" + (y2 - y1) + "</Í¼:¸ß¶È>";
-				_anchor_height = "<×Ö:¸ß¶È uof:locID=\"t0113\">" + (y2 - y1) + "</×Ö:¸ß¶È>";
+				_height = "<å›¾:é«˜åº¦>" + (y2 - y1) + "</å›¾:é«˜åº¦>";
+				_anchor_height = "<å­—:é«˜åº¦ uof:locID=\"t0113\">" + (y2 - y1) + "</å­—:é«˜åº¦>";
 			}
 		}
-		
-		if (_svgx.length() != 0) {  	
-			_anchor_horipos = "<×Ö:¾ø¶Ô uof:locID=\"t0177\" uof:attrList=\"Öµ\" ×Ö:Öµ=\"" + Unit_Converter.convert_gra(_svgx) + "\"/>";
+
+		if (_svgx.length() != 0) {
+			_anchor_horipos = "<å­—:ç»å¯¹ uof:locID=\"t0177\" uof:attrList=\"å€¼\" å­—:å€¼=\"" + Unit_Converter.convert_gra(_svgx) + "\"/>";
 		}
 
 		if (_svgy.length() != 0) {
-			_anchor_vertpos = "<×Ö:¾ø¶Ô uof:locID=\"t0180\" uof:attrList=\"Öµ\" ×Ö:Öµ=\"" + Unit_Converter.convert_gra(_svgy) + "\"/>";
+			_anchor_vertpos = "<å­—:ç»å¯¹ uof:locID=\"t0180\" uof:attrList=\"å€¼\" å­—:å€¼=\"" + Unit_Converter.convert_gra(_svgy) + "\"/>";
 		}
-		
+
 //		double widthValue = 0,heightValue = 0;
 //		int index = 0;
 //		String ratioString = "";
 		if ((value = atts.getValue("svg:width")) != null) {
-			_width = "<Í¼:¿í¶È>" + Unit_Converter.convert_gra(value) + "</Í¼:¿í¶È>";
-			_anchor_width = "<×Ö:¿í¶È uof:locID=\"t0112\">" + Unit_Converter.convert_gra(value) + "</×Ö:¿í¶È>";
+			_width = "<å›¾:å®½åº¦>" + Unit_Converter.convert_gra(value) + "</å›¾:å®½åº¦>";
+			_anchor_width = "<å­—:å®½åº¦ uof:locID=\"t0112\">" + Unit_Converter.convert_gra(value) + "</å­—:å®½åº¦>";
 //			index = value.indexOf("cm");
 //			widthValue = Double.parseDouble(value.substring(0,index));
 		}
 		else if ((value = atts.getValue("fo:min-width")) != null) {
-			_width = "<Í¼:¿í¶È>" + Unit_Converter.convert_gra(value) + "</Í¼:¿í¶È>";
-			_anchor_width = "<×Ö:¿í¶È uof:locID=\"t0112\">" + Unit_Converter.convert_gra(value) + "</×Ö:¿í¶È>";
+			_width = "<å›¾:å®½åº¦>" + Unit_Converter.convert_gra(value) + "</å›¾:å®½åº¦>";
+			_anchor_width = "<å­—:å®½åº¦ uof:locID=\"t0112\">" + Unit_Converter.convert_gra(value) + "</å­—:å®½åº¦>";
 		}
 		if ((value = atts.getValue("svg:height")) != null) {
-			_height = "<Í¼:¸ß¶È>" + Unit_Converter.convert_gra(value) + "</Í¼:¸ß¶È>";
-			_anchor_height = "<×Ö:¸ß¶È uof:locID=\"t0113\">" + Unit_Converter.convert_gra(value) + "</×Ö:¸ß¶È>";
+			_height = "<å›¾:é«˜åº¦>" + Unit_Converter.convert_gra(value) + "</å›¾:é«˜åº¦>";
+			_anchor_height = "<å­—:é«˜åº¦ uof:locID=\"t0113\">" + Unit_Converter.convert_gra(value) + "</å­—:é«˜åº¦>";
 //			index = value.indexOf("cm");
 //			heightValue = Double.parseDouble(value.substring(0,index));
 //			double ratio = widthValue/heightValue;
 //			ratioString = String.valueOf(ratio);
-//			_rel_ratio = ("<Í¼:Ïà¶ÔÔ­Ê¼±ÈÀı>" + ratioString + "</Í¼:Ïà¶ÔÔ­Ê¼±ÈÀı>");
+//			_rel_ratio = ("<å›¾:ç›¸å¯¹åŸå§‹æ¯”ä¾‹>" + ratioString + "</å›¾:ç›¸å¯¹åŸå§‹æ¯”ä¾‹>");
 		}
 		if ((value = atts.getValue("draw:layer")) != null) {
 			if (Style_Data.get_draw_layer(value).get_display().equals("printer"))
-				_print = ("<Í¼:´òÓ¡¶ÔÏó>true</Í¼:´òÓ¡¶ÔÏó>");
+				_print = ("<å›¾:æ‰“å°å¯¹è±¡>true</å›¾:æ‰“å°å¯¹è±¡>");
 //			else
-//				_print = ("<Í¼:´òÓ¡¶ÔÏó>false</Í¼:´òÓ¡¶ÔÏó>");
+//				_print = ("<å›¾:æ‰“å°å¯¹è±¡>false</å›¾:æ‰“å°å¯¹è±¡>");
 		}
 		if ((value = atts.getValue("draw:transform")) != null) {
-			//rotate(<rotate-angle>)  Á½¸ö±ê×¼µÄĞı×ª½Ç¶È¶ÔÓ¦¼ûdocs°üÏÂµÄ"ĞÂ±ê×¼´¦Àí....txt"
+			//rotate(<rotate-angle>)  ä¸¤ä¸ªæ ‡å‡†çš„æ—‹è½¬è§’åº¦å¯¹åº”è§docsåŒ…ä¸‹çš„"æ–°æ ‡å‡†å¤„ç†....txt"
 			if (value.contains("rotate")) {
 				int index1 = value.indexOf("rotate");
 				String substring1 = value.substring(index1);
@@ -490,9 +490,9 @@ public class Graphic_Pro {
 					rotAngle = 360 - rotAngle;
 				else if (rotAngle < 0)
 					rotAngle = -rotAngle;
-				_rotate_angle = ("<Í¼:Ğı×ª½Ç¶È>" + rotAngle + "</Í¼:Ğı×ª½Ç¶È>");
+				_rotate_angle = ("<å›¾:æ—‹è½¬è§’åº¦>" + rotAngle + "</å›¾:æ—‹è½¬è§’åº¦>");
 			}
-			//scale(<sx> [<sy>])   Ëõ·Å±ÈÀıÓ¦¸ÃÊÇÔõÑùÈ¡Öµ£¿
+			//scale(<sx> [<sy>])   ç¼©æ”¾æ¯”ä¾‹åº”è¯¥æ˜¯æ€æ ·å–å€¼ï¼Ÿ
 			if (value.contains("scale")) {
 				int index1 = value.indexOf("(");
 				int index2 = value.indexOf(")");
@@ -501,65 +501,65 @@ public class Graphic_Pro {
 					int index3 = substring.indexOf("<");
 					int index4 = substring.indexOf(">");
 					String XScale = substring.substring(index3 + 1,index4);
-					_x_scale = ("<Í¼:X-Ëõ·Å±ÈÀı>" + XScale + "</Í¼:X-Ëõ·Å±ÈÀı>");
+					_x_scale = ("<å›¾:X-ç¼©æ”¾æ¯”ä¾‹>" + XScale + "</å›¾:X-ç¼©æ”¾æ¯”ä¾‹>");
 					String substring2 = substring.substring(index4 + 1);
 					int index5 = substring2.indexOf("<");
 					int index6 = substring2.indexOf(">");
 					String YScale = substring.substring(index5 + 1,index6);
-					_y_scale = ("<Í¼:Y-Ëõ·Å±ÈÀı>" + YScale + "</Í¼:Y-Ëõ·Å±ÈÀı>");
+					_y_scale = ("<å›¾:Y-ç¼©æ”¾æ¯”ä¾‹>" + YScale + "</å›¾:Y-ç¼©æ”¾æ¯”ä¾‹>");
 				}
 				else {
 					int index3 = substring.indexOf("<");
 					int index4 = substring.indexOf(">");
 					String XYScale = substring.substring(index3 + 1,index4);
-					_x_scale = ("<Í¼:X-Ëõ·Å±ÈÀı>" + XYScale + "</Í¼:X-Ëõ·Å±ÈÀı>");
-					_y_scale = ("<Í¼:Y-Ëõ·Å±ÈÀı>" + XYScale + "</Í¼:Y-Ëõ·Å±ÈÀı>");
+					_x_scale = ("<å›¾:X-ç¼©æ”¾æ¯”ä¾‹>" + XYScale + "</å›¾:X-ç¼©æ”¾æ¯”ä¾‹>");
+					_y_scale = ("<å›¾:Y-ç¼©æ”¾æ¯”ä¾‹>" + XYScale + "</å›¾:Y-ç¼©æ”¾æ¯”ä¾‹>");
 				}
 			}
 		}
-		
+
 		if ((value = atts.getValue("style:print-content")) != null) {
-			_print = "<Í¼:´òÓ¡¶ÔÏó>" + value + "</Í¼:´òÓ¡¶ÔÏó>";
+			_print = "<å›¾:æ‰“å°å¯¹è±¡>" + value + "</å›¾:æ‰“å°å¯¹è±¡>";
 		}
 	}
-	
+
 	public void process_para_atts(Attributes atts)
 	{
 		_parapro += Para_Style.process_para_atts(atts);
-		
+
 		String value = "";
-		
+
 		if((value = atts.getValue("fo:margin")) != null) {
 			value = Unit_Converter.convert(value);
-			_left_margin = " Í¼:×ó±ß¾à=\"" + value + "\"";
-			_right_margin = " Í¼:ÓÒ±ß¾à=\"" + value + "\"";
-			_top_margin = " Í¼:ÉÏ±ß¾à=\"" + value + "\"";
-			_bottom_margin = " Í¼:ÏÂ±ß¾à=\"" + value + "\"";
+			_left_margin = " å›¾:å·¦è¾¹è·=\"" + value + "\"";
+			_right_margin = " å›¾:å³è¾¹è·=\"" + value + "\"";
+			_top_margin = " å›¾:ä¸Šè¾¹è·=\"" + value + "\"";
+			_bottom_margin = " å›¾:ä¸‹è¾¹è·=\"" + value + "\"";
 		}
 		else {
 			if ((value = atts.getValue("fo:margin-left")) != null)
-				_left_margin = (" Í¼:×ó±ß¾à=\"" + Unit_Converter.convert(value) + "\"");
+				_left_margin = (" å›¾:å·¦è¾¹è·=\"" + Unit_Converter.convert(value) + "\"");
 			if ((value = atts.getValue("fo:margin-right")) != null)
-				_right_margin = (" Í¼:ÓÒ±ß¾à=\"" + Unit_Converter.convert(value) + "\"");
+				_right_margin = (" å›¾:å³è¾¹è·=\"" + Unit_Converter.convert(value) + "\"");
 			if ((value = atts.getValue("fo:margin-top")) != null)
-				_top_margin = (" Í¼:ÉÏ±ß¾à=\"" + Unit_Converter.convert(value) + "\"");
+				_top_margin = (" å›¾:ä¸Šè¾¹è·=\"" + Unit_Converter.convert(value) + "\"");
 			if ((value = atts.getValue("fo:margin-bottom")) != null)
-				_bottom_margin = (" Í¼:ÏÂ±ß¾à=\"" + Unit_Converter.convert(value) + "\"");
+				_bottom_margin = (" å›¾:ä¸‹è¾¹è·=\"" + Unit_Converter.convert(value) + "\"");
 		}
-		
+
 		if((value = atts.getValue("style:writing-mode")) != null) {
 			if(value.equals("lr-tb"))
-				_writing_mode = " Í¼:ÎÄ×ÖÅÅÁĞ·½Ïò=\"hori-l2r\"";
+				_writing_mode = " å›¾:æ–‡å­—æ’åˆ—æ–¹å‘=\"hori-l2r\"";
 			else if(value.equals("rl-tb"))
-				_writing_mode = " Í¼:ÎÄ×ÖÅÅÁĞ·½Ïò=\"hori-r2l\"";
+				_writing_mode = " å›¾:æ–‡å­—æ’åˆ—æ–¹å‘=\"hori-r2l\"";
 			else if(value.equals("tb-rl"))
-				_writing_mode = " Í¼:ÎÄ×ÖÅÅÁĞ·½Ïò=\"vert-l2r\"";
+				_writing_mode = " å›¾:æ–‡å­—æ’åˆ—æ–¹å‘=\"vert-l2r\"";
 			else if(value.equals("tb-lr"))
-				_writing_mode = " Í¼:ÎÄ×ÖÅÅÁĞ·½Ïò=\"vert-r2l\"";
+				_writing_mode = " å›¾:æ–‡å­—æ’åˆ—æ–¹å‘=\"vert-r2l\"";
 		}
 	}
-	
-	//´¦Àí±ß¿ò£º´Ó"0.002cm solid #000000"ĞÎÊ½µÄ×Ö·û´®ÌáÈ¡³ö¸÷ÖÖÖµ 
+
+	//å¤„ç†è¾¹æ¡†ï¼šä»"0.002cm solid #000000"å½¢å¼çš„å­—ç¬¦ä¸²æå–å‡ºå„ç§å€¼
 	public static String tranBorderValue(String border)
 	{
 		int index1 = border.indexOf(' ');
@@ -569,24 +569,24 @@ public class Graphic_Pro {
 			str = "";
 		}
 		else if(border.substring(index1+1,index2).equals("solid")){////single" + border.substring(index1+1,index2) +
-			str = "<Í¼:Ïß´ÖÏ¸>" + Unit_Converter.convert(border.substring(0,index1)) +"</Í¼:Ïß´ÖÏ¸>" +  
-			"<Í¼:ÏßĞÍ uof:locID=\"g0014\">single</Í¼:ÏßĞÍ>" +
-			"<Í¼:ÏßÑÕÉ«>"+ border.substring(index2+1) +"</Í¼:ÏßÑÕÉ«>";
+			str = "<å›¾:çº¿ç²—ç»†>" + Unit_Converter.convert(border.substring(0,index1)) +"</å›¾:çº¿ç²—ç»†>" +
+			"<å›¾:çº¿å‹ uof:locID=\"g0014\">single</å›¾:çº¿å‹>" +
+			"<å›¾:çº¿é¢œè‰²>"+ border.substring(index2+1) +"</å›¾:çº¿é¢œè‰²>";
 		}
 		else if(border.substring(index1+1,index2).equals("double")){////single" + border.substring(index1+1,index2) +
-			str = "<Í¼:Ïß´ÖÏ¸>" + Unit_Converter.convert(border.substring(0,index1)) +"</Í¼:Ïß´ÖÏ¸>" +  
-			"<Í¼:ÏßĞÍ uof:locID=\"g0014\">double</Í¼:ÏßĞÍ>" +
-			"<Í¼:ÏßÑÕÉ«>"+ border.substring(index2+1) +"</Í¼:ÏßÑÕÉ«>";
+			str = "<å›¾:çº¿ç²—ç»†>" + Unit_Converter.convert(border.substring(0,index1)) +"</å›¾:çº¿ç²—ç»†>" +
+			"<å›¾:çº¿å‹ uof:locID=\"g0014\">double</å›¾:çº¿å‹>" +
+			"<å›¾:çº¿é¢œè‰²>"+ border.substring(index2+1) +"</å›¾:çº¿é¢œè‰²>";
 		}
-		
-		return str;	
+
+		return str;
 	}
-	
-	//´¦Àí ±ß¿ò µÄ×ª»»
+
+	//å¤„ç† è¾¹æ¡† çš„è½¬æ¢
 	protected static String get_borders(Attributes atts){
 		String border = "";
 		String value = "";
-		if((value = atts.getValue("fo:border")) != null) { 
+		if((value = atts.getValue("fo:border")) != null) {
 			border +=  tranBorderValue(value);
 		}
 		else{
@@ -608,29 +608,29 @@ public class Graphic_Pro {
 		return border;
 	}
 	public void process_sent_atts(Attributes atts)
-	{	
-		_parapro += "<×Ö:¾äÊôĞÔ>" + Sent_Style.process_text_atts(atts) + "</×Ö:¾äÊôĞÔ>";
+	{
+		_parapro += "<å­—:å¥å±æ€§>" + Sent_Style.process_text_atts(atts) + "</å­—:å¥å±æ€§>";
 	}
-	
+
 	public String get_anchor_atts()
-	{		
-		String str = _anchor_width + _anchor_height + "<×Ö:Î»ÖÃ uof:locID=\"t0114\"><×Ö:Ë®Æ½" + _anchor_horirel + ">" 
-		+ _anchor_horipos + "</×Ö:Ë®Æ½><×Ö:´¹Ö±" + _anchor_vertrel + ">" + _anchor_vertpos + "</×Ö:´¹Ö±>" + "</×Ö:Î»ÖÃ>"
+	{
+		String str = _anchor_width + _anchor_height + "<å­—:ä½ç½® uof:locID=\"t0114\"><å­—:æ°´å¹³" + _anchor_horirel + ">"
+		+ _anchor_horipos + "</å­—:æ°´å¹³><å­—:å‚ç›´" + _anchor_vertrel + ">" + _anchor_vertpos + "</å­—:å‚ç›´>" + "</å­—:ä½ç½®>"
 		+ _anchor_wrap + _anchor_margin + _anchor_lock
 		+ _anchor_protection + _anchor_allow_overlap;
-		
+
 		return str;
 	}
-	
-	public String get_drawing_pro_string() 
+
+	public String get_drawing_pro_string()
 	{
 		String str = _padding + _line_color + _line_type + _line_width  + _border + _for_arrow + _back_arrow
-		+ _width + _height + _rotate_angle + _x_scale + _y_scale + _lock_asp_ratio 
+		+ _width + _height + _rotate_angle + _x_scale + _y_scale + _lock_asp_ratio
 		+ _rel_ratio + _print + _web_ch + _opacity;
-		
+
 		return str;
 	}
-	
+
 	public String get_anchortype() {
 		return _anchor_type;
 	}

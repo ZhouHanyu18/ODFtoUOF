@@ -7,9 +7,9 @@ import tables.Numformat_Table;
 import convertor.Unit_Converter;
 import graphic_content.Media_Obj;
 
-/** 
- * ´¦Àí<text:list-style>ºÍ<text:outline-style> µ½ <uof:×Ô¶¯±àºÅ>µÄ×ª»»¡£
- *  
+/**
+ * å¤„ç†<text:list-style>å’Œ<text:outline-style> åˆ° <uof:è‡ªåŠ¨ç¼–å·>çš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
@@ -23,97 +23,97 @@ public class Auto_Num {
 	//
 	private static String _font = "";
 	//
-	private static String _ele_atts = "";				//<¼¶±ğ>µÄÊôĞÔ
-	private static String _symbol = "";   				//ÏîÄ¿·ûºÅ
-	private static String _symbol_font = "";   			//·ûºÅ×ÖÌå
-	private static String _link_ref = "";   			//Á´½ÓÊ½ÑùÒıÓÃ(ÎŞ¶ÔÓ¦)
-	private static String _num_format = "";   			//±àºÅ¸ñÊ½														
-	private static String _num_format_render = "";   	//±àºÅ¸ñÊ½±íÊ¾
-	private static String _image_ref = "";   			//Í¼Æ¬·ûºÅÒıÓÃ														
-	private static String _indent = "";   				//Ëõ½ø 
-	private static String _tab_position = "";   		//ÖÆ±í·ûÎ»ÖÃ														
-	private static String _start_num = "";   			//ÆğÊ¼±àºÅ
-	private static String _regular_format = "";   		//Õı¹æ¸ñÊ½
+	private static String _ele_atts = "";				//<çº§åˆ«>çš„å±æ€§
+	private static String _symbol = "";   				//é¡¹ç›®ç¬¦å·
+	private static String _symbol_font = "";   			//ç¬¦å·å­—ä½“
+	private static String _link_ref = "";   			//é“¾æ¥å¼æ ·å¼•ç”¨(æ— å¯¹åº”)
+	private static String _num_format = "";   			//ç¼–å·æ ¼å¼
+	private static String _num_format_render = "";   	//ç¼–å·æ ¼å¼è¡¨ç¤º
+	private static String _image_ref = "";   			//å›¾ç‰‡ç¬¦å·å¼•ç”¨
+	private static String _indent = "";   				//ç¼©è¿›
+	private static String _tab_position = "";   		//åˆ¶è¡¨ç¬¦ä½ç½®
+	private static String _start_num = "";   			//èµ·å§‹ç¼–å·
+	private static String _regular_format = "";   		//æ­£è§„æ ¼å¼
 	private static int _level = 0;
-	
+
 	private static void clear(){
 		_font = "";
 		_ele_atts = "";
-		_symbol = "";   
-		_symbol_font = "";   
-		_link_ref = "";   
-		_num_format = "";  
-		_num_format_render = "";  
-		_image_ref = ""; 
-		_indent = "";  
-		_tab_position = "";  
-		_start_num = ""; 
-		_regular_format = ""; 
+		_symbol = "";
+		_symbol_font = "";
+		_link_ref = "";
+		_num_format = "";
+		_num_format_render = "";
+		_image_ref = "";
+		_indent = "";
+		_tab_position = "";
+		_start_num = "";
+		_regular_format = "";
 		_level = 0;
 	}
-	
+
 	private static String get_one_level(){
 		String oneLevel = "";
-		
+
 		if(_symbol_font.equals("")){
-			_symbol_font += "<×Ö:·ûºÅ×ÖÌå>";
+			_symbol_font += "<å­—:ç¬¦å·å­—ä½“>";
 		}
-		_symbol_font += _font + "</×Ö:·ûºÅ×ÖÌå>";
-		
-		oneLevel ="<×Ö:¼¶±ğ" + _ele_atts + ">";
-		oneLevel += _symbol + _symbol_font + _link_ref 
+		_symbol_font += _font + "</å­—:ç¬¦å·å­—ä½“>";
+
+		oneLevel ="<å­—:çº§åˆ«" + _ele_atts + ">";
+		oneLevel += _symbol + _symbol_font + _link_ref
 			  + _num_format + _num_format_render
-			  + _image_ref + _indent + _tab_position 
+			  + _image_ref + _indent + _tab_position
 			  + _start_num + _regular_format;
-		oneLevel += "</×Ö:¼¶±ğ>";
+		oneLevel += "</å­—:çº§åˆ«>";
 
 		//The level range in UOF is 0-8, so
 		//level 9 is just dropped.
 		if(_level == 9){
 			oneLevel = "";
 		}
-		clear();		
+		clear();
 		return oneLevel;
 	}
-	
-	//return <×Ô¶¯±àºÅ¼¯>
+
+	//return <è‡ªåŠ¨ç¼–å·é›†>
 	public static String get_result(){
 		String rst = "";
-		
-		rst = "<uof:×Ô¶¯±àºÅ¼¯>";
+
+		rst = "<uof:è‡ªåŠ¨ç¼–å·é›†>";
 		if(Common_Data.get_file_type().equals("presentation")){
 			rst += add_present_list_style();
 		}
 		rst += _result;
-		rst += "</uof:×Ô¶¯±àºÅ¼¯>";
+		rst += "</uof:è‡ªåŠ¨ç¼–å·é›†>";
 
 		_result = "";
 		return rst;
 	}
-	
+
 	//set list name
 	public static void set_list_name(String name){
 		_list_name = name;
 	}
-	
+
 	private static String skip_null(String val){
 		return (val==null) ? "" : val;
 	}
-	
+
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		
+
 		if(qName.equals("text:list-style")){
 			if((attVal=atts.getValue("style:name")) != null){
 				attVal = Style_Data.rename(attVal);
 				_list_name = attVal;
 			}
 		}
-		
+
 		else if(qName.equals("text:outline-style")){
 			_list_name = "outline";
 		}
-		
+
 		else if (qName.equals("style:text-properties")) {
 			//Here the element's only attribute is
 			//style:font-name, and the default font-size
@@ -125,148 +125,148 @@ public class Auto_Num {
 					Font_Face.add_font(attVal,attVal);
 				}
 			}
-			if(attVal != null){				
-				_font = "<×Ö:×ÖÌå ×Ö:×ÖºÅ=\"9\" ×Ö:Î÷ÎÄ×ÖÌåÒıÓÃ=\"" + attVal + "\"/>";
+			if(attVal != null){
+				_font = "<å­—:å­—ä½“ å­—:å­—å·=\"9\" å­—:è¥¿æ–‡å­—ä½“å¼•ç”¨=\"" + attVal + "\"/>";
 			}
 		}
-		
+
 		else if(qName.equals("text:list-level-style-image")){
 			attVal = atts.getValue("text:level");
-			_level = Integer.valueOf(attVal) - 1;			
-			_ele_atts += " ×Ö:¼¶±ğÖµ=\"" + _level + "\"";
-			
+			_level = Integer.valueOf(attVal) - 1;
+			_ele_atts += " å­—:çº§åˆ«å€¼=\"" + _level + "\"";
+
 			attVal = atts.getValue("text:style-name");
 			if (attVal != null) {
-				_symbol_font = "<×Ö:·ûºÅ×ÖÌå ×Ö:Ê½ÑùÒıÓÃ=\"" + attVal + "\">";
+				_symbol_font = "<å­—:ç¬¦å·å­—ä½“ å­—:å¼æ ·å¼•ç”¨=\"" + attVal + "\">";
 			}
-			
+
 			if ((attVal = atts.getValue("xlink:href")) != null) {
 				String objID = "";
 
 				objID = Media_Obj.process_href(attVal);
-				_image_ref = "<×Ö:Í¼Æ¬·ûºÅÒıÓÃ>" + objID + "</×Ö:Í¼Æ¬·ûºÅÒıÓÃ>";
+				_image_ref = "<å­—:å›¾ç‰‡ç¬¦å·å¼•ç”¨>" + objID + "</å­—:å›¾ç‰‡ç¬¦å·å¼•ç”¨>";
 			}
 		}
 		else if((qName.equals("text:list-level-style-number")
 				||qName.equals("text:list-level-style-bullet")
-				||qName.equals("text:outline-level-style"))){		
+				||qName.equals("text:outline-level-style"))){
 
 			attVal = atts.getValue("text:level");
-			_level = Integer.valueOf(attVal) - 1;			
-			_ele_atts += " ×Ö:¼¶±ğÖµ=\"" + _level + "\"";
-			
+			_level = Integer.valueOf(attVal) - 1;
+			_ele_atts += " å­—:çº§åˆ«å€¼=\"" + _level + "\"";
+
 			attVal = atts.getValue("text:style-name");
 			if (attVal != null) {
-				_symbol_font = "<×Ö:·ûºÅ×ÖÌå ×Ö:Ê½ÑùÒıÓÃ=" + "\"" + attVal + "\">";
+				_symbol_font = "<å­—:ç¬¦å·å­—ä½“ å­—:å¼æ ·å¼•ç”¨=" + "\"" + attVal + "\">";
 			}
-			
+
 			String suffix = skip_null(atts.getValue("style:num-suffix"));
 			String prefix = skip_null(atts.getValue("style:num-prefix"));
 			String displays = skip_null(atts.getValue("text:display-levels"));
-			
-			_num_format_render = "<×Ö:±àºÅ¸ñÊ½±íÊ¾>";
+
+			_num_format_render = "<å­—:ç¼–å·æ ¼å¼è¡¨ç¤º>";
 			_num_format_render += prefix + get_render_levels(displays,_level) + suffix;
-			_num_format_render += "</×Ö:±àºÅ¸ñÊ½±íÊ¾>";
-			
+			_num_format_render += "</å­—:ç¼–å·æ ¼å¼è¡¨ç¤º>";
+
 			attVal=atts.getValue("text:bullet-char");
 			if (attVal != null) {
-				_symbol = "<×Ö:ÏîÄ¿·ûºÅ>" + attVal + "</×Ö:ÏîÄ¿·ûºÅ>";
+				_symbol = "<å­—:é¡¹ç›®ç¬¦å·>" + attVal + "</å­—:é¡¹ç›®ç¬¦å·>";
 			}
-			
+
 			attVal = skip_null(atts.getValue("style:num-format"));
-			if (!attVal.equals("")) {			
-				_num_format = "<×Ö:±àºÅ¸ñÊ½>" + Numformat_Table.get_name(attVal)+ "</×Ö:±àºÅ¸ñÊ½>";
+			if (!attVal.equals("")) {
+				_num_format = "<å­—:ç¼–å·æ ¼å¼>" + Numformat_Table.get_name(attVal)+ "</å­—:ç¼–å·æ ¼å¼>";
 			}
-			
-			//×Ö:ÆğÊ¼±àºÅ
+
+			//å­—:èµ·å§‹ç¼–å·
 			attVal = atts.getValue("text:start-value");
 			if (attVal != null) {
-				_start_num += "<×Ö:ÆğÊ¼±àºÅ>" + attVal + "</×Ö:ÆğÊ¼±àºÅ>"; 
+				_start_num += "<å­—:èµ·å§‹ç¼–å·>" + attVal + "</å­—:èµ·å§‹ç¼–å·>";
 			}
 		}
-		
+
 		else if (qName.equals("style:list-level-properties")){
-			//@×Ö:±àºÅ¶ÔÆë·½Ê½
+			//@å­—:ç¼–å·å¯¹é½æ–¹å¼
 			attVal=atts.getValue("fo:text-align");
 			if (attVal != null) {
-				_ele_atts += " ×Ö:±àºÅ¶ÔÆë·½Ê½=\"" + conv_align_val(attVal) + "\"";
+				_ele_atts += " å­—:ç¼–å·å¯¹é½æ–¹å¼=\"" + conv_align_val(attVal) + "\"";
 			}else {
-				_ele_atts += " ×Ö:±àºÅ¶ÔÆë·½Ê½=\"left\"";
+				_ele_atts += " å­—:ç¼–å·å¯¹é½æ–¹å¼=\"left\"";
 			}
-			
-			//Ëõ½ø/ÖÆ±í·ûÎ»ÖÃ
+
+			//ç¼©è¿›/åˆ¶è¡¨ç¬¦ä½ç½®
 			attVal = atts.getValue("text:space-before");
 			attVal = (attVal==null||attVal.equals("")) ? "0" : Unit_Converter.convert(attVal);
 			float space = Float.parseFloat(attVal);
-			
+
 			attVal = atts.getValue("text:min-label-width");
 			attVal = (attVal==null||attVal.equals("")) ? "0" : Unit_Converter.convert(attVal);
-			
+
 			attVal = atts.getValue("text:min-label-distance");
 			attVal = (attVal==null||attVal.equals("")) ? "0" : Unit_Converter.convert(attVal);
 			float labelDis = Float.parseFloat(attVal);
-			
-			_indent = "<×Ö:Ëõ½ø uof:locID=\"t0165\">";
-			_indent += "<×Ö:×ó><×Ö:¾ø¶Ô uof:locID=\"t0185\" uof:attrList=\"Öµ\""
-				+ " ×Ö:Öµ=\"" + space + "\"/></×Ö:×ó>";
+
+			_indent = "<å­—:ç¼©è¿› uof:locID=\"t0165\">";
+			_indent += "<å­—:å·¦><å­—:ç»å¯¹ uof:locID=\"t0185\" uof:attrList=\"å€¼\""
+				+ " å­—:å€¼=\"" + space + "\"/></å­—:å·¦>";
 			//The default value is -21.0pt
-			_indent += "<×Ö:Ê×ĞĞ><×Ö:¾ø¶Ô uof:locID=\"t0189\" uof:attrList=\"Öµ\""
-				+ " ×Ö:Öµ=\"-21.0\"/></×Ö:Ê×ĞĞ>";
-			_indent += "</×Ö:Ëõ½ø>";
-			
-			_tab_position  = "<×Ö:ÖÆ±í·ûÎ»ÖÃ>";
+			_indent += "<å­—:é¦–è¡Œ><å­—:ç»å¯¹ uof:locID=\"t0189\" uof:attrList=\"å€¼\""
+				+ " å­—:å€¼=\"-21.0\"/></å­—:é¦–è¡Œ>";
+			_indent += "</å­—:ç¼©è¿›>";
+
+			_tab_position  = "<å­—:åˆ¶è¡¨ç¬¦ä½ç½®>";
 			_tab_position += labelDis;
 			//_tab_position  += (space + labelWid + labelDis);
-			_tab_position  += "</×Ö:ÖÆ±í·ûÎ»ÖÃ>";
+			_tab_position  += "</å­—:åˆ¶è¡¨ç¬¦ä½ç½®>";
 		}
 	}
-	
+
 	public static void process_end(String qName){
 		if(qName.contains("text:list-level-style")
 			||qName.equals("text:outline-level-style")){
-			
+
 			_levels += get_one_level();
 		}
-		
+
 		else if(qName.equals("text:list-style")
 				||qName.equals("text:outline-style")){
 			String style = "";
-			
-			style = "<×Ö:×Ô¶¯±àºÅ";
-			style += " ×Ö:±êÊ¶·û=\"" + _list_name + "\"";
-			style += " ×Ö:Ãû³Æ=\"" + _list_name + "\">";
+
+			style = "<å­—:è‡ªåŠ¨ç¼–å·";
+			style += " å­—:æ ‡è¯†ç¬¦=\"" + _list_name + "\"";
+			style += " å­—:åç§°=\"" + _list_name + "\">";
 			style += _levels;
-			style += "</×Ö:×Ô¶¯±àºÅ>";
-			
+			style += "</å­—:è‡ªåŠ¨ç¼–å·>";
+
 			//list name connot be empty
 			if(!_list_name.equals("")){
 				_result += style;
 			}
-			
+
 			_levels = "";
 			_list_name = "";
 		}
 	}
-	
+
 	private static String get_render_levels(String displays, int level){
 		String rls = "";
 		int dis = 1;
-		
+
 		if(!displays.equals("")){
 			dis = Integer.parseInt(displays);
 		}
-		
+
 		for(int i = level+1; dis > 0; dis--,i--){
 			rls = "%" + i + "." + rls;
 		}
 		rls = rls.substring(0,rls.length()-1);
-		
+
 		return rls;
 	}
-	
+
 	private static String conv_align_val(String val){
 		String convVal = "left";
-		
+
 		if (val.equals("left")){
 			convVal = "left";
 		}
@@ -285,37 +285,37 @@ public class Auto_Num {
 		else if (val.equals("justify")){
 			convVal = "justify";
 		}
-		
+
 		return convVal;
 	}
-	
+
 	private static String add_present_list_style(){
 		String presenls = "";
-		
-		presenls = 
-			"<×Ö:×Ô¶¯±àºÅ ×Ö:±êÊ¶·û=\"bn0\" ×Ö:Ãû³Æ=\"bn0\" ×Ö:¶à¼¶±àºÅ=\"false\">"
-				+ "<×Ö:¼¶±ğ ×Ö:¼¶±ğÖµ=\"0\" ×Ö:±àºÅ¶ÔÆë·½Ê½=\"left\" ×Ö:Î²Ëæ×Ö·û=\"none\">"
-				+	"<×Ö:ÏîÄ¿·ûºÅ>¨C</×Ö:ÏîÄ¿·ûºÅ>"
-				+	"<×Ö:·ûºÅ×ÖÌå>"
-				+ "<×Ö:×ÖÌå ×Ö:×ÖºÅ=\"13\" ×Ö:Î÷ÎÄ×ÖÌåÒıÓÃ=\"StarSymbol\"/>"
-				//+		"<×Ö:×ÖÌå ×Ö:Î÷ÎÄ×ÖÌåÒıÓÃ=\"font_2\" ×Ö:ÖĞÎÄ×ÖÌåÒıÓÃ=\"font_2\"/>"
-				+	"</×Ö:·ûºÅ×ÖÌå>"
-				+	"<×Ö:ÖÆ±í·ûÎ»ÖÃ>0.0</×Ö:ÖÆ±í·ûÎ»ÖÃ>"
-				+	"<×Ö:ÆğÊ¼±àºÅ>1</×Ö:ÆğÊ¼±àºÅ>"
-				+"</×Ö:¼¶±ğ>"
-			+"</×Ö:×Ô¶¯±àºÅ>"
-			+"<×Ö:×Ô¶¯±àºÅ ×Ö:±êÊ¶·û=\"bn1\" ×Ö:Ãû³Æ=\"bn1\" ×Ö:¶à¼¶±àºÅ=\"false\">"
-				+"<×Ö:¼¶±ğ ×Ö:¼¶±ğÖµ=\"0\" ×Ö:±àºÅ¶ÔÆë·½Ê½=\"left\" ×Ö:Î²Ëæ×Ö·û=\"none\">"
-				+	"<×Ö:ÏîÄ¿·ûºÅ>¡ñ</×Ö:ÏîÄ¿·ûºÅ>"
-				+	"<×Ö:·ûºÅ×ÖÌå>"
-				+ "<×Ö:×ÖÌå ×Ö:×ÖºÅ=\"13\" ×Ö:Î÷ÎÄ×ÖÌåÒıÓÃ=\"StarSymbol\"/>"
-				//+		"<×Ö:×ÖÌå ×Ö:Î÷ÎÄ×ÖÌåÒıÓÃ=\"font_1\" ×Ö:ÖĞÎÄ×ÖÌåÒıÓÃ=\"font_1\"/>"
-				+	"</×Ö:·ûºÅ×ÖÌå>"
-				+	"<×Ö:ÖÆ±í·ûÎ»ÖÃ>0.0</×Ö:ÖÆ±í·ûÎ»ÖÃ>"
-				+	"<×Ö:ÆğÊ¼±àºÅ>1</×Ö:ÆğÊ¼±àºÅ>"
-				+"</×Ö:¼¶±ğ>"
-			+"</×Ö:×Ô¶¯±àºÅ>";
-		
+
+		presenls =
+			"<å­—:è‡ªåŠ¨ç¼–å· å­—:æ ‡è¯†ç¬¦=\"bn0\" å­—:åç§°=\"bn0\" å­—:å¤šçº§ç¼–å·=\"false\">"
+				+ "<å­—:çº§åˆ« å­—:çº§åˆ«å€¼=\"0\" å­—:ç¼–å·å¯¹é½æ–¹å¼=\"left\" å­—:å°¾éšå­—ç¬¦=\"none\">"
+				+	"<å­—:é¡¹ç›®ç¬¦å·>â€“</å­—:é¡¹ç›®ç¬¦å·>"
+				+	"<å­—:ç¬¦å·å­—ä½“>"
+				+ "<å­—:å­—ä½“ å­—:å­—å·=\"13\" å­—:è¥¿æ–‡å­—ä½“å¼•ç”¨=\"StarSymbol\"/>"
+				//+		"<å­—:å­—ä½“ å­—:è¥¿æ–‡å­—ä½“å¼•ç”¨=\"font_2\" å­—:ä¸­æ–‡å­—ä½“å¼•ç”¨=\"font_2\"/>"
+				+	"</å­—:ç¬¦å·å­—ä½“>"
+				+	"<å­—:åˆ¶è¡¨ç¬¦ä½ç½®>0.0</å­—:åˆ¶è¡¨ç¬¦ä½ç½®>"
+				+	"<å­—:èµ·å§‹ç¼–å·>1</å­—:èµ·å§‹ç¼–å·>"
+				+"</å­—:çº§åˆ«>"
+			+"</å­—:è‡ªåŠ¨ç¼–å·>"
+			+"<å­—:è‡ªåŠ¨ç¼–å· å­—:æ ‡è¯†ç¬¦=\"bn1\" å­—:åç§°=\"bn1\" å­—:å¤šçº§ç¼–å·=\"false\">"
+				+"<å­—:çº§åˆ« å­—:çº§åˆ«å€¼=\"0\" å­—:ç¼–å·å¯¹é½æ–¹å¼=\"left\" å­—:å°¾éšå­—ç¬¦=\"none\">"
+				+	"<å­—:é¡¹ç›®ç¬¦å·>â—</å­—:é¡¹ç›®ç¬¦å·>"
+				+	"<å­—:ç¬¦å·å­—ä½“>"
+				+ "<å­—:å­—ä½“ å­—:å­—å·=\"13\" å­—:è¥¿æ–‡å­—ä½“å¼•ç”¨=\"StarSymbol\"/>"
+				//+		"<å­—:å­—ä½“ å­—:è¥¿æ–‡å­—ä½“å¼•ç”¨=\"font_1\" å­—:ä¸­æ–‡å­—ä½“å¼•ç”¨=\"font_1\"/>"
+				+	"</å­—:ç¬¦å·å­—ä½“>"
+				+	"<å­—:åˆ¶è¡¨ç¬¦ä½ç½®>0.0</å­—:åˆ¶è¡¨ç¬¦ä½ç½®>"
+				+	"<å­—:èµ·å§‹ç¼–å·>1</å­—:èµ·å§‹ç¼–å·>"
+				+"</å­—:çº§åˆ«>"
+			+"</å­—:è‡ªåŠ¨ç¼–å·>";
+
 		return presenls;
 	}
 }

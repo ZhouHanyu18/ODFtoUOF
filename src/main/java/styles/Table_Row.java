@@ -11,49 +11,49 @@ import convertor.Unit_Converter;
 
 /**
  * Process the <style:style> whose style:family is
- * table-row. If _file_type is "text", <◊÷:∏ﬂ∂»> and 
- * <◊÷:øÁ“≥>-ele will be created and keeped in the 
+ * table-row. If _file_type is "text", <Â≠ó:È´òÂ∫¶> and
+ * <Â≠ó:Ë∑®È°µ>-ele will be created and keeped in the
  * TreeMap.If _file_type is "spreadsheet", the attribute
- * ±Ì:––∏ﬂ will be created and keeped.
- * 
+ * Ë°®:Ë°åÈ´ò will be created and keeped.
+ *
  * @author xie
  *
  */
 public class Table_Row {
 	//Current style name of table-row <style:style>
 	private static String _current_id = "";
-	
-	//To keep <◊÷:∏ﬂ∂»> and <◊÷:øÁ“≥>-element for every table-row
-	//in <text>. Both two elements are child of <◊÷:±Ì–– Ù–‘>-ele. 
-	private static Map<String,String> 
-			_row_pro_map = new TreeMap<String,String>(); 
-	
+
+	//To keep <Â≠ó:È´òÂ∫¶> and <Â≠ó:Ë∑®È°µ>-element for every table-row
+	//in <text>. Both two elements are child of <Â≠ó:Ë°®Ë°åÂ±ûÊÄß>-ele.
+	private static Map<String,String>
+			_row_pro_map = new TreeMap<String,String>();
+
 	//To keep height for every table-row in <spreadsheet>.
 	private static Map<String,String>
 			_row_height_map = new HashMap<String,String>();
-	
-	
+
+
 	//initialize
 	public static void init(){
 		_current_id = "";
 		_row_pro_map.clear();
 		_row_height_map.clear();
 	}
-	
-	//return the ±Ì:––∏ﬂ-attribute for <spreadsheet>.
+
+	//return the Ë°®:Ë°åÈ´ò-attribute for <spreadsheet>.
 	public static String get_row_height(String styleName){
 		return _row_height_map.get(styleName);
 	}
-	
-	//Return <◊÷:∏ﬂ∂»> and <◊÷:øÁ“≥>-ele for <text>
+
+	//Return <Â≠ó:È´òÂ∫¶> and <Â≠ó:Ë∑®È°µ>-ele for <text>
 	public static String get_row_pro(String styleName){
 		return _row_pro_map.get(styleName);
 	}
-	
+
 	public static void process_start(String qName, Attributes atts) {
 		String attVal = "";
 		String val = "";
-		
+
 		if(qName.equals("style:style")){
 			_current_id = atts.getValue("style:name");
 		}
@@ -63,31 +63,31 @@ public class Table_Row {
 		else if (qName.equals("style:table-row-properties")){
 			if(Common_Data.get_file_type().equals("text")){
 				if ((attVal = atts.getValue("style:min-row-height")) != null) {
-					val += " ◊÷:◊Ó–°÷µ=\"" + Unit_Converter.convert(attVal) + "\"";
+					val += " Â≠ó:ÊúÄÂ∞èÂÄº=\"" + Unit_Converter.convert(attVal) + "\"";
 				}
 				if ((attVal = atts.getValue("style:row-height")) != null) {
-					val += " ◊÷:πÃ∂®÷µ=\"" + Unit_Converter.convert(attVal) + "\"";
+					val += " Â≠ó:Âõ∫ÂÆöÂÄº=\"" + Unit_Converter.convert(attVal) + "\"";
 				}
 				if(val.length() != 0){
-					val = "<◊÷:∏ﬂ∂»" + val + " uof:locID=\"t0145\" uof:attrList=\"πÃ∂®÷µ ◊Ó–°÷µ\""  + "/>";
+					val = "<Â≠ó:È´òÂ∫¶" + val + " uof:locID=\"t0145\" uof:attrList=\"Âõ∫ÂÆöÂÄº ÊúÄÂ∞èÂÄº\""  + "/>";
 				}
-				
+
 				if ((attVal = atts.getValue("fo:keep-together")) != null) {
 					if (attVal.equals("auto")){
-						val += ("<◊÷:øÁ“≥ ◊÷:÷µ=\"true\"/>");
+						val += ("<Â≠ó:Ë∑®È°µ Â≠ó:ÂÄº=\"true\"/>");
 					}
 					else{
-						val += ("<◊÷:øÁ“≥ ◊÷:÷µ=\"false\"/>");
+						val += ("<Â≠ó:Ë∑®È°µ Â≠ó:ÂÄº=\"false\"/>");
 					}
 				}
-				
+
 				_row_pro_map.put(_current_id, val);
 			}
 			else if(Common_Data.get_file_type().equals("spreadsheet")){
 				String height = "";
-				
+
 				if((attVal=atts.getValue("style:row-height")) != null){
-					height += " ±Ì:––∏ﬂ=\"" + Unit_Converter.convert(attVal) + "\"";
+					height += " Ë°®:Ë°åÈ´ò=\"" + Unit_Converter.convert(attVal) + "\"";
 				}
 
 				_row_height_map.put(_current_id,height);

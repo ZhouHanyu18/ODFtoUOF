@@ -8,31 +8,31 @@ import stored_data.*;
 import convertor.Unit_Converter;
 
 /**
- * ´¦Àístyle:family="text"µÄ<style:style> µ½ <uof:¾äÊ½Ñù>µÄ×ª»»¡£
- * 
+ * å¤„ç†style:family="text"çš„<style:style> åˆ° <uof:å¥å¼æ ·>çš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
 public class Sent_Style {
 	private static String _id = "";
 	private static String _result = "";
-	private static String _padding = "";			//Ìî³ä
+	private static String _padding = "";			//å¡«å……
 	private static float _font_size = 0;
-	
+
 	public static String get_result(){
 		String result = "";
-		
+
 		if (_padding.length() != 0){
-			_padding = "<×Ö:Ìî³ä uof:locID=\"t0093\">" + _padding + "</×Ö:Ìî³ä>";
+			_padding = "<å­—:å¡«å…… uof:locID=\"t0093\">" + _padding + "</å­—:å¡«å……>";
 		}
-		result = _result + _padding + "</uof:¾äÊ½Ñù>";
-		
+		result = _result + _padding + "</uof:å¥å¼æ ·>";
+
 		_padding = "";
 		_result = "";
-		
+
 		return result;
 	}
-	
+
 	public static float get_fontsize(){
 		float fontsize = _font_size;
 		_font_size = 0;
@@ -41,31 +41,31 @@ public class Sent_Style {
 
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		
+
 		if(qName.equals("style:default-style")){
-			_result = "<uof:¾äÊ½Ñù  ×Ö:±êÊ¶·û=\"defaultf\" ×Ö:Ãû³Æ=\"defaultf\" ×Ö:ÀàĞÍ=\"auto\">";
+			_result = "<uof:å¥å¼æ ·  å­—:æ ‡è¯†ç¬¦=\"defaultf\" å­—:åç§°=\"defaultf\" å­—:ç±»å‹=\"auto\">";
 			_id = "defaultf";
 		}
 		else if(qName.equals("style:style")){
 			String styleType = "";
 			styleType = Style_Data.is_auto_style() ? "auto" : "custom";
-			
-			_result = "<uof:¾äÊ½Ñù";
+
+			_result = "<uof:å¥å¼æ ·";
 			if((attVal = atts.getValue("style:name")) != null){
 				attVal = Style_Data.rename(attVal);
-				_result += " ×Ö:±êÊ¶·û=\"" + attVal + "\"";
-				_result += " ×Ö:Ãû³Æ=\"" + attVal + "\"";
+				_result += " å­—:æ ‡è¯†ç¬¦=\"" + attVal + "\"";
+				_result += " å­—:åç§°=\"" + attVal + "\"";
 				_id = attVal;
 			}
 			if((attVal = atts.getValue("style:parent-style-name")) != null){
-				_result += " ×Ö:»ùÊ½ÑùÒıÓÃ=\"" + attVal + "\"";
+				_result += " å­—:åŸºå¼æ ·å¼•ç”¨=\"" + attVal + "\"";
 				Style_Data.set_parent_style(attVal);
 			}
 			else {
-				_result += " ×Ö:»ùÊ½ÑùÒıÓÃ=\"defaultf\"";
+				_result += " å­—:åŸºå¼æ ·å¼•ç”¨=\"defaultf\"";
 				Style_Data.set_parent_style("defaultf");
 			}
-			_result += " ×Ö:ÀàĞÍ=\"" + styleType + "\">";
+			_result += " å­—:ç±»å‹=\"" + styleType + "\">";
 		}
 		else if (qName.equals("style:text-properties")) {
 			_result += process_text_atts(atts);
@@ -74,7 +74,7 @@ public class Sent_Style {
 			_padding += deal_with_bg_image(atts);
 		}
 	}
-	
+
 	public static void process_end(String qName){
 		if (qName.equals("style:style") || qName.equals("style:default-style")) {
 			Style_Data.set_parent_style("");
@@ -83,75 +83,75 @@ public class Sent_Style {
 			_font_size = 0;
 		}
 	}
-	
+
 	public static String process_text_atts(Attributes atts){
 		String attVal = "";
 		String lineTypeVal = "";
 		String lineStyleVal = "";
 		String underlineVal = "";
 		String result = "";
-		
-		//======×ÖÌå=====
+
+		//======å­—ä½“=====
 		attVal = atts.getValue("fo:font-family");
 		if(attVal != null){
 			Font_Face.add_font(attVal,attVal);
 		}
-		
+
 		attVal = atts.getValue("style:font-family-asian");
 		if(attVal != null){
 			Font_Face.add_font(attVal,attVal);
 		}
-		
+
 		if(!get_font_val(atts).equals("")){
-			result += "<×Ö:×ÖÌå" + get_font_val(atts) + "/>";
+			result += "<å­—:å­—ä½“" + get_font_val(atts) + "/>";
 		}
-		
-		//======´ÖÌå=====
+
+		//======ç²—ä½“=====
 		if((attVal = atts.getValue("fo:font-weight")) != null
 				&& !attVal.equals("normal")) {
-			result += "<×Ö:´ÖÌå ×Ö:Öµ=\"true\"/>";
+			result += "<å­—:ç²—ä½“ å­—:å€¼=\"true\"/>";
 		}
-		else if ((attVal = atts.getValue("style:font-weight-asian")) != null 
-				&& !attVal.equals("normal")){ 
-			result += "<×Ö:´ÖÌå ×Ö:Öµ=\"true\"/>";
+		else if ((attVal = atts.getValue("style:font-weight-asian")) != null
+				&& !attVal.equals("normal")){
+			result += "<å­—:ç²—ä½“ å­—:å€¼=\"true\"/>";
 		}
-		else if ((attVal = atts.getValue("style:font-weight-complex")) != null 
-				&& !attVal.equals("normal")){ 
-			result += "<×Ö:´ÖÌå ×Ö:Öµ=\"true\"/>";
+		else if ((attVal = atts.getValue("style:font-weight-complex")) != null
+				&& !attVal.equals("normal")){
+			result += "<å­—:ç²—ä½“ å­—:å€¼=\"true\"/>";
 		}
-		
-		//======Ğ±Ìå=====
+
+		//======æ–œä½“=====
 		if((attVal = atts.getValue("fo:font-style")) != null
 				&& !attVal.equals("normal")){
-			result += "<×Ö:Ğ±Ìå ×Ö:Öµ=\"true\"/>";
+			result += "<å­—:æ–œä½“ å­—:å€¼=\"true\"/>";
 		}
 		else if((attVal = atts.getValue("style:font-style-asian")) != null
 				&& !attVal.equals("normal")){
-			result += "<×Ö:Ğ±Ìå ×Ö:Öµ=\"true\"/>";
+			result += "<å­—:æ–œä½“ å­—:å€¼=\"true\"/>";
 		}
 		else if((attVal = atts.getValue("style:font-style-complex")) != null
 				&& !attVal.equals("normal")){
-			result += "<×Ö:Ğ±Ìå ×Ö:Öµ=\"true\"/>";
+			result += "<å­—:æ–œä½“ å­—:å€¼=\"true\"/>";
 		}
-		
-		//======Í»³öÏÔÊ¾=====
-		
-		//======±ß¿ò=====
-		
-		//======Ìî³ä=====
+
+		//======çªå‡ºæ˜¾ç¤º=====
+
+		//======è¾¹æ¡†=====
+
+		//======å¡«å……=====
 		if((attVal=atts.getValue("fo:background-color")) != null) {
 			if (!attVal.equals("transparent")){
-				_padding += "<Í¼:ÑÕÉ«>" + attVal + "</Í¼:ÑÕÉ«>";
+				_padding += "<å›¾:é¢œè‰²>" + attVal + "</å›¾:é¢œè‰²>";
 			}
 		}
-		
-		//======É¾³ıÏß=====
+
+		//======åˆ é™¤çº¿=====
 		if((attVal=atts.getValue("style:text-line-through-type"))!=null
 				|| (attVal=atts.getValue("style:text-line-through-style"))!=null) {
-			result +=  "<×Ö:É¾³ıÏß ×Ö:ÀàĞÍ=\"" + conv_line_type(attVal) + "\"/>";
+			result +=  "<å­—:åˆ é™¤çº¿ å­—:ç±»å‹=\"" + conv_line_type(attVal) + "\"/>";
 		}
-		
-		//======ÏÂ»®Ïß=====
+
+		//======ä¸‹åˆ’çº¿=====
 		if((attVal=atts.getValue("style:text-underline-type")) != null) {
 			lineTypeVal = attVal.equals("none") ? "" : attVal;
 		}
@@ -159,63 +159,63 @@ public class Sent_Style {
 			lineStyleVal = attVal.equals("none") ? "" : attVal;
 		}
 		if(!get_line_type(lineTypeVal, lineStyleVal).equals("")){
-			underlineVal +=  " ×Ö:ÀàĞÍ=\"" + get_line_type(lineTypeVal, lineStyleVal) + "\"";
+			underlineVal +=  " å­—:ç±»å‹=\"" + get_line_type(lineTypeVal, lineStyleVal) + "\"";
 		}
 		if((attVal=atts.getValue("style:text-underline-color")) != null) {
 			if(attVal.equals("font-color")){
 				attVal = "auto";
 			}
-			underlineVal += " ×Ö:ÑÕÉ«=\"" + attVal + "\"";
+			underlineVal += " å­—:é¢œè‰²=\"" + attVal + "\"";
 		}
 		if ((attVal=atts.getValue("style:text-underline-mode")) != null) {
 			if(attVal.equals("skip-white-space")){
-				underlineVal += "  ×Ö:×ÖÏÂ»®Ïß=\"true\"";
+				underlineVal += "  å­—:å­—ä¸‹åˆ’çº¿=\"true\"";
 			}
 		}
 		if(!underlineVal.equals("")){
-			result += "<×Ö:ÏÂ»®Ïß" + underlineVal + "/>";
+			result += "<å­—:ä¸‹åˆ’çº¿" + underlineVal + "/>";
 		}
-		
-		//======×ÅÖØºÅ=====
+
+		//======ç€é‡å·=====
 		if((attVal=atts.getValue("style:text-emphasize")) != null && !attVal.equals("none")) {
-			result += "<×Ö:×ÅÖØºÅ ×Ö:ÀàĞÍ=\"dot\"/>";
+			result += "<å­—:ç€é‡å· å­—:ç±»å‹=\"dot\"/>";
 		}
-		
-		//======Òş²ØÎÄ×Ö=====
+
+		//======éšè—æ–‡å­—=====
 		if((attVal=atts.getValue("text:display"))!= null) {
-			if (attVal.equals("true")){ 
-				result += "<×Ö:Òş²ØÎÄ×Ö ×Ö:Öµ=\"false\"/>";
+			if (attVal.equals("true")){
+				result += "<å­—:éšè—æ–‡å­— å­—:å€¼=\"false\"/>";
 			}
 			else if (attVal.equals("none")){
-				result += "<×Ö:Òş²ØÎÄ×Ö ×Ö:Öµ=\"true\"/>";
+				result += "<å­—:éšè—æ–‡å­— å­—:å€¼=\"true\"/>";
 			}
 		}
-		
-		//======¿ÕĞÄ=====???
+
+		//======ç©ºå¿ƒ=====???
 		if((attVal=atts.getValue("style:text-outline")) != null) {
-			result += "<×Ö:¿ÕĞÄ ×Ö:Öµ=\"" + attVal + "\"/>";
+			result += "<å­—:ç©ºå¿ƒ å­—:å€¼=\"" + attVal + "\"/>";
 		}
-		
-		//======¸¡µñ=====
+
+		//======æµ®é›•=====
 		if((attVal=atts.getValue("style:font-relief")) != null) {
-			if (attVal.equals("embossed")){ 
-				result += "<×Ö:¸¡µñ ×Ö:ÀàĞÍ=\"emboss\"/>";	
+			if (attVal.equals("embossed")){
+				result += "<å­—:æµ®é›• å­—:ç±»å‹=\"emboss\"/>";
 			}
 			else if(attVal.equals("engraved")){
-				result += "<×Ö:¸¡µñ ×Ö:ÀàĞÍ=\"engrave\"/>";
+				result += "<å­—:æµ®é›• å­—:ç±»å‹=\"engrave\"/>";
 			}
-			else{ 
-				result += "<×Ö:¸¡µñ ×Ö:ÀàĞÍ=\"none\"/>";
+			else{
+				result += "<å­—:æµ®é›• å­—:ç±»å‹=\"none\"/>";
 			}
 		}
-		
-		//======ÒõÓ°=====
+
+		//======é˜´å½±=====
 		if((attVal=atts.getValue("fo:text-shadow")) != null && !attVal.equals("none")){
-			result += " <×Ö:ÒõÓ° ×Ö:Öµ=\"true\"/>";
+			result += " <å­—:é˜´å½± å­—:å€¼=\"true\"/>";
 		}
-		//======ĞÑÄ¿×ÖÌå=====
-		if((attVal = atts.getValue("fo:text-transform")) != null && !attVal.equals("none")){ 
-			result += " <×Ö:ĞÑÄ¿×ÖÌå ×Ö:ÀàĞÍ=\"";
+		//======é†’ç›®å­—ä½“=====
+		if((attVal = atts.getValue("fo:text-transform")) != null && !attVal.equals("none")){
+			result += " <å­—:é†’ç›®å­—ä½“ å­—:ç±»å‹=\"";
 			if(attVal.equals("lowercase")){
 				result += "lowercase";
 			}
@@ -231,34 +231,34 @@ public class Sent_Style {
 			result += "\"/>";
 		}
 		else if((attVal=atts.getValue("fo:font-variant")) != null && attVal.equals("small-caps")){
-			result += "<×Ö:ĞÑÄ¿×ÖÌå ×Ö:ÀàĞÍ=\"small-caps\"/>";
+			result += "<å­—:é†’ç›®å­—ä½“ å­—:ç±»å‹=\"small-caps\"/>";
 		}
-		
-		//======Î»ÖÃ=====
-		
-		//======Ëõ·Å=====
+
+		//======ä½ç½®=====
+
+		//======ç¼©æ”¾=====
 		if((attVal=atts.getValue("style:text-scale")) != null) {
-			int index = attVal.indexOf("%"); 
-			
+			int index = attVal.indexOf("%");
+
 			if(index != -1){
 				attVal = attVal.substring(0,index);
-				result += "<×Ö:Ëõ·Å uof:locID=\"t0103\">" + attVal + "</×Ö:Ëõ·Å>";
+				result += "<å­—:ç¼©æ”¾ uof:locID=\"t0103\">" + attVal + "</å­—:ç¼©æ”¾>";
 			}
 		}
-		
-		//======×Ö·û¼ä¾à=====
+
+		//======å­—ç¬¦é—´è·=====
 		if((attVal=atts.getValue("fo:letter-spacing")) != null){
 			if(!attVal.equals("normal")){
-				result += "<×Ö:×Ö·û¼ä¾à>";
+				result += "<å­—:å­—ç¬¦é—´è·>";
 				result += Unit_Converter.convert(attVal);
-				result += "</×Ö:×Ö·û¼ä¾à>";
+				result += "</å­—:å­—ç¬¦é—´è·>";
 			}
 		}
-		
-		//======ÉÏÏÂ±ê=====
+
+		//======ä¸Šä¸‹æ ‡=====
 		if ((attVal = atts.getValue("style:text-position")) != null) {
 			String supOrSub = "sup";
-			
+
 			if (attVal.startsWith("super")) {
 				supOrSub = "sup";
 			}
@@ -268,27 +268,27 @@ public class Sent_Style {
 			else if(attVal.startsWith("0%")){
 				supOrSub = "";
 			}
-			else if(attVal.contains("-")) {  //ÎªÒ»¸ö°Ù·ÖÊıÖµ
+			else if(attVal.contains("-")) {  //ä¸ºä¸€ä¸ªç™¾åˆ†æ•°å€¼
 				supOrSub = "sub";
-			}	
-			
+			}
+
 			if(!supOrSub.equals("")){
-				result += "<×Ö:ÉÏÏÂ±ê ×Ö:Öµ=\"" + supOrSub + "\"/>";
+				result += "<å­—:ä¸Šä¸‹æ ‡ å­—:å€¼=\"" + supOrSub + "\"/>";
 			}
 		}
-		
-		//======µ÷Õû×Ö¼ä¾à=====
-		
-		//======×Ö·û¶ÔÆëÍø¸ñ=====
-		
+
+		//======è°ƒæ•´å­—é—´è·=====
+
+		//======å­—ç¬¦å¯¹é½ç½‘æ ¼=====
+
 		return result;
 	}
-	
-	public static String deal_with_bg_image(Attributes atts){	
+
+	public static String deal_with_bg_image(Attributes atts){
 		String attVal = "";
 		String padding = "";
 		String repeat = "";
-		
+
 		if((attVal = atts.getValue("style:repeat")) != null){
 			if(attVal.equals("no-repeat")){
 				repeat += "center";
@@ -299,106 +299,106 @@ public class Sent_Style {
 			else if(attVal.equals("stretch")){
 				repeat += "stretch";
 			}
-			padding += " Í¼:Î»ÖÃ=\"" + repeat + "\"";
+			padding += " å›¾:ä½ç½®=\"" + repeat + "\"";
 		}
-		
+
 		if ((attVal = atts.getValue("xlink:href")) != null) {
 			String objID = "";
-			
+
 			objID = Media_Obj.process_href(attVal);
-			padding += (" Í¼:Í¼ĞÎÒıÓÃ=\"" + objID + "\"");
+			padding += (" å›¾:å›¾å½¢å¼•ç”¨=\"" + objID + "\"");
 		}
-		
-		if ((attVal = atts.getValue("draw:name")) != null){ 
-			padding += (" Í¼:Ãû³Æ=\"" + attVal + "\"");
+
+		if ((attVal = atts.getValue("draw:name")) != null){
+			padding += (" å›¾:åç§°=\"" + attVal + "\"");
 		}
-		
+
 		if (padding.length() != 0){
-			padding = "<Í¼:Í¼Æ¬" + padding + "/>";
+			padding = "<å›¾:å›¾ç‰‡" + padding + "/>";
 		}
-		
+
 		return padding;
 	}
-	
+
 	private static String get_font_val(Attributes atts){
 		String attVal = "";
 		String font = "";
-		
+
 		attVal = atts.getValue("style:font-name-asian");
 		if(attVal == null){
 			attVal = atts.getValue("style:font-family-asian");
 		}
 		if(attVal != null){
-			font += " ×Ö:ÖĞÎÄ×ÖÌåÒıÓÃ=\"" + attVal + "\"";
+			font += " å­—:ä¸­æ–‡å­—ä½“å¼•ç”¨=\"" + attVal + "\"";
 		}
-		
+
 		attVal = atts.getValue("style:font-name");
 		if(attVal == null){
 			attVal = atts.getValue("fo:font-family");
 		}
 		if(attVal != null){
-			font += " ×Ö:Î÷ÎÄ×ÖÌåÒıÓÃ=\"" + attVal + "\"";
+			font += " å­—:è¥¿æ–‡å­—ä½“å¼•ç”¨=\"" + attVal + "\"";
 		}
-		
+
 		attVal = atts.getValue("style:font-name-complex");
 		if(attVal != null){
-			font += " ×Ö:ÌØÊâ×ÖÌåÒıÓÃ=\"" + attVal +"\"";
+			font += " å­—:ç‰¹æ®Šå­—ä½“å¼•ç”¨=\"" + attVal +"\"";
 		}
-		
+
 		if((attVal = atts.getValue("fo:color")) != null){
-			font += " ×Ö:ÑÕÉ«=\"" + attVal + "\"";
+			font += " å­—:é¢œè‰²=\"" + attVal + "\"";
 		}
-		
+
 		if((attVal = atts.getValue("fo:font-size")) != null) {
 			_font_size = font_size(attVal);
-			font += " ×Ö:×ÖºÅ=\"" + _font_size + "\"";
+			font += " å­—:å­—å·=\"" + _font_size + "\"";
 		}
 		else if((attVal = atts.getValue("style:font-size-asian")) != null) {
 			_font_size = font_size(attVal);
-			font += " ×Ö:×ÖºÅ=\"" + _font_size + "\"";
+			font += " å­—:å­—å·=\"" + _font_size + "\"";
 		}
 		else if((attVal = atts.getValue("style:font-size-complex")) != null) {
-			//_font_size = font_size(attVal); //ÓĞÎÊÌâ
-			//font += " ×Ö:×ÖºÅ=\"" + _font_size + "\"";
-		}	
+			//_font_size = font_size(attVal); //æœ‰é—®é¢˜
+			//font += " å­—:å­—å·=\"" + _font_size + "\"";
+		}
 		else if(!font.equals("")){
-			//ÔÚµ¥Ôª¸ñÊ½ÑùÖĞ£¬Èç¹ûÖ»´æÔÚÖĞÎÄ×ÖÌåÒıÓÃµÄ»°£¬ÏÔÊ¾»á³öÏÖÎÊÌâ
+			//åœ¨å•å…ƒæ ¼å¼æ ·ä¸­ï¼Œå¦‚æœåªå­˜åœ¨ä¸­æ–‡å­—ä½“å¼•ç”¨çš„è¯ï¼Œæ˜¾ç¤ºä¼šå‡ºç°é—®é¢˜
 			String fileType = Common_Data.get_file_type();
 			if(fileType.equals("text")){
-				font += " ×Ö:×ÖºÅ=\"12\"";			//(odf)textÄ¬ÈÏ×ÖºÅÉèÎª12
+				font += " å­—:å­—å·=\"12\"";			//(odf)texté»˜è®¤å­—å·è®¾ä¸º12
 			}
 			else if(fileType.equals("spreadsheet")){
-				font += " ×Ö:×ÖºÅ=\"10\"";			//(odf)spreadsheetÄ¬ÈÏ×ÖºÅÉèÎª10
+				font += " å­—:å­—å·=\"10\"";			//(odf)spreadsheeté»˜è®¤å­—å·è®¾ä¸º10
 			}
-		}	
-		
+		}
+
 		return font;
 	}
-	
+
 	private static float font_size(String attVal){
 		float size = 0;
-		
+
 		if (!attVal.contains("%")) {
 			size = Float.valueOf(Unit_Converter.convert(attVal));
 		}
-		else { 
+		else {
 			String p = Style_Data.get_parent_style();
 			String centVal = attVal.substring(0,attVal.indexOf("%"));
-			
+
 			if (!p.equals("")) {
 				float parentSize = Style_Data.get_font_size(p);
 				float percent = Float.valueOf(centVal);
-				
+
 				size = parentSize * percent / 100;
 			}
 		}
-		
+
 		return size;
 	}
-	
+
 	private static String conv_line_type(String val){
 		String type = "single";
-		
+
 		if(val.equals("none")){
 			type = "none";
 		}
@@ -408,17 +408,17 @@ public class Sent_Style {
 		else if(val.equals("double")){
 			type = "double";
 		}
-		
+
 		return type;
 	}
-	
+
 	private static String get_line_type(String typeVal, String styleVal){
 		String type = "single";
-		
+
 		if(typeVal.equals("") && styleVal.equals("")){
 			type = "";
 		}
-		
+
 		if(styleVal.equals("solid")){
 			type = "single";
 		}
@@ -437,11 +437,11 @@ public class Sent_Style {
 		else if(styleVal.equals("wave") && typeVal.equals("double")){
 			type = "wave-double";
 		}
-		
+
 		if(typeVal.equals("double") && !type.equals("wave-double")){
 			type = "double";
 		}
-		
+
 		return type;
 	}
 }

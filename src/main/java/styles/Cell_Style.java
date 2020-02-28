@@ -9,34 +9,34 @@ import stored_data.Style_Data;
 import stored_data.Common_Data;
 
 /**
- * ´¦Àístyle:family="table-cell"µÄ<style:style> µ½ <uof:µ¥Ôª¸ñÊ½Ñù>µÄ×ª»»¡£
- * 
+ * å¤„ç†style:family="table-cell"çš„<style:style> åˆ° <uof:å•å…ƒæ ¼å¼æ ·>çš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
 public class Cell_Style extends Common_Pro{
 	private static String _style_name = "";
-	
-	//attributes of <uof:µ¥Ôª¸ñÊ½Ñù>
+
+	//attributes of <uof:å•å…ƒæ ¼å¼æ ·>
 	private static String _ele_atts = "";
-	private static String _format_change = "";   			//¸ñÊ½ĞŞ¶©
-	private static String _sent_pro = "";   				//×ÖÌå¸ñÊ½
-	
-	private static String _hori_align = "";   				//Ë®Æ½¶ÔÆë·½Ê½
-	private static String _vert_align = "";					//´¹Ö±¶ÔÆë·½Ê½
-	private static String _indent = "";   					//Ëõ½ø
-	private static String _direction = "";					//ÎÄ×Ö·½Ïò
-	private static String _rotation_angle = "";				//ÎÄ×ÖĞı×ª½Ç¶È
-	private static String _auto_newline = "";   			//×Ô¶¯»»ĞĞ
-	private static String _contract_padding = "";  			//ËõĞ¡×ÖÌåÌî³ä
-	
-	private static String _num_style = "";   				//Êı×Ö¸ñÊ½
-	private static String _border = "";   					//±ß¿ò
-	private static String _padding = "";   					//Ìî³ä
+	private static String _format_change = "";   			//æ ¼å¼ä¿®è®¢
+	private static String _sent_pro = "";   				//å­—ä½“æ ¼å¼
+
+	private static String _hori_align = "";   				//æ°´å¹³å¯¹é½æ–¹å¼
+	private static String _vert_align = "";					//å‚ç›´å¯¹é½æ–¹å¼
+	private static String _indent = "";   					//ç¼©è¿›
+	private static String _direction = "";					//æ–‡å­—æ–¹å‘
+	private static String _rotation_angle = "";				//æ–‡å­—æ—‹è½¬è§’åº¦
+	private static String _auto_newline = "";   			//è‡ªåŠ¨æ¢è¡Œ
+	private static String _contract_padding = "";  			//ç¼©å°å­—ä½“å¡«å……
+
+	private static String _num_style = "";   				//æ•°å­—æ ¼å¼
+	private static String _border = "";   					//è¾¹æ¡†
+	private static String _padding = "";   					//å¡«å……
 	private static String _text_align_source = "";
-	
+
 	private static boolean _mapped_style = false;
-	
+
 	private static void clear(){
 		_style_name = "";
 		_ele_atts = "";
@@ -55,154 +55,154 @@ public class Cell_Style extends Common_Pro{
 		_text_align_source = "";
 		_mapped_style = false;
 	}
-	
+
 	public static String get_result(){
 		String result = "";
-		
+
 		if(_sent_pro.equals("")){
-			//_sent_pro = "<×Ö:×ÖÌå ×Ö:×ÖºÅ=\"10\"/>";
+			//_sent_pro = "<å­—:å­—ä½“ å­—:å­—å·=\"10\"/>";
 		}
-		
-		result += "<uof:µ¥Ôª¸ñÊ½Ñù" + _ele_atts + ">";
-		result += "<±í:×ÖÌå¸ñÊ½>" + _format_change + _sent_pro + "</±í:×ÖÌå¸ñÊ½>";
-		result += "<±í:¶ÔÆë¸ñÊ½>" + _hori_align + _vert_align + _indent + _direction 
-				+ _rotation_angle + _auto_newline + _contract_padding + "</±í:¶ÔÆë¸ñÊ½>";
+
+		result += "<uof:å•å…ƒæ ¼å¼æ ·" + _ele_atts + ">";
+		result += "<è¡¨:å­—ä½“æ ¼å¼>" + _format_change + _sent_pro + "</è¡¨:å­—ä½“æ ¼å¼>";
+		result += "<è¡¨:å¯¹é½æ ¼å¼>" + _hori_align + _vert_align + _indent + _direction
+				+ _rotation_angle + _auto_newline + _contract_padding + "</è¡¨:å¯¹é½æ ¼å¼>";
 		result += _num_style + _border + _padding;
-		result += "</uof:µ¥Ôª¸ñÊ½Ñù>";
-		
+		result += "</uof:å•å…ƒæ ¼å¼æ ·>";
+
 		if(_mapped_style){
 			result = "";
 		}
 		clear();
-		
+
 		return  result;
 	}
-	
+
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		
+
 		if(qName.equals("style:default-style")){
-			_ele_atts = " ±í:»ùÊ½ÑùÒıÓÃ=\"defaultc\"  ±í:ÀàĞÍ=\"auto\"";
+			_ele_atts = " è¡¨:åŸºå¼æ ·å¼•ç”¨=\"defaultc\"  è¡¨:ç±»å‹=\"auto\"";
 		}
-		
+
 		else if(qName.equals("style:style")){
 			String styleType = "";
 			styleType = Style_Data.is_auto_style() ? "auto" : "custom";
-			
+
 			if((attVal=atts.getValue("style:name"))!=null){
 				_style_name = attVal;
-				_ele_atts += " ±í:±êÊ¶·û=\"" + _style_name + "\"";
-				_ele_atts += " ±í:Ãû³Æ=\"" + _style_name + "\"";
+				_ele_atts += " è¡¨:æ ‡è¯†ç¬¦=\"" + _style_name + "\"";
+				_ele_atts += " è¡¨:åç§°=\"" + _style_name + "\"";
 			}
-			
+
 			if((attVal=atts.getValue("style:parent-style-name")) != null){
-				_ele_atts += " ±í:»ùÊ½ÑùÒıÓÃ=\"" + attVal + "\"";
+				_ele_atts += " è¡¨:åŸºå¼æ ·å¼•ç”¨=\"" + attVal + "\"";
 			}else {
-				_ele_atts += " ×Ö:»ùÊ½ÑùÒıÓÃ=\"defaultc\"";
+				_ele_atts += " å­—:åŸºå¼æ ·å¼•ç”¨=\"defaultc\"";
 			}
-			
+
 			if((attVal=atts.getValue("style:data-style-name")) != null){
 				//_num_style = Style_Data.get_data_style(attVal);
 			}
-			
-			_ele_atts += " ±í:ÀàĞÍ=\"" + styleType + "\"";
+
+			_ele_atts += " è¡¨:ç±»å‹=\"" + styleType + "\"";
 		}
-		
+
 		else if(qName.equals("style:table-cell-properties")){
 			if((attVal=atts.getValue("style:text-align-source")) != null){
 				_text_align_source = attVal;
 			}
-			
+
 			if((attVal=atts.getValue("style:repeat-content")) != null){
 				if(attVal.equals("true")){
-					_hori_align = "<±í:Ë®Æ½¶ÔÆë·½Ê½>fill</±í:Ë®Æ½¶ÔÆë·½Ê½>";
+					_hori_align = "<è¡¨:æ°´å¹³å¯¹é½æ–¹å¼>fill</è¡¨:æ°´å¹³å¯¹é½æ–¹å¼>";
 				}
 			}
-			
+
 			if((attVal=atts.getValue("style:vertical-align")) != null){
-				_vert_align = "<±í:´¹Ö±¶ÔÆë·½Ê½>";
+				_vert_align = "<è¡¨:å‚ç›´å¯¹é½æ–¹å¼>";
 				_vert_align += conv_vertical_align(attVal);
-				_vert_align += "</±í:´¹Ö±¶ÔÆë·½Ê½>";
+				_vert_align += "</è¡¨:å‚ç›´å¯¹é½æ–¹å¼>";
 			}
-			
+
 			if ((attVal=atts.getValue("style:direction")) != null) {
 				if (attVal.equals("ltr")){
-					_direction = "<±í:ÎÄ×Ö·½Ïò uof:locID=\"s0118\">horizontal</±í:ÎÄ×Ö·½Ïò>";
+					_direction = "<è¡¨:æ–‡å­—æ–¹å‘ uof:locID=\"s0118\">horizontal</è¡¨:æ–‡å­—æ–¹å‘>";
 				}
 				else if (attVal.equals("ttb")){
-					_direction = "<±í:ÎÄ×Ö·½Ïò uof:locID=\"s0118\">vertical</±í:ÎÄ×Ö·½Ïò>";
+					_direction = "<è¡¨:æ–‡å­—æ–¹å‘ uof:locID=\"s0118\">vertical</è¡¨:æ–‡å­—æ–¹å‘>";
 				}
 			}
-			
-			//ĞèÒª¸Ä½ø¡£ODFµÄÎÄ×ÖĞı×ª½Ç¶ÈÊÇ¸ö·Ç¸ºÕûÊı£¬UOFµÄÔòÊÇ-90µ½90Ö®¼ä¡£
+
+			//éœ€è¦æ”¹è¿›ã€‚ODFçš„æ–‡å­—æ—‹è½¬è§’åº¦æ˜¯ä¸ªéè´Ÿæ•´æ•°ï¼ŒUOFçš„åˆ™æ˜¯-90åˆ°90ä¹‹é—´ã€‚
 			if ((attVal=atts.getValue("style:rotation-angle")) != null) {
-				_rotation_angle = "<±í:ÎÄ×ÖĞı×ª½Ç¶È>";
+				_rotation_angle = "<è¡¨:æ–‡å­—æ—‹è½¬è§’åº¦>";
 				_rotation_angle += conv_rotation_angle(attVal);
-				_rotation_angle += "</±í:ÎÄ×ÖĞı×ª½Ç¶È>";
+				_rotation_angle += "</è¡¨:æ–‡å­—æ—‹è½¬è§’åº¦>";
 			}
-			
+
 			if ((attVal=atts.getValue("fo:wrap-option")) != null) {
 				if(attVal.equals("wrap")){
-					_auto_newline = "<±í:×Ô¶¯»»ĞĞ ±í:Öµ=\"true\"/>";
+					_auto_newline = "<è¡¨:è‡ªåŠ¨æ¢è¡Œ è¡¨:å€¼=\"true\"/>";
 				}
-			}	
-			if ((attVal=atts.getValue("style:shrink-to-fit")) != null) {		//?????????
-				_contract_padding = "<±í:ËõĞ¡×ÖÌåÌî³ä ±í:Öµ=\"" + attVal + "\"/>";
 			}
-			
-			//±í:±ß¿ò
+			if ((attVal=atts.getValue("style:shrink-to-fit")) != null) {		//?????????
+				_contract_padding = "<è¡¨:ç¼©å°å­—ä½“å¡«å…… è¡¨:å€¼=\"" + attVal + "\"/>";
+			}
+
+			//è¡¨:è¾¹æ¡†
 			_border = get_borders("spreadsheet", atts);
-			
-			//±í:Ìî³ä
+
+			//è¡¨:å¡«å……
 			if((attVal=atts.getValue("fo:background-color")) != null) {
 				if (!attVal.equals("transparent")){
-					String padding = "<Í¼:ÑÕÉ«>" + attVal + "</Í¼:ÑÕÉ«>";
-					_padding = "<±í:Ìî³ä>" + padding + "</±í:Ìî³ä>";
+					String padding = "<å›¾:é¢œè‰²>" + attVal + "</å›¾:é¢œè‰²>";
+					_padding = "<è¡¨:å¡«å……>" + padding + "</è¡¨:å¡«å……>";
 				}
 			}
 		}
-		
+
 		else if(qName.equals("style:paragraph-properties")){
 			if((attVal=atts.getValue("fo:text-align")) != null){
 				if(_text_align_source.equals("fix") && !_hori_align.equals("")){
-					_hori_align = "<±í:Ë®Æ½¶ÔÆë·½Ê½>";
+					_hori_align = "<è¡¨:æ°´å¹³å¯¹é½æ–¹å¼>";
 					_hori_align += conv_text_align(attVal);
-					_hori_align += "</±í:Ë®Æ½¶ÔÆë·½Ê½>";
+					_hori_align += "</è¡¨:æ°´å¹³å¯¹é½æ–¹å¼>";
 				}
 			}
-			if((attVal=atts.getValue("fo:margin-left")) !=null ){	//<±í:Ëõ½ø>µÄµ¥Î»ÎªÒ»¸ö×Ö·û¿í¶È£¨Ôİ¶¨Îª10pt£©
+			if((attVal=atts.getValue("fo:margin-left")) !=null ){	//<è¡¨:ç¼©è¿›>çš„å•ä½ä¸ºä¸€ä¸ªå­—ç¬¦å®½åº¦ï¼ˆæš‚å®šä¸º10ptï¼‰
 				float fVal = Float.parseFloat(Unit_Converter.convert(attVal))/10.0f;
-				int iVal = new Float(fVal).intValue();
-				_indent += "<±í:Ëõ½ø>" + iVal + "</±í:Ëõ½ø>";
+				int iVal = (int) fVal;
+				_indent += "<è¡¨:ç¼©è¿›>" + iVal + "</è¡¨:ç¼©è¿›>";
 			}
 		}
-		
+
 		else if(qName.equals("style:background-image")){
-			_padding = "<±í:Ìî³ä>";
+			_padding = "<è¡¨:å¡«å……>";
 			_padding += Sent_Style.deal_with_bg_image(atts);
-			_padding += "</±í:Ìî³ä>";
+			_padding += "</è¡¨:å¡«å……>";
 		}
-		
+
 		else if(qName.equals("style:text-properties")){
 			_sent_pro = Sent_Style.process_text_atts(atts);
 		}
-		
+
 		else if(qName.equals("style:map")){
 			if(!_mapped_style){
 				_mapped_style = true;
 				Spreadsheet_Data.add_style_name(_style_name);
 			}
-			
+
 			if(Common_Data.get_file_type().equals("spreadsheet")){
 				Style_Map.process_ele(_style_name, atts);
-				
+
 			}
 		}
 	}
 
 	private static String conv_text_align(String val){
 		String convVal = "general";
-		
+
 		if(val.equals("start")){
 			convVal = "left";
 		}
@@ -221,14 +221,14 @@ public class Cell_Style extends Common_Pro{
 		else if(val.equals("center")){
 			convVal = "center";
 		}
-		
+
 		return convVal;
 	}
-	
+
 	private static String conv_vertical_align(String val){
 		//default value is "center" in uof
 		String convVal = "center";
-		
+
 		if(val.equals("top")){
 			convVal = "top";
 		}
@@ -238,21 +238,21 @@ public class Cell_Style extends Common_Pro{
 		else if(val.equals("bottom")){
 			convVal = "bottom";
 		}
-		
+
 		return convVal;
 	}
 
 	//0~360>>>-90~90
 	private static String conv_rotation_angle(String val){
 		int i = Integer.parseInt(val);
-		
+
 		if(i>90 && i<=270){
 			i = 180-i;
 		}
 		if(i>270 && i<=360){
 			i = i-360;
 		}
-		
-		return Integer.toString(i);	
+
+		return Integer.toString(i);
 	}
 }

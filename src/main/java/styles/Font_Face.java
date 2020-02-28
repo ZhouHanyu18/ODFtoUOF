@@ -5,8 +5,8 @@ import java.util.TreeSet;
 import org.xml.sax.Attributes;
 
 /**
- * ¥¶¿Ì<office:font-face-decls> µΩ <uof:◊÷ÃÂºØ>µƒ◊™ªª°£
- * 
+ * Â§ÑÁêÜ<office:font-face-decls> Âà∞ <uof:Â≠ó‰ΩìÈõÜ>ÁöÑËΩ¨Êç¢„ÄÇ
+ *
  * @author xie
  *
  */
@@ -19,20 +19,20 @@ public class Font_Face {
 	private static String _font_family = "";
 	//to guarantee no duplicate font
 	private static Set<String> _font_set = new TreeSet<String>();
-		
-	
+
+
 	public static String get_result(){
 		String rst = "";
-		
-		rst = "<uof:◊÷ÃÂºØ>";
+
+		rst = "<uof:Â≠ó‰ΩìÈõÜ>";
 		rst += _fonts;
-		rst += "</uof:◊÷ÃÂºØ>";
-		
+		rst += "</uof:Â≠ó‰ΩìÈõÜ>";
+
 		_fonts = "";
 		_font_set.clear();
 		return rst;
 	}
-	
+
 	//add a new font
 	public static void add_font(String name,String family){
 		String font = "";
@@ -40,30 +40,30 @@ public class Font_Face {
 		if(name.equals("")){
 			name = family;
 		}
-		
+
 		if(family.equals("")||_font_set.contains(name+family)){
 			return ;
 		}
-		
+
 		_font_set.add(name + family);
-		
-		font = "<uof:◊÷ÃÂ…˘√˜";
-		font += " uof:±Í ∂∑˚=\"" + name + "\"";
-		font += " uof:√˚≥∆=\"" + name + "\"";
-		font += " uof:◊÷ÃÂ◊Â=\"" + family + "\"";
+
+		font = "<uof:Â≠ó‰ΩìÂ£∞Êòé";
+		font += " uof:Ê†áËØÜÁ¨¶=\"" + name + "\"";
+		font += " uof:ÂêçÁß∞=\"" + name + "\"";
+		font += " uof:Â≠ó‰ΩìÊóè=\"" + family + "\"";
 		font += "/>";
 		_fonts += font;
 	}
-	
+
 	public static void process_atts(Attributes atts){
 		String attVal = "";
-		
+
 		attVal = atts.getValue("style:name");
 		_font_name = (attVal==null) ? "" : attVal;
-		
+
 		attVal = atts.getValue("svg:font-family");
 		_font_family = (attVal==null) ? "" : attVal;
-		
+
 		add_font(_font_name, _font_family);
 		_font_name = "";
 		_font_family = "";

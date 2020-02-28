@@ -8,52 +8,52 @@ import spreadsheet.Cell_Address;
 
 public class Style_Map {
 	private static Style_Map_Struct _cur_map = null;
-	
-	//Each <±í:Ìõ¼þ¸ñÊ½»¯>-element presented by the 
+
+	//Each <è¡¨:æ¡ä»¶æ ¼å¼åŒ–>-element presented by the
 	//Style_Map_Struct would be keeped in the TreeMap.
-	private static Map<String,Style_Map_Struct> 
+	private static Map<String,Style_Map_Struct>
 			_style_map = new TreeMap<String,Style_Map_Struct> ();
-	
+
 	//
 	public static String get_result(){
 		String rst = "";
-		
-		rst += "<±í:Ìõ¼þ¸ñÊ½»¯¼¯>";
+
+		rst += "<è¡¨:æ¡ä»¶æ ¼å¼åŒ–é›†>";
 		for(Iterator<String> it = get_key_set().iterator(); it.hasNext();){
 			String name = it.next();
 			rst += _style_map.get(name).get_result();
 		}
-		rst += "</±í:Ìõ¼þ¸ñÊ½»¯¼¯>";
-		
+		rst += "</è¡¨:æ¡ä»¶æ ¼å¼åŒ–é›†>";
+
 		_cur_map = null;
 		_style_map.clear();
-		
+
 		return rst;
 	}
-	
+
 	public static Set<String> get_key_set(){
 		return _style_map.keySet();
 	}
-	
+
 	//Return the Style_Map_Struct to which this TreeMap
 	//maps the specified key: styleName.
 	public static Style_Map_Struct get_style_map(String styleName){
 		Style_Map_Struct sms = null;
-		
+
 		for(Iterator<String> it=_style_map.keySet().iterator(); it.hasNext();){
 			if(it.next().equals(styleName)){
 				sms = _style_map.get(styleName);
 				break;
 			}
-		}	
+		}
 		return sms;
 	}
-	
+
 	/**
-	 * process <style:map> element(it should be contained 
-	 * in <style:style style:family = "table-cell">) to 
+	 * process <style:map> element(it should be contained
+	 * in <style:style style:family = "table-cell">) to
 	 * generate a Style_Map_Struct that contains needed
-	 * content in <±í:Ìõ¼þ¸ñÊ½»¯>
+	 * content in <è¡¨:æ¡ä»¶æ ¼å¼åŒ–>
 	 * @param styleName
 	 * @param atts
 	 */
@@ -62,55 +62,55 @@ public class Style_Map {
 		String tableName = "";
 		String condition = "";
 		String condType = "";
-		
+
 		try{
 			_cur_map = get_style_map(styleName);
 			if(_cur_map == null){
 				_cur_map = new Style_Map_Struct();
 				_style_map.put(styleName, _cur_map);
 			}
-			
+
 			if((attVal=atts.getValue("style:base-cell-address")) != null){
 				String cellAddr = Cell_Address.get_cell_address(attVal);
 				tableName = Cell_Address.get_table_name(attVal);
-				
+
 				_cur_map.set_cell_address(cellAddr);
 				_cur_map.set_table_name(tableName);
 			}
-			
+
 			if((attVal=atts.getValue("style:condition"))!=null){
 				int index1, index2, index3;
 				String op = "";
 				String operatorCodeOne = "";
 				String operatorCodeTwo = "";
-				
+
 				//is-true-formula(SUM([.A1:.C1]) > 100)
 				if(attVal.contains("is-true-formula")){
 					index1 = attVal.indexOf("(");
 					index2 = attVal.lastIndexOf(")");
 					String formula = attVal.substring(index1+1,index2);
-					
+
 					condType = "formula";
 					operatorCodeOne = Formula.get_cell_formula(formula,tableName);
 				}
 				else if(attVal.contains("is-not-between")){
 					op = "not between";
-					
+
 					index1 = attVal.indexOf("between");
 					index1 = attVal.indexOf("(",index1);
 					index2 = attVal.indexOf(")",index1);
 					index3 = attVal.indexOf(",",index1);
-					operatorCodeOne= attVal.substring(index1+1,index3); 
+					operatorCodeOne= attVal.substring(index1+1,index3);
 					operatorCodeTwo= attVal.substring(index3+1,index2);
 				}
 				else if(attVal.contains("is-between")){
 					op = "between";
-					
+
 					index1 = attVal.indexOf("between");
 					index1 = attVal.indexOf("(",index1);
 					index2 = attVal.indexOf(")",index1);
-					index3 = attVal.indexOf(",",index1);				
-					operatorCodeOne= attVal.substring(index1+1,index3); 
+					index3 = attVal.indexOf(",",index1);
+					operatorCodeOne= attVal.substring(index1+1,index3);
 					operatorCodeTwo= attVal.substring(index3+1,index2);
 				}
 				else if(attVal.contains("cell-content-is-in-list")){
@@ -148,33 +148,33 @@ public class Style_Map {
 					index1 = attVal.indexOf("<");
 					operatorCodeOne = attVal.substring(index1+1);
 				}
-				
+
 				if(!op.equals("")){
-					condition += "<±í:²Ù×÷Âë>" + op + "</±í:²Ù×÷Âë>";
-				}				
+					condition += "<è¡¨:æ“ä½œç >" + op + "</è¡¨:æ“ä½œç >";
+				}
 				if(!operatorCodeOne.equals("")){
-					condition += "<±í:µÚÒ»²Ù×÷Êý>" + operatorCodeOne + "</±í:µÚÒ»²Ù×÷Êý>";
+					condition += "<è¡¨:ç¬¬ä¸€æ“ä½œæ•°>" + operatorCodeOne + "</è¡¨:ç¬¬ä¸€æ“ä½œæ•°>";
 				}
 				else{
-					condition += "<±í:µÚÒ»²Ù×÷Êý/>";
+					condition += "<è¡¨:ç¬¬ä¸€æ“ä½œæ•°/>";
 				}
 				if(!operatorCodeTwo.equals("")){
-					condition += "<±í:µÚ¶þ²Ù×÷Êý>" + operatorCodeTwo + "</±í:µÚ¶þ²Ù×÷Êý>";
+					condition += "<è¡¨:ç¬¬äºŒæ“ä½œæ•°>" + operatorCodeTwo + "</è¡¨:ç¬¬äºŒæ“ä½œæ•°>";
 				}
 			}
-			
+
 			if((attVal=atts.getValue("style:apply-style-name")) != null){
-				condition += "<±í:¸ñÊ½ ±í:Ê½ÑùÒýÓÃ=\"" + attVal + "\"/>";
+				condition += "<è¡¨:æ ¼å¼ è¡¨:å¼æ ·å¼•ç”¨=\"" + attVal + "\"/>";
 			}
-			
+
 			if(!condType.equals("formula")){
 				condType = "cell value";
 			}
-			condition = "<±í:Ìõ¼þ uof:locID=\"s0019\" uof:attrList=\"ÀàÐÍ\""
-						+ " ±í:ÀàÐÍ=\"" + condType + "\">"
-						+ condition + "</±í:Ìõ¼þ>";
+			condition = "<è¡¨:æ¡ä»¶ uof:locID=\"s0019\" uof:attrList=\"ç±»åž‹\""
+						+ " è¡¨:ç±»åž‹=\"" + condType + "\">"
+						+ condition + "</è¡¨:æ¡ä»¶>";
 			_cur_map.add_condition(condition);
-			
+
 		}catch (Exception e){
 			e.printStackTrace();
 		}

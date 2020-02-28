@@ -8,37 +8,37 @@ import convertor.Unit_Converter;
 import convertor.Common_Pro;
 
 /**
- * 
+ *
  * @author xie
  *
  */
-public class Page_Layout extends Common_Pro{	
-	//attributes of <×Ö:·ÖÀ¸>
+public class Page_Layout extends Common_Pro{
+	//attributes of <å­—:åˆ†æ >
 	private static String _columns_pro = "";
 	//column gap
 	private static float _column_gap = 0.0f;
 	//number of columns
 	//private static int _column_count = 0;
-	//<½ÚÊôĞÔ>
-	private static Sec_Style _sec_style = null;	
-	
+	//<èŠ‚å±æ€§>
+	private static Sec_Style _sec_style = null;
+
 	private static float _page_width = 0.0f;
 	private static float _margin_left = 0.0f;
 	private static float _margin_right = 0.0f;
 	private static float _space_width = 0.0f;
 	//
-	private static ArrayList<Integer> rel_width_list = new ArrayList<Integer>();	
+	private static ArrayList<Integer> rel_width_list = new ArrayList<Integer>();
 	//
 	private static Map<String,Sec_Style> _sec_style_map = new TreeMap<String,Sec_Style>();
-	
-	
+
+
 	//initialize
 	public static void init(){
 		_sec_style = null;
 		rel_width_list.clear();
 		_sec_style_map.clear();
 	}
-	
+
 	private static void clear(){
 		_columns_pro = "";
 		_column_gap = 0.0f;
@@ -48,18 +48,18 @@ public class Page_Layout extends Common_Pro{
 		_margin_right = 0.0f;
 		rel_width_list.clear();
 	}
-	
+
 	public static Sec_Style get_sec_style(String name){
 		return _sec_style_map.get(name);
 	}
-	
+
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		
+
 		if(qName.equals("style:page-layout")){
 			//create a new struct
 			_sec_style = new Sec_Style();
-			
+
 			attVal = atts.getValue("style:name");
 			_sec_style.set_id(attVal);
 			//add to the map
@@ -73,7 +73,7 @@ public class Page_Layout extends Common_Pro{
 			_sec_style.set_grid(get_grid(atts));
 			_sec_style.set_writingMode(get_writingMode(atts));
 			_sec_style.set_borders(get_borders("text",atts).replace("t0065","t0047"));
-			
+
 			if((attVal=atts.getValue("fo:page-width"))!=null){
 				_page_width = Float.parseFloat(Unit_Converter.convert(attVal));
 			}
@@ -84,40 +84,40 @@ public class Page_Layout extends Common_Pro{
 				_margin_right = Float.parseFloat(Unit_Converter.convert(attVal));
 			}
 			if((attVal=atts.getValue("fo:background-color"))!=null && !attVal.equals("none")){
-				_sec_style.set_padding("<×Ö:Ìî³ä uof:locID=\"t0153\"><Í¼:ÑÕÉ«>" + attVal + "</Í¼:ÑÕÉ«></×Ö:Ìî³ä>");
+				_sec_style.set_padding("<å­—:å¡«å…… uof:locID=\"t0153\"><å›¾:é¢œè‰²>" + attVal + "</å›¾:é¢œè‰²></å­—:å¡«å……>");
 			}
 		}
 		else if(qName.equals("style:columns")){
 			String str = "";
-			
+
 			if((attVal=atts.getValue("fo:column-count"))!=null){
-				str += " ×Ö:À¸Êı=\"" + attVal + "\"";
+				str += " å­—:æ æ•°=\"" + attVal + "\"";
 				//_column_count = Integer.parseInt(attVal);
 			}
-			
-			str += " ×Ö:µÈ¿í=\"true\"";
+
+			str += " å­—:ç­‰å®½=\"true\"";
 			if((attVal=atts.getValue("fo:column-gap"))!=null){
-				_column_gap = Float.parseFloat(Unit_Converter.convert(attVal));			
+				_column_gap = Float.parseFloat(Unit_Converter.convert(attVal));
 			}
-			
+
 			_columns_pro += str;
 		}
 		else if(qName.equals("style:column-sep")){
 			String str = "";
-			
+
 			if((attVal=atts.getValue("style:style"))!=null){
-				str += " ×Ö:·Ö¸ôÏß=\"" + tranLineStyle(attVal) + "\"";
+				str += " å­—:åˆ†éš”çº¿=\"" + tranLineStyle(attVal) + "\"";
 			}
 			else{
-				str += " ×Ö:·Ö¸ôÏß=\"single\"";
+				str += " å­—:åˆ†éš”çº¿=\"single\"";
 			}
 			if((attVal=atts.getValue("style:width"))!=null){
-				str += " ×Ö:·Ö¸ôÏß¿í¶È=\"" + Unit_Converter.convert(attVal) + "\"";
+				str += " å­—:åˆ†éš”çº¿å®½åº¦=\"" + Unit_Converter.convert(attVal) + "\"";
 			}
 			if((attVal=atts.getValue("style:color"))!=null){
-				str += " ×Ö:·Ö¸ôÏßÑÕÉ«=\"" + attVal + "\"";
+				str += " å­—:åˆ†éš”çº¿é¢œè‰²=\"" + attVal + "\"";
 			}
-			
+
 			_columns_pro += str;
 		}
 		else if(qName.equals("style:column")){
@@ -126,7 +126,7 @@ public class Page_Layout extends Common_Pro{
 			float startIndent = 0.0f;
 			float endIndent = 0.0f;
 
-			
+
 			if((attVal=atts.getValue("style:rel-width"))!=null){
 				index = attVal.indexOf("*");
 				the_rel = new Integer(attVal.substring(0, index));
@@ -148,27 +148,27 @@ public class Page_Layout extends Common_Pro{
 		}
 		else if(qName.equals("style:header-footer-properties")){
 			String str = "";
-			
+
 			if((attVal=atts.getValue("fo:margin-bottom")) != null){
-				str = "<×Ö:Ò³Ã¼Î»ÖÃ ×Ö:¾à°æĞ¾=\"" + Unit_Converter.convert(attVal) + "\"/>";
+				str = "<å­—:é¡µçœ‰ä½ç½® å­—:è·ç‰ˆèŠ¯=\"" + Unit_Converter.convert(attVal) + "\"/>";
 				_sec_style.set_header_position(str);
 			}
 			else if((attVal=atts.getValue("fo:margin-top")) != null){
-				str = "<×Ö:Ò³½ÅÎ»ÖÃ ×Ö:¾à°æĞ¾=\"" + Unit_Converter.convert(attVal) + "\"/>";
+				str = "<å­—:é¡µè„šä½ç½® å­—:è·ç‰ˆèŠ¯=\"" + Unit_Converter.convert(attVal) + "\"/>";
 				_sec_style.set_footer_position(str);
 			}
 		}
 		else if (qName.equals("style:background-image")) {
 			String padding = Sent_Style.deal_with_bg_image(atts);
 			if (padding.length() != 0)
-				_sec_style.set_padding("<×Ö:Ìî³ä uof:locID=\"t0153\">" + padding + "</×Ö:Ìî³ä>");
+				_sec_style.set_padding("<å­—:å¡«å…… uof:locID=\"t0153\">" + padding + "</å­—:å¡«å……>");
 		}
 	}
-	
+
 	public static void process_end(String qName){
-		
+
 		if(qName.equals("style:columns")){
-			String columns = "<×Ö:·ÖÀ¸" + _columns_pro + ">" + get_columns() + "</×Ö:·ÖÀ¸>";
+			String columns = "<å­—:åˆ†æ " + _columns_pro + ">" + get_columns() + "</å­—:åˆ†æ >";
 			_sec_style.set_columns(columns);
 		}
 		else if(qName.equals("style:page-layout")){
@@ -183,70 +183,70 @@ public class Page_Layout extends Common_Pro{
 
 		width = _page_width - _margin_left - _margin_right - _space_width;
 		for(int i=0; i < rel_width_list.size(); i++){
-			sum += rel_width_list.get(i).intValue();		
+			sum += rel_width_list.get(i).intValue();
 		}
-		
+
 		for(int i=0; i < rel_width_list.size(); i++){
 			float theWidth = 0.0f;
-			
-			cols += "<×Ö:À¸";
+
+			cols += "<å­—:æ ";
 			theWidth = (rel_width_list.get(i).intValue() * width / sum);
-			cols += " ×Ö:¿í¶È=\"" + Unit_Converter.convert(Float.toString(theWidth) + "cm") + "\"";			
+			cols += " å­—:å®½åº¦=\"" + Unit_Converter.convert(Float.toString(theWidth) + "cm") + "\"";
 			if(i == 0){
-				cols += " ×Ö:¼ä¾à=\"" + _column_gap + "\"";
+				cols += " å­—:é—´è·=\"" + _column_gap + "\"";
 			}
 			cols += "/>";
 		}
 
 		return cols;
 	}
-	
-	//´¦Àí<×Ö:Ò³ÂëÉèÖÃ>µÄ×ª»»
+
+	//å¤„ç†<å­—:é¡µç è®¾ç½®>çš„è½¬æ¢
 	private static String get_numFormat(Attributes atts){
 		String str = "";
 		String attVal = "";
-		
-		str += "<×Ö:Ò³ÂëÉèÖÃ";
+
+		str += "<å­—:é¡µç è®¾ç½®";
 		if((attVal=atts.getValue("style:num-format"))!=null){
-			str += " ×Ö:¸ñÊ½=\"" + Text_Config.conv_format(attVal) + "\"";
+			str += " å­—:æ ¼å¼=\"" + Text_Config.conv_format(attVal) + "\"";
 		}
 		if((attVal=atts.getValue("style:first-page-number"))!=null){
-			str += " ×Ö:ÆğÊ¼±àºÅ=\"" + attVal + "\"";
+			str += " å­—:èµ·å§‹ç¼–å·=\"" + attVal + "\"";
 		}
 		str += "/>";
-		
+
 		return str;
 	}
-	
-	//´¦Àí<×Ö:Íø¸ñÉèÖÃ>µÄ×ª»»
+
+	//å¤„ç†<å­—:ç½‘æ ¼è®¾ç½®>çš„è½¬æ¢
 	private static String get_grid(Attributes atts){
 		String str = "";
 		String attVal = "";
-		
+
 		if((attVal=atts.getValue("style:layout-grid-mode"))!=null){
-			str += " ×Ö:Íø¸ñÀàĞÍ=\"" + tranGridMode(attVal) + "\"";
+			str += " å­—:ç½‘æ ¼ç±»å‹=\"" + tranGridMode(attVal) + "\"";
 		}
 		if((attVal=atts.getValue("style:layout-grid-base-height"))!=null){
-			str += " ×Ö:¸ß¶È=\"" + Unit_Converter.convert(attVal) + "\"";
+			str += " å­—:é«˜åº¦=\"" + Unit_Converter.convert(attVal) + "\"";
 		}
 		if((attVal=atts.getValue("style:layout-grid-display"))!=null){
-			str += " ×Ö:ÏÔÊ¾Íø¸ñ=\"" + attVal + "\"";
+			str += " å­—:æ˜¾ç¤ºç½‘æ ¼=\"" + attVal + "\"";
 		}
 		if((attVal=atts.getValue("style:layout-grid-print"))!=null){
-			str += " ×Ö:´òÓ¡Íø¸ñ=\"" + attVal + "\"";
+			str += " å­—:æ‰“å°ç½‘æ ¼=\"" + attVal + "\"";
 		}
-		
+
 		if(str.length()!=0){
-			str = "<×Ö:Íø¸ñÉèÖÃ" + str + "/>";
+			str = "<å­—:ç½‘æ ¼è®¾ç½®" + str + "/>";
 		}
-		
+
 		return str;
 	}
-	
-	//uofÓëodf¶ÔÏßĞÍÀàĞÍµÄ¶¨Òå²»Ò»Ñù£¬ĞèÒª½øĞĞ×ª»»
+
+	//uofä¸odfå¯¹çº¿å‹ç±»å‹çš„å®šä¹‰ä¸ä¸€æ ·ï¼Œéœ€è¦è¿›è¡Œè½¬æ¢
 	private static String tranLineStyle(String val){
-		String str = "single";	//Ä¬ÈÏµÄÏßĞÍÀàĞÍ
-		
+		String str = "single";	//é»˜è®¤çš„çº¿å‹ç±»å‹
+
 		if(val.equals("none")){
 			str = "none";
 		}
@@ -262,29 +262,29 @@ public class Page_Layout extends Common_Pro{
 		else if(val.equals("dot-dashed")){
 			str = "dot-dash";
 		}
-		
+
 		return str;
 	}
-	
-	//´¦Àí<×Ö:ÎÄ×ÖÅÅÁĞ·½Ïò>µÄ×ª»»
+
+	//å¤„ç†<å­—:æ–‡å­—æ’åˆ—æ–¹å‘>çš„è½¬æ¢
 	private static String get_writingMode(Attributes atts){
 		String str = "";
 		String attVal = "";
-		
+
 		if((attVal=atts.getValue("style:writing-mode"))!=null){
-		//	str += "<×Ö:ÎÄ×ÖÅÅÁĞ·½Ïò>";
+		//	str += "<å­—:æ–‡å­—æ’åˆ—æ–¹å‘>";
 		//	str += tranWritingMode(attVal);
-		//	str += "</×Ö:ÎÄ×ÖÅÅÁĞ·½Ïò>";
+		//	str += "</å­—:æ–‡å­—æ’åˆ—æ–¹å‘>";
 		}
-		
+
 		return str;
 	}
-	
-	//uofÓëodf¶Ôwriting-modeµÄÖµµÄ¶¨Òå²»Ò»Ñù£¬ĞèÒª×ª»»
+
+	//uofä¸odfå¯¹writing-modeçš„å€¼çš„å®šä¹‰ä¸ä¸€æ ·ï¼Œéœ€è¦è½¬æ¢
 	private static String tranWritingMode(String val){
-		String str = "vert-r2l";		//Ä¬ÈÏÖµ
-		
-		if(val.equals("lr-tb")){       //lr-tb´ú±íleft to right-top to bottom
+		String str = "vert-r2l";		//é»˜è®¤å€¼
+
+		if(val.equals("lr-tb")){       //lr-tbä»£è¡¨left to right-top to bottom
 			//str = "hori-l2r";
 			str = "vert-r2l";
 		}
@@ -297,13 +297,13 @@ public class Page_Layout extends Common_Pro{
 		else if(val.equals("tb-lr")){
 			str = "vert-l2r";
 		}
-		
+
 		return str;
 	}
-	
+
 	private static String tranGridMode(String val){
 		String str = "none";
-		
+
 		if(val.equals("none")){
 			str = "none";
 		}
@@ -313,7 +313,7 @@ public class Page_Layout extends Common_Pro{
 		else if(val.equals("both")){
 			str = "line-char";
 		}
-		
+
 		return str;
 	}
 }

@@ -3,23 +3,23 @@ package tables;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Meta_Table 
+public class Meta_Table
 {
 	private static Map<String,String> _hashmap = new HashMap<String,String>();
-	
+
 	public static void create_map()
 	{
-		_hashmap.put("meta:generator","uof:´´½¨Ó¦ÓÃ³ÌĞò");
-		_hashmap.put("meta:initial-creator","uof:´´½¨Õß");
-		_hashmap.put("dc:creator","uof:×îºó×÷Õß");
-		_hashmap.put("meta:creation-date","uof:´´½¨ÈÕÆÚ");
-		_hashmap.put("meta:editing-cycles","uof:±à¼­´ÎÊı");
-		_hashmap.put("meta:editing-duration","uof:±à¼­Ê±¼ä");
-		_hashmap.put("dc:title","uof:±êÌâ");
-		_hashmap.put("dc:description","uof:ÕªÒª");
-		_hashmap.put("dc:subject","uof:Ö÷Ìâ");
+		_hashmap.put("meta:generator","uof:åˆ›å»ºåº”ç”¨ç¨‹åº");
+		_hashmap.put("meta:initial-creator","uof:åˆ›å»ºè€…");
+		_hashmap.put("dc:creator","uof:æœ€åä½œè€…");
+		_hashmap.put("meta:creation-date","uof:åˆ›å»ºæ—¥æœŸ");
+		_hashmap.put("meta:editing-cycles","uof:ç¼–è¾‘æ¬¡æ•°");
+		_hashmap.put("meta:editing-duration","uof:ç¼–è¾‘æ—¶é—´");
+		_hashmap.put("dc:title","uof:æ ‡é¢˜");
+		_hashmap.put("dc:description","uof:æ‘˜è¦");
+		_hashmap.put("dc:subject","uof:ä¸»é¢˜");
 	}
-	
+
 	public static String get_ele_name(String qName)
 	{
 		return _hashmap.get(qName);

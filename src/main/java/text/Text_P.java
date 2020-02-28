@@ -9,15 +9,15 @@ import presentation.Presentation_Style;
 import tables.Draw_Type_Table;
 
 /**
- * ´¦Àí<text:p> µ½ <×Ö:¶ÎÂä>µÄ×ª»»¡£
- * 
+ * å¤„ç†<text:p> åˆ° <å­—:æ®µè½>çš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
 public class Text_P {
-	//the result 
-	private static String _result = ""; 
-	//tag for filtration	
+	//the result
+	private static String _result = "";
+	//tag for filtration
 	private static boolean _filter_tag = false;
 	//This tag is set in First_Content_Handler
 	//when <text:table-of-content> is present.
@@ -27,12 +27,12 @@ public class Text_P {
 	//The current list level.(From 0 to 8 in UOF)
 	private static int _list_level = -1;
 	//class of note:"footnote" or "endnote"
-	private static String _note_class = "";	
+	private static String _note_class = "";
 	//text:note-citation
 	private static String _citation = "";
 	//the generated id for heperlink
-	private static String _hlk_id = "";	
-	//inside <×Ö:¾ä> or not
+	private static String _hlk_id = "";
+	//inside <å­—:å¥> or not
 	private static boolean _in_span = false;
 	//temp for _in_span in case of nesting
 	private static boolean _in_span_tmp = false;
@@ -49,8 +49,8 @@ public class Text_P {
 	private static String _presen_class = "";
 
 	private static boolean _is_1stparse = true;
-	
-	
+
+
 	//initialize
 	public static void init(){
 		_list_name = "";
@@ -61,52 +61,52 @@ public class Text_P {
 		_presen_class = "";
 		_is_1stparse = true;
 	}
-	
+
 	public static void set_parsenum(boolean bool) {
 		_is_1stparse = bool;
 	}
-	
+
 	public static void set_toc_tag(){
 		_is_toc_set = true;
-	}	
+	}
 	public static boolean toc_tag(){
 		return _is_toc_set;
 	}
-	
+
 	public static void set_presen_class(String cls){
 		_presen_class = cls;
 	}
-	
+
 	private static String get_presen_outline(int listLev){
 		String outline = "";
-		
-		String stopInd = "<uof:Í£Ö¹ÒıÓÃ><uof:Â·¾¶ uof:locID=\"u0067\">"
-					+ "×Ô¶¯±àºÅĞÅÏ¢</uof:Â·¾¶></uof:Í£Ö¹ÒıÓÃ>";
-		
+
+		String stopInd = "<uof:åœæ­¢å¼•ç”¨><uof:è·¯å¾„ uof:locID=\"u0067\">"
+					+ "è‡ªåŠ¨ç¼–å·ä¿¡æ¯</uof:è·¯å¾„></uof:åœæ­¢å¼•ç”¨>";
+
 		if(_presen_class.equals("title")){
-			outline = "<×Ö:´ó¸Ù¼¶±ğ>0</×Ö:´ó¸Ù¼¶±ğ>";
+			outline = "<å­—:å¤§çº²çº§åˆ«>0</å­—:å¤§çº²çº§åˆ«>";
 			outline += stopInd;
 		}
 		else if(_presen_class.equals("subtitle")){
-			outline = "<×Ö:´ó¸Ù¼¶±ğ>1</×Ö:´ó¸Ù¼¶±ğ>";
+			outline = "<å­—:å¤§çº²çº§åˆ«>1</å­—:å¤§çº²çº§åˆ«>";
 		}
 		else if(_presen_class.equals("outline")){
-			outline = "<×Ö:´ó¸Ù¼¶±ğ>" + (listLev+1) + "</×Ö:´ó¸Ù¼¶±ğ>";
+			outline = "<å­—:å¤§çº²çº§åˆ«>" + (listLev+1) + "</å­—:å¤§çº²çº§åˆ«>";
 		}
-		
+
 		return outline;
 	}
-	
+
 
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
 		String start = "";
-			
+
 		if (qName.equals("draw:g")) {
 			_group_level++;
 		}
-		
-		if(_filter_tag)	return;	
+
+		if(_filter_tag)	return;
 
 		//<text:list> can be nested and its level
 		//is the number of layers being nested.
@@ -120,115 +120,115 @@ public class Text_P {
 		else if(qName.equals("text:h")){
 			int level = 0;
 			_heading_tag = true;
-			
-			start += "<×Ö:¶ÎÂä>";		
+
+			start += "<å­—:æ®µè½>";
 			attVal=atts.getValue("text:style-name");
-			start += (attVal == null) ? "<×Ö:¶ÎÂäÊôĞÔ>" :
-				"<×Ö:¶ÎÂäÊôĞÔ" + " ×Ö:Ê½ÑùÒıÓÃ=\"" + attVal + "\">";
-			
+			start += (attVal == null) ? "<å­—:æ®µè½å±æ€§>" :
+				"<å­—:æ®µè½å±æ€§" + " å­—:å¼æ ·å¼•ç”¨=\"" + attVal + "\">";
+
 			attVal=atts.getValue("text:outline-level");
 			level = (attVal==null) ? 1 : (Integer.parseInt(attVal)-1);
-			
-			//ODF has a level from 1 to 10, but UOF's is 
+
+			//ODF has a level from 1 to 10, but UOF's is
 			//from 0 to 8 so level 10 is simply dropped.
 			if(level+1 != 10){
-				start += "<×Ö:´ó¸Ù¼¶±ğ>" + level + "</×Ö:´ó¸Ù¼¶±ğ>";			
-				//start += "<×Ö:×Ô¶¯±àºÅĞÅÏ¢ ×Ö:±àºÅÒıÓÃ=\"outline\"" 
-				//		+ " ×Ö:±àºÅ¼¶±ğ=\"" + level + "\"/>";
+				start += "<å­—:å¤§çº²çº§åˆ«>" + level + "</å­—:å¤§çº²çº§åˆ«>";
+				//start += "<å­—:è‡ªåŠ¨ç¼–å·ä¿¡æ¯ å­—:ç¼–å·å¼•ç”¨=\"outline\""
+				//		+ " å­—:ç¼–å·çº§åˆ«=\"" + level + "\"/>";
 			}
-			
-			start += "</×Ö:¶ÎÂäÊôĞÔ>";	
+
+			start += "</å­—:æ®µè½å±æ€§>";
 		}
-		
+
 		else if(qName.equals("text:p")){
 			_in_span_tmp = _in_span;
 			_in_span = false;
-			
+
 			attVal = atts.getValue("text:style-name");
 			if(attVal == null){
-				//Èç¹ûÊÇÍ¼ĞÎµÄÎÄ±¾ÄÚÈİµÄ»°£¬µ±Ã»ÓĞÒıÓÃÊ½ÑùÊ±
-				//ĞèÒª½«Ä¬ÈÏµÄÍ¼ĞÎ¶ÎÂäÊ½ÑùÊ©¼ÓÔÚÆäÉÏ
-				if (Common_Data.get_draw_text_tag()) {  
-					start += "<×Ö:¶ÎÂä><×Ö:¶ÎÂäÊôĞÔ>";
+				//å¦‚æœæ˜¯å›¾å½¢çš„æ–‡æœ¬å†…å®¹çš„è¯ï¼Œå½“æ²¡æœ‰å¼•ç”¨å¼æ ·æ—¶
+				//éœ€è¦å°†é»˜è®¤çš„å›¾å½¢æ®µè½å¼æ ·æ–½åŠ åœ¨å…¶ä¸Š
+				if (Common_Data.get_draw_text_tag()) {
+					start += "<å­—:æ®µè½><å­—:æ®µè½å±æ€§>";
 					start += Graphic_Style.get_def().get_parapro();
-					start += "</×Ö:¶ÎÂäÊôĞÔ>";
+					start += "</å­—:æ®µè½å±æ€§>";
 				}
 				else{
-					start += "<×Ö:¶ÎÂä><×Ö:¶ÎÂäÊôĞÔ/>";
+					start += "<å­—:æ®µè½><å­—:æ®µè½å±æ€§/>";
 				}
 			}
 			else{
 				String outline = "";
 				String name = Presentation_Style.style_name(_presen_class,_list_level);
-				
+
 				if(name.equals("")){
 					name = Style_Data.rename(attVal);
 				}
 				else{
 					outline = get_presen_outline(_list_level);
 				}
-				
-				start += "<×Ö:¶ÎÂä><×Ö:¶ÎÂäÊôĞÔ ×Ö:Ê½ÑùÒıÓÃ=\"" + name + "\">";
-				
+
+				start += "<å­—:æ®µè½><å­—:æ®µè½å±æ€§ å­—:å¼æ ·å¼•ç”¨=\"" + name + "\">";
+
 				if(!outline.equals("")){
 					start += outline;
 				}
 				else if (_list_level > -1) {
-					start += "<×Ö:×Ô¶¯±àºÅĞÅÏ¢";
-					start += " ×Ö:±àºÅÒıÓÃ=\"" + _list_name + "\"";
-					start += " ×Ö:±àºÅ¼¶±ğ=\"" + _list_level + "\"";
+					start += "<å­—:è‡ªåŠ¨ç¼–å·ä¿¡æ¯";
+					start += " å­—:ç¼–å·å¼•ç”¨=\"" + _list_name + "\"";
+					start += " å­—:ç¼–å·çº§åˆ«=\"" + _list_level + "\"";
 					start += "/>";
 				}
-				start += "</×Ö:¶ÎÂäÊôĞÔ>";
+				start += "</å­—:æ®µè½å±æ€§>";
 			}
 		}
-		
+
 		else if(qName.equals("text:span")){
-			start += get_span_end();		
-			
+			start += get_span_end();
+
 			attVal = atts.getValue("text:style-name");
 			start += get_span_start(attVal);
 		}
 		else if(qName.equals("text:change")){
 			String id = atts.getValue("text:change-id");
-			
-			start += "<×Ö:É¾³ı ×Ö:ĞŞ¶©ĞÅÏ¢ÒıÓÃ=\"" + id + "\">";
+
+			start += "<å­—:åˆ é™¤ å­—:ä¿®è®¢ä¿¡æ¯å¼•ç”¨=\"" + id + "\">";
 			start += Tracked_Change.get_deletion_data(id);
-			start += "</×Ö:É¾³ı>";
+			start += "</å­—:åˆ é™¤>";
 		}
 		else if(qName.equals("text:change-start")){
 			String id = atts.getValue("text:change-id");
 			String type = Tracked_Change.get_change_type(id);
-			
+
 			if(type.equals("INSERTION")){
-				start += "<×Ö:²åÈë¿ªÊ¼ ×Ö:ĞŞ¶©ĞÅÏ¢ÒıÓÃ=\"" + id + "\"/>";
+				start += "<å­—:æ’å…¥å¼€å§‹ å­—:ä¿®è®¢ä¿¡æ¯å¼•ç”¨=\"" + id + "\"/>";
 			}
 			else if(type.equals("FORMAT-CHANGE")){
 				start += get_span_end();
-				
-				start += "<×Ö:¾ä><×Ö:¾äÊôĞÔ>";
-				start += "<×Ö:¸ñÊ½ĞŞ¶© uof:locID=\"t0087\"" +
-						" uof:attrList=\"ĞŞ¶©ĞÅÏ¢ÒıÓÃ\"" +
-						" ×Ö:ĞŞ¶©ĞÅÏ¢ÒıÓÃ=\"" + id + "\"/>";
-				start += "</×Ö:¾äÊôĞÔ>";
+
+				start += "<å­—:å¥><å­—:å¥å±æ€§>";
+				start += "<å­—:æ ¼å¼ä¿®è®¢ uof:locID=\"t0087\"" +
+						" uof:attrList=\"ä¿®è®¢ä¿¡æ¯å¼•ç”¨\"" +
+						" å­—:ä¿®è®¢ä¿¡æ¯å¼•ç”¨=\"" + id + "\"/>";
+				start += "</å­—:å¥å±æ€§>";
 				_in_span = true;
 			}
 		}
 		else if(qName.equals("text:change-end")){
 			String id = atts.getValue("text:change-id");
 			String type = Tracked_Change.get_change_type(id);
-			
+
 			if(type.equals("INSERTION")){
-				start += "<×Ö:²åÈë½áÊø/>";
+				start += "<å­—:æ’å…¥ç»“æŸ/>";
 			}
 			else if(type.equals("FORMAT-CHANGE")){
-				
+
 			}
 		}
 		else if(qName.contains("text:bookmark")){
 			String str = "";
 			String name = atts.getValue("text:name");
-			
+
 			if(qName.equals("text:bookmark")){
 				str += get_sec_start("bookmark",name,name);
 				str += get_sec_end(name);
@@ -239,15 +239,15 @@ public class Text_P {
 			else if(qName.equals("text:bookmark-end")){
 				str += get_sec_end(name);
 			}
-			
+
 			start += str;
 		}
 		else if(qName.equals("text:a")){
 			start += get_span_end();
-			
+
 			//default text style for hyperlink in odf
 			start += get_span_start(Hyperlink.style_name());
-			
+
 			_hlk_id = IDGenerator.get_body_linkID();
 			start += get_sec_start("hyperlink",_hlk_id,"");
 		}
@@ -260,42 +260,42 @@ public class Text_P {
 		else if(qName.equals("text:note")){
 			_note_class = atts.getValue("text:note-class");
 			if(_note_class.equals("endnote")){
-				start += "<×Ö:Î²×¢>";
+				start += "<å­—:å°¾æ³¨>";
 			}
 			else if(_note_class.equals("footnote")){
-				start += "<×Ö:½Å×¢>";
+				start += "<å­—:è„šæ³¨>";
 			}
-		}		
+		}
 		else if(qName.equals("text:tab")){
-			start += "<×Ö:ÖÆ±í·û/>";
+			start += "<å­—:åˆ¶è¡¨ç¬¦/>";
 		}
 		else if(qName.equals("text:s")){
-			start += "<×Ö:¿Õ¸ñ·û";
+			start += "<å­—:ç©ºæ ¼ç¬¦";
 			if(atts.getValue("text:c") != null){
-				start += " ×Ö:¸öÊı=\"" + atts.getValue("text:c") + "\"";
+				start += " å­—:ä¸ªæ•°=\"" + atts.getValue("text:c") + "\"";
 			}
 			start += "/>";
 		}
 		else if(qName.equals("text:line-break")){
-			start += "<×Ö:»»ĞĞ·û/>";
+			start += "<å­—:æ¢è¡Œç¬¦/>";
 		}
-		else if (qName.contains("draw:") && !_is_1stparse){	
+		else if (qName.contains("draw:") && !_is_1stparse){
 			_filter_tag = true;
-			if (Draw_Type_Table._in_list(qName) && _group_level == 0 
+			if (Draw_Type_Table._in_list(qName) && _group_level == 0
 					|| (_group_level == 1 && qName.equals("draw:g"))) {
 				String id = Common_Data.get_text_anchor_id();
 				start += Content_Data.get_text_anchor(id).get_text_anchor_string();
 			}
-		}		
-		else if(Text_Field.is_field_name(qName)){		
+		}
+		else if(Text_Field.is_field_name(qName)){
 			_field_tag = true;
 			Text_Field.process_start(qName,atts);
 		}
-		
+
 		else if(qName.equals("text:note-citation")){
 			_cite_tag = true;
 		}
-		
+
 		if(need_not_span(start)){
 			_result += get_span_end();
 		}
@@ -304,8 +304,8 @@ public class Text_P {
 		}
 		_result += start;
 	}
-	
-	public static void process_chars(String chs){		
+
+	public static void process_chars(String chs){
 		if(_filter_tag){
 			return;
 		}
@@ -318,63 +318,63 @@ public class Text_P {
 		}
 		else{
 			_result += get_span_start();
-			
+
 			if(_is_toc_set && _heading_tag){
 				String id = IDGenerator.get_toc_bk_id();
 				String name = IDGenerator.get_toc_bk_name();
-				
+
 				_result += get_sec_start("bookmark",id,name);
 				_result += get_sec_end(id);
 			}
-			_result += "<×Ö:ÎÄ±¾´®>" + chs + "</×Ö:ÎÄ±¾´®>";
-		}	
+			_result += "<å­—:æ–‡æœ¬ä¸²>" + chs + "</å­—:æ–‡æœ¬ä¸²>";
+		}
 	}
-	
+
 	public static void process_end(String qName){
 		String end = "";
-		
+
 		if (qName.equals("draw:g")) {
 			_group_level--;
-		}	
-		
+		}
+
 		if(qName.equals("text:list")){
 			_list_level --;
-		}		
+		}
 		else if(qName.equals("office:annotation")){
 			_filter_tag = false;
-		}			
-		else if (qName.contains("draw:")) {		
+		}
+		else if (qName.contains("draw:")) {
 			if (_group_level == 0)
 				_filter_tag = false;
 		}
 		else if(_filter_tag){
 			return;
-		}		
+		}
 		else if(qName.equals("text:p")){
 			end += get_span_end();
-			
-			end += "</×Ö:¶ÎÂä>";
+
+			end += "</å­—:æ®µè½>";
 			_in_span = _in_span_tmp;
 		}
 		else if(qName.equals("text:h")){
 			end += get_span_end();
-			
+
 			_heading_tag = false;
-			end += "</×Ö:¶ÎÂä>";
+			end += "</å­—:æ®µè½>";
 			_in_span = _in_span_tmp;
 		}
 		else if(qName.equals("text:span")){
 			end += get_span_end();
 		}
 		else if(qName.equals("text:note-citation")){
-			insertStyle_name(" ×Ö:ÒıÎÄÌå=\"" + _citation + "\"");
+			insertStyle_name(" å­—:å¼•æ–‡ä½“=\"" + _citation + "\"");
 		}
 		else if(qName.equals("text:note")){
 			if(_note_class.equals("endnote")){
-				end += "</×Ö:Î²×¢>";
+				end += "</å­—:å°¾æ³¨>";
 			}
 			else if(_note_class.equals("footnote")){
-				end += "</×Ö:½Å×¢>";
+				end += "</å­—:è„šæ³¨>";
 			}
 		}
 		else if(Text_Field.is_field_name(qName)){
@@ -382,7 +382,7 @@ public class Text_P {
 			_field_tag = false;
 			end += Text_Field.get_result();
 		}
-		
+
 		if(need_not_span(end)){
 			_result += get_span_end();
 		}
@@ -394,109 +394,109 @@ public class Text_P {
 		}
 		_result += end;
 	}
-	
-	
-	//<×Ö:¾ä>
+
+
+	//<å­—:å¥>
 	private static String get_span_start(){
 		String start = "";
-		
-		start = _in_span ? "" : "<×Ö:¾ä><×Ö:¾äÊôĞÔ/>";
+
+		start = _in_span ? "" : "<å­—:å¥><å­—:å¥å±æ€§/>";
 		_in_span = true;
-		
+
 		return start;
 	}
 	private static String get_span_end(){
 		String end = "";
-		
-		end = _in_span ? "</×Ö:¾ä>" : "";
+
+		end = _in_span ? "</å­—:å¥>" : "";
 		_in_span = false;
-		
+
 		return end;
 	}
 	private static String get_span_start(String styleName){
 		String span = "";
-		
-		span = "<×Ö:¾ä><×Ö:¾äÊôĞÔ";
+
+		span = "<å­—:å¥><å­—:å¥å±æ€§";
 		if(styleName != null && !styleName.equals("")){
-			span += " ×Ö:Ê½ÑùÒıÓÃ=\"" + styleName + "\"";
+			span += " å­—:å¼æ ·å¼•ç”¨=\"" + styleName + "\"";
 		}
 		span += "/>";
-		
+
 		span = _in_span ? "" : span;
 		_in_span = true;
-		
+
 		return span;
 	}
-	
-	//<×Ö:ÇøÓò¿ªÊ¼>
+
+	//<å­—:åŒºåŸŸå¼€å§‹>
 	private static String get_sec_start(String type,String id,String name){
 		String sec = "";
 
-		sec = "<×Ö:ÇøÓò¿ªÊ¼" + " ×Ö:ÀàĞÍ=\"" + type + "\"" + " ×Ö:±êÊ¶·û=\"" + id + "\"";
+		sec = "<å­—:åŒºåŸŸå¼€å§‹" + " å­—:ç±»å‹=\"" + type + "\"" + " å­—:æ ‡è¯†ç¬¦=\"" + id + "\"";
 		if(!name.equals("")){
-			sec += " ×Ö:Ãû³Æ=\"" + name + "\"";
-		}		
+			sec += " å­—:åç§°=\"" + name + "\"";
+		}
 		sec += "/>";
-		
+
 		return sec;
 	}
-	
-	//<×Ö:ÇøÓò½áÊø>
+
+	//<å­—:åŒºåŸŸç»“æŸ>
 	private static String get_sec_end(String idRef){
-		return "<×Ö:ÇøÓò½áÊø" + " ×Ö:±êÊ¶·ûÒıÓÃ=\"" + idRef + "\"" + "/>";
+		return "<å­—:åŒºåŸŸç»“æŸ" + " å­—:æ ‡è¯†ç¬¦å¼•ç”¨=\"" + idRef + "\"" + "/>";
 	}
-	
+
 	//
 	private static boolean need_not_span(String ele){
 		boolean noNeed = false;
-		//siblings of <×Ö:¾ä>
-		String sibling[] = 
-			{"×Ö:Óò¿ªÊ¼","×Ö:Óò´úÂë","×Ö:Óò½áÊø",
-			 "×Ö:²åÈë¿ªÊ¼","×Ö:²åÈë½áÊø","×Ö:É¾³ı"
+		//siblings of <å­—:å¥>
+		String sibling[] =
+			{"å­—:åŸŸå¼€å§‹","å­—:åŸŸä»£ç ","å­—:åŸŸç»“æŸ",
+			 "å­—:æ’å…¥å¼€å§‹","å­—:æ’å…¥ç»“æŸ","å­—:åˆ é™¤"
 			};
-		
+
 		for(int i=0; i<sibling.length; i++){
 			if(ele.contains(sibling[i])){
 				noNeed = true;
 				break;
 			}
 		}
-		
+
 		return noNeed;
 	}
-	
+
 	private static boolean need_span(String ele){
 		boolean needed = false;
-		//children of <×Ö:¾ä>
-		String children[] = 
-			{"×Ö:ÇøÓò¿ªÊ¼","×Ö:ÇøÓò½áÊø","×Ö:Ãªµã",
-			 "×Ö:ÖÆ±í·û","×Ö:»»ĞĞ·û","×Ö:·ÖÀ¸·û",
-			 "×Ö:¿Õ¸ñ·û","×Ö:·ÖÒ³·û","×Ö:½Å×¢","×Ö:Î²×¢"
+		//children of <å­—:å¥>
+		String children[] =
+			{"å­—:åŒºåŸŸå¼€å§‹","å­—:åŒºåŸŸç»“æŸ","å­—:é”šç‚¹",
+			 "å­—:åˆ¶è¡¨ç¬¦","å­—:æ¢è¡Œç¬¦","å­—:åˆ†æ ç¬¦",
+			 "å­—:ç©ºæ ¼ç¬¦","å­—:åˆ†é¡µç¬¦","å­—:è„šæ³¨","å­—:å°¾æ³¨"
 			};
-		
+
 		for(int i=0; i<children.length; i++){
 			if(ele.contains(children[i])){
 				needed = true;
 				break;
 			}
 		}
-		
+
 		return needed;
 	}
-	
+
 	private static void insertStyle_name(String inserted){
 		StringBuffer str_buf = new StringBuffer(_result);
 		int index = str_buf.lastIndexOf(">");
-		
+
 		if(index == -1)		return;
-		
+
 		str_buf = str_buf.insert(index,inserted);
 		_result = str_buf.toString();
 	}
-	
+
 	public static String get_result(){
 		String str = "";
-		
+
 		str = _result;
 		_result = "";
 		return str;

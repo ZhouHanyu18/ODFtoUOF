@@ -7,8 +7,8 @@ import convertor.Common_Pro;
 import convertor.Unit_Converter;
 
 /**
- * ´¦Àístyle:family="paragraph"µÄ<style:style> µ½ <uof:¶ÎÂäÊ½Ñù>µÄ×ª»»¡£
- * 
+ * å¤„ç†style:family="paragraph"çš„<style:style> åˆ° <uof:æ®µè½å¼æ ·>çš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
@@ -16,158 +16,158 @@ public class Para_Style extends Common_Pro{
 	private static String _id = "";
 	//the result
 	private static String _result = "";
-	//attributes of <uof:¶ÎÂäÊ½Ñù>
+	//attributes of <uof:æ®µè½å¼æ ·>
 	private static String _ele_atts = "";
-	//<×Ö:¾äÊôĞÔ>
-	private static String _sent_pro = "";			
-	//ÖÆ±íÎ»ÉèÖÃ
-	private static String _tab_stops = "";			
+	//<å­—:å¥å±æ€§>
+	private static String _sent_pro = "";
+	//åˆ¶è¡¨ä½è®¾ç½®
+	private static String _tab_stops = "";
 	//tag for filtration
 	private static boolean _filter_tag = false;
-	
-	//ÎªÁË<Í¼£ºÍ¼ĞÎ>´¦ÀíµÄĞèÒª
+
+	//ä¸ºäº†<å›¾ï¼šå›¾å½¢>å¤„ç†çš„éœ€è¦
 	private static String _leftMargin = "";
 	private static String _rightMargin = "";
 	private static String _topMargin = "";
 	private static String _bottomMargin = "";
 	private static String _writing_mode = "";
-	
-	
+
+
 	private static void clear(){
 		_result = "";
 		_ele_atts = "";
 		_sent_pro = "";
 		_tab_stops = "";
 	}
-	
+
 	public static String get_result(){
 		String rst = "";
-		
-		rst = "<uof:¶ÎÂäÊ½Ñù" + _ele_atts + ">";
-		rst += "<×Ö:¾äÊôĞÔ>" + _sent_pro + "</×Ö:¾äÊôĞÔ>";
+
+		rst = "<uof:æ®µè½å¼æ ·" + _ele_atts + ">";
+		rst += "<å­—:å¥å±æ€§>" + _sent_pro + "</å­—:å¥å±æ€§>";
 		rst += _result;
-		rst += "</uof:¶ÎÂäÊ½Ñù>";
-		
+		rst += "</uof:æ®µè½å¼æ ·>";
+
 		clear();
 		return rst;
 	}
-	
+
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		
+
 		if(_filter_tag){
 			return ;
 		}
 		else if(qName.equals("style:graphic-properties")){
 			_filter_tag = true;
 		}
-		
+
 		else if(qName.equals("style:default-style")){
-			_ele_atts = " ×Ö:±êÊ¶·û=\"defaultp\"" + " ×Ö:Ãû³Æ=\"defaultp\"" + " ×Ö:ÀàĞÍ=\"auto\"";
+			_ele_atts = " å­—:æ ‡è¯†ç¬¦=\"defaultp\"" + " å­—:åç§°=\"defaultp\"" + " å­—:ç±»å‹=\"auto\"";
 			_id = "defaultp";
 		}
-		
+
 		else if(qName.equals("style:style")){
 			String styleType = "";
 			styleType = Style_Data.is_auto_style() ? "auto" : "custom";
-			
+
 			if((attVal = atts.getValue("style:name")) != null){
 				attVal = Style_Data.rename(attVal);
-				_ele_atts += " ×Ö:±êÊ¶·û=\"" + attVal + "\"";
-				_ele_atts += " ×Ö:Ãû³Æ=\"" + attVal + "\"";
+				_ele_atts += " å­—:æ ‡è¯†ç¬¦=\"" + attVal + "\"";
+				_ele_atts += " å­—:åç§°=\"" + attVal + "\"";
 				_id = attVal;
 			}
-			
+
 			attVal = atts.getValue("style:parent-style-name");
 			attVal = (attVal==null) ? "defaultp" : attVal;
-			_ele_atts += " ×Ö:»ùÊ½ÑùÒıÓÃ=\"" + attVal + "\"";
+			_ele_atts += " å­—:åŸºå¼æ ·å¼•ç”¨=\"" + attVal + "\"";
 			Style_Data.set_parent_style(attVal);
-			
+
 			if((attVal = atts.getValue("style:display-name")) != null){
-				_ele_atts += " ×Ö:±ğÃû=\"" + attVal + "\"";
-					
+				_ele_atts += " å­—:åˆ«å=\"" + attVal + "\"";
+
 			}
-			_ele_atts += " ×Ö:ÀàĞÍ=\"" + styleType + "\"";
-			
-			if ((attVal=atts.getValue("style:default-outline-level"))!=null 
+			_ele_atts += " å­—:ç±»å‹=\"" + styleType + "\"";
+
+			if ((attVal=atts.getValue("style:default-outline-level"))!=null
 					&& !attVal.equals("10")) {
 				int level = Integer.valueOf(attVal) -1;
-				_result += "<×Ö:´ó¸Ù¼¶±ğ>" + level + "</×Ö:´ó¸Ù¼¶±ğ>";	
-				//_result += "<×Ö:×Ô¶¯±àºÅĞÅÏ¢ ×Ö:±àºÅÒıÓÃ=\"outline\"" +
-					//	" ×Ö:±àºÅ¼¶±ğ=\"" + level + "\"/>";
+				_result += "<å­—:å¤§çº²çº§åˆ«>" + level + "</å­—:å¤§çº²çº§åˆ«>";
+				//_result += "<å­—:è‡ªåŠ¨ç¼–å·ä¿¡æ¯ å­—:ç¼–å·å¼•ç”¨=\"outline\"" +
+					//	" å­—:ç¼–å·çº§åˆ«=\"" + level + "\"/>";
 			}
 		}
-		
+
 		else if(qName.equals("style:text-properties")){
-			_sent_pro = Sent_Style.process_text_atts(atts);		
-			
+			_sent_pro = Sent_Style.process_text_atts(atts);
+
 			if (atts.getValue("fo:hyphenate") != null) {
-				_result += "<×Ö:ÔÊĞíµ¥´Ê¶Ï×Ö ×Ö:Öµ=\"" + atts.getValue("fo:hyphenate") + "\"/>";
+				_result += "<å­—:å…è®¸å•è¯æ–­å­— å­—:å€¼=\"" + atts.getValue("fo:hyphenate") + "\"/>";
 			}
 		}
-		
+
 		else if(qName.equals("style:paragraph-properties")){
 			_result += process_para_atts(atts);
 		}
-		
+
 		else if(qName.equals("style:background-image")){
 			String pad = Sent_Style.deal_with_bg_image(atts);
 			if(!pad.equals("")){
-				_result += "<×Ö:Ìî³ä uof:locID=\"t0066\">" + pad + "</×Ö:Ìî³ä>";
+				_result += "<å­—:å¡«å…… uof:locID=\"t0066\">" + pad + "</å­—:å¡«å……>";
 			}
 		}
-		
-		//====Ê××ÖÏÂ³Á====
+
+		//====é¦–å­—ä¸‹æ²‰====
 		else if(qName.equals("style:drop-cap")){
 			String dropCap ="";
-			
-			dropCap += " <×Ö:Ê××ÖÏÂ³Á ×Ö:ÀàĞÍ=\"dropped\""; 
-			if((attVal = atts.getValue("style:style-name")) != null){	
-				dropCap +=" ×Ö:×ÖÌåÒıÓÃ=\"" + attVal + "\"";
+
+			dropCap += " <å­—:é¦–å­—ä¸‹æ²‰ å­—:ç±»å‹=\"dropped\"";
+			if((attVal = atts.getValue("style:style-name")) != null){
+				dropCap +=" å­—:å­—ä½“å¼•ç”¨=\"" + attVal + "\"";
 			}
 			if((attVal = atts.getValue("style:length")) != null){
 				if(attVal.equals("word")){
-					dropCap +=" ×Ö:×Ö·ûÊı=\"1\"" ; 
+					dropCap +=" å­—:å­—ç¬¦æ•°=\"1\"" ;
 				}
-				else{ 
-					dropCap +=" ×Ö:×Ö·ûÊı=\"" + attVal + "\"";
+				else{
+					dropCap +=" å­—:å­—ç¬¦æ•°=\"" + attVal + "\"";
 				}
 			}
-			//ĞĞÊı±ØĞë
+			//è¡Œæ•°å¿…é¡»
 			if((attVal = atts.getValue("style:lines")) != null){
-				dropCap +=" ×Ö:ĞĞÊı=\"" + attVal + "\"";
+				dropCap +=" å­—:è¡Œæ•°=\"" + attVal + "\"";
 			}
 			else{
-				dropCap +=" ×Ö:ĞĞÊı=\"1\"";
+				dropCap +=" å­—:è¡Œæ•°=\"1\"";
 			}
-			//¼ä¾à±ØĞë
+			//é—´è·å¿…é¡»
 			if((attVal = atts.getValue("style:distance")) != null){
-				dropCap +=" ×Ö:¼ä¾à=\"" + Unit_Converter.convert(attVal) + "\"";
+				dropCap +=" å­—:é—´è·=\"" + Unit_Converter.convert(attVal) + "\"";
 			}
 			else{
-				dropCap +=" ×Ö:¼ä¾à=\"0\"";
-			}		
-			dropCap += "/>";		
+				dropCap +=" å­—:é—´è·=\"0\"";
+			}
+			dropCap += "/>";
 			_result += dropCap;
 		}
-		
+
 		else if(qName.equals("style:tab-stops")){
-			_tab_stops +="<×Ö:ÖÆ±íÎ»ÉèÖÃ>";
+			_tab_stops +="<å­—:åˆ¶è¡¨ä½è®¾ç½®>";
 		}
 		else if(qName.equals("style:tab-stop")){
-			String tab = "<×Ö:ÖÆ±íÎ»";
-			
+			String tab = "<å­—:åˆ¶è¡¨ä½";
+
 			if((attVal = atts.getValue("style:position")) != null){
-				tab += " ×Ö:Î»ÖÃ=\"" + Unit_Converter.convert(attVal) +"\"";
+				tab += " å­—:ä½ç½®=\"" + Unit_Converter.convert(attVal) +"\"";
 			}
 			if((attVal = atts.getValue("style:type")) != null
-				&& (attVal.equals("left") || attVal.equals("center") 
+				&& (attVal.equals("left") || attVal.equals("center")
 						|| attVal.equals("right"))) {
-				tab +=" ×Ö:ÀàĞÍ=\"" + attVal +"\"";
+				tab +=" å­—:ç±»å‹=\"" + attVal +"\"";
 			}
 			if((attVal=atts.getValue("style:leader-style")) != null){
-				int style = 0;			//Ç°µ¼·ûÊÇÊı×Ö£º1-5
-								
+				int style = 0;			//å‰å¯¼ç¬¦æ˜¯æ•°å­—ï¼š1-5
+
 				if(attVal.equals("none")){
 					style = 0;
 				}
@@ -183,16 +183,16 @@ public class Para_Style extends Common_Pro{
 				else {
 					style = 1;
 				}
-				
-				tab +=" ×Ö:Ç°µ¼·û=\"" + style +"\"";
+
+				tab +=" å­—:å‰å¯¼ç¬¦=\"" + style +"\"";
 			}
 
-			tab += "/>";		
+			tab += "/>";
 			_tab_stops += tab;
 
 		}
 	}
-	
+
 	public static void process_end(String qName){
 		if(qName.equals("style:graphic-properties")){
 			_filter_tag = false;
@@ -200,18 +200,18 @@ public class Para_Style extends Common_Pro{
 		else if(_filter_tag){
 			return ;
 		}
-		
+
 		else if(qName.equals("style:tab-stops")){
-			_tab_stops +="</×Ö:ÖÆ±íÎ»ÉèÖÃ>";
+			_tab_stops +="</å­—:åˆ¶è¡¨ä½è®¾ç½®>";
 		}
 		else if (qName.equals("style:default-style") || qName.equals("style:style")) {
 			float fontSize = Sent_Style.get_fontsize();
 			if(fontSize != 0){
 				Style_Data.add_font_size(_id,fontSize);
 			}
-			
-			Style_Data.add_para_grapro(_id,_leftMargin + "Ò»" + _rightMargin + "¶ş"
-					+ _topMargin + "Èı" + _bottomMargin + "ËÄ" + _writing_mode + "Îå");    //·ÖÎªÎå¸ö×Ö¶Î,"Ò»¶şÈıËÄ"±ãÓÚ¼ìË÷
+
+			Style_Data.add_para_grapro(_id,_leftMargin + "ä¸€" + _rightMargin + "äºŒ"
+					+ _topMargin + "ä¸‰" + _bottomMargin + "å››" + _writing_mode + "äº”");    //åˆ†ä¸ºäº”ä¸ªå­—æ®µ,"ä¸€äºŒä¸‰å››"ä¾¿äºæ£€ç´¢
 			_id = "";
 
 			_leftMargin = "";
@@ -220,189 +220,189 @@ public class Para_Style extends Common_Pro{
 			_bottomMargin = "";
 			_writing_mode = "";
 		}
-		
+
 		_result += _tab_stops;
 		_tab_stops = "";
 	}
-	
+
 	public static String process_para_atts(Attributes atts){
 		String attVal = "";
 		String result = "";
-		
-		//======¶ÔÆë=====
+
+		//======å¯¹é½=====
 		String alignVal = "";
 		if((attVal=atts.getValue("fo:text-align")) != null){
-			alignVal +=  " ×Ö:Ë®Æ½¶ÔÆë=\"" + conv_text_align(attVal) + "\"";
+			alignVal +=  " å­—:æ°´å¹³å¯¹é½=\"" + conv_text_align(attVal) + "\"";
 		}
 		if((attVal=atts.getValue("style:vertical-align")) != null){
-			alignVal += " ×Ö:ÎÄ×Ö¶ÔÆë=\"" + conv_vertical_align(attVal) + "\"";
+			alignVal += " å­—:æ–‡å­—å¯¹é½=\"" + conv_vertical_align(attVal) + "\"";
 		}
 		if(!alignVal.equals("")){
-			result += "<×Ö:¶ÔÆë  uof:locID=\"t0055\" uof:attrList=\"Ë®Æ½¶ÔÆë ÎÄ×Ö¶ÔÆë\"" 
+			result += "<å­—:å¯¹é½  uof:locID=\"t0055\" uof:attrList=\"æ°´å¹³å¯¹é½ æ–‡å­—å¯¹é½\""
 				+ alignVal + "/>";
 		}
-		
-		//======Ëõ½ø=====
+
+		//======ç¼©è¿›=====
 		String indentVal = "";
 		if((attVal=atts.getValue("fo:margin-left")) != null){
-			indentVal += "<×Ö:×ó>";
-			indentVal += "<×Ö:¾ø¶Ô uof:locID=\"t0185\" uof:attrList=\"Öµ\"" +
-						" ×Ö:Öµ=\"" + Unit_Converter.convert(attVal) + "\"/>";;		
-			indentVal += "</×Ö:×ó>";
+			indentVal += "<å­—:å·¦>";
+			indentVal += "<å­—:ç»å¯¹ uof:locID=\"t0185\" uof:attrList=\"å€¼\"" +
+						" å­—:å€¼=\"" + Unit_Converter.convert(attVal) + "\"/>";;
+			indentVal += "</å­—:å·¦>";
 		}
 		if((attVal=atts.getValue("fo:margin-right")) != null){
-			indentVal += "<×Ö:ÓÒ>";
-				indentVal += "<×Ö:¾ø¶Ô uof:locID=\"t0187\" uof:attrList=\"Öµ\"" +
-							" ×Ö:Öµ=\"" + Unit_Converter.convert(attVal) + "\"/>";;
-			indentVal += "</×Ö:ÓÒ>";
+			indentVal += "<å­—:å³>";
+				indentVal += "<å­—:ç»å¯¹ uof:locID=\"t0187\" uof:attrList=\"å€¼\"" +
+							" å­—:å€¼=\"" + Unit_Converter.convert(attVal) + "\"/>";;
+			indentVal += "</å­—:å³>";
 		}
 		if((attVal=atts.getValue("fo:text-indent")) != null){
-			indentVal += "<×Ö:Ê×ĞĞ>";
-			indentVal += "<×Ö:¾ø¶Ô uof:locID=\"t0189\" uof:attrList=\"Öµ\"" +
-						" ×Ö:Öµ=\"" + Unit_Converter.convert(attVal) + "\"/>";;		
-			indentVal += "</×Ö:Ê×ĞĞ>";
+			indentVal += "<å­—:é¦–è¡Œ>";
+			indentVal += "<å­—:ç»å¯¹ uof:locID=\"t0189\" uof:attrList=\"å€¼\"" +
+						" å­—:å€¼=\"" + Unit_Converter.convert(attVal) + "\"/>";;
+			indentVal += "</å­—:é¦–è¡Œ>";
 		}
 		if(!indentVal.equals("")){
-			result += "<×Ö:Ëõ½ø uof:locID=\"t0056\">" + indentVal + "</×Ö:Ëõ½ø>";
+			result += "<å­—:ç¼©è¿› uof:locID=\"t0056\">" + indentVal + "</å­—:ç¼©è¿›>";
 		}
-		
-		//======ĞĞ¾à=====
+
+		//======è¡Œè·=====
 		String rowSpace = "";
 		if((attVal = atts.getValue("fo:line-height")) != null && !attVal.equals("normal")) {
 			if(attVal.contains("%")) {
-				rowSpace  += "<×Ö:ĞĞ¾à ×Ö:ÀàĞÍ=\"multi-lines\" ×Ö:Öµ=\"" 
+				rowSpace  += "<å­—:è¡Œè· å­—:ç±»å‹=\"multi-lines\" å­—:å€¼=\""
 					+ Unit_Converter.from_percent(attVal) + "\"/>";
 			}
 			else {
-				rowSpace  += "<×Ö:ĞĞ¾à ×Ö:ÀàĞÍ=\"fixed\" ×Ö:Öµ=\"" 
+				rowSpace  += "<å­—:è¡Œè· å­—:ç±»å‹=\"fixed\" å­—:å€¼=\""
 					+ Unit_Converter.convert(attVal) + "\"/>";
 			}
 		}
-		else if((attVal = atts.getValue("style:line-height-at-least")) != null){	
-			rowSpace += "<×Ö:ĞĞ¾à ×Ö:ÀàĞÍ=\"at-least\" ×Ö:Öµ=\""
+		else if((attVal = atts.getValue("style:line-height-at-least")) != null){
+			rowSpace += "<å­—:è¡Œè· å­—:ç±»å‹=\"at-least\" å­—:å€¼=\""
 					+ Unit_Converter.convert(attVal) + "\"/>";
 		}
 		else if((attVal = atts.getValue("style:line-spacing")) != null){
-			rowSpace += " <×Ö:ĞĞ¾à ×Ö:ÀàĞÍ=\"line-space\" ×Ö:Öµ=\"" 
+			rowSpace += " <å­—:è¡Œè· å­—:ç±»å‹=\"line-space\" å­—:å€¼=\""
 					+ Unit_Converter.convert(attVal) + "\"/>";
 		}
-		result += rowSpace;	
-		
-		//======¶ÎÇ°¾à=====
+		result += rowSpace;
+
+		//======æ®µå‰è·=====
 		String paraSpace = "";
 		if ((attVal = atts.getValue("fo:margin-top")) != null) {
-			paraSpace += "<×Ö:¶ÎÇ°¾à>";
-			paraSpace += "<×Ö:¾ø¶ÔÖµ uof:locID=\"t0199\" uof:attrList=\"Öµ\"" +
-					" ×Ö:Öµ=\"" + Unit_Converter.convert(attVal) + "\"/>";;
-			paraSpace += "</×Ö:¶ÎÇ°¾à>";
+			paraSpace += "<å­—:æ®µå‰è·>";
+			paraSpace += "<å­—:ç»å¯¹å€¼ uof:locID=\"t0199\" uof:attrList=\"å€¼\"" +
+					" å­—:å€¼=\"" + Unit_Converter.convert(attVal) + "\"/>";;
+			paraSpace += "</å­—:æ®µå‰è·>";
 		}
 		if ((attVal = atts.getValue("fo:margin-bottom")) != null) {
-			paraSpace += "<×Ö:¶Îºó¾à>";
-			paraSpace += "<×Ö:¾ø¶ÔÖµ uof:locID=\"t0202\" uof:attrList=\"Öµ\"" +
-					" ×Ö:Öµ=\"" + Unit_Converter.convert(attVal) + "\"/>";;
-			paraSpace += "</×Ö:¶Îºó¾à>";
+			paraSpace += "<å­—:æ®µåè·>";
+			paraSpace += "<å­—:ç»å¯¹å€¼ uof:locID=\"t0202\" uof:attrList=\"å€¼\"" +
+					" å­—:å€¼=\"" + Unit_Converter.convert(attVal) + "\"/>";;
+			paraSpace += "</å­—:æ®µåè·>";
 		}
 		if(paraSpace.length() != 0){
-			result += "<×Ö:¶Î¼ä¾à>" + paraSpace + "</×Ö:¶Î¼ä¾à>";
+			result += "<å­—:æ®µé—´è·>" + paraSpace + "</å­—:æ®µé—´è·>";
 		}
-		
-		//======×Ô¶¯±àºÅĞÅÏ¢=====
-		
-		//======¹ÂĞĞ¿ØÖÆ=====
+
+		//======è‡ªåŠ¨ç¼–å·ä¿¡æ¯=====
+
+		//======å­¤è¡Œæ§åˆ¶=====
 		if((attVal = atts.getValue("fo:orphans")) != null){
-			result += "<×Ö:¹ÂĞĞ¿ØÖÆ>" + attVal + "</×Ö:¹ÂĞĞ¿ØÖÆ>";
+			result += "<å­—:å­¤è¡Œæ§åˆ¶>" + attVal + "</å­—:å­¤è¡Œæ§åˆ¶>";
 		}
-		
-		//======¹ÑĞĞ¿ØÖÆ=====
+
+		//======å¯¡è¡Œæ§åˆ¶=====
 		if((attVal = atts.getValue("fo:widows")) != null){
-			result += "<×Ö:¹ÑĞĞ¿ØÖÆ>" + attVal + "</×Ö:¹ÑĞĞ¿ØÖÆ>";
+			result += "<å­—:å¯¡è¡Œæ§åˆ¶>" + attVal + "</å­—:å¯¡è¡Œæ§åˆ¶>";
 		}
-		
-		//======¶ÎÖĞ²»·ÖÒ³=====
+
+		//======æ®µä¸­ä¸åˆ†é¡µ=====
 		if((attVal = atts.getValue("fo:keep-together")) != null){
 			if(attVal.equals("always")){
-				result += "<×Ö:¶ÎÖĞ²»·ÖÒ³ ×Ö:Öµ=\"true\"/>"; 
+				result += "<å­—:æ®µä¸­ä¸åˆ†é¡µ å­—:å€¼=\"true\"/>";
 			}
 		}
-		
-		//======ÓëÏÂ¶ÎÍ¬Ò³=====
+
+		//======ä¸ä¸‹æ®µåŒé¡µ=====
 		if((attVal = atts.getValue("fo:keep-with-next")) != null){
 			if(attVal.equals("always")){
-				result += "<×Ö:ÓëÏÂ¶ÎÍ¬Ò³ ×Ö:Öµ=\"true\"/>"; 
+				result += "<å­—:ä¸ä¸‹æ®µåŒé¡µ å­—:å€¼=\"true\"/>";
 			}
 		}
-		
-		//¶ÎÇ°·ÖÒ³
+
+		//æ®µå‰åˆ†é¡µ
 		if((attVal = atts.getValue("fo:break-before")) != null){
 			if(attVal.equals("page")){
-				result += "<×Ö:¶ÎÇ°·ÖÒ³ ×Ö:Öµ=\"true\"/>";
+				result += "<å­—:æ®µå‰åˆ†é¡µ å­—:å€¼=\"true\"/>";
 			}
 		}
-		
-		//======±ß¿ò=====
+
+		//======è¾¹æ¡†=====
 		result += get_borders("text", atts);
-		
-		//======Ìî³ä=====
+
+		//======å¡«å……=====
 		if((attVal=atts.getValue("fo:background-color")) != null) {
 			if (!attVal.equals("transparent")){
 				String padding = "";
-				
-				padding = "<Í¼:Í¼°¸ Í¼:ÀàĞÍ=\"Çå³ı\"" +
-						" Í¼:Ç°¾°É«=\"auto\" Í¼:±³¾°É«=\"" + attVal + "\"/>";
-				result += "<×Ö:Ìî³ä uof:locID=\"t0066\">" + padding + "</×Ö:Ìî³ä>";
+
+				padding = "<å›¾:å›¾æ¡ˆ å›¾:ç±»å‹=\"æ¸…é™¤\"" +
+						" å›¾:å‰æ™¯è‰²=\"auto\" å›¾:èƒŒæ™¯è‰²=\"" + attVal + "\"/>";
+				result += "<å­—:å¡«å…… uof:locID=\"t0066\">" + padding + "</å­—:å¡«å……>";
 			}
 		}
-		
-		//======¶ÔÆëÍø¸ñ=====
+
+		//======å¯¹é½ç½‘æ ¼=====
 		if((attVal = atts.getValue("style:snap-to-layout-grid")) != null){
 			if(attVal.equals("true")){
-				result += "<×Ö:¶ÔÆëÍø¸ñ ×Ö:Öµ=\"" + attVal + "\"/>";
+				result += "<å­—:å¯¹é½ç½‘æ ¼ å­—:å€¼=\"" + attVal + "\"/>";
 			}
 		}
-		
-		//======È¡Ïû¶Ï×Ö=====¶ÔÓ¦¹ØÏµÓĞÎÊÌâ
-		
-		//======È¡ÏûĞĞºÅ=====
+
+		//======å–æ¶ˆæ–­å­—=====å¯¹åº”å…³ç³»æœ‰é—®é¢˜
+
+		//======å–æ¶ˆè¡Œå·=====
 		if((attVal = atts.getValue("text:number-lines")) != null){
 			if(attVal.equals("true")){
-				result += "<×Ö:È¡ÏûĞĞºÅ ×Ö:Öµ=\"false\"/>";
+				result += "<å­—:å–æ¶ˆè¡Œå· å­—:å€¼=\"false\"/>";
 			}
 			else {
-				result += "<×Ö:È¡ÏûĞĞºÅ ×Ö:Öµ=\"true\"/>";
+				result += "<å­—:å–æ¶ˆè¡Œå· å­—:å€¼=\"true\"/>";
 			}
 		}
-		
-		//ÔÊĞíµ¥´Ê¶Ï×Ö  fo:hyphenate(text-properties)
-		
-		//======ÊÇ·ñĞĞÊ×±êµãÑ¹Ëõ=====
+
+		//å…è®¸å•è¯æ–­å­—  fo:hyphenate(text-properties)
+
+		//======æ˜¯å¦è¡Œé¦–æ ‡ç‚¹å‹ç¼©=====
 		if((attVal = atts.getValue("style:punctuation-wrap")) != null){
 			if(attVal.equals("hanging")){
-				result += "<×Ö:ÊÇ·ñĞĞÊ×±êµãÑ¹Ëõ ×Ö:Öµ=\"true\"/>";
+				result += "<å­—:æ˜¯å¦è¡Œé¦–æ ‡ç‚¹å‹ç¼© å­—:å€¼=\"true\"/>";
 			}
-			else { 
-				result += "<×Ö:ÊÇ·ñĞĞÊ×±êµãÑ¹Ëõ ×Ö:Öµ=\"false\"/>";	
+			else {
+				result += "<å­—:æ˜¯å¦è¡Œé¦–æ ‡ç‚¹å‹ç¼© å­—:å€¼=\"false\"/>";
 			}
 		}
-		
-		//======×Ô¶¯µ÷ÕûÖĞÓ¢ÎÄ×Ö·û¼ä¾à====
+
+		//======è‡ªåŠ¨è°ƒæ•´ä¸­è‹±æ–‡å­—ç¬¦é—´è·====
 		if((attVal = atts.getValue("style:text-autospace")) != null){
 			if(attVal.equals("ideograph-alpha"))
 			{
-				result += "<×Ö:×Ô¶¯µ÷ÕûÖĞÓ¢ÎÄ×Ö·û¼ä¾à ×Ö:Öµ=\"true\"/>";
-				result += "<×Ö:×Ô¶¯µ÷ÕûÖĞÎÄÓëÊı×Ö¼ä¾à ×Ö:Öµ=\"true\"/>";
+				result += "<å­—:è‡ªåŠ¨è°ƒæ•´ä¸­è‹±æ–‡å­—ç¬¦é—´è· å­—:å€¼=\"true\"/>";
+				result += "<å­—:è‡ªåŠ¨è°ƒæ•´ä¸­æ–‡ä¸æ•°å­—é—´è· å­—:å€¼=\"true\"/>";
 			}
 			else  {
-				result += "<×Ö:×Ô¶¯µ÷ÕûÖĞÓ¢ÎÄ×Ö·û¼ä¾à ×Ö:Öµ=\"false\"/>";
-				result += "<×Ö:×Ô¶¯µ÷ÕûÖĞÎÄÓëÊı×Ö¼ä¾à ×Ö:Öµ=\"false\"/>";
+				result += "<å­—:è‡ªåŠ¨è°ƒæ•´ä¸­è‹±æ–‡å­—ç¬¦é—´è· å­—:å€¼=\"false\"/>";
+				result += "<å­—:è‡ªåŠ¨è°ƒæ•´ä¸­æ–‡ä¸æ•°å­—é—´è· å­—:å€¼=\"false\"/>";
 			}
 		}
-		
+
 		return result;
 	}
-	
+
 	private static String conv_text_align(String val){
 		String convVal = "general";
-		
+
 		if(val.equals("start")){
 			convVal = "left";
 		}
@@ -421,13 +421,13 @@ public class Para_Style extends Common_Pro{
 		else if(val.equals("center")){
 			convVal = "center";
 		}
-		
+
 		return convVal;
 	}
-	
+
 	private static String conv_vertical_align(String val){
 		String convVal = "bottom";
-		
+
 		if(val.equals("top")){
 			convVal = "top";
 		}
@@ -437,7 +437,7 @@ public class Para_Style extends Common_Pro{
 		else if(val.equals("bottom")){
 			convVal = "bottom";
 		}
-		
+
 		return convVal;
 	}
 }

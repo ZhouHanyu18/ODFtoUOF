@@ -4,47 +4,47 @@ import org.xml.sax.Attributes;
 import text.Sec_Style;
 
 /**
- * ´¦Àí<style:master-page> µ½ <×Ö:·Ö½Ú>µÄ×ª»»¡£
- * 
+ * å¤„ç†<style:master-page> åˆ° <å­—:åˆ†èŠ‚>çš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
 public class Master_Page {
-	private static String _left_header_content = "";			//Å¼ÊıÒ³Ã¼µÄÄÚÈİ
-	private static String _header_content = "";					//±ê×¼Ò³Ã¼µÄÄÚÈİ
-	private static String _left_footer_content = "";			//Å¼ÊıÒ³½ÅµÄÄÚÈİ
-	private static String _footer_content = "";					//±ê×¼Ò³½ÅµÄÄÚÈİ
+	private static String _left_header_content = "";			//å¶æ•°é¡µçœ‰çš„å†…å®¹
+	private static String _header_content = "";					//æ ‡å‡†é¡µçœ‰çš„å†…å®¹
+	private static String _left_footer_content = "";			//å¶æ•°é¡µè„šçš„å†…å®¹
+	private static String _footer_content = "";					//æ ‡å‡†é¡µè„šçš„å†…å®¹
 	//tag for text content
 	private static boolean _text_content_tag = false;
 	//name of first page-layout used by master-page
 	private static String _first_PLname = "";
 	//
-	private static Sec_Style _cur_sec_style = null;				//¶ÔÓ¦µÄSecStyleÒıÓÃ
-	
-	
+	private static Sec_Style _cur_sec_style = null;				//å¯¹åº”çš„SecStyleå¼•ç”¨
+
+
 	private static void clear(){
 		_footer_content =  "";
 		_left_footer_content = "";
 		_header_content =  "";
 		_left_header_content = "";
 	}
-	
+
 	public static String get_result(){
-		String rst = "";	
+		String rst = "";
 		Sec_Style first = Page_Layout.get_sec_style(_first_PLname);
-		
-		rst = "<×Ö:·Ö½Ú>";
+
+		rst = "<å­—:åˆ†èŠ‚>";
 		if(first != null){
 			rst += first.get_result();
 		}
-		rst += "</×Ö:·Ö½Ú>";
-		
+		rst += "</å­—:åˆ†èŠ‚>";
+
 		return rst;
 	}
-	
+
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		
+
 		if(_text_content_tag){
 			Text_Content.process_start(qName,atts);
 		}
@@ -55,23 +55,23 @@ public class Master_Page {
 		else if(qName.equals("style:master-page")){
 			attVal = atts.getValue("style:page-layout-name");
 			attVal = (attVal==null) ? "" : attVal;
-			
+
 			if(_first_PLname.equals("")){
 				_first_PLname = attVal;
 			}
-			
+
 			_cur_sec_style = Page_Layout.get_sec_style(attVal);
 		}
 	}
-	
+
 	public static void process_chars(String chs){
 		if(_text_content_tag){
 			Text_Content.process_chars(chs);
 		}
 	}
-	
 
-	public static void process_end(String qName){	
+
+	public static void process_end(String qName){
 		if(qName.equals("style:header")){
 			_text_content_tag = false;
 			_header_content = Text_Content.get_result();
@@ -88,7 +88,7 @@ public class Master_Page {
 			_text_content_tag = false;
 			_left_footer_content = Text_Content.get_result();
 			if(_left_footer_content.length() != 0){
-				String str = "<×Ö:ÆæÅ¼Ò³Ò³Ã¼Ò³½Å²»Í¬ ×Ö:Öµ=\"true\"/>";
+				String str = "<å­—:å¥‡å¶é¡µé¡µçœ‰é¡µè„šä¸åŒ å­—:å€¼=\"true\"/>";
 				_cur_sec_style.set_differ_even_odd(str);
 			}
 		}
@@ -101,42 +101,42 @@ public class Master_Page {
 			Text_Content.process_end(qName);
 		}
 	}
-	
-	//È¡µÃ<×Ö:Ò³Ã¼>µÄ×ª»»½á¹û
+
+	//å–å¾—<å­—:é¡µçœ‰>çš„è½¬æ¢ç»“æœ
 	private static String get_header(){
 		String header = "";
-		
+
 		if(!_header_content.equals("")||!_left_header_content.equals("")){
-			header += "<×Ö:Ò³Ã¼>";
-			
-			header += "<×Ö:ÆæÊıÒ³Ò³Ã¼>" + _header_content + "</×Ö:ÆæÊıÒ³Ò³Ã¼>";
-			
+			header += "<å­—:é¡µçœ‰>";
+
+			header += "<å­—:å¥‡æ•°é¡µé¡µçœ‰>" + _header_content + "</å­—:å¥‡æ•°é¡µé¡µçœ‰>";
+
 			if(_left_header_content.equals("")){
-				header += "<×Ö:Å¼ÊıÒ³Ò³Ã¼>" + _header_content + "</×Ö:Å¼ÊıÒ³Ò³Ã¼>";
+				header += "<å­—:å¶æ•°é¡µé¡µçœ‰>" + _header_content + "</å­—:å¶æ•°é¡µé¡µçœ‰>";
 			}else{
-				header += "<×Ö:Å¼ÊıÒ³Ò³Ã¼>" + _left_header_content + "</×Ö:Å¼ÊıÒ³Ò³Ã¼>";
+				header += "<å­—:å¶æ•°é¡µé¡µçœ‰>" + _left_header_content + "</å­—:å¶æ•°é¡µé¡µçœ‰>";
 			}
-			header += "</×Ö:Ò³Ã¼>";
+			header += "</å­—:é¡µçœ‰>";
 		}
-		
+
 		return header;
 	}
-	
-	//È¡µÃ<×Ö:Ò³½Å>µÄ×ª»»½á¹û
+
+	//å–å¾—<å­—:é¡µè„š>çš„è½¬æ¢ç»“æœ
 	private static String get_footer(){
 		String footer = "";
-		
+
 		if(!_footer_content.equals("")||!_left_footer_content.equals("")){
-			footer += "<×Ö:Ò³½Å>";
-			
-			footer += "<×Ö:ÆæÊıÒ³Ò³½Å>" + _footer_content + "</×Ö:ÆæÊıÒ³Ò³½Å>";
-			
+			footer += "<å­—:é¡µè„š>";
+
+			footer += "<å­—:å¥‡æ•°é¡µé¡µè„š>" + _footer_content + "</å­—:å¥‡æ•°é¡µé¡µè„š>";
+
 			if(_left_footer_content.equals("")){
-				footer += "<×Ö:Å¼ÊıÒ³Ò³½Å>" + _footer_content + "</×Ö:Å¼ÊıÒ³Ò³½Å>";
+				footer += "<å­—:å¶æ•°é¡µé¡µè„š>" + _footer_content + "</å­—:å¶æ•°é¡µé¡µè„š>";
 			}else{
-				footer += "<×Ö:Å¼ÊıÒ³Ò³½Å>" + _left_footer_content + "</×Ö:Å¼ÊıÒ³Ò³½Å>";
+				footer += "<å­—:å¶æ•°é¡µé¡µè„š>" + _left_footer_content + "</å­—:å¶æ•°é¡µé¡µè„š>";
 			}
-			footer += "</×Ö:Ò³½Å>";
+			footer += "</å­—:é¡µè„š>";
 		}
 
 		return footer;

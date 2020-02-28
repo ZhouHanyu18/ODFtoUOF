@@ -13,38 +13,38 @@ public class Styles {
 	//type of the style
 	private static String _style_type = "";
 	//current style name
-	private static String _current_id = "";	
-	//uof:¶ÎÂäÊ½Ñù
-	private static boolean _para_tag = false;				
-	//uof:¾äÊ½Ñù
-	private static boolean _text_tag = false;		
-	//uof:ÎÄ×Ö±íÊ½Ñù
-	private static boolean _table_tag = false;				
-	//×Ö:µ¥Ôª¸ñÊôĞÔ
-	private static boolean _text_cell_tag = false;			
-	//uof:µ¥Ôª¸ñÊ½Ñù
-	private static boolean _sheet_cell_tag = false;			
-	//±í:ÁĞ »ò ×Ö:ÁĞ
-	private static boolean _column_tag = false;				
-	//×Ö:±íĞĞÊôĞÔ
-	private static boolean _row_tag = false;				
-	//uof:×Ô¶¯±àºÅĞÅÏ¢
-	private static boolean _list_tag = false;		
+	private static String _current_id = "";
+	//uof:æ®µè½å¼æ ·
+	private static boolean _para_tag = false;
+	//uof:å¥å¼æ ·
+	private static boolean _text_tag = false;
+	//uof:æ–‡å­—è¡¨å¼æ ·
+	private static boolean _table_tag = false;
+	//å­—:å•å…ƒæ ¼å±æ€§
+	private static boolean _text_cell_tag = false;
+	//uof:å•å…ƒæ ¼å¼æ ·
+	private static boolean _sheet_cell_tag = false;
+	//è¡¨:åˆ— æˆ– å­—:åˆ—
+	private static boolean _column_tag = false;
+	//å­—:è¡¨è¡Œå±æ€§
+	private static boolean _row_tag = false;
+	//uof:è‡ªåŠ¨ç¼–å·ä¿¡æ¯
+	private static boolean _list_tag = false;
 	//graphic
-	private static boolean _graphic_tag = false;	
+	private static boolean _graphic_tag = false;
 	//draw page
 	private static boolean _draw_page_tag = false;
 	//draw:*
 	private static boolean _in_draw_tag = false;
 	//number:number-style..
-	private static boolean _number_tag = false;			
-	
+	private static boolean _number_tag = false;
+
 	public static void init(){
 		_style_type = "";
 		_current_id = "";
 	}
-	
-	public static void process_start(String qName,Attributes atts){		
+
+	public static void process_start(String qName,Attributes atts){
 		if(_para_tag){
 			Para_Style.process_start(qName, atts);
 		}
@@ -87,7 +87,7 @@ public class Styles {
 		}
 		else if(qName.equals("style:style") || qName.equals("style:default-style")){
 			_style_type = atts.getValue("style:family");
-			
+
 			_current_id = atts.getValue("style:name");
 			if(_current_id == null){
 				_current_id = "";
@@ -140,12 +140,12 @@ public class Styles {
 			_number_tag = true;
 			Number_Style.process_start(qName,atts);
 		}
-		else if(qName.equals("text:notes-configuration") 
+		else if(qName.equals("text:notes-configuration")
 				|| qName.equals("text:linenumbering-configuration")){
 			Text_Config.process_start(qName,atts);
 		}
 	}
-	
+
 	public static void process_chars(String chs){
 		if (_in_draw_tag){
 			Graphic_Handler.process_chars(chs);
@@ -154,7 +154,7 @@ public class Styles {
 			Number_Style.process_chars(chs);
 		}
 	}
-	
+
 	public static void process_end(String qName){
 		if (qName.equals("style:style") || qName.equals("style:default-style")) {
 			if(_style_type.equals("paragraph")){
@@ -168,7 +168,7 @@ public class Styles {
 				Style_Data.add_styles(Sent_Style.get_result());
 			}
 			else if(_style_type.equals("table")){
-				_table_tag = false;					
+				_table_tag = false;
 				//nothing to do
 			}
 			else if(_style_type.equals("table-column")){
@@ -199,15 +199,15 @@ public class Styles {
 				_draw_page_tag = false;
 				Draw_Page_Style.process_end(qName);
 			}
-			
+
 			_style_type = "";
 		}
-		
+
 		else if(qName.equals("text:list-style")||qName.equals("text:outline-style")){
 			_list_tag = false;
 			Auto_Num.process_end(qName);
 		}
-		
+
 		else if(qName.startsWith("number:")&&qName.endsWith("-style")){
 			_number_tag = false;
 			Number_Style.process_end(qName);

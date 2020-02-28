@@ -14,112 +14,112 @@ public class Cell_Pro extends Common_Pro{
 	//the result
 	private static String _cell_pro = "";
 	//
-//	private static boolean _padding_trans = false;	
-	
+//	private static boolean _padding_trans = false;
+
 	private static void clear(){
 //		_padding_trans = false;
 		_cell_pro = "";
 	}
-	
+
 	public static String get_result(){
 		String result = _cell_pro;
 
 		clear();
 		return result;
 	}
-	
+
 	public static void process_start(String qName, Attributes atts){
 		String attVal = "";
-		
-		if(qName.equals("style:style")){		
+
+		if(qName.equals("style:style")){
 
 		}
-		
+
 		else if(qName.equals("style:background-image")){
 			String padding = Sent_Style.deal_with_bg_image(atts);
 			if(!padding.equals("")){
-				_cell_pro +=  "<×Ö:Ìî³ä uof:locID=\"t0153\">" + padding + "</×Ö:Ìî³ä>";
+				_cell_pro +=  "<å­—:å¡«å…… uof:locID=\"t0153\">" + padding + "</å­—:å¡«å……>";
 			}
 		}
-		
+
 		else if(qName.equals("style:table-cell-properties")){
-					
-			_cell_pro += get_padding(atts);					//µ¥Ôª¸ñ±ß¾à
-					
-			_cell_pro += get_borders("text",atts).replace("t0065","t0152");		//±ß¿ò
-					
-			attVal = atts.getValue("fo:background-color");	//Ìî³ä
-			if(attVal != null) {						
+
+			_cell_pro += get_padding(atts);					//å•å…ƒæ ¼è¾¹è·
+
+			_cell_pro += get_borders("text",atts).replace("t0065","t0152");		//è¾¹æ¡†
+
+			attVal = atts.getValue("fo:background-color");	//å¡«å……
+			if(attVal != null) {
 				/*if (!attVal.equals("transparent")){
-					_cell_pro += "<×Ö:Ìî³ä uof:locID=\"t0153\">";
-					_cell_pro +=  "<uof:ÑÕÉ«>" + attVal + "</uof:ÑÕÉ«>";
-					_cell_pro += "</×Ö:Ìî³ä>";;
+					_cell_pro += "<å­—:å¡«å…… uof:locID=\"t0153\">";
+					_cell_pro +=  "<uof:é¢œè‰²>" + attVal + "</uof:é¢œè‰²>";
+					_cell_pro += "</å­—:å¡«å……>";;
 				}*/
-				if (!attVal.equals("transparent")){		
-					_cell_pro += "<×Ö:Ìî³ä uof:locID=\"t0153\">";
-					_cell_pro += "<Í¼:Í¼°¸ Í¼:ÀàĞÍ=\"Çå³ı\"";
-					_cell_pro += " Í¼:Ç°¾°É«=\"auto\" Í¼:±³¾°É«=\"" + attVal + "\"/>";
-					_cell_pro += "</×Ö:Ìî³ä>";
+				if (!attVal.equals("transparent")){
+					_cell_pro += "<å­—:å¡«å…… uof:locID=\"t0153\">";
+					_cell_pro += "<å›¾:å›¾æ¡ˆ å›¾:ç±»å‹=\"æ¸…é™¤\"";
+					_cell_pro += " å›¾:å‰æ™¯è‰²=\"auto\" å›¾:èƒŒæ™¯è‰²=\"" + attVal + "\"/>";
+					_cell_pro += "</å­—:å¡«å……>";
 				}
 			}
-				
-			attVal=atts.getValue("style:vertical-align");	//´¹Ö±¶ÔÆë·½Ê½
-			if (attVal != null) {		
-					_cell_pro += "<×Ö:´¹Ö±¶ÔÆë·½Ê½>"; 
-					_cell_pro += conv_vertical_align(attVal);
-					_cell_pro += "</×Ö:´¹Ö±¶ÔÆë·½Ê½>";
-			}	
 
-			attVal=atts.getValue("fo:wrap-option");			//×Ô¶¯»»ĞĞ
+			attVal=atts.getValue("style:vertical-align");	//å‚ç›´å¯¹é½æ–¹å¼
+			if (attVal != null) {
+					_cell_pro += "<å­—:å‚ç›´å¯¹é½æ–¹å¼>";
+					_cell_pro += conv_vertical_align(attVal);
+					_cell_pro += "</å­—:å‚ç›´å¯¹é½æ–¹å¼>";
+			}
+
+			attVal=atts.getValue("fo:wrap-option");			//è‡ªåŠ¨æ¢è¡Œ
 			if (attVal != null) {
 				if (attVal.equals("wrap")){
-					_cell_pro += "<×Ö:×Ô¶¯»»ĞĞ ×Ö:Öµ=\"false\"/>";
+					_cell_pro += "<å­—:è‡ªåŠ¨æ¢è¡Œ å­—:å€¼=\"false\"/>";
 				}
 				else{
-					_cell_pro += "<×Ö:×Ô¶¯»»ĞĞ ×Ö:Öµ=\"true\"/>";
+					_cell_pro += "<å­—:è‡ªåŠ¨æ¢è¡Œ å­—:å€¼=\"true\"/>";
 				}
 			}
-				
-			attVal=atts.getValue("style:shrink-to-fit");//ÊÊÓ¦ÎÄ×Ö
+
+			attVal=atts.getValue("style:shrink-to-fit");//é€‚åº”æ–‡å­—
 			if (attVal != null) {
-				_cell_pro += "<×Ö:ÊÊÓ¦ÎÄ×Ö ×Ö:Öµ=\"" + attVal + "\"/>";
+				_cell_pro += "<å­—:é€‚åº”æ–‡å­— å­—:å€¼=\"" + attVal + "\"/>";
 			}
 		}
 	}
-	
+
 	private static String get_padding(Attributes atts){
 		String attVal = "";
-		String margin = "";	
-		
+		String margin = "";
+
 		if((attVal=atts.getValue("fo:padding")) != null) {
 			attVal = Unit_Converter.convert(attVal);
-			margin += " ×Ö:ÉÏ=\"" + attVal + "\" ×Ö:×ó=\"" + attVal
-					+ "\" ×Ö:ÓÒ=\"" + attVal + "\" ×Ö:ÏÂ=\"" + attVal + "\"";
+			margin += " å­—:ä¸Š=\"" + attVal + "\" å­—:å·¦=\"" + attVal
+					+ "\" å­—:å³=\"" + attVal + "\" å­—:ä¸‹=\"" + attVal + "\"";
 		}
 		if((attVal = atts.getValue("fo:padding-top")) != null){
-			margin += " ×Ö:ÉÏ=\"" + Unit_Converter.convert(attVal) + "\""; 
+			margin += " å­—:ä¸Š=\"" + Unit_Converter.convert(attVal) + "\"";
 		}
 		if((attVal = atts.getValue("fo:padding-left")) != null){
-			margin += " ×Ö:×ó=\"" + Unit_Converter.convert(attVal) + "\""; 
+			margin += " å­—:å·¦=\"" + Unit_Converter.convert(attVal) + "\"";
 		}
 		if((attVal = atts.getValue("fo:padding-right")) != null){
-			margin += " ×Ö:ÓÒ=\"" + Unit_Converter.convert(attVal) + "\"";
+			margin += " å­—:å³=\"" + Unit_Converter.convert(attVal) + "\"";
 		}
 		if((attVal = atts.getValue("fo:padding-bottom")) != null){
-			margin += " ×Ö:ÏÂ=\"" + Unit_Converter.convert(attVal) + "\"";
+			margin += " å­—:ä¸‹=\"" + Unit_Converter.convert(attVal) + "\"";
 		}
-		
+
 		if(margin.length() != 0){
-			margin = "<×Ö:µ¥Ôª¸ñ±ß¾à" + margin + "/>";
+			margin = "<å­—:å•å…ƒæ ¼è¾¹è·" + margin + "/>";
 		}
-		
+
 		return margin;
 	}
-	
+
 	private static String conv_vertical_align(String val){
-		//"style:vertical-align"ÊôĞÔÖµ£ºUOFÖĞbothºÍODFÖĞautomatic·Ö±ğÔÚ¶Ô·½ÕÒ²»µ½¶ÔÓ¦
+		//"style:vertical-align"å±æ€§å€¼ï¼šUOFä¸­bothå’ŒODFä¸­automaticåˆ†åˆ«åœ¨å¯¹æ–¹æ‰¾ä¸åˆ°å¯¹åº”
 		String convVal = "bottom";
-		
+
 		if(val.equals("top")){
 			convVal = "top";
 		}
@@ -129,7 +129,7 @@ public class Cell_Pro extends Common_Pro{
 		else if(val.equals("bottom")){
 			convVal = "bottom";
 		}
-		
+
 		return convVal;
 	}
 }

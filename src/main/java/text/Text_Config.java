@@ -4,92 +4,92 @@ import org.xml.sax.Attributes;
 import convertor.Unit_Converter;
 
 /**
- * ¥¶¿Ì<text:notes-configuration> µΩ <◊÷:Ω≈◊¢…Ë÷√>/<◊÷:Œ≤◊¢…Ë÷√>°¢
- * 	  <text:linenumbering-configuration> µΩ <◊÷:––∫≈…Ë÷√>µƒ◊™ªª°£
- * 
+ * Â§ÑÁêÜ<text:notes-configuration> Âà∞ <Â≠ó:ËÑöÊ≥®ËÆæÁΩÆ>/<Â≠ó:Â∞æÊ≥®ËÆæÁΩÆ>„ÄÅ
+ * 	  <text:linenumbering-configuration> Âà∞ <Â≠ó:Ë°åÂè∑ËÆæÁΩÆ>ÁöÑËΩ¨Êç¢„ÄÇ
+ *
  * @author xie
  *
  */
 public class Text_Config {
 	//the result
 	private static String _result = "";
-	
-	
+
+
 	public static String get_result(){
 		String rst = "";
-		
+
 		rst = _result;
 		_result = "";
 		return _result;
 	}
-	
+
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		String config = "";	
-		
+		String config = "";
+
 		if(qName.equals("text:notes-configuration")){
 			String type = "";
-			
+
 			type = atts.getValue("text:note-class");
 			if(type != null && type.equals("footnote")){
-				config = "<◊÷:Ω≈◊¢…Ë÷√";
-				config += " ◊÷:Œª÷√=\"page-bottom\"";
+				config = "<Â≠ó:ËÑöÊ≥®ËÆæÁΩÆ";
+				config += " Â≠ó:‰ΩçÁΩÆ=\"page-bottom\"";
 			}
 			else {
-				config = "<◊÷:Œ≤◊¢…Ë÷√";
-				config += " ◊÷:Œª÷√=\"doc-end\"";
+				config = "<Â≠ó:Â∞æÊ≥®ËÆæÁΩÆ";
+				config += " Â≠ó:‰ΩçÁΩÆ=\"doc-end\"";
 			}
-			
+
 			attVal = conv_format(atts.getValue("style:num-format"));
-			config += " ◊÷:∏Ò Ω=\"" + attVal + "\"";
-			
+			config += " Â≠ó:Ê†ºÂºè=\"" + attVal + "\"";
+
 			int startNum = 1;
 			attVal = atts.getValue("text:start-value");
 			if(attVal != null){
 				startNum = Integer.parseInt(attVal) + 1;
 			}
-			config += " ◊÷:∆ º±‡∫≈=\"" + startNum + "\"";
-			
-			config += " ◊÷:±‡∫≈∑Ω Ω=\"continuous\"";
+			config += " Â≠ó:Ëµ∑ÂßãÁºñÂè∑=\"" + startNum + "\"";
+
+			config += " Â≠ó:ÁºñÂè∑ÊñπÂºè=\"continuous\"";
 			config += "/>";
-			
+
 			_result = config;
 		}
-		
+
 		else if(qName.equals("text:linenumbering-configuration")){
-			config = "<◊÷:––∫≈…Ë÷√";
-			
+			config = "<Â≠ó:Ë°åÂè∑ËÆæÁΩÆ";
+
 			attVal = atts.getValue("text:number-lines");
 			attVal = (attVal == null) ? "true" : attVal;
-			config += " ◊÷: π”√––∫≈=\"" + attVal + "\"";
-			
-			config += " ◊÷:±‡∫≈∑Ω Ω=\"page\"";
-			
+			config += " Â≠ó:‰ΩøÁî®Ë°åÂè∑=\"" + attVal + "\"";
+
+			config += " Â≠ó:ÁºñÂè∑ÊñπÂºè=\"page\"";
+
 			int startNum = 1;
 			attVal = atts.getValue("text:start-value");
 			if(attVal != null){
 				startNum = Integer.parseInt(attVal) + 1;
 			}
-			config += " ◊÷:∆ º±‡∫≈=\"" + startNum + "\"";
-			
+			config += " Â≠ó:Ëµ∑ÂßãÁºñÂè∑=\"" + startNum + "\"";
+
 			attVal = atts.getValue("text:offset");
 			if(attVal != null){
 				attVal = Unit_Converter.convert(attVal);
-				config += " ◊÷:æ‡±ﬂΩÁ=\"" + attVal + "\"";
+				config += " Â≠ó:Ë∑ùËæπÁïå=\"" + attVal + "\"";
 			}
-			
+
 			attVal = atts.getValue("text:increment");
 			attVal = (attVal==null) ? "1" : attVal;
-			config += " ◊÷:––∫≈º‰∏Ù=\"" + attVal + "\"";
+			config += " Â≠ó:Ë°åÂè∑Èó¥Èöî=\"" + attVal + "\"";
 			config += "/>";
-			
+
 			_result += config;
 		}
 	}
-	
+
 	public static String conv_format(String val){
 		String format = "decimal";
-		
+
 		val = (val==null) ? "" : val;
 		if(val.equals("1")){
 			format = "decimal";
@@ -106,25 +106,25 @@ public class Text_Config {
 		else if(val.equals("I")){
 			format = "upper-roman";
 		}
-		else if(val.equals("◊”, ≥Û, “˙, ...")){
+		else if(val.equals("Â≠ê, ‰∏ë, ÂØÖ, ...")){
 			format = "ideograph-zodiac";
 		}
-		else if(val.equals("“ª, ∂˛, »˝, ...")){
+		else if(val.equals("‰∏Ä, ‰∫å, ‰∏â, ...")){
 			format = "chinese-counting";
 		}
-		else if(val.equals("“º, ∑°, »˛, ...")){
+		else if(val.equals("Â£π, Ë¥∞, ÂèÅ, ...")){
 			format = "chinese-legal-simplified";
 		}
-		else if(val.equals("º◊, ““, ±˚, ...")){
+		else if(val.equals("Áî≤, ‰πô, ‰∏ô, ...")){
 			format = "ideograph-traditional";
 		}
-		else if(val.equals("¢Ÿ, ¢⁄, ¢€, ...")){
+		else if(val.equals("‚ë†, ‚ë°, ‚ë¢, ...")){
 			format = "decimal-enclosed-circle-chinese";
 		}
-		else if(val.equals("£±, £≤, £≥, ...")){
+		else if(val.equals("Ôºë, Ôºí, Ôºì, ...")){
 			format = "decimal-full-width";
 		}
-		
+
 		return format;
 	}
 }

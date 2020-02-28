@@ -3,7 +3,7 @@ package text;
 import org.xml.sax.Attributes;
 
 /**
- * ¥¶¿Ì ƒø¬º µƒ◊™ªª°£
+ * Â§ÑÁêÜ ÁõÆÂΩï ÁöÑËΩ¨Êç¢„ÄÇ
  *
  * @author xie
  *
@@ -48,14 +48,14 @@ public class Text_TOC {
 		else if(qName.equals("text:index-title")){
 			String tocStart = "";
 
-			tocStart += "<◊÷:∂Œ¬‰><◊÷:∂Œ¬‰ Ù–‘/>";
-			tocStart += "<◊÷:”Úø™ º ◊÷:¿‡–Õ=\"ref\" ◊÷:À¯∂®=\"false\"/>";
-			tocStart += "<◊÷:”Ú¥˙¬Î><◊÷:∂Œ¬‰>";
-			tocStart += "<◊÷:æ‰><◊÷:æ‰ Ù–‘/>";
-			tocStart += "<◊÷:Œƒ±æ¥Æ>TOC \\o\"1-3\" \\h \\z </◊÷:Œƒ±æ¥Æ>";
-			tocStart += "</◊÷:æ‰>";
-			tocStart += "</◊÷:∂Œ¬‰></◊÷:”Ú¥˙¬Î>";
-			tocStart += "</◊÷:∂Œ¬‰>";
+			tocStart += "<Â≠ó:ÊÆµËêΩ><Â≠ó:ÊÆµËêΩÂ±ûÊÄß/>";
+			tocStart += "<Â≠ó:ÂüüÂºÄÂßã Â≠ó:Á±ªÂûã=\"ref\" Â≠ó:ÈîÅÂÆö=\"false\"/>";
+			tocStart += "<Â≠ó:Âüü‰ª£Á†Å><Â≠ó:ÊÆµËêΩ>";
+			tocStart += "<Â≠ó:Âè•><Â≠ó:Âè•Â±ûÊÄß/>";
+			tocStart += "<Â≠ó:ÊñáÊú¨‰∏≤>TOC \\o\"1-3\" \\h \\z </Â≠ó:ÊñáÊú¨‰∏≤>";
+			tocStart += "</Â≠ó:Âè•>";
+			tocStart += "</Â≠ó:ÊÆµËêΩ></Â≠ó:Âüü‰ª£Á†Å>";
+			tocStart += "</Â≠ó:ÊÆµËêΩ>";
 
 			_result += tocStart;
 		}
@@ -63,9 +63,9 @@ public class Text_TOC {
 		else if(qName.equals("text:index-body")){
 			String tocEnd = "";
 
-			tocEnd += "<◊÷:∂Œ¬‰><◊÷:∂Œ¬‰ Ù–‘/>";
-			tocEnd += "<◊÷:”ÚΩ· ¯/>";
-			tocEnd += "</◊÷:∂Œ¬‰>";
+			tocEnd += "<Â≠ó:ÊÆµËêΩ><Â≠ó:ÊÆµËêΩÂ±ûÊÄß/>";
+			tocEnd += "<Â≠ó:ÂüüÁªìÊùü/>";
+			tocEnd += "</Â≠ó:ÊÆµËêΩ>";
 
 			_result += tocEnd;
 		}

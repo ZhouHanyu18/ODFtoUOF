@@ -5,8 +5,8 @@ import org.xml.sax.Attributes;
 import convertor.IDGenerator;
 
 /**
- * ¥¶¿Ì<text:a> µΩ <uof:≥¨º∂¡¥Ω”>µƒ◊™ªª°£
- * 
+ * Â§ÑÁêÜ<text:a> Âà∞ <uof:Ë∂ÖÁ∫ßÈìæÊé•>ÁöÑËΩ¨Êç¢„ÄÇ
+ *
  * @author xie
  *
  */
@@ -15,112 +15,112 @@ public class Hyperlink {
 	private static String _links = "";
 	//text style name for hyperlink in <spreadsheet>
 	private static String _link_style_name = "T_Link";
-	
-	
+
+
 	public static String get_result(){
 		String rst = "";
-		
+
 		if(!_links.equals("")){
-			rst = "<uof:¡¥Ω”ºØ>";
+			rst = "<uof:ÈìæÊé•ÈõÜ>";
 			rst += _links;
-			rst += "</uof:¡¥Ω”ºØ>";
+			rst += "</uof:ÈìæÊé•ÈõÜ>";
 			_links = "";
-		}	
-		
+		}
+
 		return rst;
 	}
-	
+
 	//create the text style for hyperlink
 	public static String link_style(){
 		String ls = "";
-		
-		ls += "<uof:æ‰ Ω—˘";
-		ls += " ◊÷:±Í ∂∑˚=\"" + _link_style_name + "\"";
-		ls += " ◊÷:√˚≥∆=\"" + _link_style_name + "\"";
-		ls += " ◊÷:¿‡–Õ=\"auto\">";
-		
-		ls += "<◊÷:◊÷ÃÂ ◊÷:◊÷∫≈=\"12.0\" ◊÷:—’…´=\"#0000ff\"/>";
-		ls += "<◊÷:œ¬ªÆœﬂ ◊÷:¿‡–Õ=\"single\" ◊÷:—’…´=\"auto\"/>";	
-		ls += "</uof:æ‰ Ω—˘>";
-		
+
+		ls += "<uof:Âè•ÂºèÊ†∑";
+		ls += " Â≠ó:Ê†áËØÜÁ¨¶=\"" + _link_style_name + "\"";
+		ls += " Â≠ó:ÂêçÁß∞=\"" + _link_style_name + "\"";
+		ls += " Â≠ó:Á±ªÂûã=\"auto\">";
+
+		ls += "<Â≠ó:Â≠ó‰Ωì Â≠ó:Â≠óÂè∑=\"12.0\" Â≠ó:È¢úËâ≤=\"#0000ff\"/>";
+		ls += "<Â≠ó:‰∏ãÂàíÁ∫ø Â≠ó:Á±ªÂûã=\"single\" Â≠ó:È¢úËâ≤=\"auto\"/>";
+		ls += "</uof:Âè•ÂºèÊ†∑>";
+
 		return ls ;
 	}
-	
+
 	//return the text style for hyperlink in spreadsheet
 	public static String sheet_link_style(){
 		String ls = "";
-		
-		ls += "<◊÷:◊÷ÃÂ ◊÷:◊÷∫≈=\"12.0\" ◊÷:—’…´=\"#0000ff\"/>";
-		ls += "<◊÷:œ¬ªÆœﬂ ◊÷:¿‡–Õ=\"single\" ◊÷:—’…´=\"auto\"/>";
-		
+
+		ls += "<Â≠ó:Â≠ó‰Ωì Â≠ó:Â≠óÂè∑=\"12.0\" Â≠ó:È¢úËâ≤=\"#0000ff\"/>";
+		ls += "<Â≠ó:‰∏ãÂàíÁ∫ø Â≠ó:Á±ªÂûã=\"single\" Â≠ó:È¢úËâ≤=\"auto\"/>";
+
 		return ls;
 	}
-	
+
 	//return the link style name
 	public static String style_name(){
 		return _link_style_name;
 	}
-	
+
 	//add a new link
 	public static void process(Attributes atts){
 		String attVal = "";
-		String oneLink = "<uof:≥¨º∂¡¥Ω”";
+		String oneLink = "<uof:Ë∂ÖÁ∫ßÈìæÊé•";
 		String linkID = IDGenerator.get_hyperlink_id();
-		
-		oneLink += " uof:±Í ∂∑˚=\"" + "ID_" + linkID + "\"";
-		
+
+		oneLink += " uof:Ê†áËØÜÁ¨¶=\"" + "ID_" + linkID + "\"";
+
 		if((attVal=atts.getValue("xlink:href"))!=null){
-			oneLink += " uof:ƒø±Í=\"" + parse_href(attVal) + "\"";
+			oneLink += " uof:ÁõÆÊ†á=\"" + parse_href(attVal) + "\"";
 		}
-		
+
 		if((attVal=atts.getValue("text:style-name"))!=null){
-			oneLink += " uof: Ω—˘“˝”√=\"" + attVal + "\"";
+			oneLink += " uof:ÂºèÊ†∑ÂºïÁî®=\"" + attVal + "\"";
 		}
 		else {
-			//oneLink += " uof: Ω—˘“˝”√=\"" + _unvisited + "\"";
+			//oneLink += " uof:ÂºèÊ†∑ÂºïÁî®=\"" + _unvisited + "\"";
 		}
-		
+
 		if((attVal=atts.getValue("text:visited-style-name"))!=null){
-			oneLink += " uof:“—∑√Œ  Ω—˘“˝”√=\"" + attVal + "\"";
+			oneLink += " uof:Â∑≤ËÆøÈóÆÂºèÊ†∑ÂºïÁî®=\"" + attVal + "\"";
 		}
 		else {
-			//oneLink += " uof:“—∑√Œ  Ω—˘“˝”√=\"" + _visited + "\"";
+			//oneLink += " uof:Â∑≤ËÆøÈóÆÂºèÊ†∑ÂºïÁî®=\"" + _visited + "\"";
 		}
-		
-		oneLink += " uof:¡¥‘¥=\"" + linkID + "\"";
+
+		oneLink += " uof:ÈìæÊ∫ê=\"" + linkID + "\"";
 		oneLink += "/>";
-		
+
 		_links += oneLink;
 	}
-	
+
 	private static String parse_href(String rawHref){
 		String href = "";
-		
+
 		href = rawHref;
-		
+
 		if(rawHref.contains("../")){
 			int ind = href.lastIndexOf("../");
-			
+
 			href = href.substring(0,ind) + href.substring(ind+3);
 		}
-		
+
 		if(rawHref.startsWith("#")){
 			href = rawHref.replace(".","!").substring(1);
 		}
-		else if(!(rawHref.startsWith("http:") || rawHref.startsWith("ftp:") 
+		else if(!(rawHref.startsWith("http:") || rawHref.startsWith("ftp:")
 			|| rawHref.startsWith("telnet:") || rawHref.startsWith("mailto:")
 			|| rawHref.startsWith("news:")) && rawHref.contains("%")){
-			
+
 			try{
-				URI uri = new URI(rawHref);	
+				URI uri = new URI(rawHref);
 				if(uri.getPath() != null){
 					href = uri.getPath();
-				}				
+				}
 			}catch (Exception e){
 				e.printStackTrace();
 			}
 		}
-		
+
 		return href;
 	}
 }
