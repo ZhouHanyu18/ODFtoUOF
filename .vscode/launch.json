@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Convertor_ODF_To_UOF",
+            "request": "launch",
+            "mainClass": "convertor.Convertor_ODF_To_UOF",
+            "projectName": "ODFtoUOF"
+        }
+    ]
+}
