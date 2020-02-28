@@ -5,53 +5,53 @@ import java.util.*;
 import java.util.zip.*;
 
 /**
- * ï¿½ï¿½ï¿½Ú½ï¿½ODFï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½Ð½ï¿½Ñ¹ï¿½Ãµï¿½content.xmlï¿½ï¿½styles.xmlï¿½ï¿½meta.xmlï¿½ï¿½xmlÔ´ï¿½Ä¼ï¿½ï¿½ï¿½
- *
+ * ÓÃÓÚ½«ODFÀàÐÍÎÄµµ½øÐÐ½âÑ¹µÃµ½content.xml¡¢styles.xml¡¢meta.xmlµÈxmlÔ´ÎÄ¼þ¡£
+ * 
  * @author xie
  *
  */
 public class Unzip {
-	private static String _tmp_file_dir = "testfile/";
+	private static String _tmp_file_dir = "testfile\\";
 
-
+	
 	public static String get_temp_path(){
 		return _tmp_file_dir;
 	}
-
+	
 	public static void copyInputStream(InputStream in, OutputStream out) throws IOException{
 		byte[] buffer = new byte[1024];
 		int len;
-
+		
 		while((len = in.read(buffer)) >= 0){
 			out.write(buffer, 0, len);
 		}
-
+		
 		in.close();
 		out.close();
 	}
-
+	
 	public static void unzip(String originName) throws Exception{
 		Enumeration entries;
 		ZipFile zipFile;
-
+		
 		if(!originName.endsWith(".odt") && !originName.endsWith(".ods") && !originName.endsWith(".odp")){
 			throw new Exception("Error: The file type is wrong!!!");
 		}
-
-		File src = new File(originName);
+		
+		File src = new File(originName);		
 		if(!src.exists()){
 			throw new Exception("Error: The source file name is not present!!!");
 		}
-
-		try {
+		
+		try {		
 			zipFile = new ZipFile(src);
-
+			
 			entries = zipFile.entries();
-
+			
 			while(entries.hasMoreElements()) {
 				ZipEntry entry = (ZipEntry)entries.nextElement();
 				String fileName = _tmp_file_dir + entry.getName();
-
+				
 				if(entry.isDirectory()) {
 					(new File(fileName)).mkdir();
 				}
@@ -59,18 +59,18 @@ public class Unzip {
 					String parent = new File(fileName).getParent();
 					//to make sure its parent directories are present.
 					(new File(parent)).mkdirs();
-
+					
 					copyInputStream(zipFile.getInputStream(entry),
 							new BufferedOutputStream(new FileOutputStream(fileName)));
 				}
 			}
-
+			
 			zipFile.close();
-
-		} catch (IOException ioe) {
+			
+		} catch (IOException ioe) {			
 			ioe.printStackTrace();
-			throw new Exception("Unhandled exception: ï¿½Ä¼ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½â£¡");
+			throw new Exception("Unhandled exception: ÎÄ¼þ½âÑ¹³öÏÖÎÊÌâ£¡");
 		}
 	}
-
+	
 }

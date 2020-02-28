@@ -6,8 +6,8 @@ import java.util.Map;
 import graphic_content.ChartStyle;
 
 public class Chart_Data {
-	private static String _ole_type = "";   //ï¿½ï¿½ï¿½Ú´æ´¢OLEï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£¨Ä¿Ç°Ö»ï¿½ï¿½ï¿½chartï¿½ï¿½
-	private static Map<String,ChartStyle> _chart_style_set = new HashMap<String,ChartStyle>();   //ï¿½æ´¢chartï¿½Ðµï¿½Ê½ï¿½ï¿½
+	private static String _ole_type = "";   //ÓÃÓÚ´æ´¢OLE¶ÔÏóµÄÖÖÀà£¨Ä¿Ç°Ö»Õë¶Ôchart£©
+	private static Map<String,ChartStyle> _chart_style_set = new HashMap<String,ChartStyle>();   //´æ´¢chartÖÐµÄÊ½Ñù
 	
 	
 	//initialize
@@ -16,7 +16,7 @@ public class Chart_Data {
 		_chart_style_set.clear();
 	}
 	
-//	*******************ï¿½ï¿½ï¿½ï¿½OLEType****************************
+//	*******************²Ù×÷OLEType****************************
 //	*		
 	public static void set_ole_type(String type) {
 		_ole_type = type;
@@ -28,7 +28,7 @@ public class Chart_Data {
 //	*	
 //	***************************************
 	
-//	*******************ï¿½ï¿½ï¿½ï¿½chartStyleSet****************************
+//	*******************²Ù×÷chartStyleSet****************************
 //	*		
 	public static void add_chart_style(String ID,ChartStyle chartstyle) {
 		_chart_style_set.put(ID,chartstyle);

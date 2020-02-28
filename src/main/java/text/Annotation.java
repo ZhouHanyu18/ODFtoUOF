@@ -4,7 +4,7 @@ import org.xml.sax.Attributes;
 import convertor.IDGenerator;
 
 /**
- * ï¿½ï¿½ï¿½ï¿½<office:annotation> ï¿½ï¿½ <ï¿½ï¿½:ï¿½ï¿½×¢>ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
+ * ´¦Àí<office:annotation> µ½ <×Ö:Åú×¢>µÄ×ª»»¡£
  * 
  * @author xie
  *
@@ -35,18 +35,18 @@ public class Annotation {
 		String anno = "";
 		String annoID = IDGenerator.get_annotation_id();
 		
-		anno = "<ï¿½ï¿½:ï¿½ï¿½×¢";
-		anno += " ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½=\"" + annoID + "\"";
+		anno = "<×Ö:Åú×¢";
+		anno += " ×Ö:ÇøÓòÒýÓÃ=\"" + annoID + "\"";
 		if(!_creator.equals("")){
-			anno += " ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½=\"" + _creator + "\"";
+			anno += " ×Ö:×÷Õß=\"" + _creator + "\"";
 		}
 		if(!_date.equals("")){
-			anno += " ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½=\"" + _date + "\"";
+			anno += " ×Ö:ÈÕÆÚ=\"" + _date + "\"";
 		}
 		anno += ">";
 		
 		anno += _content;
-		anno += "</ï¿½ï¿½:ï¿½ï¿½×¢>";
+		anno += "</×Ö:Åú×¢>";
 		
 		clear();
 		return anno;
@@ -56,9 +56,9 @@ public class Annotation {
 		String rst = "";
 		
 		if(!_result.equals("")){
-			rst += "<ï¿½ï¿½:ï¿½ï¿½×¢ï¿½ï¿½>";
+			rst += "<×Ö:Åú×¢¼¯>";
 			rst += _result;
-			rst += "</ï¿½ï¿½:ï¿½ï¿½×¢ï¿½ï¿½>";
+			rst += "</×Ö:Åú×¢¼¯>";
 			
 			_result = "";
 		}

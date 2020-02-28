@@ -5,22 +5,22 @@ import java.util.Map;
 
 public class Chart {
 
-	private static float _frameX = 0;   //锟斤拷前frame锟斤拷X锟斤拷锟斤拷
+	private static float _frameX = 0;   //当前frame的X坐标
 	private static float _frameY = 0;
 	
-	private static String _begin_element = "<锟斤拷:图锟斤拷";
-	private static String _end_element = "</锟斤拷:图锟斤拷>";
-	private static String _chart_area = "";   //图锟斤拷锟斤拷
-	private static String _plot_area = "";   //锟斤拷图锟斤拷
-	private static String _x_axis = "";   //锟斤拷锟斤拷锟斤拷
-	private static String _y_axis = "";   //锟斤拷值锟斤拷
-	private static String _legend = "";   //图锟斤拷
-	private static String _data_table = "";   //锟斤拷锟捷憋拷
-	private static String _data_series_set = "";   //锟斤拷锟斤拷系锟叫硷拷
-	private static String _data_point_set = "";   //锟斤拷锟捷点集
-	private static String _gridline_set = "";   //锟斤拷锟斤拷锟竭硷拷
-	private static String _data_sources = "";   //锟斤拷锟斤拷源
-	private static String _title_set = "";   //锟斤拷锟解集
+	private static String _begin_element = "<表:图表";
+	private static String _end_element = "</表:图表>";
+	private static String _chart_area = "";   //图表区
+	private static String _plot_area = "";   //绘图区
+	private static String _x_axis = "";   //分类轴
+	private static String _y_axis = "";   //数值轴
+	private static String _legend = "";   //图例
+	private static String _data_table = "";   //数据表
+	private static String _data_series_set = "";   //数据系列集
+	private static String _data_point_set = "";   //数据点集
+	private static String _gridline_set = "";   //网格线集
+	private static String _data_sources = "";   //数据源
+	private static String _title_set = "";   //标题集
 	
 	private static String _type = "";
 	private static boolean _3D = false;
@@ -31,7 +31,7 @@ public class Chart {
 	private static boolean _symbol = false;
 	private static boolean _lines = false;
 	
-	private static Map<String,String> _data_style_set = new HashMap<String,String>();   //锟斤拷锟街革拷式锟侥硷拷锟较ｏ拷目前只锟斤拷ID锟斤拷锟斤拷锟街革拷式锟侥讹拷
+	private static Map<String,String> _data_style_set = new HashMap<String,String>();   //数字格式的集合，目前只存ID和数字格式的对
 	
 	public Chart() {
 	}
@@ -114,18 +114,18 @@ public class Chart {
 	public static String get_chart_string() 
 	{
 		get_type(_type);
-		_begin_element += (" 锟斤拷:x锟斤拷锟斤拷=\"" + _frameX + "\" 锟斤拷:y锟斤拷锟斤拷=\"" + _frameY + "\">");
+		_begin_element += (" 表:x坐标=\"" + _frameX + "\" 表:y坐标=\"" + _frameY + "\">");
 		return _begin_element + _chart_area + _plot_area + _x_axis + _y_axis + _legend
-		+ _data_table + "<锟斤拷:锟斤拷锟斤拷系锟叫硷拷>" + _data_series_set + "</锟斤拷:锟斤拷锟斤拷系锟叫硷拷>" 
-		+ "<锟斤拷:锟斤拷锟捷点集>" + _data_point_set + "</锟斤拷:锟斤拷锟捷点集>" 
-		+ "<锟斤拷:锟斤拷锟斤拷锟竭硷拷>" + _gridline_set + "</锟斤拷:锟斤拷锟斤拷锟竭硷拷>" + "<锟斤拷:锟斤拷锟斤拷源" + _data_sources + "</锟斤拷:锟斤拷锟斤拷源>"
-		+ "<锟斤拷:锟斤拷锟解集>" + _title_set  + "</锟斤拷:锟斤拷锟解集>" + _end_element;
+		+ _data_table + "<表:数据系列集>" + _data_series_set + "</表:数据系列集>" 
+		+ "<表:数据点集>" + _data_point_set + "</表:数据点集>" 
+		+ "<表:网格线集>" + _gridline_set + "</表:网格线集>" + "<表:数据源" + _data_sources + "</表:数据源>"
+		+ "<表:标题集>" + _title_set  + "</表:标题集>" + _end_element;
 	}
 	
 	public static void clear() 
 	{
-		_begin_element = "<锟斤拷:图锟斤拷";
-		_end_element = "</锟斤拷:图锟斤拷>";
+		_begin_element = "<表:图表";
+		_end_element = "</表:图表>";
 		_chart_area = "";
 		_plot_area = "";
 		_x_axis = "";
@@ -285,9 +285,9 @@ public class Chart {
 /*		else if (Type.equals("chart:stock")) {
 			type = "line";
 			subtype = "line_stacked";
-			//锟斤拷锟叫的股硷拷图锟斤拷示锟斤拷锟斤拷锟解，锟斤拷为uof锟侥硷拷锟斤拷锟劫打开诧拷锟斤拷锟斤拷锟斤拷锟斤拷示锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷图锟斤拷锟斤拷锟酵猴拷锟斤拷锟斤拷锟酵讹拷锟斤拷同锟斤拷应锟斤拷锟斤拷bug
+			//永中的股价图显示有问题，存为uof文件后再打开不能正常显示。而且四种图的类型和子类型都相同，应该是bug
 		}*/
 		
-		_begin_element += " 锟斤拷:锟斤拷锟斤拷=\"" + type + "\" 锟斤拷:锟斤拷锟斤拷锟斤拷=\"" + subtype + "\"";
+		_begin_element += " 表:类型=\"" + type + "\" 表:子类型=\"" + subtype + "\"";
 	}
 }

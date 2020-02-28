@@ -1,5 +1,5 @@
 
-//============ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½Ãªï¿½ï¿½Î»ï¿½ï¿½==================
+//============ÓÃÓÚ¼ÆËãÃªµãÎ»ÖÃ==================
 
 package spreadsheet;
 
@@ -11,14 +11,14 @@ import stored_data.Spreadsheet_Data;
 
 public class Anchor_Pos {
 
-	private static Map<String,Float> _colStartX_map = new HashMap<String,Float>();  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼xï¿½ï¿½ï¿½ï¿½ 
-	private static float _nextColStartX = 0;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼xï¿½ï¿½ï¿½ï¿½
-	private static float _currentRowStartY = 0;  //ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ê¼yï¿½ï¿½ï¿½ï¿½
+	private static Map<String,Float> _colStartX_map = new HashMap<String,Float>();  //¸÷ÁÐÆðÊ¼x×ø±ê 
+	private static float _nextColStartX = 0;  //ÏÂÁÐÆðÊ¼x×ø±ê
+	private static float _currentRowStartY = 0;  //µ±Ç°ÐÐÆðÊ¼y×ø±ê
 
 	private static int _colIndex = 1;
 	private static float _rowHeightAdd = 0;
 	private static String _tableName = "";
-	private static final float _DEFcolWidth = (float)85.6926;  //Ä¬ï¿½Ïµï¿½Ôªï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½Í¼ï¿½Î±ï¿½ï¿½ï¿½2.267*37.8)
+	private static final float _DEFcolWidth = (float)85.6926;  //Ä¬ÈÏµ¥Ôª¸ñ¿í¶È(°´Í¼ÐÎ±ÈÀý2.267*37.8)
 	
 	
 	private static void clear() {

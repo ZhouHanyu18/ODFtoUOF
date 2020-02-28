@@ -2,7 +2,7 @@ package convertor;
 
 import org.xml.sax.Attributes;
 /**
- * ï¿½ï¿½ï¿½ï¿½ Ö½ï¿½Å·ï¿½ï¿½ï¿½Ö½ï¿½Å¡ï¿½Ò³ï¿½ß¾à¡¢ï¿½ß¿ï¿½ ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
+ * ´¦Àí Ö½ÕÅ·½Ïò¡¢Ö½ÕÅ¡¢Ò³±ß¾à¡¢±ß¿ò µÄ×ª»»¡£
  * 
  * @author xie
  *
@@ -10,22 +10,22 @@ import org.xml.sax.Attributes;
 public class Common_Pro {
 	
 	private static String get_pre(String fileType){
-		String pre = "ï¿½ï¿½:";
+		String pre = "×Ö:";
 		
 		if(fileType.equals("text")){
-			pre = "ï¿½ï¿½:";
+			pre = "×Ö:";
 		}
 		else if(fileType.equals("spreadsheet")){
-			pre = "ï¿½ï¿½:";
+			pre = "±í:";
 		}
 		else if(fileType.equals("presentation")){
-			pre = "ï¿½ï¿½:";
+			pre = "ÑÝ:";
 		}
 		
 		return pre;
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½<Ö½ï¿½Å·ï¿½ï¿½ï¿½>ï¿½ï¿½×ªï¿½ï¿½
+	//´¦Àí<Ö½ÕÅ·½Ïò>µÄ×ª»»
 	protected static String get_orientation(String fileType, Attributes atts){
 		String str = "";
 		String attVal = "";
@@ -35,72 +35,72 @@ public class Common_Pro {
 		}
 		
 		if(str.length() != 0){
-			str = "<" + get_pre(fileType) + "Ö½ï¿½Å·ï¿½ï¿½ï¿½>" + str + "</" + get_pre(fileType) + "Ö½ï¿½Å·ï¿½ï¿½ï¿½>";
+			str = "<" + get_pre(fileType) + "Ö½ÕÅ·½Ïò>" + str + "</" + get_pre(fileType) + "Ö½ÕÅ·½Ïò>";
 		}
 		
 		return str;
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½<Ö½ï¿½ï¿½>ï¿½ï¿½×ªï¿½ï¿½
+	//´¦Àí<Ö½ÕÅ>µÄ×ª»»
 	protected static String get_page(String fileType, Attributes atts){
 		String str = "";
 		String attVal = "";
 
 		if((attVal=atts.getValue("fo:page-width")) != null){
 			String width = Unit_Converter.convert(attVal);
-			if (fileType.equals("presentation")){ //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½Ä¸ï¿½ï¿½Ö½ï¿½Å³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
-				str += " uof:ï¿½ï¿½ï¿½=" + "\"" + Math.round(Float.valueOf(width)) + "\"";
+			if (fileType.equals("presentation")){ //ÓÀÖÐÑÝÊ¾ÎÄ¸åµÄÖ½ÕÅ³¤¿í±ØÐëÎªÕûÊý
+				str += " uof:¿í¶È=" + "\"" + Math.round(Float.valueOf(width)) + "\"";
 			}
 			else{
-				str += " uof:ï¿½ï¿½ï¿½=" + "\"" + width + "\"";
+				str += " uof:¿í¶È=" + "\"" + width + "\"";
 			}
 		}
 		if((attVal=atts.getValue("fo:page-height")) != null){
 			String height = Unit_Converter.convert(attVal);
 			if (fileType.equals("presentation")){
-				str += " uof:ï¿½ß¶ï¿½=" + "\"" + Math.round(Float.valueOf(height)) + "\"";
+				str += " uof:¸ß¶È=" + "\"" + Math.round(Float.valueOf(height)) + "\"";
 			}
 			else{
-				str += " uof:ï¿½ß¶ï¿½=" + "\"" + height + "\"";
+				str += " uof:¸ß¶È=" + "\"" + height + "\"";
 			}
 		}
 		if((attVal=atts.getValue("style:paper-tray-name")) != null){
-			str += " uof:Ö½ï¿½ï¿½=" + "\"" + attVal + "\"";
+			str += " uof:Ö½ÐÍ=" + "\"" + attVal + "\"";
 		}
 		
 		if(str.length() != 0){
-			str = "<" + get_pre(fileType) + "Ö½ï¿½ï¿½" + str + "/>";
+			str = "<" + get_pre(fileType) + "Ö½ÕÅ" + str + "/>";
 		}
 		
 		return str;
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½<Ò³ï¿½ß¾ï¿½>ï¿½ï¿½×ªï¿½ï¿½
+	//´¦Àí<Ò³±ß¾à>µÄ×ª»»
 	protected static String get_margins(String fileType, Attributes atts){
 		String str = "";
 		String attVal = "";
 		
 		if((attVal=atts.getValue("fo:margin-top")) != null){
-			str += " uof:ï¿½ï¿½=" + "\"" + Unit_Converter.convert(attVal) + "\"";
+			str += " uof:ÉÏ=" + "\"" + Unit_Converter.convert(attVal) + "\"";
 		}
 		if((attVal=atts.getValue("fo:margin-left")) != null){
-			str += " uof:ï¿½ï¿½=" + "\"" + Unit_Converter.convert(attVal) + "\"";
+			str += " uof:×ó=" + "\"" + Unit_Converter.convert(attVal) + "\"";
 		}
 		if((attVal=atts.getValue("fo:margin-bottom")) != null){
-			str += " uof:ï¿½ï¿½=" + "\"" + Unit_Converter.convert(attVal) + "\"";
+			str += " uof:ÏÂ=" + "\"" + Unit_Converter.convert(attVal) + "\"";
 		}
 		if((attVal=atts.getValue("fo:margin-right")) != null){
-			str += " uof:ï¿½ï¿½=" + "\"" + Unit_Converter.convert(attVal) + "\"";
+			str += " uof:ÓÒ=" + "\"" + Unit_Converter.convert(attVal) + "\"";
 		}
 		
 		if(str.length() != 0){
-			str = "<" + get_pre(fileType) + "Ò³ï¿½ß¾ï¿½" + str + "/>";
+			str = "<" + get_pre(fileType) + "Ò³±ß¾à" + str + "/>";
 		}
 
 		return str;
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½ß¿ò£º´ï¿½"0.002cm solid #000000"ï¿½ï¿½Ê½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµ 
+	//´¦Àí±ß¿ò£º´Ó"0.002cm solid #000000"ÐÎÊ½µÄ×Ö·û´®ÌáÈ¡³ö¸÷ÖÖÖµ 
 	public static String tranBorderValue(String border)
 	{
 		int index1 = border.indexOf(' ');
@@ -108,7 +108,7 @@ public class Common_Pro {
 		String str = "";
 		
 		if(border.equals("none")){
-			str = " uof:ï¿½ï¿½ï¿½ï¿½=\"none\"";
+			str = " uof:ÀàÐÍ=\"none\"";
 		}
 		else {
 			String width = border.substring(0,index1);
@@ -116,62 +116,62 @@ public class Common_Pro {
 			String color = border.substring(index2+1);
 			
 			if(type.equals("solid")){
-				str = " uof:ï¿½ï¿½ï¿½=\"" + Unit_Converter.convert(width) + 
-					"\" uof:ï¿½ï¿½ï¿½ï¿½=\"single\" uof:ï¿½ï¿½É«=\"" + color + "\"";
+				str = " uof:¿í¶È=\"" + Unit_Converter.convert(width) + 
+					"\" uof:ÀàÐÍ=\"single\" uof:ÑÕÉ«=\"" + color + "\"";
 			}
 			else if(type.equals("double")){
 				float widVal = Float.valueOf(Unit_Converter.convert(width));
 				
 				widVal = (widVal > 4) ? widVal/2 : widVal;
-				str = " uof:ï¿½ï¿½ï¿½=\"" + widVal + "\" uof:ï¿½ï¿½ï¿½ï¿½=\"double\" uof:ï¿½ï¿½É«=\"" + color + "\"";
+				str = " uof:¿í¶È=\"" + widVal + "\" uof:ÀàÐÍ=\"double\" uof:ÑÕÉ«=\"" + color + "\"";
 			}
 		}
 		
 		return str;	
 	}
 	
-	//ï¿½ï¿½ï¿½ï¿½<ï¿½ß¿ï¿½>ï¿½ï¿½×ªï¿½ï¿½
+	//´¦Àí<±ß¿ò>µÄ×ª»»
 	protected static String get_borders(String fileType, Attributes atts){
 		String border = "";
 		String value = "";
 		
 		value = atts.getValue("fo:border");
 		if(value != null && !value.equals("none")) { 
-			border += "<uof:ï¿½ï¿½" + tranBorderValue(value) + "/>";
-			border += "<uof:ï¿½ï¿½" + tranBorderValue(value) + "/>";
-			border += "<uof:ï¿½ï¿½" + tranBorderValue(value) + "/>";
-			border += "<uof:ï¿½ï¿½" + tranBorderValue(value) + "/>";
+			border += "<uof:×ó" + tranBorderValue(value) + "/>";
+			border += "<uof:ÉÏ" + tranBorderValue(value) + "/>";
+			border += "<uof:ÓÒ" + tranBorderValue(value) + "/>";
+			border += "<uof:ÏÂ" + tranBorderValue(value) + "/>";
 		}
 		else{
 			if((value = atts.getValue("fo:border-left")) != null){
-				border += "<uof:ï¿½ï¿½" + tranBorderValue(value) + "/>";
+				border += "<uof:×ó" + tranBorderValue(value) + "/>";
 			}
 			if((value = atts.getValue("fo:border-top")) != null){
-				border += "<uof:ï¿½ï¿½" + tranBorderValue(value) + "/>";
+				border += "<uof:ÉÏ" + tranBorderValue(value) + "/>";
 			}
 			if((value = atts.getValue("fo:border-right")) != null){
-				border += "<uof:ï¿½ï¿½" + tranBorderValue(value) + "/>";
+				border += "<uof:ÓÒ" + tranBorderValue(value) + "/>";
 			}
 			if((value = atts.getValue("fo:border-bottom")) != null){
-				border += "<uof:ï¿½ï¿½" + tranBorderValue(value) + "/>";
+				border += "<uof:ÏÂ" + tranBorderValue(value) + "/>";
 			}
 		}
-		if((value = atts.getValue("style:diagonal-tl-br")) != null){   //ï¿½ï¿½Ôªï¿½ï¿½ï¿½Ð¶Ô½ï¿½ï¿½ï¿½
-			border += "<uof:ï¿½Ô½ï¿½ï¿½ï¿½1" + tranBorderValue(value) + "/>";
+		if((value = atts.getValue("style:diagonal-tl-br")) != null){   //µ¥Ôª¸ñÓÐ¶Ô½ÇÏß
+			border += "<uof:¶Ô½ÇÏß1" + tranBorderValue(value) + "/>";
 		}
 		if((value = atts.getValue("style:diagonal-bl-tr")) != null){
-			border += "<uof:ï¿½Ô½ï¿½ï¿½ï¿½2" + tranBorderValue(value) + "/>";
+			border += "<uof:¶Ô½ÇÏß2" + tranBorderValue(value) + "/>";
 		}
 		
 		if (border.length() != 0){
 			if(fileType.equals("text")){
-				border = "<ï¿½ï¿½:ï¿½ß¿ï¿½ uof:locID=\"t0065\">" + border + "</ï¿½ï¿½:ï¿½ß¿ï¿½>";
+				border = "<×Ö:±ß¿ò uof:locID=\"t0065\">" + border + "</×Ö:±ß¿ò>";
 			}
 			else if(fileType.equals("spreadsheet")){
-				border = "<ï¿½ï¿½:ï¿½ß¿ï¿½ uof:locID=\"s0022\">" + border + "</ï¿½ï¿½:ï¿½ß¿ï¿½>";
+				border = "<±í:±ß¿ò uof:locID=\"s0022\">" + border + "</±í:±ß¿ò>";
 			}
 			else {
-				border = "<ï¿½ï¿½:ï¿½ß¿ï¿½>" + border + "</ï¿½ï¿½:ï¿½ß¿ï¿½>";
+				border = "<ÑÝ:±ß¿ò>" + border + "</ÑÝ:±ß¿ò>";
 			}
 		}
 		

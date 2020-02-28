@@ -8,88 +8,88 @@ import tables.Meta_Table;
 import stored_data.*;
 
 /**
- * ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÚµÚ¶ï¿½ï¿½ï¿½É¨ï¿½ï¿½meta.xmlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ôªï¿½Ø£ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½Ð¼ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½Ð¡ï¿½
- *
+ * ÄÚÈÝ´¦Àí³ÌÐò£¬ÓÃÓÚµÚ¶þÂÖÉ¨Ãèmeta.xml£¬´¦ÀíÇ°Á½ÀàÔªËØ£¬½«×ª»»ºóµÄ½á¹ûÐ´µ½ÖÐ¼ä½á¹ûÎÄµµÖÐ¡£
+ * 
  * @author xie
  *
  */
 public class Second_Meta_Handler extends DefaultHandler{
 	private String _text_node = "";
 	private boolean _need_to_store_text = false;
-
+	
 	public Second_Meta_Handler()
-	{
+	{	
 	}
-
+	
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException
 	{
 		String result = "";
-
+		
 		if (qName.equals("office:document-meta"))
-			result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><uof:UOF xmlns:uof=\"http://schemas.uof.org/cn/2003/uof\" xmlns:Í¼=\"http://schemas.uof.org/cn/2003/graph\" xmlns:ï¿½ï¿½=\"http://schemas.uof.org/cn/2003/uof-wordproc\" xmlns:ï¿½ï¿½=\"http://schemas.uof.org/cn/2003/uof-spreadsheet\" xmlns:ï¿½ï¿½=\"http://schemas.uof.org/cn/2003/uof-slideshow\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://schemas.uof.org/cn/2003/uof D:/UOF/uof_schema/uof.xsd\" uof:language=\"cn\" uof:version=\"1.0\">";
+			result = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><uof:UOF xmlns:uof=\"http://schemas.uof.org/cn/2003/uof\" xmlns:Í¼=\"http://schemas.uof.org/cn/2003/graph\" xmlns:×Ö=\"http://schemas.uof.org/cn/2003/uof-wordproc\" xmlns:±í=\"http://schemas.uof.org/cn/2003/uof-spreadsheet\" xmlns:ÑÝ=\"http://schemas.uof.org/cn/2003/uof-slideshow\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://schemas.uof.org/cn/2003/uof D:\\UOF\\uof_schema\\uof.xsd\" uof:language=\"cn\" uof:version=\"1.0\">";
 		else if (qName.equals("office:meta"))
-			result = "<uof:Ôªï¿½ï¿½ï¿½ï¿½>";
+			result = "<uof:ÔªÊý¾Ý>";
 		else if (qName.equals("meta:document-statistic")) {
 			if (atts.getValue("meta:page-count") != null)
-				result += "<uof:Ò³ï¿½ï¿½>" + atts.getValue("meta:page-count") + "</uof:Ò³ï¿½ï¿½>";
+				result += "<uof:Ò³Êý>" + atts.getValue("meta:page-count") + "</uof:Ò³Êý>";
 			if (atts.getValue("meta:word-count") != null)
-				result += "<uof:ï¿½ï¿½ï¿½ï¿½>" + atts.getValue("meta:word-count") + "</uof:ï¿½ï¿½ï¿½ï¿½>";
+				result += "<uof:×ÖÊý>" + atts.getValue("meta:word-count") + "</uof:×ÖÊý>";
 			if (atts.getValue("meta:row-count") != null)
-				result += "<uof:ï¿½ï¿½ï¿½ï¿½>" + atts.getValue("meta:row-count") + "</uof:ï¿½ï¿½ï¿½ï¿½>";
+				result += "<uof:ÐÐÊý>" + atts.getValue("meta:row-count") + "</uof:ÐÐÊý>";
 			if (atts.getValue("meta:paragraph-count") != null)
-				result += "<uof:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½>" + atts.getValue("meta:paragraph-count") + "</uof:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½>";
+				result += "<uof:¶ÎÂäÊý>" + atts.getValue("meta:paragraph-count") + "</uof:¶ÎÂäÊý>";
 			if (atts.getValue("meta:ole-object-count") != null)
-				result += "<uof:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½>" + atts.getValue("meta:ole-object-count") + "</uof:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½>";
+				result += "<uof:¶ÔÏóÊý>" + atts.getValue("meta:ole-object-count") + "</uof:¶ÔÏóÊý>";
 			if (atts.getValue("meta:object-count") != null)
-				result += "<uof:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½>" + atts.getValue("meta:object-count") + "</uof:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½>";
+				result += "<uof:¶ÔÏóÊý>" + atts.getValue("meta:object-count") + "</uof:¶ÔÏóÊý>";
 		}
 		else if (qName.equals("meta:template")) {
-			result = "<uof:ï¿½Äµï¿½Ä£ï¿½ï¿½>" + atts.getValue("xlink:href") + "</uof:ï¿½Äµï¿½Ä£ï¿½ï¿½>";
+			result = "<uof:ÎÄµµÄ£°å>" + atts.getValue("xlink:href") + "</uof:ÎÄµµÄ£°å>";
 		}
 		else if (Meta_Table.get_ele_name(qName) != null) {
 			_need_to_store_text = true;
 			result = "<" + Meta_Table.get_ele_name(qName) + ">";
 		}
-
+		
 		Results_Processor.process_result(result);
 	}
-
+	
 	public void endElement(String namespaceURI, String localName, String qName) throws SAXException
 	{
 		String result = "";
-
+		
 		if (qName.equals("office:meta")) {
-			result = Meta_Data.get_keyword_set() + Meta_Data.get_udm_set() + "</uof:Ôªï¿½ï¿½ï¿½ï¿½>";
+			result = Meta_Data.get_keyword_set() + Meta_Data.get_udm_set() + "</uof:ÔªÊý¾Ý>";
 		}
 		else if (Meta_Table.get_ele_name(qName) != null) {
 			result = _text_node + "</" + Meta_Table.get_ele_name(qName) + ">";
 		}
-
+		
 		Results_Processor.process_result(result);
-
+		
 		_text_node = "";
 		_need_to_store_text = false;
 	}
-
-	public void characters(char[] ch, int start, int length) throws SAXException
+	
+	public void characters(char[] ch, int start, int length) throws SAXException  
 	{
 		if (_need_to_store_text) {
 			String chs = new String(ch, start, length).trim();
-			_text_node += chs;
+			_text_node += chs;			
 		}
 	}
-
-	public void error(SAXParseException exception)
+	
+	public void error(SAXParseException exception) 
 	{
 		System.err.println("Error parsing the file: "+exception.getMessage());
 	}
-
-	public void warning(SAXParseException exception)
+	
+	public void warning(SAXParseException exception) 
 	{
 		System.err.println("Warning parsing the file: "+exception.getMessage());
 	}
-
-	public void fatalError(SAXParseException exception)
+	
+	public void fatalError(SAXParseException exception) 
 	{
 		System.err.println("Fatal error parsing the file: "+exception.getMessage());
 		System.err.println("Cannot continue.");

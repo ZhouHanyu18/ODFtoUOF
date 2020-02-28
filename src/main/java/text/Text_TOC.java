@@ -3,8 +3,8 @@ package text;
 import org.xml.sax.Attributes;
 
 /**
- * ï¿½ï¿½ï¿½ï¿½ Ä¿Â¼ ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
- *
+ * ´¦Àí Ä¿Â¼ µÄ×ª»»¡£
+ * 
  * @author xie
  *
  */
@@ -17,9 +17,9 @@ public class Text_TOC {
 		_result = "";
 		return rst;
 	}
-
+	
 	public static void process_start(String qName,Attributes atts){
-
+		
 		if(_para_tag){
 			Text_P.process_start(qName,atts);
 		}
@@ -28,13 +28,13 @@ public class Text_TOC {
 			Text_P.process_start(qName,atts);
 		}
 	}
-
+	
 	public static void process_chars(String chs){
 		if(_para_tag){
 			Text_P.process_chars(chs);
 		}
 	}
-
+	
 	public static void process_end(String qName){
 		if(qName.equals("text:p")){
 			_para_tag = false;
@@ -44,29 +44,29 @@ public class Text_TOC {
 		else if(_para_tag){
 			Text_P.process_end(qName);
 		}
-
+		
 		else if(qName.equals("text:index-title")){
 			String tocStart = "";
-
-			tocStart += "<ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½><ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/>";
-			tocStart += "<ï¿½ï¿½:ï¿½ï¿½Ê¼ ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½=\"ref\" ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½=\"false\"/>";
-			tocStart += "<ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½><ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½>";
-			tocStart += "<ï¿½ï¿½:ï¿½ï¿½><ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/>";
-			tocStart += "<ï¿½ï¿½:ï¿½Ä±ï¿½ï¿½ï¿½>TOC /o\"1-3\" /h /z </ï¿½ï¿½:ï¿½Ä±ï¿½ï¿½ï¿½>";
-			tocStart += "</ï¿½ï¿½:ï¿½ï¿½>";
-			tocStart += "</ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½></ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½>";
-			tocStart += "</ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½>";
-
+			
+			tocStart += "<×Ö:¶ÎÂä><×Ö:¶ÎÂäÊôÐÔ/>";
+			tocStart += "<×Ö:Óò¿ªÊ¼ ×Ö:ÀàÐÍ=\"ref\" ×Ö:Ëø¶¨=\"false\"/>";
+			tocStart += "<×Ö:Óò´úÂë><×Ö:¶ÎÂä>";
+			tocStart += "<×Ö:¾ä><×Ö:¾äÊôÐÔ/>";
+			tocStart += "<×Ö:ÎÄ±¾´®>TOC \\o\"1-3\" \\h \\z </×Ö:ÎÄ±¾´®>";
+			tocStart += "</×Ö:¾ä>";
+			tocStart += "</×Ö:¶ÎÂä></×Ö:Óò´úÂë>";
+			tocStart += "</×Ö:¶ÎÂä>";
+			
 			_result += tocStart;
 		}
-
+		
 		else if(qName.equals("text:index-body")){
 			String tocEnd = "";
-
-			tocEnd += "<ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½><ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/>";
-			tocEnd += "<ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½/>";
-			tocEnd += "</ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½>";
-
+			
+			tocEnd += "<×Ö:¶ÎÂä><×Ö:¶ÎÂäÊôÐÔ/>";
+			tocEnd += "<×Ö:Óò½áÊø/>";
+			tocEnd += "</×Ö:¶ÎÂä>";
+			
 			_result += tocEnd;
 		}
 	}

@@ -6,7 +6,7 @@ import java.util.Map;
 import org.xml.sax.Attributes;
 
 /**
- * ï¿½ï¿½ï¿½ï¿½ <anim:par> ï¿½ï¿½ <ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½>ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
+ * ´¦Àí <anim:par> µ½ <ÑÝ:¶¯»­>µÄ×ª»»¡£
  * 
  * @author xie
  *
@@ -42,7 +42,7 @@ public class Anim_Par {
 	public static String get_result(){
 		String rst = "";
 		
-		rst = "<ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½>" + _result + "</ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½>";
+		rst = "<ÑÝ:¶¯»­>" + _result + "</ÑÝ:¶¯»­>";
 		_result = "";
 		
 		return rst;
@@ -67,13 +67,13 @@ public class Anim_Par {
 			_one_par.set_present_class(skip_null(attVal));
 	
 			attVal = skip_null(atts.getValue("presentation:node-type"));
-			_one_par.add_timing_att("ï¿½ï¿½:ï¿½Â¼ï¿½",get_event_type(attVal));
+			_one_par.add_timing_att("ÑÝ:ÊÂ¼þ",get_event_type(attVal));
 			
 			attVal = skip_null(atts.getValue("smil:begin"));
-			_one_par.add_timing_att("ï¿½ï¿½:ï¿½ï¿½Ê±",get_duration(attVal));
+			_one_par.add_timing_att("ÑÝ:ÑÓÊ±",get_duration(attVal));
 			
 			attVal = skip_null(atts.getValue("smil:repeatCount"));
-			_one_par.add_timing_att("ï¿½ï¿½:ï¿½Ø¸ï¿½",get_repeat_count(attVal));
+			_one_par.add_timing_att("ÑÝ:ÖØ¸´",get_repeat_count(attVal));
 			
 			attVal = skip_null(atts.getValue("presentation:preset-id"));
 			_one_par.set_present_id(attVal);
@@ -90,25 +90,25 @@ public class Anim_Par {
 			
 			attVal = skip_null(atts.getValue("presentation:node-type"));
 			if(!get_event_type(attVal).equals("")){
-				_timing_atts += " ï¿½ï¿½:ï¿½Â¼ï¿½=\"" + get_event_type(attVal) + "\"";
+				_timing_atts += " ÑÝ:ÊÂ¼þ=\"" + get_event_type(attVal) + "\"";
 			}
 			
 			attVal = skip_null(atts.getValue("smil:begin"));
 			if(!attVal.equals("")){ //?? zhuan huan
-				//_timing_atts += " ï¿½ï¿½:ï¿½ï¿½Ê±=\"" + attVal + "\"";
+				//_timing_atts += " ÑÝ:ÑÓÊ±=\"" + attVal + "\"";
 			}
 			
 			attVal = skip_null(atts.getValue("smil:repeatCount"));
 			if(!get_repeat_count(attVal).equals("")){
-				_timing_atts += " ï¿½ï¿½:ï¿½Ø¸ï¿½=\"" + get_repeat_count(attVal) + "\"";
+				_timing_atts += " ÑÝ:ÖØ¸´=\"" + get_repeat_count(attVal) + "\"";
 			}
 			
 			attVal = skip_null(atts.getValue("anim:iterate-type"));		
 			if(attVal.equals("by-letter") || attVal.equals("by-word")){
-				_text_atts += " ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½=\"" + attVal + "\"";
+				_text_atts += " ÑÝ:·¢ËÍ=\"" + attVal + "\"";
 			}
 			else{
-				_text_atts += " ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½=\"all at once\"";
+				_text_atts += " ÑÝ:·¢ËÍ=\"all at once\"";
 			}
 			
 			attVal = skip_null(atts.getValue("smil:targetElement"));
@@ -132,7 +132,7 @@ public class Anim_Par {
 				String to = skip_null(atts.getValue("smil:to"));
 				if(begin.equals(_anim_id+".end") &&
 					att.equals("visibility") && to.equals("hidden")){
-					_one_par.add_after_att("ï¿½ï¿½:ï¿½ï¿½ï¿½Åºï¿½ï¿½ï¿½ï¿½ï¿½","true");
+					_one_par.add_after_att("ÑÝ:²¥·ÅºóÒþ²Ø","true");
 				}
 			}
 		}
@@ -141,7 +141,7 @@ public class Anim_Par {
 			attVal = skip_null(atts.getValue("smil:dur"));
 			String sp = get_speed(attVal);
 			
-			_one_par.add_timing_att("ï¿½ï¿½:ï¿½Ù¶ï¿½",sp);
+			_one_par.add_timing_att("ÑÝ:ËÙ¶È",sp);
 			_one_par.set_speed(sp);
 		}
 		
@@ -149,7 +149,7 @@ public class Anim_Par {
 			attVal = skip_null(atts.getValue("smil:attributeName"));
 			if(attVal.equals("dim")){
 				String color = skip_null(atts.getValue("smil:to"));
-				_one_par.add_after_att("ï¿½ï¿½:ï¿½ï¿½É«",color);
+				_one_par.add_after_att("ÑÝ:ÑÕÉ«",color);
 			}
 		}
 		
@@ -161,7 +161,7 @@ public class Anim_Par {
 			_one_par.set_motion_path(atts.getValue("svg:path"));
 			
 			attVal = skip_null(atts.getValue("smil:dur"));
-			_one_par.add_timing_att("ï¿½ï¿½:ï¿½ï¿½Ê±",get_duration(attVal));
+			_one_par.add_timing_att("ÑÝ:ÑÓÊ±",get_duration(attVal));
 		}
 	}
 	
@@ -245,10 +245,10 @@ public class Anim_Par {
 		}
 
 		else if(presentID.equals("ooo-entrance-appear")){
-			effect = "ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½";
+			effect = "ÑÝ:³öÏÖ";
 		}
 		else if(presentID.equals("ooo-exit-disappear")){
-			effect = "ï¿½ï¿½:ï¿½ï¿½Ê§";
+			effect = "ÑÝ:ÏûÊ§";
 		}
 		else{
 			int ind1 = presentID.indexOf("-");
@@ -256,7 +256,7 @@ public class Anim_Par {
 			
 			presentID = presentID.substring(ind1+1);
 			if(presentID.equals("wheel")){
-				effect = "ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½" + " ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½×´=\"" + subType + "\"";
+				effect = "ÑÝ:ÂÖ×Ó" + " ÑÝ:·øÉä×´=\"" + subType + "\"";
 			}
 			else {
 				rst = _effect_table.get(presentID + "|" + subType);
@@ -264,7 +264,7 @@ public class Anim_Par {
 					int ind = rst.indexOf("|");
 					String val1 = rst.substring(0,ind);
 					String val2 = rst.substring(ind + 1);
-					effect = "" + val1 + " ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½=\"" + val2 + "\"";
+					effect = "" + val1 + " ÑÝ:·½Ïò=\"" + val2 + "\"";
 				}
 			}
 		}
@@ -273,36 +273,36 @@ public class Anim_Par {
 	
 	public static void init_effect_table(){
 		//entrance/exit
-		_effect_table.put("wipe|from-left","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½|from left");
+		_effect_table.put("wipe|from-left","ÑÝ:²Á³ý|from left");
 		
-		_effect_table.put("wipe|from-up","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½|from up");
+		_effect_table.put("wipe|from-up","ÑÝ:²Á³ý|from up");
 		
-		_effect_table.put("wipe|from-bottom","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½|from bottom");
+		_effect_table.put("wipe|from-bottom","ÑÝ:²Á³ý|from bottom");
 		
-		_effect_table.put("wipe|from-right","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½|from right");
+		_effect_table.put("wipe|from-right","ÑÝ:²Á³ý|from right");
 		
-		_effect_table.put("split|horizontal-in","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½|horizontal in");//5
+		_effect_table.put("split|horizontal-in","ÑÝ:ÅüÁÑ|horizontal in");//5
 		
-		//_effect_table.put("appear|","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½");
+		//_effect_table.put("appear|","ÑÝ:³öÏÖ");
 		
-		_effect_table.put("diagonal-squares|left-to-bottom","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½×´|left down");
+		_effect_table.put("diagonal-squares|left-to-bottom","ÑÝ:½×ÌÝ×´|left down");
 		
-		_effect_table.put("fly-in|from-bottom","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½|from bottom");
+		_effect_table.put("fly-in|from-bottom","ÑÝ:·ÉÈë|from bottom");
 		
-		_effect_table.put("wheel|4","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½|4");//ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½×´
+		_effect_table.put("wheel|4","ÑÝ:ÂÖ×Ó|4");//ÑÝ:·øÉä×´
 
-		_effect_table.put("fly-in-slow|from-right","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½|from right");
+		_effect_table.put("fly-in-slow|from-right","ÑÝ:»ºÂý½øÈë|from right");
 		
-		_effect_table.put("venetian-blinds|horizontal","ï¿½ï¿½:ï¿½ï¿½Ò¶ï¿½ï¿½|horizontal");
+		_effect_table.put("venetian-blinds|horizontal","ÑÝ:°ÙÒ¶´°|horizontal");
 		
-		_effect_table.put("box|in","ï¿½ï¿½:ï¿½ï¿½×´|in");
+		_effect_table.put("box|in","ÑÝ:ºÐ×´|in");
 		
-		_effect_table.put("diamond|out","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½|out");
+		_effect_table.put("diamond|out","ÑÝ:ÁâÐÎ|out");
 		
 		//exit
-		_effect_table.put("fly-out|from-bottom","ï¿½ï¿½:ï¿½É³ï¿½|from bottom");
+		_effect_table.put("fly-out|from-bottom","ÑÝ:·É³ö|from bottom");
 		
-		_effect_table.put("disappear","ï¿½ï¿½:ï¿½ï¿½Ê§");
+		_effect_table.put("disappear","ÑÝ:ÏûÊ§");
 		
 		_effect_table.put("","");
 		_effect_table.put("","");
@@ -312,9 +312,9 @@ public class Anim_Par {
 		_effect_table.put("","");
 		
 		//emphasis
-		_effect_table.put("fill-color","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«");
+		_effect_table.put("fill-color","ÑÝ:¸ü¸ÄÌî³äÑÕÉ«");
 		
-		_effect_table.put("line-color","ï¿½ï¿½:ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«");
+		_effect_table.put("line-color","ÑÝ:¸ü¸ÄÏßÌõÑÕÉ«");
 		
 		_effect_table.put("","");
 		_effect_table.put("","");
