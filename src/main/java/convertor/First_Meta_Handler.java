@@ -8,94 +8,94 @@ import org.xml.sax.helpers.DefaultHandler;
 import stored_data.Meta_Data;
 
 /**
- * ÄÚÈİ´¦Àí³ÌĞò£¬ÓÃÓÚµÚÒ»ÂÖÉ¨Ãèmeta.xml£¬´¦ÀíµÚ¶şÀàÔªËØ£¬½«ĞèÒª´æ´¢µÄĞÅÏ¢ÌáÈ¡³öÀ´²¢´æ´¢¡£
- * 
+ * å†…å®¹å¤„ç†ç¨‹åºï¼Œç”¨äºç¬¬ä¸€è½®æ‰«æmeta.xmlï¼Œå¤„ç†ç¬¬äºŒç±»å…ƒç´ ï¼Œå°†éœ€è¦å­˜å‚¨çš„ä¿¡æ¯æå–å‡ºæ¥å¹¶å­˜å‚¨ã€‚
+ *
  * @author xie
  *
  */
 public class First_Meta_Handler extends DefaultHandler {
-	private String _text_node = "";   				//ÓÃÓÚ´æ´¢ÎÄ±¾½ÚµãµÄÖµ
-	private boolean _need_to_store_text = false; 	//±êÖ¾ÊÇ·ñĞèÒª´æ´¢ÎÄ±¾½Úµã
-	private String _udm = "";   					//ÓÃ»§×Ô¶¨ÒåÔªÊı¾İ
-	
+	private String _text_node = "";   				//ç”¨äºå­˜å‚¨æ–‡æœ¬èŠ‚ç‚¹çš„å€¼
+	private boolean _need_to_store_text = false; 	//æ ‡å¿—æ˜¯å¦éœ€è¦å­˜å‚¨æ–‡æœ¬èŠ‚ç‚¹
+	private String _udm = "";   					//ç”¨æˆ·è‡ªå®šä¹‰å…ƒæ•°æ®
+
 	public First_Meta_Handler(){
-		
+
 	}
-	
+
 	public void startElement(String namespaceURI, String localName, String qName, Attributes atts) throws SAXException{
-		
+
 		String value = "";
-		
+
 		Convertor_ODF_To_UOF.write_source_ta("parsing <" + qName + ">...\n");
-		
+
 		if (qName.equals("meta:user-defined")) {
-			 _udm = "<uof:ÓÃ»§×Ô¶¨ÒåÔªÊı¾İ";
+			 _udm = "<uof:ç”¨æˆ·è‡ªå®šä¹‰å…ƒæ•°æ®";
 			if ((value = atts.getValue("meta:name")) != null)
-				_udm += " uof:Ãû³Æ=\"" + value + "\"";
+				_udm += " uof:åç§°=\"" + value + "\"";
 			if ((value = atts.getValue("meta:type")) != null) {
 				if (value.equals("date"))
-					_udm += " uof:ÀàĞÍ=\"datetime\"";
+					_udm += " uof:ç±»å‹=\"datetime\"";
 				else if (!value.equals("time"))
-					_udm += " uof:ÀàĞÍ=\"" + value + "\"";
+					_udm += " uof:ç±»å‹=\"" + value + "\"";
 			}
 			_udm += ">";
 			_need_to_store_text = true;
 		}
 		else if (qName.equals("meta:printed-by")) {
-			_udm = "<uof:ÓÃ»§×Ô¶¨ÒåÔªÊı¾İ uof:Ãû³Æ=\"×îºó´òÓ¡Õß\" uof:ÀàĞÍ=\"string\">";
+			_udm = "<uof:ç”¨æˆ·è‡ªå®šä¹‰å…ƒæ•°æ® uof:åç§°=\"æœ€åæ‰“å°è€…\" uof:ç±»å‹=\"string\">";
 			_need_to_store_text = true;
 		}
 		else if (qName.equals("dc:date")) {
-			_udm = "<uof:ÓÃ»§×Ô¶¨ÒåÔªÊı¾İ uof:Ãû³Æ=\"×îºóĞŞ¸ÄÊ±¼ä\" uof:ÀàĞÍ=\"datetime\">";
+			_udm = "<uof:ç”¨æˆ·è‡ªå®šä¹‰å…ƒæ•°æ® uof:åç§°=\"æœ€åä¿®æ”¹æ—¶é—´\" uof:ç±»å‹=\"datetime\">";
 			_need_to_store_text = true;
 		}
 		else if (qName.equals("meta:print-date")) {
-			_udm = "<uof:ÓÃ»§×Ô¶¨ÒåÔªÊı¾İ uof:Ãû³Æ=\"×îºó´òÓ¡Ê±¼ä\" uof:ÀàĞÍ=\"datetime\">";
+			_udm = "<uof:ç”¨æˆ·è‡ªå®šä¹‰å…ƒæ•°æ® uof:åç§°=\"æœ€åæ‰“å°æ—¶é—´\" uof:ç±»å‹=\"datetime\">";
 			_need_to_store_text = true;
 		}
 		else if (qName.equals("meta:keyword")) {
 			_need_to_store_text = true;
 		}
 	}
-	
+
 	public void endElement(String namespaceURI, String localName, String qName) throws SAXException{
-		
+
 		Convertor_ODF_To_UOF.write_source_ta("parsing </" + qName + ">...\n");
-		
+
 		if (qName.equals("meta:user-defined") || qName.equals("meta:printed-by") || qName.equals("dc:date")
 				|| qName.equals("meta:print-date")) {
-			_udm += _text_node + "</uof:ÓÃ»§×Ô¶¨ÒåÔªÊı¾İ>";
+			_udm += _text_node + "</uof:ç”¨æˆ·è‡ªå®šä¹‰å…ƒæ•°æ®>";
 			Meta_Data.add_udm(_udm);
 			_udm = "";
 			_text_node = "";
 			_need_to_store_text = false;
 		}
 		else if (qName.equals("meta:keyword")) {
-			Meta_Data.add_keyword("<uof:¹Ø¼ü×Ö>" + _text_node + "</uof:¹Ø¼ü×Ö>");
+			Meta_Data.add_keyword("<uof:å…³é”®å­—>" + _text_node + "</uof:å…³é”®å­—>");
 			_text_node = "";
 			_need_to_store_text = false;
 		}
 	}
-	
-	public void characters(char[] ch, int start, int length) throws SAXException  
+
+	public void characters(char[] ch, int start, int length) throws SAXException
 	{
 		if (_need_to_store_text) {
 			String chs = new String(ch, start, length);
-			_text_node += chs;			
+			_text_node += chs;
 		}
 	}
-	
-	public void error(SAXParseException exception) 
+
+	public void error(SAXParseException exception)
 	{
 		System.err.println("Error parsing the file: "+exception.getMessage());
 	}
-	
-	public void warning(SAXParseException exception) 
+
+	public void warning(SAXParseException exception)
 	{
 		System.err.println("Warning parsing the file: "+exception.getMessage());
 	}
-	
-	public void fatalError(SAXParseException exception) 
+
+	public void fatalError(SAXParseException exception)
 	{
 		System.err.println("Fatal error parsing the file: "+exception.getMessage());
 		System.err.println("Cannot continue.");

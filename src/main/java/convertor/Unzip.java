@@ -5,7 +5,7 @@ import java.util.*;
 import java.util.zip.*;
 
 /**
- * ÓÃÓÚ½«ODFÀàĞÍÎÄµµ½øĞĞ½âÑ¹µÃµ½content.xml¡¢styles.xml¡¢meta.xmlµÈxmlÔ´ÎÄ¼ş¡£
+ * ç”¨äºå°†ODFç±»å‹æ–‡æ¡£è¿›è¡Œè§£å‹å¾—åˆ°content.xmlã€styles.xmlã€meta.xmlç­‰xmlæºæ–‡ä»¶ã€‚
  *
  * @author xie
  *
@@ -69,7 +69,7 @@ public class Unzip {
 
 		} catch (IOException ioe) {
 			ioe.printStackTrace();
-			throw new Exception("Unhandled exception: ÎÄ¼ş½âÑ¹³öÏÖÎÊÌâ£¡");
+			throw new Exception("Unhandled exception: æ–‡ä»¶è§£å‹å‡ºç°é—®é¢˜ï¼");
 		}
 	}
 

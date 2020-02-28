@@ -23,7 +23,7 @@ import styles.*;
 import presentation.*;
 
 /**
- * �����򣬸����ʼ����̬��������SAX�����������������ݴ���������ĵ����н�����
+ * 锟斤拷锟斤拷锟津，革拷锟斤拷锟绞硷拷锟斤拷锟教拷锟斤拷锟斤拷锟斤拷锟絊AX锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟捷达拷锟斤拷锟斤拷锟斤拷锟斤拷牡锟斤拷锟斤拷薪锟斤拷锟斤拷锟�
  *
  * @author xie
  *
@@ -64,7 +64,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 		super(title);
 		getContentPane().setLayout(new GridBagLayout());
 
-	    JLabel pathLb = new JLabel("������ODFԴ�ļ���: ");
+	    JLabel pathLb = new JLabel("锟斤拷锟斤拷锟斤拷ODF源锟侥硷拷锟斤拷: ");
 	    pathLb.setBorder(BorderFactory.createEmptyBorder(0,0,0,10));
 	    pathLb.setFont(new Font(" ", Font.BOLD, 14));
 	    _src_path_field = new JTextField(System.getProperty("user.dir"));
@@ -72,7 +72,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 	    _src_path_field.setColumns(37);
 	    add_content(create_src_panel(pathLb, _src_path_field),new Insets(25,5,5,5), 0, 0, 2);
 
-	    convertButton = new JButton("ת����");
+	    convertButton = new JButton("转锟斤拷锟斤拷");
 	    convertButton.setBorder(BorderFactory.createEmptyBorder(3,4,3,4));
 	    convertButton.setActionCommand("CONVERT");
 	    convertButton.addActionListener(this);
@@ -85,9 +85,9 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 	    _rst_path_field.setColumns(32);
 	    add_content(create_src_panel(butPn, _rst_path_field),new Insets(5,5,5,5), 0, 1, 2);
 
-	    add_content(new JLabel("����Դ�ļ�: "),new Insets(5,5,0,35), 0, 2, 1);
+	    add_content(new JLabel("锟斤拷锟斤拷源锟侥硷拷: "),new Insets(5,5,0,35), 0, 2, 1);
 
-	    add_content(new JLabel("������:   "),new Insets(5,0,0,55), 1, 2, 1);
+	    add_content(new JLabel("锟斤拷锟斤拷锟斤拷:   "),new Insets(5,0,0,55), 1, 2, 1);
 
 	    _source_area = new JTextArea("",20,25);
 	    _source_area.setEditable(false);
@@ -159,7 +159,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			String rstFile = _rst_path_field.getText().trim();
 
 			if(!srcFile.endsWith(".odt") && !srcFile.endsWith(".ods") && !srcFile.endsWith(".odp")){
-				_source_area.setText("����! Դ�ļ�������odf���ͣ����������룡");
+				_source_area.setText("锟斤拷锟斤拷! 源锟侥硷拷锟斤拷锟斤拷锟斤拷odf锟斤拷锟酵ｏ拷锟斤拷锟斤拷锟斤拷锟斤拷锟诫！");
 			}
 			else {
 				try{
@@ -211,7 +211,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			Unzip.unzip(srcFileName);
 			XMLReader xmlReader = null;
 
-			//��mimetype�ļ���ȡ�ĵ�����.
+			//锟斤拷mimetype锟侥硷拷锟斤拷取锟侥碉拷锟斤拷锟斤拷.
 			BufferedReader typeReader = new BufferedReader(new FileReader(tmpPath + "mimetype"));
 			String fileType = "";
 
@@ -228,7 +228,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			}
 
 			SAXParserFactory spfactory = SAXParserFactory.newInstance();
-			spfactory.setValidating(false);    //����֤�����������ڸ�ʽ���õ��ĵ�.
+			spfactory.setValidating(false);    //锟斤拷锟斤拷证锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟节革拷式锟斤拷锟矫碉拷锟侥碉拷.
 			SAXParser saxParser = spfactory.newSAXParser();
 			xmlReader = saxParser.getXMLReader();
 
@@ -236,7 +236,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			InputSource styleSource = new InputSource(tmpPath + "styles.xml");
 			InputSource contentSource = new InputSource(tmpPath + "content.xml");
 
-			//��һ��ɨ��Դ�ĵ�����ȡ����Ҫ�洢������.
+			//锟斤拷一锟斤拷扫锟斤拷源锟侥碉拷锟斤拷锟斤拷取锟斤拷锟斤拷要锟芥储锟斤拷锟斤拷锟斤拷.
 			//first parse of meta.xml
 			DefaultHandler firstMetaHandler = new First_Meta_Handler();
 			xmlReader.setContentHandler(firstMetaHandler);
@@ -255,7 +255,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			xmlReader.setErrorHandler(firstContentHandler);
 			xmlReader.parse(contentSource);
 
-			//�ڶ���ɨ��Դ�ĵ�������չ��֮�������д�����ĵ�result.xml.
+			//锟节讹拷锟斤拷扫锟斤拷源锟侥碉拷锟斤拷锟斤拷锟斤拷展锟斤拷之锟斤拷锟斤拷锟斤拷锟叫达拷锟斤拷锟斤拷牡锟絩esult.xml.
 			IDGenerator.restart();
 			Text_P.set_parsenum(false);
 			//second parse of meta.xml
@@ -276,7 +276,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			xmlReader.setErrorHandler(secondContentHandler);
 			xmlReader.parse(contentSource);
 
-			//ɨ�����ĵ�����ÿ��Ԫ��׷��uof:locID��uof:AttList����.
+			//扫锟斤拷锟斤拷锟侥碉拷锟斤拷锟斤拷每锟斤拷元锟斤拷追锟斤拷uof:locID锟斤拷uof:AttList锟斤拷锟斤拷.
 			InputSource result = new InputSource(tmpFileName);
 			DefaultHandler thirdHandler = new Third_Handler();
 			xmlReader.setContentHandler(thirdHandler);

@@ -3,8 +3,8 @@ package convertor;
 import java.io.*;
 
 /**
- * ÓÃÓÚÊä³ö½á¹ûµÄ´¦Àí£¬°Ñ×ª»»¹ý³ÌÖÐµÄÊä³öÐ´µ½UOF½á¹ûÎÄ¼þÖÐ¡£
- * 
+ * ç”¨äºŽè¾“å‡ºç»“æžœçš„å¤„ç†ï¼ŒæŠŠè½¬æ¢è¿‡ç¨‹ä¸­çš„è¾“å‡ºå†™åˆ°UOFç»“æžœæ–‡ä»¶ä¸­ã€‚
+ *
  * @author xie
  *
  */
@@ -13,48 +13,48 @@ public class Results_Processor {
 	private static OutputStreamWriter _outstream_writer = null;
 	private static FileOutputStream _outstream_final = null;
 	private static OutputStreamWriter _outstream_writer_final = null;
-	
+
 	public Results_Processor() {
-		
+
 	}
-	
+
 	public static void close() throws IOException{
 		_outstream.close();
 		_outstream_writer.close();
 		_outstream_final.close();
 		_outstream_writer_final.close();
 	}
-	
+
 	public static String initialize(String uofName) throws IOException{
 		File uofFile = new File(uofName);
-		
+
 		if(uofFile.exists()){
-			String error = "Error: File name:" + uofName 
-						+ " exists already£¡Please input a new file name for the result£¡";
-			
+			String error = "Error: File name:" + uofName
+						+ " exists alreadyï¼Please input a new file name for the resultï¼";
+
 			Convertor_ODF_To_UOF.write_source_ta(error);
 			throw new IOException(error);
 		}
-		
+
 		uofFile.createNewFile();
 		File tmpFile = File.createTempFile("odf_to_uof",".xml");
 		tmpFile.deleteOnExit();
-		
-		_outstream = new FileOutputStream(tmpFile);	
+
+		_outstream = new FileOutputStream(tmpFile);
 		_outstream_writer = new OutputStreamWriter(_outstream,"UTF8");
-		
-		_outstream_final = new FileOutputStream(uofName);	
+
+		_outstream_final = new FileOutputStream(uofName);
 		_outstream_writer_final = new OutputStreamWriter(_outstream_final,"UTF8");
-		
+
 		System.out.println(tmpFile.getAbsolutePath());
 		return tmpFile.getAbsolutePath();
 	}
-	
-	public static void process_result(String result){		
+
+	public static void process_result(String result){
 		try {
 			_outstream_writer.write(result,0,result.length());
 			_outstream_writer.flush();
-			
+
 			if(!result.equals("")){
 				Convertor_ODF_To_UOF.write_result_ta(result.replace(">",">\n"));
 			}
@@ -63,14 +63,14 @@ public class Results_Processor {
 			e.printStackTrace();
 		}
 	}
-	 
+
 	public static void write_final_file(String result) {
 		//=============================
 		int last = 0;
 		int current = result.indexOf(">");
-		
+
 		if(result.length()==0) return;
-		
+
 		if(result.indexOf("\n")!=-1){
 			System.out.print(result);
 		}
@@ -82,7 +82,7 @@ public class Results_Processor {
 			}
 		}
 		//=============================
-		
+
 		try {
 			_outstream_writer_final.write(result,0,result.length());
 			_outstream_writer_final.flush();

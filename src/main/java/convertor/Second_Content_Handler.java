@@ -14,42 +14,42 @@ import spreadsheet.*;
 import presentation.*;
 
 /**
- * ÄÚÈİ´¦Àí³ÌĞò£¬ÓÃÓÚµÚ¶şÂÖÉ¨Ãècontent.xml£¬´¦ÀíÇ°Á½ÀàÔªËØ£¬½«×ª»»ºóµÄ½á¹ûĞ´µ½ÖĞ¼ä½á¹ûÎÄµµÖĞ¡£
- * 
+ * å†…å®¹å¤„ç†ç¨‹åºï¼Œç”¨äºç¬¬äºŒè½®æ‰«æcontent.xmlï¼Œå¤„ç†å‰ä¸¤ç±»å…ƒç´ ï¼Œå°†è½¬æ¢åçš„ç»“æœå†™åˆ°ä¸­é—´ç»“æœæ–‡æ¡£ä¸­ã€‚
+ *
  * @author xie
  *
  */
-public class Second_Content_Handler extends DefaultHandler{	
+public class Second_Content_Handler extends DefaultHandler{
 	//type of file
 	private String _filetype = Common_Data.get_file_type();
 	//tag for filtration
-	private boolean _filter_tag = false;	
+	private boolean _filter_tag = false;
 	//tag for <text:table-of-content>
 	private boolean _toc_tag = false;
 	//tag for <text:p>
 	private boolean _paragraph_tag = false;
 	//tag for <table:table> in <text>
-	private boolean _table_tag = false;	
+	private boolean _table_tag = false;
 	//stack for nesting
 	private Stack<String> _stack = new Stack<String>();
 	//tag for <table:table> in <spreadsheet>
-	private boolean _sheet_table_tag = false;	
+	private boolean _sheet_table_tag = false;
 	//tag for <draw:page>
-	private boolean _draw_page_tag = false;					
+	private boolean _draw_page_tag = false;
 	//
 	private boolean _extension_tag = false;
 	//
 	private int _group_level = 0;
-	
-	
+
+
 	public Second_Content_Handler(){
 
 	}
 
 	public void startDocument() throws SAXException {
 		String result = "";
-		
-		if(_filetype.equals("text")){ 
+
+		if(_filetype.equals("text")){
 			result += get_text_prelude();
 		}
 		else if(_filetype.equals("spreadsheet")){
@@ -58,35 +58,35 @@ public class Second_Content_Handler extends DefaultHandler{
 		else if(_filetype.equals("presentation")){
 			result += get_presentation_prelude();
 		}
-		
+
 		Results_Processor.process_result(result);
 	}
-	
+
 	public void endDocument() throws SAXException {
 		String result = "";
-		
+
 		if(_filetype.equals("text")){
-			result += "</×Ö:Ö÷Ìå>";
-			result += "</uof:ÎÄ×Ö´¦Àí>";
+			result += "</å­—:ä¸»ä½“>";
+			result += "</uof:æ–‡å­—å¤„ç†>";
 		}
 		else if(_filetype.equals("spreadsheet")){
-			result += "</±í:Ö÷Ìå>";
-			result += "</uof:µç×Ó±í¸ñ>";
+			result += "</è¡¨:ä¸»ä½“>";
+			result += "</uof:ç”µå­è¡¨æ ¼>";
 		}
 		else if(_filetype.equals("presentation")){
-			result += "</Ñİ:»ÃµÆÆ¬¼¯>";
-			result += "</Ñİ:Ö÷Ìå>";
-			result += "</uof:ÑİÊ¾ÎÄ¸å>";
+			result += "</æ¼”:å¹»ç¯ç‰‡é›†>";
+			result += "</æ¼”:ä¸»ä½“>";
+			result += "</uof:æ¼”ç¤ºæ–‡ç¨¿>";
 		}
-		
+
 		result += "</uof:UOF>";
 		Results_Processor.process_result(result);
 	}
-	
+
 	public void startElement(String namespaceURI, String localName,
-			String qName, Attributes atts) throws SAXException{			
+			String qName, Attributes atts) throws SAXException{
 		String result = "";
-		
+
 		if (qName.contains("draw:")) {
 			if (qName.equals("draw:g")){
 				_group_level ++;
@@ -105,8 +105,8 @@ public class Second_Content_Handler extends DefaultHandler{
 				}
 			}
 		}
-		
-		//ÎÄ×Ö´¦Àí
+
+		//æ–‡å­—å¤„ç†
 		if(_filetype.equals("text")){
 			if(_filter_tag){
 				return;
@@ -114,15 +114,15 @@ public class Second_Content_Handler extends DefaultHandler{
 			else if(qName.equals("text:tracked-changes")){
 				_filter_tag = true;
 			}
-			
-			else if(_toc_tag){ 
+
+			else if(_toc_tag){
 				Text_TOC.process_start(qName,atts);
 			}
-			//º¬ÓĞtext:p×ÓÔªËØ£¬·ÅÔÚtext:pÇ°Ãæ
+			//å«æœ‰text:på­å…ƒç´ ï¼Œæ”¾åœ¨text:på‰é¢
 			else if(qName.equals("text:table-of-content")){
 				_toc_tag = true;
 			}
-			
+
 			else if(_paragraph_tag){
 				_stack.push(qName);
 				Text_P.process_start(qName,atts);
@@ -135,7 +135,7 @@ public class Second_Content_Handler extends DefaultHandler{
 				_stack.push(qName);
 				_table_tag = true;
 				Text_Table.process_start(qName,atts);
-			}	
+			}
 			else if(qName.equals("text:p")||qName.equals("text:h")
 					||qName.equals("text:list")||qName.equals("text:list-item")){
 				_stack.push(qName);
@@ -143,19 +143,19 @@ public class Second_Content_Handler extends DefaultHandler{
 				Text_P.process_start(qName,atts);
 			}
 		}
-		
-		//µç×Ó±í¸ñ
-		else if(_filetype.equals("spreadsheet")){			 						
+
+		//ç”µå­è¡¨æ ¼
+		else if(_filetype.equals("spreadsheet")){
 			if(_sheet_table_tag){
 				Sheet_Table.process_start(qName,atts);
 			}
 			else if(qName.equals("table:table")){
 				_sheet_table_tag = true;
 				Sheet_Table.process_start(qName,atts);
-			}			
+			}
 		}
-		
-		//ÑİÊ¾ÎÄµµ		
+
+		//æ¼”ç¤ºæ–‡æ¡£
 		else if(_filetype.equals("presentation")){
 			if(_draw_page_tag){
 				Draw_Page.process_start(qName,atts);
@@ -165,18 +165,18 @@ public class Second_Content_Handler extends DefaultHandler{
 				Draw_Page.process_start(qName,atts);
 			}
 		}
-		
+
 		Results_Processor.process_result(result);
 	}
-	
-	public void endElement(String namespaceURI, 
-			String localName, String qName) throws SAXException{		
+
+	public void endElement(String namespaceURI,
+			String localName, String qName) throws SAXException{
 		String result = "";
-		
+
 		if (qName.equals("draw:g")) {
 			_group_level--;
 		}
-		
+
 		if(_filetype.equals("text")){
 			if(qName.equals("text:tracked-changes")){
 				_filter_tag = false;
@@ -184,7 +184,7 @@ public class Second_Content_Handler extends DefaultHandler{
 			else if(_filter_tag){
 				return;
 			}
-			
+
 			else if(qName.equals("text:table-of-content")){
 				_toc_tag = false;
 				result = Text_TOC.get_result();
@@ -192,7 +192,7 @@ public class Second_Content_Handler extends DefaultHandler{
 			else if(_toc_tag){
 				Text_TOC.process_end(qName);
 			}
-			
+
 			else if(_table_tag){
 				Text_Table.process_end(qName);
 				_stack.pop();
@@ -210,7 +210,7 @@ public class Second_Content_Handler extends DefaultHandler{
 				}
 			}
 		}
-		
+
 		else if(_filetype.equals("spreadsheet")){
 			if(qName.equals("table:table")){
 				_sheet_table_tag = false;
@@ -219,12 +219,12 @@ public class Second_Content_Handler extends DefaultHandler{
 			}
 			else if(_sheet_table_tag){
 				Sheet_Table.process_end(qName);
-			}			
+			}
 		}
-		
+
 		else if(_filetype.equals("presentation")){
 			Draw_Page.set_achor_id("");
-			
+
 			if(qName.equals("draw:page")){
 				_draw_page_tag = false;
 				Draw_Page.process_end(qName);
@@ -234,19 +234,19 @@ public class Second_Content_Handler extends DefaultHandler{
 				Draw_Page.process_end(qName);
 			}
 		}
-		
+
 		Results_Processor.process_result(result);
 	}
-	
-	public void characters(char[] ch, int start, int length) throws SAXException  
+
+	public void characters(char[] ch, int start, int length) throws SAXException
 	{
 		String chs = new String(ch, start, length);
 		if(chs.equals(""))	return;
-		
+
 		chs = chs.replace("&", Common_Data.ANDTAG);
 		chs = chs.replaceAll("<", Common_Data.LTAG);
 		chs = chs.replace("&", Common_Data.ANDTAG);
-		
+
 		if(_filter_tag){
 			return;
 		}
@@ -266,81 +266,81 @@ public class Second_Content_Handler extends DefaultHandler{
 			Sheet_Table.process_chars(chs);
 		}
 	}
-	
-	public void error(SAXParseException exception) 
+
+	public void error(SAXParseException exception)
 	{
 		System.err.println("Error parsing the file: "+exception.getMessage());
 	}
-	
-	public void warning(SAXParseException exception) 
+
+	public void warning(SAXParseException exception)
 	{
 		System.err.println("Warning parsing the file: "+exception.getMessage());
 	}
-	
-	public void fatalError(SAXParseException exception) 
+
+	public void fatalError(SAXParseException exception)
 	{
 		System.err.println("Fatal error parsing the file: "+exception.getMessage());
 		System.err.println("Cannot continue.");
 	}
-	
-	
+
+
 	private static String get_text_prelude(){
 		String result = "";
-		
-		result += "<uof:ÎÄ×Ö´¦Àí>";
-		result += "<×Ö:¹«ÓÃ´¦Àí¹æÔò>";
-		result += "<×Ö:ÎÄµµÉèÖÃ>";	
-		result += "<×Ö:µ±Ç°ÊÓÍ¼>page</×Ö:µ±Ç°ÊÓÍ¼>";
-		result += "<×Ö:Ëõ·Å uof:locID=\"t0003\">100</×Ö:Ëõ·Å>";
-		//result += "<×Ö:Ä¬ÈÏÖÆ±íÎ»Î»ÖÃ>21.0</×Ö:Ä¬ÈÏÖÆ±íÎ»Î»ÖÃ>";
-		result += "<×Ö:ĞŞ¶© ×Ö:Öµ=\"false\"/>";
-		result += "<×Ö:¶ÈÁ¿µ¥Î»>pt</×Ö:¶ÈÁ¿µ¥Î»>";
-		result += "</×Ö:ÎÄµµÉèÖÃ>";
-		result += "<×Ö:ÓÃ»§¼¯>";
+
+		result += "<uof:æ–‡å­—å¤„ç†>";
+		result += "<å­—:å…¬ç”¨å¤„ç†è§„åˆ™>";
+		result += "<å­—:æ–‡æ¡£è®¾ç½®>";
+		result += "<å­—:å½“å‰è§†å›¾>page</å­—:å½“å‰è§†å›¾>";
+		result += "<å­—:ç¼©æ”¾ uof:locID=\"t0003\">100</å­—:ç¼©æ”¾>";
+		//result += "<å­—:é»˜è®¤åˆ¶è¡¨ä½ä½ç½®>21.0</å­—:é»˜è®¤åˆ¶è¡¨ä½ä½ç½®>";
+		result += "<å­—:ä¿®è®¢ å­—:å€¼=\"false\"/>";
+		result += "<å­—:åº¦é‡å•ä½>pt</å­—:åº¦é‡å•ä½>";
+		result += "</å­—:æ–‡æ¡£è®¾ç½®>";
+		result += "<å­—:ç”¨æˆ·é›†>";
 		result += Text_Data.getUserSet();
-		result += "</×Ö:ÓÃ»§¼¯>";
-		result += Tracked_Change.get_result();			//<×Ö:ĞŞ¶©ĞÅÏ¢¼¯>
-		result += Annotation.get_result();				//<×Ö:Åú×¢¼¯>
-		result += "</×Ö:¹«ÓÃ´¦Àí¹æÔò>";
-		result += "<×Ö:Ö÷Ìå>";
-		result += Master_Page.get_result();				//<×Ö:·Ö½Ú>
-		
+		result += "</å­—:ç”¨æˆ·é›†>";
+		result += Tracked_Change.get_result();			//<å­—:ä¿®è®¢ä¿¡æ¯é›†>
+		result += Annotation.get_result();				//<å­—:æ‰¹æ³¨é›†>
+		result += "</å­—:å…¬ç”¨å¤„ç†è§„åˆ™>";
+		result += "<å­—:ä¸»ä½“>";
+		result += Master_Page.get_result();				//<å­—:åˆ†èŠ‚>
+
 		return result;
 	}
-	
+
 	private static String get_spreadsheet_prelude(){
 		String result = "";
-		
-		result += "<uof:µç×Ó±í¸ñ>";
-		result += "<±í:¹«ÓÃ´¦Àí¹æÔò>";
-		result += "<±í:¶ÈÁ¿µ¥Î»>pt</±í:¶ÈÁ¿µ¥Î»>";
+
+		result += "<uof:ç”µå­è¡¨æ ¼>";
+		result += "<è¡¨:å…¬ç”¨å¤„ç†è§„åˆ™>";
+		result += "<è¡¨:åº¦é‡å•ä½>pt</è¡¨:åº¦é‡å•ä½>";
 		result += Spreadsheet_Data.getCommonRules();
 		result += Validation.get_result();
 		result += Style_Map.get_result();
-		result += "<±í:ÊÇ·ñRCÒıÓÃ ±í:Öµ=\"false\"/>";
-		result += "</±í:¹«ÓÃ´¦Àí¹æÔò>";
-		result += "<±í:Ö÷Ìå>";
-		
+		result += "<è¡¨:æ˜¯å¦RCå¼•ç”¨ è¡¨:å€¼=\"false\"/>";
+		result += "</è¡¨:å…¬ç”¨å¤„ç†è§„åˆ™>";
+		result += "<è¡¨:ä¸»ä½“>";
+
 		return result;
 	}
-	
+
 	private static String get_presentation_prelude(){
 		String result = "";
-		
-		result += "<uof:ÑİÊ¾ÎÄ¸å>";
-		result += "<Ñİ:¹«ÓÃ´¦Àí¹æÔò>";
-		result += "<Ñİ:¶ÈÁ¿µ¥Î»>pt</Ñİ:¶ÈÁ¿µ¥Î»>";
-		result += Page_Layout_p.get_result();				//<Ñİ:Ò³ÃæÉèÖÃ¼¯>
-		result += "<Ñİ:ÅäÉ«·½°¸¼¯/>";
-		result += Presentation_Page_Layout.get_result();	//<Ñİ:Ò³Ãæ°æÊ½¼¯>
-		result += Presentation_Style.get_result();			//<Ñİ:ÎÄ±¾Ê½Ñù¼¯>
-		result += "<Ñİ:ÏÔÊ¾±ÈÀı/>";
-		result += Presentation_Setting.get_result();		//<Ñİ:·ÅÓ³ÉèÖÃ>
-		result += "</Ñİ:¹«ÓÃ´¦Àí¹æÔò>";
-		result += "<Ñİ:Ö÷Ìå>";
-		result += Master_Pane.get_result();					//<Ñİ:Ä¸°æ¼¯>
-		result += "<Ñİ:»ÃµÆÆ¬¼¯>";
-		
+
+		result += "<uof:æ¼”ç¤ºæ–‡ç¨¿>";
+		result += "<æ¼”:å…¬ç”¨å¤„ç†è§„åˆ™>";
+		result += "<æ¼”:åº¦é‡å•ä½>pt</æ¼”:åº¦é‡å•ä½>";
+		result += Page_Layout_p.get_result();				//<æ¼”:é¡µé¢è®¾ç½®é›†>
+		result += "<æ¼”:é…è‰²æ–¹æ¡ˆé›†/>";
+		result += Presentation_Page_Layout.get_result();	//<æ¼”:é¡µé¢ç‰ˆå¼é›†>
+		result += Presentation_Style.get_result();			//<æ¼”:æ–‡æœ¬å¼æ ·é›†>
+		result += "<æ¼”:æ˜¾ç¤ºæ¯”ä¾‹/>";
+		result += Presentation_Setting.get_result();		//<æ¼”:æ”¾æ˜ è®¾ç½®>
+		result += "</æ¼”:å…¬ç”¨å¤„ç†è§„åˆ™>";
+		result += "<æ¼”:ä¸»ä½“>";
+		result += Master_Pane.get_result();					//<æ¼”:æ¯ç‰ˆé›†>
+		result += "<æ¼”:å¹»ç¯ç‰‡é›†>";
+
 		return result;
 	}
 }
