@@ -1,25 +1,25 @@
 package spreadsheet;
 
 public class Formula {
-	
-	//oooc:=[.C9] or oooc:=[¹¤×÷±í1.C9] >>> ?
+
+	//oooc:=[.C9] or oooc:=[å·¥ä½œè¡¨1.C9] >>> ?
 	//oooc:=AVERAGE([.C3:.C8]) >>> =AVERAGE(C3:C8)
-	//oooc:=ÓïÑÔÆ½¾ù³É¼¨ >>> =ÓïÑÔÆ½¾ù³É¼¨
+	//oooc:=è¯­è¨€å¹³å‡æˆç»© >>> =è¯­è¨€å¹³å‡æˆç»©
 	public static String get_cell_formula(String val, String tableName){
 		char[] ourChars = null;
 		int val_len = 0;
 		int chars_len = 0;
 		String newVal = "";
-				
-		newVal = val.replaceAll(";", ",");				//Ìæ»»²ÎÊı·Ö¸ô·û
-		newVal = newVal.replaceAll(tableName,".");		//'.' ½«±»É¾³ı
+
+		newVal = val.replaceAll(";", ",");				//æ›¿æ¢å‚æ•°åˆ†éš”ç¬¦
+		newVal = newVal.replaceAll(tableName,".");		//'.' å°†è¢«åˆ é™¤
 		if(newVal.startsWith("oooc:")){
 			newVal = newVal.substring(5);
 		}
-		
+
 		val_len = newVal.length();
 		ourChars = new char[val_len];
-		
+
 		for(int i=0; i<val_len; i++){
 			char c = newVal.charAt(i);
 			if(c!='.' && c!='$' && c!='[' && c!=']'){
@@ -27,7 +27,7 @@ public class Formula {
 				chars_len++;
 			}
 		}
-		
+
 		return (new String(ourChars,0,chars_len));
 	}
 }

@@ -4,35 +4,35 @@ import org.xml.sax.Attributes;
 import stored_data.Spreadsheet_Data;
 
 /**
- * ¥¶¿Ì<table:filter> µΩ <±Ì:…∏—°>µƒ◊™ªª.
- * 
+ * Â§ÑÁêÜ<table:filter> Âà∞ <Ë°®:Á≠õÈÄâ>ÁöÑËΩ¨Êç¢.
+ *
  * @author xie
  *
  */
 public class Table_Filter {
-	
-	private static String _filter_id = "";		//µ±«∞…∏—°µƒ±Ìµƒid
-	private static String _range = "";			//<±Ì:∑∂Œß>
-	private static String _condition_area = "";	//<±Ì:Ãıº˛«¯”Ú>
-	private static String _result_area = "";	//<±Ì:Ω·π˚«¯”Ú>
-	private static String _condition = "";		//<±Ì:Ãıº˛>
-	
+
+	private static String _filter_id = "";		//ÂΩìÂâçÁ≠õÈÄâÁöÑË°®ÁöÑid
+	private static String _range = "";			//<Ë°®:ËåÉÂõ¥>
+	private static String _condition_area = "";	//<Ë°®:Êù°‰ª∂Âå∫Âüü>
+	private static String _result_area = "";	//<Ë°®:ÁªìÊûúÂå∫Âüü>
+	private static String _condition = "";		//<Ë°®:Êù°‰ª∂>
+
 	private static void clear(){
 		_range = "";
 		_condition_area = "";
 		_result_area = "";
 		_condition = "";
 	}
-	
+
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		
+
 		if(qName.equals("table:database-range")){
 			if((attVal=atts.getValue("table:target-range-address")) != null){
 				int index = attVal.indexOf(".");
-				
-				_range = "<±Ì:∑∂Œß>" + Cell_Address.get_cell_range(attVal) + "</±Ì:∑∂Œß>";
-				
+
+				_range = "<Ë°®:ËåÉÂõ¥>" + Cell_Address.get_cell_range(attVal) + "</Ë°®:ËåÉÂõ¥>";
+
 				if(attVal.startsWith("$")){
 					_filter_id = attVal.substring(1, index);
 				}else{
@@ -43,61 +43,61 @@ public class Table_Filter {
 				_filter_id = "";
 			}
 		}
-		
-		else if(qName.equals("table:filter")){			
+
+		else if(qName.equals("table:filter")){
 			if((attVal=atts.getValue("table:condition-source-range-address"))!=null){
-				_condition_area ="<±Ì:Ãıº˛«¯”Ú>" + attVal +"</±Ì:Ãıº˛«¯”Ú>";
+				_condition_area ="<Ë°®:Êù°‰ª∂Âå∫Âüü>" + attVal +"</Ë°®:Êù°‰ª∂Âå∫Âüü>";
 			}
 			if((attVal=atts.getValue("table:target-range-address"))!=null){
-				_result_area ="<±Ì:Ω·π˚«¯”Ú>" + attVal +"</±Ì:Ω·π˚«¯”Ú>";
-			}	
+				_result_area ="<Ë°®:ÁªìÊûúÂå∫Âüü>" + attVal +"</Ë°®:ÁªìÊûúÂå∫Âüü>";
+			}
 		}
-		
+
 		else if(qName.equals("table:filter-condition")){
-			_condition += "<±Ì:Ãıº˛  uof:locID=\"s0103\" uof:attrList=\"¡–∫≈\"";
-			_condition += " ±Ì:¡–∫≈=\"" + atts.getValue("table:field-number") +"\">";
-			
+			_condition += "<Ë°®:Êù°‰ª∂  uof:locID=\"s0103\" uof:attrList=\"ÂàóÂè∑\"";
+			_condition += " Ë°®:ÂàóÂè∑=\"" + atts.getValue("table:field-number") +"\">";
+
 			if((attVal=atts.getValue("table:operator"))!=null){
-				
+
 				if(attVal.equals("empty")){
-					_condition += "<±Ì:∆’Õ® ±Ì:¿‡–Õ=\"value\"" +
-							" ±Ì:÷µ=\"" +atts.getValue("table:value") + "\"/";
+					_condition += "<Ë°®:ÊôÆÈÄö Ë°®:Á±ªÂûã=\"value\"" +
+							" Ë°®:ÂÄº=\"" +atts.getValue("table:value") + "\"/";
 				}
 				else if(attVal.equals("bottom values")){
-					_condition += "<±Ì:∆’Õ® ±Ì:¿‡–Õ=\"bottomitem\"" +
-							" ±Ì:÷µ=\"" +atts.getValue("table:value") + "\"/>";
+					_condition += "<Ë°®:ÊôÆÈÄö Ë°®:Á±ªÂûã=\"bottomitem\"" +
+							" Ë°®:ÂÄº=\"" +atts.getValue("table:value") + "\"/>";
 				}
 				else if(attVal.equals("top values")){
-					_condition += "<±Ì:∆’Õ® ±Ì:¿‡–Õ=\"topitem\"" +
-							" ±Ì:÷µ=\"" +atts.getValue("table:value") + "\"/>";
+					_condition += "<Ë°®:ÊôÆÈÄö Ë°®:Á±ªÂûã=\"topitem\"" +
+							" Ë°®:ÂÄº=\"" +atts.getValue("table:value") + "\"/>";
 				}
 				else if(attVal.equals("bottom percent")){
-					_condition += "<±Ì:∆’Õ® ±Ì:¿‡–Õ=\"bottompercent\"" +
-							" ±Ì:÷µ=\"" +atts.getValue("table:value") + "\"/>";
+					_condition += "<Ë°®:ÊôÆÈÄö Ë°®:Á±ªÂûã=\"bottompercent\"" +
+							" Ë°®:ÂÄº=\"" +atts.getValue("table:value") + "\"/>";
 				}
 				else if(attVal.equals("top percent")){
-					_condition += "<±Ì:∆’Õ® ±Ì:¿‡–Õ=\"toppercent\"" +
-							" ±Ì:÷µ=\"" +atts.getValue("table:value") + "\"/>";
-				}				
+					_condition += "<Ë°®:ÊôÆÈÄö Ë°®:Á±ªÂûã=\"toppercent\"" +
+							" Ë°®:ÂÄº=\"" +atts.getValue("table:value") + "\"/>";
+				}
 				else {
-					_condition += "<±Ì:◊‘∂®“Â>";
-					_condition += "<±Ì:≤Ÿ◊˜Ãıº˛>";
-					_condition += "<±Ì:≤Ÿ◊˜¬Î>" + conv_operator(attVal) + "</±Ì:≤Ÿ◊˜¬Î>";
-					_condition += "<±Ì:÷µ>" + atts.getValue("table:value") + "</±Ì:÷µ>";					
-					_condition += "</±Ì:≤Ÿ◊˜Ãıº˛>";
-					_condition += "</±Ì:◊‘∂®“Â>";
-				}		
-			}			
-			_condition += "</±Ì:Ãıº˛>";	
-		}		
+					_condition += "<Ë°®:Ëá™ÂÆö‰πâ>";
+					_condition += "<Ë°®:Êìç‰ΩúÊù°‰ª∂>";
+					_condition += "<Ë°®:Êìç‰ΩúÁ†Å>" + conv_operator(attVal) + "</Ë°®:Êìç‰ΩúÁ†Å>";
+					_condition += "<Ë°®:ÂÄº>" + atts.getValue("table:value") + "</Ë°®:ÂÄº>";
+					_condition += "</Ë°®:Êìç‰ΩúÊù°‰ª∂>";
+					_condition += "</Ë°®:Ëá™ÂÆö‰πâ>";
+				}
+			}
+			_condition += "</Ë°®:Êù°‰ª∂>";
+		}
 	}
-	
-	//public static void process_end(String qName){	
+
+	//public static void process_end(String qName){
 	//}
-	
+
 	private static String conv_operator(String val){
 		String convVal = "";
-		
+
 		if(val.equals("=")){
 			convVal = "equal to";
 		}
@@ -116,19 +116,19 @@ public class Table_Filter {
 		else if(val.equals(">=")){
 			convVal = "greater than or equal to";
 		}
-		
+
 		return convVal;
 	}
-	
+
 	public static String commit_result(){
 		String result = "";
-		
+
 		if(!_filter_id.equals("")){
-			result += "<±Ì:…∏—° ±Ì:¿‡–Õ=\"auto\">" + _range 
-				+ _condition + _condition_area + _result_area + "</±Ì:…∏—°>";
+			result += "<Ë°®:Á≠õÈÄâ Ë°®:Á±ªÂûã=\"auto\">" + _range
+				+ _condition + _condition_area + _result_area + "</Ë°®:Á≠õÈÄâ>";
 			Spreadsheet_Data.add_filter(_filter_id, result);
 		}
-		
+
 		clear();
 		return result;
 	}

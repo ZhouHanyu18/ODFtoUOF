@@ -10,51 +10,51 @@ public class Master_Page_S {
 	private static String _mp_type = "";
 	//tag for text content
 	private static boolean _text_content_tag = false;
-	
-	
+
+
 	public static String get_result(){
 		String rst = "";
-		
+
 		rst = _result;
 		_result = "";
-		
+
 		return rst;
 	}
-	
+
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		
+
 		if(qName.equals("style:header")){
 			_mp_type = "header";
 		}
 		else if(qName.equals("style:footer")){
 			_mp_type = "footer";
 		}
-		
+
 		else if(_text_content_tag){
 			Text_Content.process_start(qName,atts);
 		}
-		else if(qName.equals("style:region-left") 
-				|| qName.equals("style:region-center") 
-				|| qName.equals("style:region-right")){			
+		else if(qName.equals("style:region-left")
+				|| qName.equals("style:region-center")
+				|| qName.equals("style:region-right")){
 			attVal = atts.getValue("style:display");
-			
+
 			if(attVal == null || !attVal.equals("false")){
 				_text_content_tag = true;
 			}
 		}
 	}
-	
+
 	public static void process_chars(String chs){
 		if(_text_content_tag){
 			Text_Content.process_chars(chs);
 		}
 	}
-	
+
 	public static void process_end(String qName){
 		if(_text_content_tag){
 			Text_Content.process_end(qName);
-			
+
 			if(qName.equals("style:region-left")){
 				_text_content_tag = false;
 				_result += footer_or_header(Text_Content.get_result(), _mp_type + "left");
@@ -69,14 +69,14 @@ public class Master_Page_S {
 			}
 		}
 	}
-	
+
 	private static String footer_or_header(String content,String position){
 		String fh = "";
-		
-		fh = "<±í:Ò³Ã¼Ò³½Å ±í:Î»ÖÃ=\"" + position + "\">";
+
+		fh = "<è¡¨:é¡µçœ‰é¡µè„š è¡¨:ä½ç½®=\"" + position + "\">";
 		fh += content;
-		fh += "</±í:Ò³Ã¼Ò³½Å>";
-		
+		fh += "</è¡¨:é¡µçœ‰é¡µè„š>";
+
 		return fh;
 	}
 }

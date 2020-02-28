@@ -1,5 +1,5 @@
 
-//============ÓÃÓÚ¼ÆËãÃªµãÎ»ÖÃ==================
+//============ç”¨äºè®¡ç®—é”šç‚¹ä½ç½®==================
 
 package spreadsheet;
 
@@ -11,25 +11,25 @@ import stored_data.Spreadsheet_Data;
 
 public class Anchor_Pos {
 
-	private static Map<String,Float> _colStartX_map = new HashMap<String,Float>();  //¸÷ÁĞÆğÊ¼x×ø±ê 
-	private static float _nextColStartX = 0;  //ÏÂÁĞÆğÊ¼x×ø±ê
-	private static float _currentRowStartY = 0;  //µ±Ç°ĞĞÆğÊ¼y×ø±ê
+	private static Map<String,Float> _colStartX_map = new HashMap<String,Float>();  //å„åˆ—èµ·å§‹xåæ ‡
+	private static float _nextColStartX = 0;  //ä¸‹åˆ—èµ·å§‹xåæ ‡
+	private static float _currentRowStartY = 0;  //å½“å‰è¡Œèµ·å§‹yåæ ‡
 
 	private static int _colIndex = 1;
 	private static float _rowHeightAdd = 0;
 	private static String _tableName = "";
-	private static final float _DEFcolWidth = (float)85.6926;  //Ä¬ÈÏµ¥Ôª¸ñ¿í¶È(°´Í¼ĞÎ±ÈÀı2.267*37.8)
-	
-	
+	private static final float _DEFcolWidth = (float)85.6926;  //é»˜è®¤å•å…ƒæ ¼å®½åº¦(æŒ‰å›¾å½¢æ¯”ä¾‹2.267*37.8)
+
+
 	private static void clear() {
 		_colStartX_map.clear();
-		_nextColStartX = 0;  
-		_currentRowStartY = 0;  
+		_nextColStartX = 0;
+		_currentRowStartY = 0;
 		_colIndex = 1;
 		_rowHeightAdd = 0;
 		_tableName = "";
 	}
-	
+
 	public static void process_start(String qName,Attributes atts){
 		if (qName.equals("table:table")) {
 			_tableName = atts.getValue("table:name");
@@ -46,7 +46,7 @@ public class Anchor_Pos {
 				_colStartX_map.put(Cell_Address.to_col_addr(_colIndex), _nextColStartX);
 			}
 		}
-		else if(qName.equals("table:table-row")) {			
+		else if(qName.equals("table:table-row")) {
 			_currentRowStartY += _rowHeightAdd;
 			int repeat = 1;
 			float rowHeight = Spreadsheet_Data.getRowHeight(atts.getValue("table:style-name"));
@@ -56,21 +56,21 @@ public class Anchor_Pos {
 			_rowHeightAdd = rowHeight * repeat;
 		}
 	}
-	
+
 	public static void process_end(String qName){
 		if (qName.equals("table:table")) {
 			clear();
 		}
 	}
-	
+
 	public static String getTableName() {
 		return _tableName;
 	}
-	
+
 	public static float getCurrentRowStartY() {
 		return _currentRowStartY;
 	}
-	
+
 	public static float getColStartX(String colName) {
 		if (!_colStartX_map.containsKey("A"))
 			_colStartX_map.put("A", (float)0);
@@ -80,7 +80,7 @@ public class Anchor_Pos {
 		}
 		return _colStartX_map.get(colName);
 	}
-	
+
 	//A->1,...,Z->26,AA->27,...
 	public static int colName_to_int(String colName) {
 		int colNum = 0;

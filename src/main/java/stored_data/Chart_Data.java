@@ -6,37 +6,37 @@ import java.util.Map;
 import graphic_content.ChartStyle;
 
 public class Chart_Data {
-	private static String _ole_type = "";   //ÓÃÓÚ´æ´¢OLE¶ÔÏóµÄÖÖÀà£¨Ä¿Ç°Ö»Õë¶Ôchart£©
-	private static Map<String,ChartStyle> _chart_style_set = new HashMap<String,ChartStyle>();   //´æ´¢chartÖĞµÄÊ½Ñù
-	
-	
+	private static String _ole_type = "";   //ç”¨äºå­˜å‚¨OLEå¯¹è±¡çš„ç§ç±»ï¼ˆç›®å‰åªé’ˆå¯¹chartï¼‰
+	private static Map<String,ChartStyle> _chart_style_set = new HashMap<String,ChartStyle>();   //å­˜å‚¨chartä¸­çš„å¼æ ·
+
+
 	//initialize
 	public static void init(){
 		_ole_type = "";
 		_chart_style_set.clear();
 	}
-	
-//	*******************²Ù×÷OLEType****************************
-//	*		
+
+//	*******************æ“ä½œOLEType****************************
+//	*
 	public static void set_ole_type(String type) {
 		_ole_type = type;
 	}
-	
-	public static String get_ole_type() {	
+
+	public static String get_ole_type() {
 		return _ole_type;
-	}	
-//	*	
+	}
+//	*
 //	***************************************
-	
-//	*******************²Ù×÷chartStyleSet****************************
-//	*		
+
+//	*******************æ“ä½œchartStyleSet****************************
+//	*
 	public static void add_chart_style(String ID,ChartStyle chartstyle) {
 		_chart_style_set.put(ID,chartstyle);
 	}
-	
-	public static ChartStyle get_chart_style(String ID) {	
+
+	public static ChartStyle get_chart_style(String ID) {
 		return _chart_style_set.get(ID);
-	}	
-//	*	
+	}
+//	*
 //	***************************************
 }

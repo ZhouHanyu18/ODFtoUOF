@@ -1,65 +1,65 @@
 package spreadsheet;
 
-public class Validation_Struct {	
+public class Validation_Struct {
 	private String _table_name = "";
 	private int _col_start = 0;
 	private int _row_start = 0;
 	private int _col_end = 0;
 	private int _row_end = 0;
-	
-	private String _cell_address = "";			//ÇøÓò
-	private String _check_type = "";			//Ğ£ÑéÀàĞÍ
-	private String _operator = "";				//²Ù×÷Âë
-	private String _code_one = "";				//µÚÒ»²Ù×÷Êı
-	private String _code_two = "";				//µÚ¶ş²Ù×÷Êı
-	private String _allow_empty_cell = "";		//ºöÂÔ¿Õ¸ñ
-	private String _display_list = "";			//ÏÂÀ­¼üÍ·
-	private String _help_message = "";			//ÊäÈëÌáÊ¾
-	private String _error_message="";			//´íÎóÌáÊ¾
-	
+
+	private String _cell_address = "";			//åŒºåŸŸ
+	private String _check_type = "";			//æ ¡éªŒç±»å‹
+	private String _operator = "";				//æ“ä½œç 
+	private String _code_one = "";				//ç¬¬ä¸€æ“ä½œæ•°
+	private String _code_two = "";				//ç¬¬äºŒæ“ä½œæ•°
+	private String _allow_empty_cell = "";		//å¿½ç•¥ç©ºæ ¼
+	private String _display_list = "";			//ä¸‹æ‹‰é”®å¤´
+	private String _help_message = "";			//è¾“å…¥æç¤º
+	private String _error_message="";			//é”™è¯¯æç¤º
+
 	public String get_result(){
 		String result = "";
 		String range = get_range_string();
-		
+
 		if(_code_one.equals("")){
-			_code_one = "<±í:µÚÒ»²Ù×÷Êı/>";
+			_code_one = "<è¡¨:ç¬¬ä¸€æ“ä½œæ•°/>";
 		}
 		if(!range.equals("")){
-			result += "<±í:Êı¾İÓĞĞ§ĞÔ>";
+			result += "<è¡¨:æ•°æ®æœ‰æ•ˆæ€§>";
 			result += range + _check_type + _operator + _code_one;
 			result += _code_two + _allow_empty_cell + _display_list;
 			result += _help_message + _error_message;
-			result += "</±í:Êı¾İÓĞĞ§ĞÔ>";
+			result += "</è¡¨:æ•°æ®æœ‰æ•ˆæ€§>";
 		}
-	
+
 		return result;
 	}
-	
+
 	private String get_range_string(){
 		String range = "";
-		
+
 		if(_col_start == 0 || _col_end == 0){
-			range = "<±í:ÇøÓò>";
+			range = "<è¡¨:åŒºåŸŸ>";
 			range += "'" + _table_name + "'!";
 			range += _cell_address;
-			range += "</±í:ÇøÓò>";
+			range += "</è¡¨:åŒºåŸŸ>";
 		}
-		else{	//'¹¤×÷±í1'!$E$21:$F$22
-			range = "<±í:ÇøÓò>";
+		else{	//'å·¥ä½œè¡¨1'!$E$21:$F$22
+			range = "<è¡¨:åŒºåŸŸ>";
 			range += "'" + _table_name + "'!";
 			range += Cell_Address.to_addr(_col_start,_row_start);
 			range += ":";
 			range += Cell_Address.to_addr(_col_end,_row_end);
-			range += "</±í:ÇøÓò>";
+			range += "</è¡¨:åŒºåŸŸ>";
 		}
- 		
+
 		return range;
 	}
-	
+
 	public void set_table_name(String name){
 		_table_name = name;
 	}
-	
+
 	public void config_cell_address(int col, int row){
 		if(_col_start == 0 || _row_start == 0){
 			_col_start = col;
@@ -71,39 +71,39 @@ public class Validation_Struct {
 			_row_end = row;
 		}
 	}
-	
+
 	public void set_cell_address(String address){
 		_cell_address = address;
 	}
-	
+
 	public void set_check_type(String type){
 		_check_type = type;
 	}
-	
+
 	public void set_operator(String op){
 		_operator = op;
 	}
-	
+
 	public void set_code_one(String code){
 		_code_one = code;
 	}
-	
+
 	public void set_code_two(String code){
 		_code_two = code;
 	}
-	
+
 	public void set_allow_empty_cell(String allow){
 		_allow_empty_cell = allow;
 	}
-	
+
 	public void set_display_list(String list){
 		_display_list = list;
 	}
-	
+
 	public void set_help_message(String help){
 		_help_message = help;
 	}
-	
+
 	public void set_error_message(String error){
 		_error_message = error;
 	}

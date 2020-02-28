@@ -4,39 +4,39 @@ import java.util.*;
 import org.xml.sax.Attributes;
 
 /**
- * ´¦Àí<table:content-validations> µ½ <±í:Êı¾İÓĞĞ§ĞÔ¼¯>µÄ×ª»»¡£
- * 
+ * å¤„ç†<table:content-validations> åˆ° <è¡¨:æ•°æ®æœ‰æ•ˆæ€§é›†>çš„è½¬æ¢ã€‚
+ *
  * @author xie
  *
  */
 public class Validation {
-	private static String _chs = "";						//´æ·Å×Ö·û½ÚµãµÄÄÚÈİ
+	private static String _chs = "";						//å­˜æ”¾å­—ç¬¦èŠ‚ç‚¹çš„å†…å®¹
 	private static String _valid_name = "";
-	private static String _help_message = "";				//ÊäÈëÌáÊ¾
-	private static String _error_message="";				//´íÎóÌáÊ¾
-	private static boolean _in_help_message = false;	
-	
+	private static String _help_message = "";				//è¾“å…¥æç¤º
+	private static String _error_message="";				//é”™è¯¯æç¤º
+	private static boolean _in_help_message = false;
+
 	private static Validation_Struct _valid_struct = null;	//
-	private static Map<String,Validation_Struct> 
+	private static Map<String,Validation_Struct>
 			_validation_map = new TreeMap<String,Validation_Struct>();
-	
-				
+
+
 	//initialize
 	public static void init(){
 		_valid_name = "";
 		_valid_struct = null;
 		_validation_map.clear();
 	}
-	
+
 	public static String get_result(){
 		String result = "";
-		
+
 		for(Iterator<String> it = _validation_map.keySet().iterator(); it.hasNext();){
 			String name = it.next();
 			result += _validation_map.get(name).get_result();
 		}
-		
-		return "<±í:Êı¾İÓĞĞ§ĞÔ¼¯>" + result + "</±í:Êı¾İÓĞĞ§ĞÔ¼¯>";
+
+		return "<è¡¨:æ•°æ®æœ‰æ•ˆæ€§é›†>" + result + "</è¡¨:æ•°æ®æœ‰æ•ˆæ€§é›†>";
 	}
 
 	public static Set get_key_set(){
@@ -48,10 +48,10 @@ public class Validation {
 	private static void add_validation(String name, Validation_Struct struct){
 		_validation_map.put(name, struct);
 	}
-	
+
 	private static String get_check_style(String value){
 		String style = "";
-		
+
 		if(value.contains("cell-content-is-whole-number()")){
 			style = "whole number";
 		}
@@ -73,49 +73,49 @@ public class Validation {
 		else if(value.contains("cell-content-is-in-list")){
 			style = "list";
 		}
-		
+
 		return style;
 	}
-	
+
 	public static void process_start(String qName,Attributes atts){
 		String attVal = "";
-		
+
 		if(qName.equals("table:content-validation")){
 			_valid_name = atts.getValue("table:name");
 			_valid_struct = new Validation_Struct();
-			
+
 			if((attVal=atts.getValue("table:base-cell-address"))!=null){
 				String tableName = Cell_Address.get_table_name(attVal);
 				String cellAddr = Cell_Address.get_cell_address(attVal);
-				
+
 				_valid_struct.set_cell_address(cellAddr);
 				_valid_struct.set_table_name(tableName);
 			}
-			
+
 			if((attVal=atts.getValue("table:condition"))!=null){
 				int index1, index2, index3;
 				String op = "";
 				String operatorCodeOne = "";
 				String operatorCodeTwo = "";
-				
+
 				if(attVal.contains("is-not-between")){
 					op = "not between";
-					
+
 					index1 = attVal.indexOf("between");
 					index1 = attVal.indexOf("(",index1);
 					index2 = attVal.indexOf(")",index1);
 					index3 = attVal.indexOf(",",index1);
-					operatorCodeOne= attVal.substring(index1+1,index3); 
+					operatorCodeOne= attVal.substring(index1+1,index3);
 					operatorCodeTwo= attVal.substring(index3+1,index2);
 				}
 				else if(attVal.contains("is-between")){
 					op = "between";
-					
+
 					index1 = attVal.indexOf("between");
 					index1 = attVal.indexOf("(",index1);
 					index2 = attVal.indexOf(")",index1);
-					index3 = attVal.indexOf(",",index1);				
-					operatorCodeOne= attVal.substring(index1+1,index3); 
+					index3 = attVal.indexOf(",",index1);
+					operatorCodeOne= attVal.substring(index1+1,index3);
 					operatorCodeTwo= attVal.substring(index3+1,index2);
 				}
 				else if(attVal.contains("cell-content-is-in-list")){
@@ -153,96 +153,96 @@ public class Validation {
 					index1 = attVal.indexOf("<");
 					operatorCodeOne = attVal.substring(index1+1);
 				}
-				
-				//Êä³ö×ª»»½á¹û
+
+				//è¾“å‡ºè½¬æ¢ç»“æœ
 				if(!get_check_style(attVal).equals("")){
-					_valid_struct.set_check_type("<±í:Ğ£ÑéÀàĞÍ>" + get_check_style(attVal) + "</±í:Ğ£ÑéÀàĞÍ>");
-				}				
+					_valid_struct.set_check_type("<è¡¨:æ ¡éªŒç±»å‹>" + get_check_style(attVal) + "</è¡¨:æ ¡éªŒç±»å‹>");
+				}
 				if(!op.equals("")){
-					_valid_struct.set_operator("<±í:²Ù×÷Âë>" + op + "</±í:²Ù×÷Âë>");
-				}				
+					_valid_struct.set_operator("<è¡¨:æ“ä½œç >" + op + "</è¡¨:æ“ä½œç >");
+				}
 				if(!operatorCodeOne.equals("")){
-					_valid_struct.set_code_one("<±í:µÚÒ»²Ù×÷Êı>" + operatorCodeOne + "</±í:µÚÒ»²Ù×÷Êı>");
+					_valid_struct.set_code_one("<è¡¨:ç¬¬ä¸€æ“ä½œæ•°>" + operatorCodeOne + "</è¡¨:ç¬¬ä¸€æ“ä½œæ•°>");
 				}
 				if(!operatorCodeTwo.equals("")){
-					_valid_struct.set_code_two("<±í:µÚ¶ş²Ù×÷Êı>" + operatorCodeTwo + "</±í:µÚ¶ş²Ù×÷Êı>");
+					_valid_struct.set_code_two("<è¡¨:ç¬¬äºŒæ“ä½œæ•°>" + operatorCodeTwo + "</è¡¨:ç¬¬äºŒæ“ä½œæ•°>");
 				}
 			}
-			
-			if((attVal=atts.getValue("table:allow-empty-cell"))!=null){				
-				_valid_struct.set_allow_empty_cell("<±í:ºöÂÔ¿Õ¸ñ ±í:Öµ=\"" + attVal + "\"/>");
+
+			if((attVal=atts.getValue("table:allow-empty-cell"))!=null){
+				_valid_struct.set_allow_empty_cell("<è¡¨:å¿½ç•¥ç©ºæ ¼ è¡¨:å€¼=\"" + attVal + "\"/>");
 			}
 			if((attVal=atts.getValue("table:display-list"))!=null){
 				if(attVal.equals("none")){
-					_valid_struct.set_display_list("<±í:ÏÂÀ­¼ıÍ· ±í:Öµ=\"false\"/>");
+					_valid_struct.set_display_list("<è¡¨:ä¸‹æ‹‰ç®­å¤´ è¡¨:å€¼=\"false\"/>");
 				}
 				else{
-					_valid_struct.set_display_list("<±í:ÏÂÀ­¼üÍ· ±í:Öµ=\"true\"/>");
+					_valid_struct.set_display_list("<è¡¨:ä¸‹æ‹‰é”®å¤´ è¡¨:å€¼=\"true\"/>");
 				}
 			}
 		}
-		
+
 		else if(qName.equals("text:p")){
-			
+
 		}
-		
+
 		else if(qName.equals("table:help-message")){
 			_in_help_message = true;
-			_help_message="<±í:ÊäÈëÌáÊ¾";
-			
+			_help_message="<è¡¨:è¾“å…¥æç¤º";
+
 			if((attVal=atts.getValue("table:display"))!=null){
-				_help_message += " ±í:ÏÔÊ¾=\"" + attVal + "\"";				
+				_help_message += " è¡¨:æ˜¾ç¤º=\"" + attVal + "\"";
 			}
 			if((attVal=atts.getValue("table:title"))!=null){
-				_help_message += " ±í:±êÌâ=\"" + attVal + "\"";
+				_help_message += " è¡¨:æ ‡é¢˜=\"" + attVal + "\"";
 			}
 		}
-		
+
 		else if(qName.equals("table:error-message")){
-			_error_message = "<±í:´íÎóÌáÊ¾"; 
-			
+			_error_message = "<è¡¨:é”™è¯¯æç¤º";
+
 			if((attVal=atts.getValue("table:display"))!=null){
-				_error_message += " ±í:ÏÔÊ¾=\"" + attVal + "\"";
+				_error_message += " è¡¨:æ˜¾ç¤º=\"" + attVal + "\"";
 			}
 			if((attVal=atts.getValue("table:message-type"))!=null){
-				_error_message += " ±í:ÀàĞÍ=\"" + attVal + "\"";
-			}		
+				_error_message += " è¡¨:ç±»å‹=\"" + attVal + "\"";
+			}
 			if((attVal=atts.getValue("table:title"))!=null){
-				_error_message +=(" ±í:±êÌâ=\"" + attVal + "\"");
+				_error_message +=(" è¡¨:æ ‡é¢˜=\"" + attVal + "\"");
 			}
 		}
 	}
-	
+
 	public static void process_chars(String chs){
 		_chs += chs;
 	}
-	
+
 	public static void process_end(String qName){
-		
+
 		if(qName.equals("table:error-message")){
 			_error_message += "/>";
 			_valid_struct.set_error_message(_error_message);
-		}		
+		}
 		else if(qName.equals("table:help-message")){
 			_in_help_message = false;
 			_help_message += "/>";
 			_valid_struct.set_help_message(_help_message);
-		}		
-		else if(qName.equals("table:content-validation")){	
+		}
+		else if(qName.equals("table:content-validation")){
 			add_validation(_valid_name, _valid_struct);
 			clear();
-		}		
+		}
 		else if(qName.equals("text:p")){
 			if(_in_help_message && _chs.length()!=0){
-				_help_message += " ±í:ÄÚÈİ=\"" + _chs + "\"";
+				_help_message += " è¡¨:å†…å®¹=\"" + _chs + "\"";
 			}
 			else if(_chs.length()!=0){
-				_error_message += " ±í:ÄÚÈİ=\"" + _chs + "\"";
+				_error_message += " è¡¨:å†…å®¹=\"" + _chs + "\"";
 			}
 			_chs = "";
 		}
 	}
-	
+
 	private static void clear(){
 		_error_message = "";
 		_help_message = "";
