@@ -3,62 +3,62 @@ package stored_data;
 import java.util.ArrayList;
 
 public class Table_Style_Struct {
-	//attributes of <uof:ÎÄ×Ö±íÊ½Ñù>
+	//attributes of <uof:æ–‡å­—è¡¨å¼æ ·>
 	private String _start_atts = "";
-	//children of <uof:ÎÄ×Ö±íÊ½Ñù>
+	//children of <uof:æ–‡å­—è¡¨å¼æ ·>
 	private String _atts = "";
 	//
 	private String _padding = "";
-	//width of table columns in order 
-	private ArrayList<String> 
+	//width of table columns in order
+	private ArrayList<String>
 			_col_widths = new ArrayList<String>();
-	
+
 	public void set_start_atts(String ele){
 		_start_atts = ele;
 	}
-	
+
 	public void add_col_width(String wid){
 		_col_widths.add(wid);
 	}
-	
+
 	public String get_col_width(int i){
 		return _col_widths.get(i);
 	}
-	
+
 	public void set_atts(String att){
 		_atts = att;
 	}
-	
+
 	public void set_padding(String padding){
 		_padding = padding;
 	}
-	
-	//ÓÉText_Tableµ÷ÓÃ£¬×÷Îª<×Ö:ÎÄ×Ö±íÊôĞÔ>µÄ×ÓÔªËØ
+
+	//ç”±Text_Tableè°ƒç”¨ï¼Œä½œä¸º<å­—:æ–‡å­—è¡¨å±æ€§>çš„å­å…ƒç´ 
 	public String get_style_bc(){
 		String widthSet = "";
-		
+
 		for(int i=0; i<_col_widths.size(); i++){
-			widthSet += "<×Ö:ÁĞ¿í>" + _col_widths.get(i) + "</×Ö:ÁĞ¿í>";
+			widthSet += "<å­—:åˆ—å®½>" + _col_widths.get(i) + "</å­—:åˆ—å®½>";
 		}
 		if(!widthSet.equals("")){
-			widthSet = "<×Ö:ÁĞ¿í¼¯>" + widthSet + "</×Ö:ÁĞ¿í¼¯>";
+			widthSet = "<å­—:åˆ—å®½é›†>" + widthSet + "</å­—:åˆ—å®½é›†>";
 		}
-		
+
 		return widthSet + _atts  + _padding;
 	}
-	
-	//ÓÉStyle_Dataµ÷ÓÃ£¬×îºó½«±»·ÅÔÚ<uof:Ê½Ñù¼¯>ÖĞ
+
+	//ç”±Style_Dataè°ƒç”¨ï¼Œæœ€åå°†è¢«æ”¾åœ¨<uof:å¼æ ·é›†>ä¸­
 	public String get_style(){
 		String widthSet = "";
-		
+
 		for(int i=0; i<_col_widths.size(); i++){
-			widthSet += "<×Ö:ÁĞ¿í>" + _col_widths.get(i) + "</×Ö:ÁĞ¿í>";
+			widthSet += "<å­—:åˆ—å®½>" + _col_widths.get(i) + "</å­—:åˆ—å®½>";
 		}
 		if(!widthSet.equals("")){
-			widthSet = "<×Ö:ÁĞ¿í¼¯>" + widthSet + "</×Ö:ÁĞ¿í¼¯>";
+			widthSet = "<å­—:åˆ—å®½é›†>" + widthSet + "</å­—:åˆ—å®½é›†>";
 		}
-		
-		return "<uof:ÎÄ×Ö±íÊ½Ñù" + _start_atts + ">" + 
-				widthSet + _atts  + _padding + "</uof:ÎÄ×Ö±íÊ½Ñù>";
+
+		return "<uof:æ–‡å­—è¡¨å¼æ ·" + _start_atts + ">" +
+				widthSet + _atts  + _padding + "</uof:æ–‡å­—è¡¨å¼æ ·>";
 	}
 }

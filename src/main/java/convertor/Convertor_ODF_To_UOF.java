@@ -23,7 +23,7 @@ import styles.*;
 import presentation.*;
 
 /**
- * 锟斤拷锟斤拷锟津，革拷锟斤拷锟绞硷拷锟斤拷锟教拷锟斤拷锟斤拷锟斤拷锟絊AX锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟捷达拷锟斤拷锟斤拷锟斤拷锟斤拷牡锟斤拷锟斤拷薪锟斤拷锟斤拷锟�
+ * 閿熸枻鎷烽敓鏂ゆ嫹閿熸触锛岄潻鎷烽敓鏂ゆ嫹閿熺粸纭锋嫹閿熸枻鎷烽敓鏁欘剨鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熺祳AX閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸嵎杈炬嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹鐗￠敓鏂ゆ嫹閿熸枻鎷疯柂閿熸枻鎷烽敓鏂ゆ嫹閿燂拷
  *
  * @author xie
  *
@@ -64,7 +64,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 		super(title);
 		getContentPane().setLayout(new GridBagLayout());
 
-	    JLabel pathLb = new JLabel("锟斤拷锟斤拷锟斤拷ODF源锟侥硷拷锟斤拷: ");
+	    JLabel pathLb = new JLabel("閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷稯DF婧愰敓渚ョ》鎷烽敓鏂ゆ嫹: ");
 	    pathLb.setBorder(BorderFactory.createEmptyBorder(0,0,0,10));
 	    pathLb.setFont(new Font(" ", Font.BOLD, 14));
 	    _src_path_field = new JTextField(System.getProperty("user.dir"));
@@ -72,7 +72,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 	    _src_path_field.setColumns(37);
 	    add_content(create_src_panel(pathLb, _src_path_field),new Insets(25,5,5,5), 0, 0, 2);
 
-	    convertButton = new JButton("转锟斤拷锟斤拷");
+	    convertButton = new JButton("杞敓鏂ゆ嫹閿熸枻鎷�");
 	    convertButton.setBorder(BorderFactory.createEmptyBorder(3,4,3,4));
 	    convertButton.setActionCommand("CONVERT");
 	    convertButton.addActionListener(this);
@@ -85,9 +85,9 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 	    _rst_path_field.setColumns(32);
 	    add_content(create_src_panel(butPn, _rst_path_field),new Insets(5,5,5,5), 0, 1, 2);
 
-	    add_content(new JLabel("锟斤拷锟斤拷源锟侥硷拷: "),new Insets(5,5,0,35), 0, 2, 1);
+	    add_content(new JLabel("閿熸枻鎷烽敓鏂ゆ嫹婧愰敓渚ョ》鎷�: "),new Insets(5,5,0,35), 0, 2, 1);
 
-	    add_content(new JLabel("锟斤拷锟斤拷锟斤拷:   "),new Insets(5,0,0,55), 1, 2, 1);
+	    add_content(new JLabel("閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷�:   "),new Insets(5,0,0,55), 1, 2, 1);
 
 	    _source_area = new JTextArea("",20,25);
 	    _source_area.setEditable(false);
@@ -159,7 +159,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			String rstFile = _rst_path_field.getText().trim();
 
 			if(!srcFile.endsWith(".odt") && !srcFile.endsWith(".ods") && !srcFile.endsWith(".odp")){
-				_source_area.setText("锟斤拷锟斤拷! 源锟侥硷拷锟斤拷锟斤拷锟斤拷odf锟斤拷锟酵ｏ拷锟斤拷锟斤拷锟斤拷锟斤拷锟诫！");
+				_source_area.setText("閿熸枻鎷烽敓鏂ゆ嫹! 婧愰敓渚ョ》鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹odf閿熸枻鎷烽敓閰碉綇鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓璇紒");
 			}
 			else {
 				try{
@@ -211,7 +211,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			Unzip.unzip(srcFileName);
 			XMLReader xmlReader = null;
 
-			//锟斤拷mimetype锟侥硷拷锟斤拷取锟侥碉拷锟斤拷锟斤拷.
+			//閿熸枻鎷穖imetype閿熶茎纭锋嫹閿熸枻鎷峰彇閿熶茎纰夋嫹閿熸枻鎷烽敓鏂ゆ嫹.
 			BufferedReader typeReader = new BufferedReader(new FileReader(tmpPath + "mimetype"));
 			String fileType = "";
 
@@ -228,7 +228,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			}
 
 			SAXParserFactory spfactory = SAXParserFactory.newInstance();
-			spfactory.setValidating(false);    //锟斤拷锟斤拷证锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟节革拷式锟斤拷锟矫碉拷锟侥碉拷.
+			spfactory.setValidating(false);    //閿熸枻鎷烽敓鏂ゆ嫹璇侀敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹閿熻妭闈╂嫹寮忛敓鏂ゆ嫹閿熺煫纰夋嫹閿熶茎纰夋嫹.
 			SAXParser saxParser = spfactory.newSAXParser();
 			xmlReader = saxParser.getXMLReader();
 
@@ -236,7 +236,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			InputSource styleSource = new InputSource(tmpPath + "styles.xml");
 			InputSource contentSource = new InputSource(tmpPath + "content.xml");
 
-			//锟斤拷一锟斤拷扫锟斤拷源锟侥碉拷锟斤拷锟斤拷取锟斤拷锟斤拷要锟芥储锟斤拷锟斤拷锟斤拷.
+			//閿熸枻鎷蜂竴閿熸枻鎷锋壂閿熸枻鎷锋簮閿熶茎纰夋嫹閿熸枻鎷烽敓鏂ゆ嫹鍙栭敓鏂ゆ嫹閿熸枻鎷疯閿熻姤鍌ㄩ敓鏂ゆ嫹閿熸枻鎷烽敓鏂ゆ嫹.
 			//first parse of meta.xml
 			DefaultHandler firstMetaHandler = new First_Meta_Handler();
 			xmlReader.setContentHandler(firstMetaHandler);
@@ -255,7 +255,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			xmlReader.setErrorHandler(firstContentHandler);
 			xmlReader.parse(contentSource);
 
-			//锟节讹拷锟斤拷扫锟斤拷源锟侥碉拷锟斤拷锟斤拷锟斤拷展锟斤拷之锟斤拷锟斤拷锟斤拷锟叫达拷锟斤拷锟斤拷牡锟絩esult.xml.
+			//閿熻妭璁规嫹閿熸枻鎷锋壂閿熸枻鎷锋簮閿熶茎纰夋嫹閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷峰睍閿熸枻鎷蜂箣閿熸枻鎷烽敓鏂ゆ嫹閿熸枻鎷烽敓鍙揪鎷烽敓鏂ゆ嫹閿熸枻鎷风墶閿熺旦esult.xml.
 			IDGenerator.restart();
 			Text_P.set_parsenum(false);
 			//second parse of meta.xml
@@ -276,7 +276,7 @@ public class Convertor_ODF_To_UOF extends JFrame implements ActionListener{
 			xmlReader.setErrorHandler(secondContentHandler);
 			xmlReader.parse(contentSource);
 
-			//扫锟斤拷锟斤拷锟侥碉拷锟斤拷锟斤拷每锟斤拷元锟斤拷追锟斤拷uof:locID锟斤拷uof:AttList锟斤拷锟斤拷.
+			//鎵敓鏂ゆ嫹閿熸枻鎷烽敓渚ョ鎷烽敓鏂ゆ嫹閿熸枻鎷锋瘡閿熸枻鎷峰厓閿熸枻鎷疯拷閿熸枻鎷穟of:locID閿熸枻鎷穟of:AttList閿熸枻鎷烽敓鏂ゆ嫹.
 			InputSource result = new InputSource(tmpFileName);
 			DefaultHandler thirdHandler = new Third_Handler();
 			xmlReader.setContentHandler(thirdHandler);

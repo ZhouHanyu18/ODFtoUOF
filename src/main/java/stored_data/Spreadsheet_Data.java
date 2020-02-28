@@ -3,19 +3,19 @@ package stored_data;
 import java.util.*;
 
 public class Spreadsheet_Data {
-	private static String _common_rules = "";			//±í:¹«ÓÃ´¦Àí¹æÔò
-	
-	private static Map<String,String> 
-		_filter_map = new HashMap<String,String>();		//±í:É¸Ñ¡
-	
-	private static ArrayList<String> 
-		_map_style_name_list = new ArrayList<String>(); //Ìõ¼ş¸ñÊ½»¯Ê½Ñù
-	
-	private static Map<String,Float> _columnWidth_map = new HashMap<String,Float>();  //ÓÃÓÚ¼ÆËãÃªµãÎ»ÖÃ
-	private static Map<String,Float> _rowHeight_map = new HashMap<String,Float>();  //ÓÃÓÚ¼ÆËãÃªµãÎ»ÖÃ
-	private static Map<String,String> _chart_map = new HashMap<String,String>();	//´æ´¢¹¤×÷±íÄÚµÄÍ¼±í
-	
-	
+	private static String _common_rules = "";			//è¡¨:å…¬ç”¨å¤„ç†è§„åˆ™
+
+	private static Map<String,String>
+		_filter_map = new HashMap<String,String>();		//è¡¨:ç­›é€‰
+
+	private static ArrayList<String>
+		_map_style_name_list = new ArrayList<String>(); //æ¡ä»¶æ ¼å¼åŒ–å¼æ ·
+
+	private static Map<String,Float> _columnWidth_map = new HashMap<String,Float>();  //ç”¨äºè®¡ç®—é”šç‚¹ä½ç½®
+	private static Map<String,Float> _rowHeight_map = new HashMap<String,Float>();  //ç”¨äºè®¡ç®—é”šç‚¹ä½ç½®
+	private static Map<String,String> _chart_map = new HashMap<String,String>();	//å­˜å‚¨å·¥ä½œè¡¨å†…çš„å›¾è¡¨
+
+
 	//initialize
 	public static void init(){
 		_common_rules = "";
@@ -25,32 +25,32 @@ public class Spreadsheet_Data {
 		_rowHeight_map.clear();
 		_chart_map.clear();
 	}
-	
+
 	public static void addColumnWidth(String styleName,float cloumnWidth){
 		_columnWidth_map.put(styleName,cloumnWidth);
 	}
-	
+
 	public static float getColumnWidth(String styleName){
 		return _columnWidth_map.get(styleName);
 	}
-	
+
 	public static void addRowHeight(String styleName,float rowHeight){
 		_rowHeight_map.put(styleName,rowHeight);
 	}
-	
+
 	public static float getRowHeight(String styleName){
 		return _rowHeight_map.get(styleName);
 	}
-	
+
 	public static void addCommonRule(String rule){
 		_common_rules += rule;
 	}
 	public static String getCommonRules(){
 		return _common_rules;
 	}
-	
-	
-//	**********************±£´æ<±í:É¸Ñ¡>*************************
+
+
+//	**********************ä¿å­˜<è¡¨:ç­›é€‰>*************************
 //	*
 	public static void add_filter(String styleName,String fil) {
 		_filter_map.put(styleName,fil);
@@ -58,8 +58,8 @@ public class Spreadsheet_Data {
 	public static String get_filter(String styleName) {
 		return _filter_map.get(styleName);
 	}
-	
-//	**********************Ìõ¼ş¸ñÊ½»¯Ê½Ñù*************************
+
+//	**********************æ¡ä»¶æ ¼å¼åŒ–å¼æ ·*************************
 //	*
 	public static void add_style_name(String name){
 		_map_style_name_list.add(name);
@@ -67,7 +67,7 @@ public class Spreadsheet_Data {
 	public static boolean in_map_styles(String name){
 		return _map_style_name_list.contains(name);
 	}
-	
+
 	public static void add_chart(String sheetID, String chartStr) {
 		String charts = "";
 		if (_chart_map.containsKey(sheetID))
@@ -75,11 +75,11 @@ public class Spreadsheet_Data {
 		charts += chartStr;
 		_chart_map.put(sheetID,charts);
 	}
-	
+
 	public static String get_charts(String sheetID) {
 		return _chart_map.get(sheetID);
 	}
-	
+
 	public static void set_charts(String sheetID, String charts) {
 		_chart_map.put(sheetID,charts);
 	}

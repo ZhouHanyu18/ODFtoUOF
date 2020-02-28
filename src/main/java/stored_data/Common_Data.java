@@ -3,46 +3,46 @@ package stored_data;
 
 public class Common_Data {
 	private static String _file_type = "";
-	
-	public static final String LTAG = "&lt;";			//×ó±êÇ©
-	public static final String RTAG = "&gt;";			//ÓÒ±êÇ©
-	public static final String ANDTAG = "&amp;";		//AND
-	public static final String APOTAG = "&apos;";		//µ¥ÒıºÅ
-	public static final String QUOTAG = "&quot;";		//Ë«ÒıºÅ
 
-	private static String _text_anchor_id = "";      	//ÓÃÓÚµÚ¶şÂÖparse
-	private static String _graphic_anchor_id = "";      //ÓÃÓÚµÚ¶şÂÖparse
-	
-	private static boolean _draw_text_tag = false;   	//±êÊ¶ÊÇ·ñÍ¼ĞÎµÄÎÄ±¾ÄÚÈİ£¬Èç¹ûÊÇµÄ»°£¬µ±Í¼ĞÎÎÄ±¾ÄÚÈİÃ»ÓĞÒıÓÃÊ½ÑùÊ±ĞèÒª½«Ä¬ÈÏµÄÍ¼ĞÎÊ½ÑùÊ©¼ÓÔÚÆäÉÏ
-	
+	public static final String LTAG = "&lt;";			//å·¦æ ‡ç­¾
+	public static final String RTAG = "&gt;";			//å³æ ‡ç­¾
+	public static final String ANDTAG = "&amp;";		//AND
+	public static final String APOTAG = "&apos;";		//å•å¼•å·
+	public static final String QUOTAG = "&quot;";		//åŒå¼•å·
+
+	private static String _text_anchor_id = "";      	//ç”¨äºç¬¬äºŒè½®parse
+	private static String _graphic_anchor_id = "";      //ç”¨äºç¬¬äºŒè½®parse
+
+	private static boolean _draw_text_tag = false;   	//æ ‡è¯†æ˜¯å¦å›¾å½¢çš„æ–‡æœ¬å†…å®¹ï¼Œå¦‚æœæ˜¯çš„è¯ï¼Œå½“å›¾å½¢æ–‡æœ¬å†…å®¹æ²¡æœ‰å¼•ç”¨å¼æ ·æ—¶éœ€è¦å°†é»˜è®¤çš„å›¾å½¢å¼æ ·æ–½åŠ åœ¨å…¶ä¸Š
+
 	public static void set_file_type(String type){
 		_file_type = type;
 	}
-	
+
 	public static String get_file_type(){
 		return _file_type;
 	}
-	
+
 	public static void set_text_anchor_id(String id) {
 		_text_anchor_id = id;
 	}
-	
+
 	public static String get_text_anchor_id() {
 		return _text_anchor_id;
 	}
-	
+
 	public static void set_graphic_anchor_id(String id) {
 		_graphic_anchor_id = id;
 	}
-	
+
 	public static String get_graphic_anchor_id() {
 		return _graphic_anchor_id;
 	}
-	
+
 	public static void set_draw_text_tag(boolean bool) {
 		_draw_text_tag = bool;
 	}
-	
+
 	public static boolean get_draw_text_tag() {
 		return _draw_text_tag;
 	}

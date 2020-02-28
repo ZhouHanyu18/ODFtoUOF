@@ -3,29 +3,29 @@ package stored_data;
 import java.util.*;
 
 public class Text_Data {
-	private static Map<String,String> user_map = new HashMap<String,String>();		//´æ·Å ÓÃ»§ µÄĞÕÃûºÍ±êÊ¶·û
+	private static Map<String,String> user_map = new HashMap<String,String>();		//å­˜æ”¾ ç”¨æˆ· çš„å§“åå’Œæ ‡è¯†ç¬¦
 
-	
-//******************************************	
+
+//******************************************
 	public static void addUser(String name,String id){
-		user_map.put(name,id);   
-	}	
+		user_map.put(name,id);
+	}
 	public static String getUser(String name){
 		return user_map.get(name);
 	}
 	public static boolean containsUser(String name){
 		return user_map.containsKey(name);
 	}
-	public static String getUserSet(){		// ·µ»ØÓÃ»§¼¯
+	public static String getUserSet(){		// è¿”å›ç”¨æˆ·é›†
 		String users = "";
 		String name = "";
-		
+
 		Set<String> keys = user_map.keySet();
 		for(Iterator<String> iter = keys.iterator(); iter.hasNext(); ){
 			name = iter.next();
-			users += "<×Ö:ÓÃ»§ ×Ö:±êÊ¶·û=\"" + user_map.get(name) + "\" ×Ö:ĞÕÃû=\"" + name + "\"/>";
+			users += "<å­—:ç”¨æˆ· å­—:æ ‡è¯†ç¬¦=\"" + user_map.get(name) + "\" å­—:å§“å=\"" + name + "\"/>";
 		}
-		
+
 		user_map.clear();
 		return users;
 	}

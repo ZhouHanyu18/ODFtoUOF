@@ -1,45 +1,45 @@
 package stored_data;
 
 public class Meta_Data{
-	private static String _udm_set = "";   //ÓÃ»§×Ô¶¨ÒåÔªÊı¾İ¼¯
-	private static String _keyword_set = "";   //¹Ø¼ü×Ö¼¯
-	
-//	**********************²Ù×÷_udm_set*************************
-//	*	
-	public static void add_udm(String udm) 
+	private static String _udm_set = "";   //ç”¨æˆ·è‡ªå®šä¹‰å…ƒæ•°æ®é›†
+	private static String _keyword_set = "";   //å…³é”®å­—é›†
+
+//	**********************æ“ä½œ_udm_set*************************
+//	*
+	public static void add_udm(String udm)
 	{
 		_udm_set += udm;
 	}
-	
+
 	public static String get_udm_set() {
 		String udmset = "";
-		
+
 		if (_udm_set.length() != 0){
-			udmset = "<uof:ÓÃ»§×Ô¶¨ÒåÔªÊı¾İ¼¯>" + _udm_set + "</uof:ÓÃ»§×Ô¶¨ÒåÔªÊı¾İ¼¯>";
+			udmset = "<uof:ç”¨æˆ·è‡ªå®šä¹‰å…ƒæ•°æ®é›†>" + _udm_set + "</uof:ç”¨æˆ·è‡ªå®šä¹‰å…ƒæ•°æ®é›†>";
 		}
-		
+
 		_udm_set = "";
 		return udmset;
 	}
-//	*	
+//	*
 //	**************************************
-	
-//	**********************²Ù×÷_keyword_set*************************
-//	*	
+
+//	**********************æ“ä½œ_keyword_set*************************
+//	*
 	public static void add_keyword(String keyword) {
 		_keyword_set += keyword;
 	}
-	
+
 	public static String get_keyword_set() {
 		String kws = "";
-		
+
 		if (_keyword_set.length() != 0){
-			kws = "<uof:¹Ø¼ü×Ö¼¯>" + _keyword_set + "</uof:¹Ø¼ü×Ö¼¯>";
+			kws = "<uof:å…³é”®å­—é›†>" + _keyword_set + "</uof:å…³é”®å­—é›†>";
 		}
-		
+
 		_keyword_set = "";
 		return kws;
 	}
-//	*	
+//	*
 //	**************************************
 }

@@ -8,20 +8,20 @@ import spreadsheet.Anno_In_Cell;
 import graphic_content.*;
 
 public class Content_Data {
-	
-	//====<¶ÔÏó¼¯>µÄ×ÓÔªËØ========
-	private static Map<String,Drawing> _drawing_set = new TreeMap<String,Drawing>();   		//Í¼ĞÎ¶ÔÏó
-	private static Map<String,String> _other_obj_set = new TreeMap<String,String>();    	//ÆäËû¶ÔÏó
-	private static Map<String,String> _formula_set = new TreeMap<String,String>();     		//ÊıÑ§¹«Ê½
 
-	private static Map<String,TextAnchor> 
-			_text_anchor_set = new TreeMap<String,TextAnchor>();  	//´æ´¢<×Ö:Ãªµã>¼¯ºÏ
-	private static Map<String,String> 
-			_spreadsheet_anchor_set = new TreeMap<String,String>(); //´æ´¢spreadsheetÖĞµÄ<uof:Ãªµã>¼¯ºÏ
-	private static Map<String,String> 
-			_presentation_anchor_set = new TreeMap<String,String>();//´æ´¢presentationÖĞµÄ<uof:Ãªµã>¼¯ºÏ
-	
-	
+	//====<å¯¹è±¡é›†>çš„å­å…ƒç´ ========
+	private static Map<String,Drawing> _drawing_set = new TreeMap<String,Drawing>();   		//å›¾å½¢å¯¹è±¡
+	private static Map<String,String> _other_obj_set = new TreeMap<String,String>();    	//å…¶ä»–å¯¹è±¡
+	private static Map<String,String> _formula_set = new TreeMap<String,String>();     		//æ•°å­¦å…¬å¼
+
+	private static Map<String,TextAnchor>
+			_text_anchor_set = new TreeMap<String,TextAnchor>();  	//å­˜å‚¨<å­—:é”šç‚¹>é›†åˆ
+	private static Map<String,String>
+			_spreadsheet_anchor_set = new TreeMap<String,String>(); //å­˜å‚¨spreadsheetä¸­çš„<uof:é”šç‚¹>é›†åˆ
+	private static Map<String,String>
+			_presentation_anchor_set = new TreeMap<String,String>();//å­˜å‚¨presentationä¸­çš„<uof:é”šç‚¹>é›†åˆ
+
+
 	//initialize
 	public static void init(){
 		_drawing_set.clear();
@@ -31,63 +31,63 @@ public class Content_Data {
 		_spreadsheet_anchor_set.clear();
 		_presentation_anchor_set.clear();
 	}
-	
-//	*******************²Ù×÷drawingSet****************************
-//	*		
+
+//	*******************æ“ä½œdrawingSet****************************
+//	*
 	public static void add_drawing(String ID,Drawing drawing) {
 		_drawing_set.put(ID,drawing);
 	}
-	
+
 	public static boolean is_drawing_set_empty() {
 		return (_drawing_set.isEmpty());
 	}
-	
-	public static Drawing get_drawing(String ID) {	
+
+	public static Drawing get_drawing(String ID) {
 		return _drawing_set.get(ID);
-	}	
-//	*	
+	}
+//	*
 //	***************************************
-	
-//	*******************²Ù×÷otherObjSet****************************
-//	*		
+
+//	*******************æ“ä½œotherObjSet****************************
+//	*
 	public static void add_other_obj(String ID,String obj) {
 		_other_obj_set.put(ID,obj);
 	}
-	
+
 	public static boolean is_otherobj_set_empty() {
 		return _other_obj_set.isEmpty();
 	}
-	
-	public static String get_other_obj(String ID) {	
+
+	public static String get_other_obj(String ID) {
 		return _other_obj_set.get(ID);
-	}	
-//	*	
+	}
+//	*
 //	***************************************
-	
-//	*******************²Ù×÷formulaSet****************************
-//	*		
+
+//	*******************æ“ä½œformulaSet****************************
+//	*
 	public static void add_formula(String ID,String formula) {
 		_formula_set.put(ID,formula);
 	}
-	
-	public static String get_formula(String ID) {	
+
+	public static String get_formula(String ID) {
 		return _formula_set.get(ID);
-	}	
-//	*	
+	}
+//	*
 //	***************************************
-	
-//	*******************²Ù×÷objectSet****************************
-//	*To do£º»¹ĞèÌí¼Ó¶ÔÊıÑ§¹«Ê½µÄ´¦Àí¡£	
+
+//	*******************æ“ä½œobjectSet****************************
+//	*To doï¼šè¿˜éœ€æ·»åŠ å¯¹æ•°å­¦å…¬å¼çš„å¤„ç†ã€‚
 	public static boolean is_object_set_empty() {
 		return (_drawing_set.isEmpty()
 				&& _other_obj_set.isEmpty()
 				&& _formula_set.isEmpty());
 	}
-	
+
 	private static String process_drawing(Drawing drawing)
 	{
 		String drawStr = "";
-		
+
 		Stack<String> groupIDstack = drawing.get_group_id_stack();
 		String id = "";
 		while (!groupIDstack.empty()) {
@@ -101,10 +101,10 @@ public class Content_Data {
 		}
 		return drawStr;
 	}
-	
+
 	public static String get_object_set() {
 		String objectSet = "";
-		
+
 		while (!_drawing_set.keySet().isEmpty()) {
 			Iterator iterator = _drawing_set.keySet().iterator();
 			String id = (String)iterator.next();
@@ -113,12 +113,12 @@ public class Content_Data {
 			objectSet += drawing.get_drawing_string();
 			_drawing_set.remove(id);
 		}
-		
+
 		Collection<String> othehObjValues = _other_obj_set.values();
 		for (Iterator iterator = othehObjValues.iterator(); iterator.hasNext(); ) {
 			objectSet += (String)iterator.next();
 		}
-		
+
 		Collection<String> formulaValues = _formula_set.values();
 		for (Iterator iterator = formulaValues.iterator(); iterator.hasNext(); ) {
 			objectSet += (String)iterator.next();
@@ -126,48 +126,48 @@ public class Content_Data {
 
 		objectSet += Anno_In_Cell.get_anno_drawings();
 		return objectSet;
-	}	
-//	*	
+	}
+//	*
 //	***************************************
-	
-	
-//	*******************²Ù×÷textAnchorSet****************************
-//	*		
+
+
+//	*******************æ“ä½œtextAnchorSet****************************
+//	*
 	public static void add_text_anchor(String ID,TextAnchor textanchor) {
 		_text_anchor_set.put(ID,textanchor);
 	}
-	
-	public static TextAnchor get_text_anchor(String ID) {	
+
+	public static TextAnchor get_text_anchor(String ID) {
 		return _text_anchor_set.get(ID);
-	}	
-//	*	
+	}
+//	*
 //	***************************************
-	
-//	*******************²Ù×÷_spreadsheet_anchor_set****************************
-//	*		
+
+//	*******************æ“ä½œ_spreadsheet_anchor_set****************************
+//	*
 	public static void add_spreadsheet_anchor(String tableName,String uofAnchor) {
 		String anchors = "";
 		if (_spreadsheet_anchor_set.containsKey(tableName))
 			anchors = _spreadsheet_anchor_set.get(tableName);
-		
+
 		_spreadsheet_anchor_set.put(tableName,anchors + uofAnchor);
 	}
-	
-	public static String get_spreadsheet_anchors(String tableName) {	
+
+	public static String get_spreadsheet_anchors(String tableName) {
 		return _spreadsheet_anchor_set.get(tableName);
-	}	
-//	*	
+	}
+//	*
 //	***************************************
-	
-//	*******************²Ù×÷_presentation_anchor_set****************************
-//	*		
+
+//	*******************æ“ä½œ_presentation_anchor_set****************************
+//	*
 	public static void add_presentation_anchor(String ID,String uofAnchor) {
 		_presentation_anchor_set.put(ID, uofAnchor);
 	}
-	
-	public static String get_presentation_anchor(String ID) {	
+
+	public static String get_presentation_anchor(String ID) {
 		return _presentation_anchor_set.get(ID);
-	}	
-//	*	
+	}
+//	*
 //	***************************************
 }
